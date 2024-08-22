@@ -1,0 +1,32 @@
+/* .navbar {
+  margin: 0;
+  background-color: rgba(116, 172, 0, 255);
+  width: 100vw;
+  height: 7vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+  color: white;
+  display: flex;
+  flex-direction: row;
+}
+.navbar nav ul {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  justify-content: space-around;
+}
+
+.navbar nav ul a {
+  color: white;
+  padding: 3px;
+  border-radius: 5%;
+}
+
+nav {
+  width: 100vw;
+  align-self: center;
+} */

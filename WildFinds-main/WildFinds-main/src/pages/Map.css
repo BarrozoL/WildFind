@@ -1,0 +1,295 @@
+@media (max-width: 480px) {
+  .map-sightings {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: normal;
+    position: absolute;
+    gap: 8px;
+    width: 200px;
+    height: 400px;
+    right: 8%;
+    top: 30%;
+  }
+
+  .map-sightings img {
+    width: 80px;
+    border-radius: 38%;
+    display: flex;
+    padding: 15px;
+  }
+
+  .svg-map-image {
+    position: absolute;
+    top: 18%;
+    left: 2%;
+  }
+
+  .sighting-card {
+    position: absolute;
+    left: 29%;
+    top: 30%;
+  }
+
+  .individual-districts:hover {
+    fill: rgb(2, 137, 2);
+  }
+
+  .individual-districts:active {
+    fill: rgb(20, 99, 20);
+  }
+
+  .location-tag {
+    position: absolute;
+    /* top: 10%;*/
+    left: 13%;
+    width: 200px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .map-sightings {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: normal;
+    position: absolute;
+    gap: 8px;
+    width: 400px;
+    height: 400px;
+    right: 8%;
+    top: 25%;
+  }
+
+  .map-sightings img {
+    width: 80px;
+    border-radius: 38%;
+    display: flex;
+    padding: 15px;
+  }
+
+  .svg-map-image {
+    position: absolute;
+    top: 18%;
+    left: 2%;
+  }
+
+  .sighting-card {
+    width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    left: 27%;
+  }
+
+  .individual-districts:hover {
+    fill: rgb(2, 137, 2);
+  }
+
+  .individual-districts:active {
+    fill: rgb(20, 99, 20);
+  }
+
+  .location-tag {
+    position: absolute;
+    top: -23%;
+    left: 26%;
+    width: 300px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+  .map-sightings {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: normal;
+    position: absolute;
+    gap: 8px;
+    width: 400px;
+    height: 400px;
+    right: 15%;
+    top: 30%;
+  }
+
+  .map-sightings img {
+    width: 80px;
+    border-radius: 38%;
+    display: flex;
+    padding: 15px;
+  }
+
+  .svg-map-image {
+    position: absolute;
+    top: 18%;
+    left: 2%;
+  }
+
+  .sighting-card {
+    width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    left: 10%;
+  }
+
+  .individual-districts:hover {
+    fill: rgb(2, 137, 2);
+  }
+
+  .individual-districts:active {
+    fill: rgb(20, 99, 20);
+  }
+
+  .location-tag {
+    position: absolute;
+    top: -23%;
+    left: 10%;
+    width: 300px;
+  }
+}
+
+@media (min-width: 980px) and (max-width: 1199px) {
+  .map-sightings {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: normal;
+    position: absolute;
+    gap: 8px;
+    width: 400px;
+    height: 400px;
+    right: 15%;
+    top: 30%;
+  }
+
+  .map-sightings img {
+    width: 80px;
+    border-radius: 38%;
+    display: flex;
+    padding: 15px;
+  }
+
+  .svg-map-image {
+    position: absolute;
+    top: 18%;
+    left: 15%;
+  }
+
+  .sighting-card {
+    width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    left: 7%;
+  }
+
+  .individual-districts:hover {
+    fill: rgb(2, 137, 2);
+  }
+
+  .individual-districts:active {
+    fill: rgb(20, 99, 20);
+  }
+
+  .location-tag {
+    position: absolute;
+    top: -23%;
+    left: 10%;
+    width: 300px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .map-sightings {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: normal;
+    position: absolute;
+    gap: 8px;
+    width: 400px;
+    height: 400px;
+    right: 20%;
+    top: 30%;
+  }
+
+  .map-sightings img {
+    width: 80px;
+    border-radius: 38%;
+    display: flex;
+    padding: 15px;
+  }
+
+  .svg-map-image {
+    position: absolute;
+    top: 18%;
+    left: 20%;
+  }
+
+  .sighting-card {
+    width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    left: 0;
+    top: 10%;
+  }
+
+  .individual-districts:hover {
+    fill: rgb(2, 137, 2);
+  }
+
+  .individual-districts:active {
+    fill: rgb(20, 99, 20);
+  }
+
+  .location-tag {
+    position: absolute;
+    font-size: 2rem;
+    top: -23%;
+    left: 10%;
+    width: 400px;
+  }
+}
+
+/* .map-sightings {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: normal;
+  position: absolute;
+  gap: 8px;
+  width: 400px;
+  height: 400px;
+  right: 8%;
+  top: 25%;
+}
+
+.map-sightings img {
+  width: 80px;
+  border-radius: 38%;
+  display: flex;
+  padding: 15px;
+}
+
+.svg-map-image {
+  position: absolute;
+  top: 20%;
+  left: 35%;
+}
+
+.individual-districts:hover {
+  fill: rgb(2, 137, 2);
+}
+
+.individual-districts:active {
+  fill: rgb(20, 99, 20);
+}
+
+.location-tag {
+  position: absolute;
+  top: -23%;
+  left: 10%;
+  width: 300px;
+} */

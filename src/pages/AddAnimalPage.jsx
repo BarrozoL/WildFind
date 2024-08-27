@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { addAnimal } from "../../lib";
 
 import defaultBirdImage from "../assets/images/bird.jpeg";
 import defaultMammalImage from "../assets/images/fox.jpeg";

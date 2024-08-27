@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-export default function AddSighting({ animals, addSighting }) {
+export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
   const [date, setDate] = useState(new Date());
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
@@ -42,7 +42,7 @@ export default function AddSighting({ animals, addSighting }) {
       image,
     };
 
-    addSighting(newSpotting);
+    AddAnimalSighting(newSpotting);
     /* METHOD FOR ADDING SPOTTED ANIMAL WITH API */
     setDescription("");
     setLocation("");

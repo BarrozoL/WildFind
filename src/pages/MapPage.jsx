@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import "./Map.css";
 import Map from "../components/Map";
-import MapListing from "./MapListing";
+import MapListing from "../components/MapListing";
 
 export default function MapPage({
   getAnimalsWithSightings,

@@ -21,6 +21,11 @@ import AddPlantSightingPage from "./pages/AddPlantSightingPage";
 import PlantListPage from "./pages/PlantListPage";
 import PlantDetailsPage from "./pages/PlantDetailsPage";
 
+import SignupPage from "./pages/SignupPage";
+import LoginPage from "./pages/LoginPage";
+import IsPrivate from "./components/IsPrivate";
+import IsAnon from "./components/IsAnon";
+
 // Components
 
 // Functions
@@ -134,12 +139,14 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Homepage />} />
+        <Route exact path="/" element={<Homepage />} />
         <Route
+          exact
           path="/animal-list"
           element={<AnimalListPage animals={animals} />}
         />
         <Route
+          exact
           path="/:animalId/add-sighting"
           element={
             <AddAnimalSightingPage
@@ -150,6 +157,7 @@ function App() {
         />
 
         <Route
+          exact
           path="/:plantId/add-plant-sighting"
           element={
             <AddPlantSightingPage
@@ -160,29 +168,55 @@ function App() {
         />
 
         <Route
+          exact
           path={`/animal-list/:animalId`}
           element={<AnimalDetailsPage watchState={watchState} />}
         />
 
-        <Route path="/plant-list" element={<PlantListPage plants={plants} />} />
-
-        <Route path="/plant-list/:plantId" element={<PlantDetailsPage />} />
+        <Route
+          exact
+          path="/plant-list"
+          element={<PlantListPage plants={plants} />}
+        />
 
         <Route
+          exact
+          path="/plant-list/:plantId"
+          element={<PlantDetailsPage />}
+        />
+
+        <Route
+          exact
           path="/watch"
           element={
-            <WatchListPage watches={watches} deleteWatch={deleteWatch} />
+            <IsPrivate>
+              <WatchListPage watches={watches} deleteWatch={deleteWatch} />
+            </IsPrivate>
           }
         />
 
         <Route
+          exact
           path="/watch/:watchId/edit-watch"
-          element={<EditWatchPage editWatch={editWatch} watches={watches} />}
+          element={
+            <IsPrivate>
+              <EditWatchPage editWatch={editWatch} watches={watches} />
+            </IsPrivate>
+          }
         />
 
-        <Route path="/watch/:watchId/details" element={<WatchDetailsPage />} />
+        <Route
+          exact
+          path="/watch/:watchId/details"
+          element={
+            <IsPrivate>
+              <WatchDetailsPage />
+            </IsPrivate>
+          }
+        />
 
         <Route
+          exact
           path={`/animal-list/:animalId/sightings`}
           element={
             <SightingsPage
@@ -193,6 +227,7 @@ function App() {
         />
 
         <Route
+          exact
           path={"/map"}
           element={
             <MapPage
@@ -206,6 +241,7 @@ function App() {
         />
 
         <Route
+          exact
           path="/animal-add"
           element={
             <AddAnimalPage
@@ -214,6 +250,22 @@ function App() {
               animals={animals}
               animalState={animalState}
             />
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <IsAnon>
+              <SignupPage />
+            </IsAnon>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <IsAnon>
+              <LoginPage />
+            </IsAnon>
           }
         />
 

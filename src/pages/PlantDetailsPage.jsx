@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+/* import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getPlant } from "../../lib";
 
@@ -31,3 +31,4 @@ export default function PlantDetails() {
     </div>
   );
 }
+ */

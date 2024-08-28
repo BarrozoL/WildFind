@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+/* import { useState, useEffect } from "react";
 import { useParams, useNavigate, Navigate } from "react-router-dom";
 
 function EditWatchPage({ editWatch, watches }) {
@@ -83,3 +83,4 @@ function EditWatchPage({ editWatch, watches }) {
 }
 
 export default EditWatchPage;
+ */

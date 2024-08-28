@@ -1,15 +1,18 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
+import sightingService from "../../services/sighting-services";
+import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
   const [date, setDate] = useState(new Date());
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
   const [image, setImage] = useState("");
-  const animalId = useParams().animalId;
-  const animalNumber = Number(animalId) - 1;
+  const { specimenId } = useParams();
+  /*  const animalNumber = Number(animalId) - 1; */
   const navigate = useNavigate();
+
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
   };
@@ -31,27 +34,28 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
       alert("All fields are mandatory");
       return;
     }
-    const typeId = animals[animalNumber]?.typeId;
+    /*    const typeId = animals[animalNumber]?.typeId; */
 
-    const newSpotting = {
-      animalId,
-      typeId,
-      location,
-      date,
-      description,
-      image,
-    };
+    const requestBody = { specimenId, description, location, image };
 
-    AddAnimalSighting(newSpotting);
-    /* METHOD FOR ADDING SPOTTED ANIMAL WITH API */
-    setDescription("");
-    setLocation("");
-    setImage("");
-    navigate("/animal-list");
+    sightingService
+      .createSighting(requestBody)
+      .then((response) => {
+        setDescription("");
+        setLocation("");
+        setImage("");
+        navigate("/specimens");
+      })
+      .catch((error) => console.log(error));
   };
+
+  const foundSpecimen = animals.find((animal) => animal._id === specimenId);
+
   return (
     <div className="sighting-form">
-      <h1>Where and when did you spot {`${animals[animalNumber].name}`}?</h1>
+      {foundSpecimen && (
+        <h1>Where and when did you spot {foundSpecimen.name}?</h1>
+      )}
       <form className="sighting-inputs">
         <div>
           <label>Location:</label>

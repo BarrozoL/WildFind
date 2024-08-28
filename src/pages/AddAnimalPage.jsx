@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
+import specimenService from "../../services/specimen-service";
 
 import defaultBirdImage from "../assets/images/bird.jpeg";
 import defaultMammalImage from "../assets/images/fox.jpeg";
@@ -11,11 +13,12 @@ import defaultPetImage from "../assets/images/dog.jpeg";
 import defaultOtherImage from "../assets/images/other-animal.jpeg";
 
 export default function AddAnimal({ types, addAnimal, animals, animalState }) {
-  console.log(addAnimal);
+  /*console.log(addAnimal);*/
   const [selectedAnimalType, setSelectedAnimalType] = useState("");
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [danger, setDanger] = useState("");
+  const [edible, setEdible] = useState("");
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
 
@@ -35,6 +38,10 @@ export default function AddAnimal({ types, addAnimal, animals, animalState }) {
 
   const handleDangerChange = (e) => {
     setDanger(e.target.value);
+  };
+
+  const handleEdibleChange = (e) => {
+    setEdible(e.target.value);
   };
 
   const handleDescriptionChange = (e) => {
@@ -71,10 +78,7 @@ export default function AddAnimal({ types, addAnimal, animals, animalState }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!name || !description || !location) {
-      alert("All fields are mandatory");
-      return;
-    }
+    let typeId;
 
     const existingAnimalId = animalExists({ name });
 
@@ -86,35 +90,53 @@ export default function AddAnimal({ types, addAnimal, animals, animalState }) {
       return;
     }
 
-    let animalTypeId = 0;
+    if (selectedAnimalType === "bird") {
+      typeId = 1;
+    } else if (selectedAnimalType === "mammal") {
+      typeId = 2;
+    } else if (selectedAnimalType === "reptile") {
+      typeId = 3;
+    } else if (selectedAnimalType === "insect") {
+      typeId = 4;
+    } else if (selectedAnimalType === "amphibian") {
+      typeId = 5;
+    } else if (selectedAnimalType === "aquatic") {
+      typeId = 6;
+    } else if (selectedAnimalType === "pet") {
+      typeId = 7;
+    } else if (selectedAnimalType === "other") {
+      typeId = 8;
+    }
 
-    for (let i = 0; i < types.length; i++) {
-      if (types[i].name === selectedAnimalType) {
-        animalTypeId = types[i].id;
-      }
+    //we had a section of our old database that was just an array of type objects: id and name. the ids were 1-8.
+    //maybe we need to change things so that we have a document with different types and then typeId is something that isnt 1-13 but rather the actual id of that type
+
+    if (!name || !description || !location || !typeId) {
+      alert("All fields are mandatory");
+      return;
     }
 
     let img;
 
-    if (animalTypeId === 1) {
+    if (typeId === 1) {
       img = image || defaultBirdImage;
-    } else if (animalTypeId === 2) {
+    } else if (typeId === 2) {
       img = image || defaultMammalImage;
-    } else if (animalTypeId === 3) {
+    } else if (typeId === 3) {
       img = image || defaultReptileImage;
-    } else if (animalTypeId === 4) {
+    } else if (typeId === 4) {
       img = image || defaultInsectImage;
-    } else if (animalTypeId === 5) {
+    } else if (typeId === 5) {
       img = image || defaultAmphibianImage;
-    } else if (animalTypeId === 6) {
+    } else if (typeId === 6) {
       img = image || defaultAquaticImage;
-    } else if (animalTypeId === 7) {
+    } else if (typeId === 7) {
       img = image || defaultPetImage;
     } else {
       img = image || defaultOtherImage;
     }
 
-    const newAnimal = {
+    /*    const newAnimal = {
       typeId: animalTypeId,
       name,
       dangerLevel: danger,
@@ -130,7 +152,28 @@ export default function AddAnimal({ types, addAnimal, animals, animalState }) {
     setLocation("");
     setDanger("");
     animalState(newAnimal);
-    navigate("/animal-list");
+    navigate("/animal-list"); */
+
+    const requestBody = {
+      name,
+      typeId,
+      description,
+      location,
+      image,
+    };
+
+    specimenService
+      .createSpecimen(requestBody)
+      .then((response) => {
+        console.log(typeId);
+        setName("");
+        setSelectedAnimalType("");
+        setDescription("");
+        setLocation("");
+        setImage("");
+      })
+      .catch((error) => console.log(error));
+    navigate("/specimens");
   };
 
   return (

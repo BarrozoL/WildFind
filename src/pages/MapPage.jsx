@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+/* import { useState, useEffect } from "react";
 
 import "./Map.css";
 import Map from "../components/Map";
@@ -56,3 +56,4 @@ export default function MapPage({
     </>
   );
 }
+ */

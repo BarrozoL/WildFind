@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { addToWatchList, getAnimal } from "../../lib";
+import { /* addToWatchList, */ getAnimal } from "../../lib";
+import watchService from "../../services/watch-service";
 
-export default function AnimalCard({ watchState }) {
+export default function AnimalCard({ animals }) {
   const [foundAnimal, setFoundAnimal] = useState();
-  const { animalId } = useParams();
+  const { specimensId } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    getAnimal(animalId).then((data) => setFoundAnimal(data));
-  }, [animalId]);
+    getAnimal(specimensId).then((data) => setFoundAnimal(data));
+    console.log(specimensId);
+  }, [specimensId]);
 
   useEffect(() => {
     if (foundAnimal?.typeId === 8) {
@@ -33,17 +35,17 @@ export default function AnimalCard({ watchState }) {
   };
 
   const handleSightingNavigate = () => {
-    navigate(`/animal-list/${animalId}/sightings`);
+    navigate(`/specimens/${specimensId}/sightings`);
   };
 
   const handleNewSighting = () => {
-    navigate(`/${animalId}/add-sighting`);
+    navigate(`/${specimensId}/add-sighting`);
   };
 
   const handleAddToWatchList = async () => {
-    try {
+    /*  try {
       const response = await addToWatchList(
-        animalId,
+        specimensId,
         foundAnimal.typeId,
         foundAnimal.name,
         foundAnimal.image,
@@ -56,15 +58,39 @@ export default function AnimalCard({ watchState }) {
       console.log("animal added to watch list", response);
     } catch (error) {
       console.log(error, "can't add to watch list");
-    }
+    } */
+
+    const requestBody = {
+      specimenId: specimensId,
+      typeId: foundAnimal.typeId, // Accessing typeId here
+      name: foundAnimal.name,
+      image: foundAnimal.image,
+      description: foundAnimal.description,
+      location: foundAnimal.location,
+      dangerLevel: foundAnimal.dangerLevel,
+      edible: foundAnimal.edible,
+    };
+
+    watchService
+      .createWatch(requestBody)
+      .then((response) => {
+        setName("");
+        setSelectedAnimalType("");
+        setDescription("");
+        setLocation("");
+        setImage("");
+      })
+      .catch((error) => console.log(error));
+    navigate("/specimens");
   };
+  console.log(foundAnimal);
 
   if (!foundAnimal) return <p>Loading...</p>;
 
   return (
     <>
       <div className="animalDetailWrapper">
-        <div key={foundAnimal.id}></div>
+        <div key={foundAnimal._id}></div>
         <h3>{foundAnimal.name}</h3>
         <img src={foundAnimal.image} alt={foundAnimal.name} width="300px" />
         <p>{`Danger level: ${foundAnimal.dangerLevel}`}</p>

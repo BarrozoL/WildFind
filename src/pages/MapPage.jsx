@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import axios from "axios";
 import "./Map.css";
 import Map from "../components/Map";
 import MapListing from "../components/MapListing";
@@ -12,13 +12,26 @@ export default function MapPage({
   const [animalSightings, setAnimalSightings] = useState([]);
   const [plantSightings, setPlantSightings] = useState([]);
 
-  useEffect(() => {
-    getAnimalsWithSightings().then((data) => setAnimalSightings(data));
-  }, [setLocation]);
+  const ANIMALS_DB = "http://localhost:5005";
 
+  /*  useEffect(() => {
+    getAnimalsWithSightings().then((data) => setAnimalSightings(data));
+  }, [setLocation]); */
+
+  /* 
   useEffect(() => {
     getPlantsWithSightings().then((data) => setPlantSightings(data));
   }, [setLocation]);
+ */
+
+  const getSightingsByLocation = async () => {
+    try {
+      const response = await axios.get(`${ANIMALS_DB}/sightings/${location}`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   function findLocation(e) {
     setLocation(e.target.id);

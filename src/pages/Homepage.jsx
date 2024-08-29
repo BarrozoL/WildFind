@@ -13,13 +13,13 @@ export default function HomePage() {
   };
 
   const handleAnimalNavigate = () => {
-    navigate("/animal-list");
+    navigate("/specimens");
   };
 
   return (
     <div className="home">
       <img src={WildFindLogo} alt="WildFind logo" width="50%" height="50%" />
-      {/* <h1>WildFind</h1> */}
+
       <br />
       <div className="home-buttons">
         <button onClick={handleAnimalNavigate}>See your local animals</button>

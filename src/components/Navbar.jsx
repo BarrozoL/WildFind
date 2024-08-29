@@ -56,7 +56,7 @@ const Navbar = () => {
               </NavLink>
 
               <button onClick={logOutUser}>Logout</button>
-              <span>{user && user.name}</span>
+              {/* <span>{user && user.name}</span> */}
             </>
           )}
           {!isLoggedIn && (

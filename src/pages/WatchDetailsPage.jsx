@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+/* import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getWatch } from "../../lib";
 
@@ -79,4 +79,5 @@ Also .description prints "native to ..." so if I do <p>Native to: {foundWatch.de
 I noticed in AnimalCard.jsx it was exporting `Native to ${foundAnimal.location}, but I fixed this and still have this issue
 I have been trying to fix it and I am tired and stuck.
 Will go back to fix. 
-*/
+
+ */

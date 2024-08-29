@@ -69,6 +69,7 @@ export default function AnimalList({ animals }) {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
+        {/*   {console.log(animals)} */}
         <div className="type-select-wrapper">
           <select className="type-select" onChange={handleTypeFilter}>
             <option value="">Show All Animals</option>
@@ -89,7 +90,7 @@ export default function AnimalList({ animals }) {
       <div className="animalWrapper">
         {sortedAnimals.map((animal) => {
           return (
-            <Link to={`/animal-list/${animal.id}`} key={animal.id}>
+            <Link to={`/specimens/${animal._id}`} key={animal._id}>
               <div className="animal-cards">
                 <h3>{animal.name}</h3>
                 <img

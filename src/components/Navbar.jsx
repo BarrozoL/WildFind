@@ -32,11 +32,11 @@ const Navbar = () => {
             Seen a new animal? Add it!
           </NavLink>
 
-          <NavLink to="/animal-list" className="NavLink">
+          <NavLink to="/specimens" className="NavLink">
             See all Animals
           </NavLink>
 
-          <NavLink to="/plant-list" className="NavLink">
+          <NavLink to="/specimens" className="NavLink">
             See all Plants
           </NavLink>
           <NavLink to="/map" className="NavLink">

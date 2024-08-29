@@ -1,11 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import WatchCard from "../components/WatchCard";
+import { getAllWatchlistItems } from "../../lib";
+import watchService from "../../services/watch-service";
 
-export default function WatchList({ watches, deleteWatch }) {
+export default function WatchList({ /* watches */ deleteWatch }) {
   const [search, setSearch] = useState("");
   const [type, setType] = useState("");
   const [theme, setTheme] = useState("");
+  const [watches, setWatches] = useState([]);
   const navigate = useNavigate();
 
   const handleNavigate = () => {
@@ -25,6 +28,14 @@ export default function WatchList({ watches, deleteWatch }) {
   };
 
   useEffect(() => {
+    getAllWatchlistItems()
+      .then((data) => {
+        setWatches(data);
+      })
+      .catch((error) => console.error("Error fetching watchlist:", error));
+  }, []);
+
+  useEffect(() => {
     if (theme) {
       document.body.classList.add(theme);
     } else {
@@ -35,7 +46,7 @@ export default function WatchList({ watches, deleteWatch }) {
     };
   }, [theme]);
 
-  let filteredWatches = watches.filter((watch) => {
+  /*   let filteredWatches = watches.filter((watch) => {
     // Filter by type
     const typeMatch =
       (!type && watch.typeId !== 7 && watch.typeId !== 8) ||
@@ -56,7 +67,7 @@ export default function WatchList({ watches, deleteWatch }) {
 
   const sortedWatches = filteredWatches.sort((a, b) =>
     a.name.localeCompare(b.name)
-  );
+  ); */
 
   return (
     <div className="watch-list">
@@ -87,7 +98,8 @@ export default function WatchList({ watches, deleteWatch }) {
       </div>
 
       <div className="watchWrapper">
-        {sortedWatches.map((watch) => (
+        {console.log("watch:", watches)}
+        {watches.map((watch) => (
           <WatchCard key={watch.id} watch={watch} deleteWatch={deleteWatch} />
         ))}
       </div>

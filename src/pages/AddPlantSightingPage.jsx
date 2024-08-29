@@ -1,15 +1,16 @@
-import { useState } from "react";
+/* import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-export default function AddSighting({ animals, addSighting }) {
+export default function AddPlantSighting({ plants, addPlantSighting }) {
   const [date, setDate] = useState(new Date());
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
   const [image, setImage] = useState("");
-  const animalId = useParams().animalId;
-  const animalNumber = Number(animalId) - 1;
+  const plantId = useParams().plantId;
+  const plantNumber = Number(plantId) - 1;
   const navigate = useNavigate();
+
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
   };
@@ -31,27 +32,24 @@ export default function AddSighting({ animals, addSighting }) {
       alert("All fields are mandatory");
       return;
     }
-    const typeId = animals[animalNumber]?.typeId;
-
-    const newSpotting = {
-      animalId,
-      typeId,
+    const newPlantSpotting = {
+      plantId,
       location,
       date,
       description,
       image,
     };
+    addPlantSighting(newPlantSpotting);
 
-    addSighting(newSpotting);
-    /* METHOD FOR ADDING SPOTTED ANIMAL WITH API */
     setDescription("");
     setLocation("");
     setImage("");
-    navigate("/animal-list");
+    navigate("/plant-list");
   };
+
   return (
     <div className="sighting-form">
-      <h1>Where and when did you spot {`${animals[animalNumber].name}`}?</h1>
+      <h1>Where and when did you spot {`${plants[plantNumber].name}`}?</h1>
       <form className="sighting-inputs">
         <div>
           <label>Location:</label>
@@ -86,7 +84,7 @@ export default function AddSighting({ animals, addSighting }) {
           <DatePicker selected={date} onChange={handleDateChange} />
         </div>
         <div>
-          <label>Comment:</label>
+          <label>Description of sighting:</label>
           <input
             type="text"
             name="description"
@@ -113,3 +111,4 @@ export default function AddSighting({ animals, addSighting }) {
     </div>
   );
 }
+ */

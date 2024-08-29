@@ -6,57 +6,67 @@ import Footer from "./components/Footer";
 
 // Pages
 import Homepage from "./pages/Homepage";
-import AnimalList from "./pages/AnimalList";
-import Errorpage from "./pages/Errorpage";
-import AnimalCard from "./pages/AnimalCard";
-import WatchList from "./pages/WatchList";
-import Sightings from "./pages/Sightings";
-import WatchDetails from "./pages/WatchDetails";
-
-import AddSighting from "./pages/AddSighting";
-import EditWatchPage from "./pages/EditWatch";
-import AddAnimal from "./pages/AddAnimal";
+import AnimalListPage from "./pages/AnimalListPage";
+import AnimalDetailsPage from "./pages/AnimalDetailsPage";
+import SightingsPage from "./pages/SightingsPage";
+import AddAnimalSightingPage from "./pages/AddAnimalSightingPage";
+import AddAnimalPage from "./pages/AddAnimalPage";
+import WatchListPage from "./pages/WatchListPage";
 import MapPage from "./pages/MapPage";
-import AddPlantSighting from "./pages/AddPlantSighting";
+/* import Errorpage from "./pages/Errorpage";
+
+import WatchDetailsPage from "./pages/WatchDetailsPage"; */
+/* 
+
+import EditWatchPage from "./pages/EditWatchPage";
+
+
+import AddPlantSightingPage from "./pages/AddPlantSightingPage";
+import PlantListPage from "./pages/PlantListPage";
+import PlantDetailsPage from "./pages/PlantDetailsPage"; */
+
+import SignupPage from "./pages/SignupPage";
+import LoginPage from "./pages/LoginPage";
+import IsPrivate from "./components/IsPrivate";
+import IsAnon from "./components/IsAnon";
 
 // Components
-import WatchCard from "./components/WatchCard";
 
 // Functions
 import {
   getAllAnimals,
-  getAllWatches,
+  addAnimalSighting,
+  getAnimalsWithSightings,
+  /* getAllWatches,
   deleteWatchItem,
   updateWatch,
   getTypes,
   addAnimal,
-  addSighting,
-  getSightings,
-  getAnimalsWithSightings,
+ 
+  getAnimalSightings,
+ 
   getAllPlants,
   addPlantSighting,
-  getPlantsWithSightings,
+  getPlantsWithSightings, */
 } from "../lib";
-import PlantList from "./pages/PlantList";
-import PlantDetails from "./pages/PlantDetails";
 
 function App() {
   const [types, setTypes] = useState([]);
-  const [animals, setAnimals] = useState([]);
+  const [animals, setAnimals] = useState([]); //animal state relates to the request and holds all specimens. change this later
   const [watches, setWatches] = useState([]);
   const [sightings, setSightings] = useState([""]);
   const [plants, setPlants] = useState([]);
 
   // document.title = "WildFind";
 
-  useEffect(() => {
+  /*   useEffect(() => {
     getAllPlants().then((data) => setPlants(data));
   }, []);
 
   // Get the existing types of animals
   useEffect(() => {
     getTypes().then((data) => setTypes(data));
-  }, []);
+  }, []); */
 
   // Get all animals that exist in DB
   useEffect(() => {
@@ -67,8 +77,15 @@ function App() {
       .catch((error) => console.error("Error fetching animals:", error));
   }, []);
 
+  // Add sighting
+  const newSighting = (sighting) => {
+    addAnimalSighting(sighting).then((newSight) =>
+      setSightings([...sightings, newSight])
+    );
+  };
+
   //updates animals state, will be passed to AddAnimal (fixes reload problem of animal list after adding animal)
-  const animalState = (newAnimal) => {
+  /*  const animalState = (newAnimal) => {
     setAnimals((prevAnimals) => [...prevAnimals, newAnimal]);
   };
 
@@ -115,100 +132,135 @@ function App() {
 
   // Get all sightings
   useEffect(() => {
-    getSightings().then((data) => setSightings(data));
+    getAnimalSightings().then((data) => setSightings(data));
   }, []);
 
-  // Add sighting
-  const newSighting = (sighting) => {
-    addSighting(sighting).then((newSight) =>
-      setSightings([...sightings, newSight])
-    );
-  };
+
 
   const newPlantSighting = (sighting) => {
     addPlantSighting(sighting).then((newSight) =>
       setSightings([...sightings, newSight])
     );
-  };
+  }; */
 
   return (
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/animal-list" element={<AnimalList animals={animals} />} />
+        <Route exact path="/" element={<Homepage />} />
         <Route
-          path="/:animalId/add-sighting"
-          element={<AddSighting animals={animals} addSighting={newSighting} />}
+          exact
+          path="/specimens"
+          element={<AnimalListPage animals={animals} />}
         />
+        <Route
+          exact
+          path={`/specimens/:specimensId`}
+          element={
+            <AnimalDetailsPage
+              animals={animals} /* watchState={watchState} */
+            />
+          }
+        />
+        <Route
+          exact
+          path={`/specimens/:specimenId/sightings`}
+          element={
+            <SightingsPage
+              /*  getAnimalsWithSightings={getAnimalsWithSightings} */
+              sightings={sightings}
+            />
+          }
+        />
+        <Route
+          exact
+          path="/:specimenId/add-sighting"
+          element={
+            <AddAnimalSightingPage
+              animals={animals}
+              addAnimalSighting={newSighting}
+            />
+          }
+        />
+        <Route
+          exact
+          path="/animal-add"
+          element={
+            <AddAnimalPage
+              types={types}
+              /*  addAnimal={newAnimal} */
+              animals={animals}
+              /*   animalState={animalState} */
+            />
+          }
+        />
+        <Route
+          exact
+          path="/watch"
+          element={
+            <IsPrivate>
+              <WatchListPage watches={watches} /*deleteWatch={deleteWatch}*/ />
+            </IsPrivate>
+          }
+        />
+        <Route
+          exact
+          path={"/map"}
+          element={
+            <MapPage
+              plants={plants}
+              /* getPlantsWithSightings={getPlantsWithSightings}
+               */
+              getAnimalsWithSightings={getAnimalsWithSightings}
+              sightings={sightings}
+              animals={animals}
+            />
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <IsAnon>
+              <SignupPage />
+            </IsAnon>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <IsAnon>
+              <LoginPage />
+            </IsAnon>
+          }
+        />
+        {/* 
 
         <Route
+          exact
+          path="/animal-add"
+
           path="/:plantId/add-plant-sighting"
           element={
-            <AddPlantSighting
+            <AddPlantSightingPage
               plants={plants}
               addPlantSighting={newPlantSighting}
             />
           }
         />
 
-        <Route
-          path={`/animal-list/:animalId`}
-          element={<AnimalCard watchState={watchState} />}
-        />
 
-        <Route path="/plant-list" element={<PlantList plants={plants} />} />
+        <Route path="/plant-list" element={<PlantListPage plants={plants} />} />
 
-        <Route path="/plant-list/:plantId" element={<PlantDetails />} />
-
-        <Route
-          path="/watch"
-          element={<WatchList watches={watches} deleteWatch={deleteWatch} />}
-        />
+        <Route path="/plant-list/:plantId" element={<PlantDetailsPage />} />
 
         <Route
           path="/watch/:watchId/edit-watch"
           element={<EditWatchPage editWatch={editWatch} watches={watches} />}
         />
 
-        <Route path="/watch/:watchId/details" element={<WatchDetails />} />
+        <Route path="/watch/:watchId/details" element={<WatchDetailsPage />} />
 
-        <Route
-          path={`/animal-list/:animalId/sightings`}
-          element={
-            <Sightings
-              getAnimalsWithSightings={getAnimalsWithSightings}
-              sightings={sightings}
-            />
-          }
-        />
-
-        <Route
-          path={"/map"}
-          element={
-            <MapPage
-              plants={plants}
-              getPlantsWithSightings={getPlantsWithSightings}
-              getAnimalsWithSightings={getAnimalsWithSightings}
-              sightings={sightings}
-              animals={animals}
-            />
-          }
-        />
-
-        <Route
-          path="/animal-add"
-          element={
-            <AddAnimal
-              types={types}
-              addAnimal={newAnimal}
-              animals={animals}
-              animalState={animalState}
-            />
-          }
-        />
-
-        <Route path="/*" element={<Errorpage />} />
+        <Route path="/*" element={<Errorpage />} /> */}
       </Routes>
 
       <Footer />

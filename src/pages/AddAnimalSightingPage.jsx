@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
+import sightingService from "../../services/sighting-services";
+import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
-export default function AddPlantSighting({ plants, addPlantSighting }) {
+export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
   const [date, setDate] = useState(new Date());
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
   const [image, setImage] = useState("");
-  const plantId = useParams().plantId;
-  const plantNumber = Number(plantId) - 1;
+  const { specimenId } = useParams();
+  /*  const animalNumber = Number(animalId) - 1; */
   const navigate = useNavigate();
 
   const handleDescriptionChange = (e) => {
@@ -32,24 +34,28 @@ export default function AddPlantSighting({ plants, addPlantSighting }) {
       alert("All fields are mandatory");
       return;
     }
-    const newPlantSpotting = {
-      plantId,
-      location,
-      date,
-      description,
-      image,
-    };
-    addPlantSighting(newPlantSpotting);
+    /*    const typeId = animals[animalNumber]?.typeId; */
 
-    setDescription("");
-    setLocation("");
-    setImage("");
-    navigate("/plant-list");
+    const requestBody = { specimenId, description, location, image };
+
+    sightingService
+      .createSighting(requestBody)
+      .then((response) => {
+        setDescription("");
+        setLocation("");
+        setImage("");
+        navigate("/specimens");
+      })
+      .catch((error) => console.log(error));
   };
+
+  const foundSpecimen = animals.find((animal) => animal._id === specimenId);
 
   return (
     <div className="sighting-form">
-      <h1>Where and when did you spot {`${plants[plantNumber].name}`}?</h1>
+      {foundSpecimen && (
+        <h1>Where and when did you spot {foundSpecimen.name}?</h1>
+      )}
       <form className="sighting-inputs">
         <div>
           <label>Location:</label>
@@ -84,7 +90,7 @@ export default function AddPlantSighting({ plants, addPlantSighting }) {
           <DatePicker selected={date} onChange={handleDateChange} />
         </div>
         <div>
-          <label>Description of sighting:</label>
+          <label>Comment:</label>
           <input
             type="text"
             name="description"

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import axios from "axios";
-import authService from "../services/auth.service";
+import authService from "../../services/auth.service";
 
 // const API_URL = "http://localhost:5005";
 

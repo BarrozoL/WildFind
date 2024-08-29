@@ -5,23 +5,22 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
 // Pages
-/* import Homepage from "./pages/Homepage"; */
+import Homepage from "./pages/Homepage";
 import AnimalListPage from "./pages/AnimalListPage";
 import AnimalDetailsPage from "./pages/AnimalDetailsPage";
 import SightingsPage from "./pages/SightingsPage";
 import AddAnimalSightingPage from "./pages/AddAnimalSightingPage";
 import AddAnimalPage from "./pages/AddAnimalPage";
 import WatchListPage from "./pages/WatchListPage";
+import MapPage from "./pages/MapPage";
 /* import Errorpage from "./pages/Errorpage";
-;
-
 
 import WatchDetailsPage from "./pages/WatchDetailsPage"; */
 /* 
 
 import EditWatchPage from "./pages/EditWatchPage";
 
-import MapPage from "./pages/MapPage";
+
 import AddPlantSightingPage from "./pages/AddPlantSightingPage";
 import PlantListPage from "./pages/PlantListPage";
 import PlantDetailsPage from "./pages/PlantDetailsPage"; */
@@ -32,6 +31,7 @@ import PlantDetailsPage from "./pages/PlantDetailsPage"; */
 import {
   getAllAnimals,
   addAnimalSighting,
+  getAnimalsWithSightings,
   /* getAllWatches,
   deleteWatchItem,
   updateWatch,
@@ -39,7 +39,7 @@ import {
   addAnimal,
  
   getAnimalSightings,
-  getAnimalsWithSightings,
+ 
   getAllPlants,
   addPlantSighting,
   getPlantsWithSightings, */
@@ -142,7 +142,7 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-        {/*  <Route path="/" element={<Homepage />} /> */}
+        <Route path="/" element={<Homepage />} />
         <Route
           path="/specimens"
           element={<AnimalListPage animals={animals} />}
@@ -159,7 +159,7 @@ function App() {
           path={`/specimens/:specimenId/sightings`}
           element={
             <SightingsPage
-              /* getAnimalsWithSightings={getAnimalsWithSightings} */
+              /*  getAnimalsWithSightings={getAnimalsWithSightings} */
               sightings={sightings}
             />
           }
@@ -190,6 +190,19 @@ function App() {
             <WatchListPage watches={watches} /* deleteWatch={deleteWatch}  */ />
           }
         />
+        <Route
+          path={"/map"}
+          element={
+            <MapPage
+              plants={plants}
+              /* getPlantsWithSightings={getPlantsWithSightings}
+               */
+              getAnimalsWithSightings={getAnimalsWithSightings}
+              sightings={sightings}
+              animals={animals}
+            />
+          }
+        />
         {/* 
 
         <Route
@@ -202,13 +215,9 @@ function App() {
           }
         />
 
-      
-
         <Route path="/plant-list" element={<PlantListPage plants={plants} />} />
 
         <Route path="/plant-list/:plantId" element={<PlantDetailsPage />} />
-
-        
 
         <Route
           path="/watch/:watchId/edit-watch"
@@ -216,23 +225,6 @@ function App() {
         />
 
         <Route path="/watch/:watchId/details" element={<WatchDetailsPage />} />
-
-       
-
-        <Route
-          path={"/map"}
-          element={
-            <MapPage
-              plants={plants}
-              getPlantsWithSightings={getPlantsWithSightings}
-              getAnimalsWithSightings={getAnimalsWithSightings}
-              sightings={sightings}
-              animals={animals}
-            />
-          }
-        />
-
-       
 
         <Route path="/*" element={<Errorpage />} /> */}
       </Routes>

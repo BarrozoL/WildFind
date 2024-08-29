@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 
 function WatchCard({ watch, deleteWatch }) {
-  console.log("WatchCard props:", watch);
   const navigate = useNavigate();
 
   const handleEditNavigate = () => {

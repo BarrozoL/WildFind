@@ -4,29 +4,25 @@ import "./Map.css";
 import Map from "../components/Map";
 import MapListing from "../components/MapListing";
 
-export default function MapPage({
-  getAnimalsWithSightings,
-  getPlantsWithSightings,
-}) {
-  const [location, setLocation] = useState([]);
-  const [animalSightings, setAnimalSightings] = useState([]);
-  const [plantSightings, setPlantSightings] = useState([]);
+export default function MapPage({}) {
+  const [location, setLocation] = useState("");
+  const [sightings, setSightings] = useState([]);
 
   const ANIMALS_DB = "http://localhost:5005";
 
-  /*  useEffect(() => {
-    getAnimalsWithSightings().then((data) => setAnimalSightings(data));
-  }, [setLocation]); */
-
-  /* 
   useEffect(() => {
-    getPlantsWithSightings().then((data) => setPlantSightings(data));
-  }, [setLocation]);
- */
+    if (location) {
+      getSightingsByLocation(location).then((data) => setSightings(data));
+    }
+  }, [location]);
 
-  const getSightingsByLocation = async () => {
+  const getSightingsByLocation = async (location) => {
     try {
-      const response = await axios.get(`${ANIMALS_DB}/sightings/${location}`);
+      const response = await axios.get(
+        `${ANIMALS_DB}/api/sightings/${location}`
+      );
+
+      console.log("console responseData:", response.data, "sight:", sightings);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -37,7 +33,7 @@ export default function MapPage({
     setLocation(e.target.id);
   }
 
-  let matchingPlants = new Set([]);
+  /*  let matchingPlants = new Set([]);
 
   plantSightings.map((plant) => {
     plant.sightings.map((sight) => {
@@ -56,16 +52,12 @@ export default function MapPage({
         matchingAnimals.add(animal);
       }
     });
-  });
+  }); */
 
   return (
     <>
       <Map findLocation={findLocation} />
-      <MapListing
-        location={location}
-        matchingAnimals={matchingAnimals}
-        matchingPlants={matchingPlants}
-      />
+      <MapListing location={location} sightings={sightings} />
     </>
   );
 }

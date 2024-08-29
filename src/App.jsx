@@ -25,6 +25,11 @@ import AddPlantSightingPage from "./pages/AddPlantSightingPage";
 import PlantListPage from "./pages/PlantListPage";
 import PlantDetailsPage from "./pages/PlantDetailsPage"; */
 
+import SignupPage from "./pages/SignupPage";
+import LoginPage from "./pages/LoginPage";
+import IsPrivate from "./components/IsPrivate";
+import IsAnon from "./components/IsAnon";
+
 // Components
 
 // Functions
@@ -142,13 +147,15 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Homepage />} />
+        <Route exact path="/" element={<Homepage />} />
         <Route
-          path="/specimens"
+
+          exact path="/specimens"
           element={<AnimalListPage animals={animals} />}
         />
         <Route
-          path={`/specimens/:specimensId`}
+          exact path={`/specimens/:specimensId`}
+
           element={
             <AnimalDetailsPage
               animals={animals} /* watchState={watchState} */
@@ -156,7 +163,8 @@ function App() {
           }
         />
         <Route
-          path={`/specimens/:specimenId/sightings`}
+
+          exact path={`/specimens/:specimenId/sightings`}
           element={
             <SightingsPage
               /*  getAnimalsWithSightings={getAnimalsWithSightings} */
@@ -165,16 +173,18 @@ function App() {
           }
         />
         <Route
-          path="/:specimenId/add-sighting"
+          exact path="/:specimenId/add-sighting"
           element={
             <AddAnimalSightingPage
               animals={animals}
               addAnimalSighting={newSighting}
             />
+
           }
         />
         <Route
-          path="/animal-add"
+
+          exact path="/animal-add"
           element={
             <AddAnimalPage
               types={types}
@@ -185,12 +195,17 @@ function App() {
           }
         />
         <Route
-          path="/watch"
+          exact path="/watch"
           element={
-            <WatchListPage watches={watches} /* deleteWatch={deleteWatch}  */ />
+            
+                        <IsPrivate>
+              <WatchListPage watches={watches} deleteWatch={deleteWatch} />
+            </IsPrivate>
+
           }
         />
         <Route
+          exact
           path={"/map"}
           element={
             <MapPage
@@ -206,12 +221,31 @@ function App() {
         {/* 
 
         <Route
+          exact
+          path="/animal-add"
+
           path="/:plantId/add-plant-sighting"
           element={
             <AddPlantSightingPage
               plants={plants}
               addPlantSighting={newPlantSighting}
             />
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <IsAnon>
+              <SignupPage />
+            </IsAnon>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <IsAnon>
+              <LoginPage />
+            </IsAnon>
           }
         />
 

@@ -149,13 +149,13 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Homepage />} />
         <Route
-
-          exact path="/specimens"
+          exact
+          path="/specimens"
           element={<AnimalListPage animals={animals} />}
         />
         <Route
-          exact path={`/specimens/:specimensId`}
-
+          exact
+          path={`/specimens/:specimensId`}
           element={
             <AnimalDetailsPage
               animals={animals} /* watchState={watchState} */
@@ -163,8 +163,8 @@ function App() {
           }
         />
         <Route
-
-          exact path={`/specimens/:specimenId/sightings`}
+          exact
+          path={`/specimens/:specimenId/sightings`}
           element={
             <SightingsPage
               /*  getAnimalsWithSightings={getAnimalsWithSightings} */
@@ -173,18 +173,18 @@ function App() {
           }
         />
         <Route
-          exact path="/:specimenId/add-sighting"
+          exact
+          path="/:specimenId/add-sighting"
           element={
             <AddAnimalSightingPage
               animals={animals}
               addAnimalSighting={newSighting}
             />
-
           }
         />
         <Route
-
-          exact path="/animal-add"
+          exact
+          path="/animal-add"
           element={
             <AddAnimalPage
               types={types}
@@ -195,13 +195,12 @@ function App() {
           }
         />
         <Route
-          exact path="/watch"
+          exact
+          path="/watch"
           element={
-            
-                        <IsPrivate>
-              <WatchListPage watches={watches} deleteWatch={deleteWatch} />
+            <IsPrivate>
+              <WatchListPage watches={watches} /*deleteWatch={deleteWatch}*/ />
             </IsPrivate>
-
           }
         />
         <Route
@@ -215,20 +214,6 @@ function App() {
               getAnimalsWithSightings={getAnimalsWithSightings}
               sightings={sightings}
               animals={animals}
-            />
-          }
-        />
-        {/* 
-
-        <Route
-          exact
-          path="/animal-add"
-
-          path="/:plantId/add-plant-sighting"
-          element={
-            <AddPlantSightingPage
-              plants={plants}
-              addPlantSighting={newPlantSighting}
             />
           }
         />
@@ -248,6 +233,21 @@ function App() {
             </IsAnon>
           }
         />
+        {/* 
+
+        <Route
+          exact
+          path="/animal-add"
+
+          path="/:plantId/add-plant-sighting"
+          element={
+            <AddPlantSightingPage
+              plants={plants}
+              addPlantSighting={newPlantSighting}
+            />
+          }
+        />
+
 
         <Route path="/plant-list" element={<PlantListPage plants={plants} />} />
 

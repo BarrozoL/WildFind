@@ -8,8 +8,10 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
   const [date, setDate] = useState(new Date());
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
-  const [image, setImage] = useState("");
+  // const [image, setImage] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const { specimenId } = useParams();
+
   /*  const animalNumber = Number(animalId) - 1; */
   const navigate = useNavigate();
 
@@ -20,12 +22,28 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
     setLocation(e.target.value);
   };
 
-  const handleImageChange = (e) => {
-    setImage(e.target.value);
-  };
+  // const handleImageChange = (e) => {
+  //   setImage(e.target.value);
+  // };
 
   const handleDateChange = (date) => {
     setDate(date);
+  };
+
+  const handleFileUpload = (e) => {
+    console.log("The file to be uploaded is: ", e.target.files[0]);
+
+    const uploadData = new FormData();
+    uploadData.append("imageUrl", e.target.files[0]); // Append the file with the key "imageUrl"
+
+    sightingService
+      .uploadImage(uploadData)
+      .then((response) => {
+        console.log("response is: ", response);
+
+        setImageUrl(response.data.fileUrl);
+      })
+      .catch((err) => console.log("Error while uploading the file: ", err));
   };
 
   const handleSubmit = (e) => {
@@ -36,14 +54,14 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
     }
     /*    const typeId = animals[animalNumber]?.typeId; */
 
-    const requestBody = { specimenId, description, location, image };
+    const requestBody = { specimenId, description, location, image: imageUrl };
 
     sightingService
       .createSighting(requestBody)
       .then((response) => {
         setDescription("");
         setLocation("");
-        setImage("");
+        setImageUrl("");
         navigate("/specimens");
       })
       .catch((error) => console.log(error));
@@ -100,13 +118,7 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
         </div>
         <div>
           <label>{`Picture of sighting (optional):`}</label>
-          <input
-            type="text"
-            name="image"
-            value={image}
-            onChange={handleImageChange}
-            className="sighting-img"
-          />
+          <input type="file" onChange={(e) => handleFileUpload(e)} />
         </div>
         <div className="sighting-submit">
           <button type="submit" onClick={handleSubmit}>

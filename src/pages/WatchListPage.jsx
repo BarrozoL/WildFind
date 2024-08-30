@@ -46,7 +46,7 @@ export default function WatchList({ /* watches */ deleteWatch }) {
     };
   }, [theme]);
 
-  /*   let filteredWatches = watches.filter((watch) => {
+  let filteredWatches = watches.filter((watch) => {
     // Filter by type
     const typeMatch =
       (!type && watch.typeId !== 7 && watch.typeId !== 8) ||
@@ -67,7 +67,7 @@ export default function WatchList({ /* watches */ deleteWatch }) {
 
   const sortedWatches = filteredWatches.sort((a, b) =>
     a.name.localeCompare(b.name)
-  ); */
+  );
 
   return (
     <div className="watch-list">
@@ -99,7 +99,7 @@ export default function WatchList({ /* watches */ deleteWatch }) {
 
       <div className="watchWrapper">
         {console.log("watch:", watches)}
-        {watches.map((watch) => (
+        {sortedWatches.map((watch) => (
           <WatchCard key={watch.id} watch={watch} deleteWatch={deleteWatch} />
         ))}
       </div>

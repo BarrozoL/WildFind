@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { /* addToWatchList, */ getAnimal } from "../../lib";
 import { jwtDecode } from "jwt-decode";
-/* import jwt_decode from "jwt-decode"; */
 import watchService from "../../services/watch-service";
 
 export default function AnimalCard({ animals }) {
@@ -16,7 +15,6 @@ export default function AnimalCard({ animals }) {
 
   useEffect(() => {
     getAnimal(specimensId).then((data) => setFoundAnimal(data));
-    console.log(specimensId);
   }, [specimensId]);
 
   useEffect(() => {
@@ -73,7 +71,6 @@ export default function AnimalCard({ animals }) {
       .catch((error) => console.log(error));
     navigate("/specimens");
   };
-  console.log(foundAnimal);
 
   if (!foundAnimal) return <p>Loading...</p>;
 

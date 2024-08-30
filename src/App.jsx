@@ -30,6 +30,7 @@ import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import IsPrivate from "./components/IsPrivate";
 import IsAnon from "./components/IsAnon";
+import IsUnique from "./components/IsUnique";
 
 // Components
 
@@ -234,7 +235,14 @@ function App() {
             </IsAnon>
           }
         />
-        <Route path="/users/:userId" element={<UserPersonalPage />} />
+        <Route
+          path="/users/:userId"
+          element={
+            <IsUnique>
+              <UserPersonalPage />
+            </IsUnique>
+          }
+        />
         {/* 
 
         <Route

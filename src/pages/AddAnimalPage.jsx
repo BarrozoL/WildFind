@@ -11,6 +11,10 @@ import defaultAmphibianImage from "../assets/images/frog.jpeg";
 import defaultAquaticImage from "../assets/images/fish.jpeg";
 import defaultPetImage from "../assets/images/dog.jpeg";
 import defaultOtherImage from "../assets/images/other-animal.jpeg";
+import defaultTreeImage from "../assets/images/tree.jpeg";
+import defaultBerryImage from "../assets/images/berry.jpeg";
+import defaultFlowerImage from "../assets/images/flower.jpeg";
+import defaultPlantImage from "../assets/images/plant.jpeg";
 
 export default function AddAnimal({ types, addAnimal, animals, animalState }) {
   /*console.log(addAnimal);*/
@@ -164,19 +168,15 @@ export default function AddAnimal({ types, addAnimal, animals, animalState }) {
       img = imageUrl || defaultPetImage;
     } else if (typeId === 8) {
       img = imageUrl || defaultOtherImage;
+    } else if (typeId === 9) {
+      img = imageUrl || defaultTreeImage;
+    } else if (typeId === 10) {
+      img = imageUrl || defaultBerryImage;
+    } else if (typeId === 11) {
+      img = imageUrl || defaultFlowerImage;
+    } else if (typeId === 12) {
+      img = imageUrl || defaultPlantImage;
     }
-    // else if (typeId === 9) {
-    //   img = imageUrl || defaultOtherImage;
-    // }
-    // else if (typeId === 10) {
-    //   img = imageUrl || defaultOtherImage;
-    // }
-    // else if (typeId === 11) {
-    //   img = imageUrl || defaultOtherImage;
-    // }
-    // else if (typeId === 12) {
-    //   img = imageUrl || defaultOtherImage;
-    // }
 
     /*    const newAnimal = {
       typeId: animalTypeId,

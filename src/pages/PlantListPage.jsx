@@ -104,15 +104,11 @@ export default function AnimalList(/*{ animals }*/) {
   let filteredPlants = plants.filter((plant) => {
     // Filter by type
     const typeMatch =
-      (!type && plant.typeId !== 7 && plant.typeId !== 8) ||
-      (type === "Birds" && plant.typeId === 1) ||
-      (type === "Mammals" && plant.typeId === 2) ||
-      (type === "Reptiles" && plant.typeId === 3) ||
-      (type === "Insects" && plant.typeId === 4) ||
-      (type === "Amphibians" && plant.typeId === 5) ||
-      (type === "Aquatic Animals" && plant.typeId === 6) ||
-      (type === "Pets" && plant.typeId === 7) ||
-      (type === "Other" && plant.typeId === 8);
+      !type ||
+      (type === "Trees" && plant.typeId === 9) ||
+      (type === "Berries" && plant.typeId === 10) ||
+      (type === "Flowers" && plant.typeId === 11) ||
+      (type === "Other" && plant.typeId === 12);
 
     // Filter by name
     const nameMatch = plant.name.toLowerCase().includes(search.toLowerCase());
@@ -139,14 +135,10 @@ export default function AnimalList(/*{ animals }*/) {
         <div className="type-select-wrapper">
           <select className="type-select" onChange={handleTypeFilter}>
             <option value="">Show All Plants</option>
-            <option value="Birds">Show Birds</option>
-            <option value="Mammals">Show Mammals</option>
-            <option value="Reptiles">Show Reptiles</option>
-            <option value="Insects">Show Insects</option>
-            <option value="Amphibians">Show Amphibians</option>
-            <option value="Aquatic Animals">Show Aquatic Animals</option>
-            <option value="Pets">Show Pets</option>
-            <option value="Other">Show Other Animals</option>
+            <option value="Trees">Show Trees</option>
+            <option value="Berries">Show Berries</option>
+            <option value="Flowers">Show Flowers</option>
+            <option value="Other">Show Other Plants</option>
           </select>
 
           <button onClick={handleNavigate}>Add a new Plant!</button>

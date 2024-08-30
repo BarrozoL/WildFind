@@ -19,11 +19,18 @@ class WatchService {
     });
   }
 
+  //POST watch to user
+  createWatch = (userId, requestBody) => {
+    return this.api.post(`/api/watchlist/${userId}`, requestBody);
+  };
+}
+
+/* 
   // POST /api/sightings
   createWatch = (requestBody) => {
     return this.api.post("/api/watchlist", requestBody);
-  };
-}
+  }
+ */
 
 const watchService = new WatchService();
 

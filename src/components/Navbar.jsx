@@ -51,7 +51,7 @@ const Navbar = () => {
 
           {isLoggedIn && (
             <>
-              <NavLink to="/watch" className="NavLink">
+              <NavLink to={`/users/${user._id}`} className="NavLink">
                 View your Watchlist
               </NavLink>
 

@@ -13,6 +13,7 @@ import AddAnimalSightingPage from "./pages/AddAnimalSightingPage";
 import AddAnimalPage from "./pages/AddAnimalPage";
 import WatchListPage from "./pages/WatchListPage";
 import MapPage from "./pages/MapPage";
+import UserPersonalPage from "./pages/UserPersonalPage";
 /* import Errorpage from "./pages/Errorpage";
 
 import WatchDetailsPage from "./pages/WatchDetailsPage"; */
@@ -233,6 +234,7 @@ function App() {
             </IsAnon>
           }
         />
+        <Route path="/users/:userId" element={<UserPersonalPage />} />
         {/* 
 
         <Route

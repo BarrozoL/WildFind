@@ -1,11 +1,17 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { /* addToWatchList, */ getAnimal } from "../../lib";
+import { jwtDecode } from "jwt-decode";
+/* import jwt_decode from "jwt-decode"; */
 import watchService from "../../services/watch-service";
 
 export default function AnimalCard({ animals }) {
   const [foundAnimal, setFoundAnimal] = useState();
   const { specimensId } = useParams();
+  const token = localStorage.getItem("authToken");
+  const decodedToken = token ? jwtDecode(token) : null;
+  const userId = decodedToken ? decodedToken._id : null; // Extract userId
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -43,25 +49,9 @@ export default function AnimalCard({ animals }) {
   };
 
   const handleAddToWatchList = async () => {
-    /*  try {
-      const response = await addToWatchList(
-        specimensId,
-        foundAnimal.typeId,
-        foundAnimal.name,
-        foundAnimal.image,
-        foundAnimal.description,
-        foundAnimal.location,
-        foundAnimal.dangerLevel
-      );
-      watchState(response);
-      handleWatchNavigate();
-      console.log("animal added to watch list", response);
-    } catch (error) {
-      console.log(error, "can't add to watch list");
-    } */
-
     const requestBody = {
       specimenId: specimensId,
+      userId: userId,
       typeId: foundAnimal.typeId, // Accessing typeId here
       name: foundAnimal.name,
       image: foundAnimal.image,
@@ -72,13 +62,13 @@ export default function AnimalCard({ animals }) {
     };
 
     watchService
-      .createWatch(requestBody)
+      .createWatch(userId, requestBody)
       .then((response) => {
-        setName("");
-        setSelectedAnimalType("");
-        setDescription("");
-        setLocation("");
-        setImage("");
+        /*  setName("");
+        setSelectedAnimalType("") */
+        /* setDescription(""); */
+        /*  setLocation("");
+        setImage(""); */
       })
       .catch((error) => console.log(error));
     navigate("/specimens");

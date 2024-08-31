@@ -2,15 +2,21 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import sightingService from "../../services/sighting-services";
-import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 import "react-datepicker/dist/react-datepicker.css";
+
 export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
   const [date, setDate] = useState(new Date());
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
   const [image, setImage] = useState("");
   const { specimenId } = useParams();
-  /*  const animalNumber = Number(animalId) - 1; */
+  //Retrieving the user's authToken token from the localStorage
+  const token = localStorage.getItem("authToken");
+  //Running jwtDecode function to decode the user's authToken
+  const decodedToken = token ? jwtDecode(token) : null;
+  const username = decodedToken ? decodedToken.username : null; // Extract username
+
   const navigate = useNavigate();
 
   const handleDescriptionChange = (e) => {
@@ -36,7 +42,13 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
     }
     /*    const typeId = animals[animalNumber]?.typeId; */
 
-    const requestBody = { specimenId, description, location, image };
+    const requestBody = {
+      username: username,
+      specimenId,
+      description,
+      location,
+      image,
+    };
 
     sightingService
       .createSighting(requestBody)

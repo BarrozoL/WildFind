@@ -13,7 +13,6 @@ function IsUnique({ children }) {
     console.log("id:", userId);
     return <Navigate to="/specimens" />;
   }
-  console.log("is logged in");
   return children;
 }
 

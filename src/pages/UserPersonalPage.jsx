@@ -32,7 +32,6 @@ export default function UserPersonalPage() {
         console.error("Error fetching sightings:", error);
       });
   }; */
-  console.log(user);
 
   if (!user) return <p>Loading...</p>;
 
@@ -45,7 +44,7 @@ export default function UserPersonalPage() {
           user.watchList.map((watchItem) => (
             <div key={watchItem._id}>
               <p>{watchItem.name}</p>
-              {console.log("watchitem", watchItem)}
+
               <p>Location: {watchItem.location}</p>
               <p>Sightings: {watchItem.sightings.length}</p>
             </div>

@@ -13,6 +13,7 @@ export default function Sightings({ sightings, getAnimalsWithSightings }) {
   //Running jwtDecode function to decode the user's authToken
   const decodedToken = token ? jwtDecode(token) : null;
   const username = decodedToken ? decodedToken.name : null; // Extract username
+  const userId = decodedToken ? decodedToken._id : null; // Extract username
 
   const navigate = useNavigate();
 
@@ -30,14 +31,6 @@ export default function Sightings({ sightings, getAnimalsWithSightings }) {
         console.error("Error fetching sightings:", error);
       });
   }, []);
-
-  /*   const filteredSightings = sightings.filter(
-    (sight) => Number(sight.specimenId) === Number(specimenId)
-  ); */
-
-  /* useEffect(() => {
-    getAnimalsWithSightings(specimenId).then((data) => setSights(data));
-  }, []); */
 
   useEffect(() => {
     getAnimal(specimenId).then((data) => setFoundAnimal(data));
@@ -63,6 +56,7 @@ export default function Sightings({ sightings, getAnimalsWithSightings }) {
           const formattedDate = new Date(sighting.date).toString();
           return (
             <div key={sighting._id}>
+              {console.log(sighting)}
               <ul style={{ listStyleType: "none" }} className="sighting-cards">
                 {sighting.image && sighting.image.trim() !== "" && (
                   <img

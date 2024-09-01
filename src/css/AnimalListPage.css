@@ -1,0 +1,118 @@
+body.dark-mode .sidebar select {
+  background-color: black;
+  border: 2px solid rgb(44, 140, 121);
+  border-radius: 5px;
+  color: white;
+}
+
+body.dark-mode .sidebar input {
+  background-color: black;
+  border: 2px solid rgb(44, 140, 121);
+  border-radius: 5px;
+  color: white;
+}
+
+body.dark-mode .sidebar button {
+  background-color: rgb(44, 140, 121);
+  border: 1px solid rgb(44, 140, 121);
+  border-radius: 5px;
+}
+
+body.light-mode .sidebar button {
+  background-color: rgb(44, 140, 121);
+  border: 1px solid rgb(44, 140, 121);
+  border-radius: 5px;
+}
+
+body.light-mode .sidebar input {
+  background-color: white;
+  border: 2px solid rgb(44, 140, 121);
+  border-radius: 5px;
+  color: black;
+}
+
+body.light-mode .sidebar select {
+  background-color: white;
+  border: 2px solid rgb(44, 140, 121);
+  border-radius: 5px;
+  color: black;
+}
+
+.sidebar {
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.search-bar {
+  position: absolute;
+  top: 9vw;
+  right: 6vw;
+  height: 20px;
+  font-size: 16px;
+}
+
+.type-select-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 12vw;
+  right: 6vw;
+}
+
+.type-select {
+  height: 20px;
+  font-size: 16px;
+  margin-bottom: 15px;
+  width: 180px;
+}
+
+.animalWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 5vw;
+}
+
+body.light-mode .animal-cards {
+  margin: 30px;
+  /* border: 2px solid black; */
+  background-color: #d7e8c0;
+  color: rgb(44, 140, 121);
+  border-radius: 5px;
+  width: 200px;
+  height: 280px;
+}
+
+body.dark-mode .animal-cards {
+  margin: 30px;
+  /* border: 2px solid black; */
+  background-color: #b581e4;
+  color: #b5fff0;
+  border-radius: 5px;
+  width: 200px;
+  height: 280px;
+}
+
+body.other-theme .animal-cards {
+  margin: 30px;
+  /* border: 2px solid black; */
+  background-color: #1c8e66;
+  color: #b5fff0;
+  border-radius: 5px;
+  width: 200px;
+  height: 280px;
+}
+
+body.other-theme .animal-cards img {
+  border: 2px solid #20c9c1;
+}
+
+.animalWrapper h3 {
+  height: 45px;
+}
+
+.animalWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 5vw;
+}

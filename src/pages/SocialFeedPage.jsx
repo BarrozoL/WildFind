@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import "../css/SocialFeedPage.css";
 
 export default function SocialFeedPage() {
   const [sightings, setSightings] = useState();

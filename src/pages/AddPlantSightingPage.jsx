@@ -2,6 +2,8 @@
 import { useNavigate, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "../css/AddPlantSightingPage.css";
+
 export default function AddPlantSighting({ plants, addPlantSighting }) {
   const [date, setDate] = useState(new Date());
   const [description, setDescription] = useState("");

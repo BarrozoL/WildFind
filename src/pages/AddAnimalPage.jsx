@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import "../css/AddAnimalPage.css";
 
 import specimenService from "../../services/specimen-service";
 

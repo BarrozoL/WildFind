@@ -1,6 +1,7 @@
 /* import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getWatch } from "../../lib";
+import "../css/WatchDetailsPage.css";
 
 function WatchDetails() {
   const [foundWatch, setFoundWatch] = useState(null);

@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import "./Navbar.css";
+import "../css/Navbar.css";
 import WildFindLogo from "../assets/images/WildFind-logo-5.png";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
@@ -59,17 +59,19 @@ const Navbar = () => {
               <NavLink to={`/user-profile/${user._id}`} className="NavLink">
                 User Profile
               </NavLink>
-              <button onClick={logOutUser}>Logout</button>
+              <button className="logout" onClick={logOutUser}>
+                Logout
+              </button>
               {/* <span>{user && user.name}</span> */}
             </>
           )}
           {!isLoggedIn && (
             <>
               <Link to="/signup">
-                <button>Sign Up</button>
+                <button className="button">Sign Up</button>
               </Link>
               <Link to="/login">
-                <button>Login</button>
+                <button className="button">Login</button>
               </Link>
             </>
           )}

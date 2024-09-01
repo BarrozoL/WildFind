@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import WatchCard from "../components/WatchCard";
 import { getAllWatchlistItems } from "../../lib";
 import watchService from "../../services/watchlist-service";
+import "../css/WatchListPage.css";
 
 export default function WatchList({ /* watches */ deleteWatch }) {
   const [search, setSearch] = useState("");

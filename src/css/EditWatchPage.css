@@ -1,0 +1,100 @@
+body.light-mode .add-form {
+  background-color: #d7e8c0;
+}
+
+body.light-mode .add-form button {
+  background-color: rgb(44, 140, 121);
+  border-color: rgb(44, 140, 121);
+}
+
+body.dark-mode .add-form {
+  background-color: #b581e4;
+  color: #b5fff0;
+}
+
+.add-form {
+  width: 1000px;
+  height: 520px;
+  padding: 20px;
+  margin-top: 50px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+body.other-theme .add-form {
+  background-color: #1c8e66;
+  color: #b5fff0;
+}
+
+body.light-mode .edit-inputs input {
+  background-color: white;
+  border-color: rgb(44, 140, 121);
+  border-width: 1px;
+  border-radius: 5px;
+  color: black;
+}
+body.light-mode .edit-inputs select {
+  background-color: white;
+  border-color: rgb(44, 140, 121);
+  border-radius: 5px;
+  color: black;
+}
+body.light-mode .edit-inputs textarea {
+  background-color: white;
+  border-color: rgb(44, 140, 121);
+  border-width: 1px;
+  border-radius: 5px;
+  color: black;
+}
+
+body.dark-mode .edit-inputs input {
+  border-color: rgb(44, 140, 121);
+  border-width: 1px;
+  border-radius: 5px;
+}
+body.dark-mode .edit-inputs select {
+  border-radius: 5px;
+}
+body.dark-mode .edit-inputs textarea {
+  border-color: rgb(44, 140, 121);
+  border-width: 1px;
+  border-radius: 5px;
+}
+
+body.other-theme .edit-inputs input {
+  border-color: rgb(44, 140, 121);
+  background-color: #3b3b3b;
+  color: white;
+  border-width: 1px;
+  border-radius: 5px;
+}
+body.other-theme .edit-inputs select {
+  border-radius: 5px;
+  background-color: #3b3b3b;
+  color: white;
+}
+body.other-theme .edit-inputs textarea {
+  border-color: rgb(44, 140, 121);
+  background-color: #3b3b3b;
+  color: white;
+  border-width: 1px;
+  border-radius: 5px;
+}
+body.other-theme .edit-inputs button {
+  background-color: black;
+  border: 2px solid #20c9c1;
+}
+
+.edit-inputs {
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+}
+
+.edit-inputs button {
+  width: 200px;
+  margin-top: 20px;
+  margin-left: 38%;
+}

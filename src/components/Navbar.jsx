@@ -42,7 +42,9 @@ const Navbar = () => {
           <NavLink to="/map" className="NavLink">
             Map
           </NavLink>
-
+          <NavLink to="/actions" className="NavLink">
+            See Recent Sightings
+          </NavLink>
           {/* <NavLink to="/animal-add">Seen a new animal? Add it!</NavLink> */}
 
           {/* <NavLink to="/watch" className="NavLink">
@@ -51,10 +53,12 @@ const Navbar = () => {
 
           {isLoggedIn && (
             <>
-              <NavLink to={`/users/${user._id}`} className="NavLink">
+              <NavLink to={`/watchlist/${user._id}`} className="NavLink">
                 View your Watchlist
               </NavLink>
-
+              <NavLink to={`/user-profile/${user._id}`} className="NavLink">
+                User Profile
+              </NavLink>
               <button onClick={logOutUser}>Logout</button>
               {/* <span>{user && user.name}</span> */}
             </>

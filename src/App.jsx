@@ -13,9 +13,12 @@ import AddAnimalSightingPage from "./pages/AddAnimalSightingPage";
 import AddAnimalPage from "./pages/AddAnimalPage";
 import WatchListPage from "./pages/WatchListPage";
 import MapPage from "./pages/MapPage";
-import UserPersonalPage from "./pages/UserPersonalPage";
-/* import Errorpage from "./pages/Errorpage";
+import PersonalWatchlistPage from "./pages/PersonalWatchlistPage";
+import SocialFeedPage from "./pages/SocialFeedPage";
+import UserProfilePage from "./pages/UserProfilePage";
+import Errorpage from "./pages/Errorpage";
 
+/* 
 import WatchDetailsPage from "./pages/WatchDetailsPage"; */
 /* 
 
@@ -236,13 +239,17 @@ function App() {
           }
         />
         <Route
-          path="/users/:userId"
+          path="/watchlist/:userId"
           element={
             <IsUnique>
-              <UserPersonalPage />
+              <PersonalWatchlistPage />
             </IsUnique>
           }
         />
+        <Route path="/actions" element={<SocialFeedPage />} />
+        <Route path="/user-profile/:userId" element={<UserProfilePage />} />
+
+        <Route path="/*" element={<Errorpage />} />
         {/* 
 
         <Route
@@ -270,7 +277,7 @@ function App() {
 
         <Route path="/watch/:watchId/details" element={<WatchDetailsPage />} />
 
-        <Route path="/*" element={<Errorpage />} /> */}
+       */}
       </Routes>
 
       <Footer />

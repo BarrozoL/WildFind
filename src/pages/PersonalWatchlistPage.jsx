@@ -2,16 +2,16 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-export default function UserPersonalPage() {
+export default function UserWatchlistPage() {
   const [user, setUser] = useState();
-  /*   const [userWatchlist, setUserWatchlist] = useState([]); */
   const { userId } = useParams();
 
   useEffect(() => {
-    getUser();
+    getUserInfo();
   }, []);
 
-  const getUser = async () => {
+  //GET all of the user information
+  const getUserInfo = async () => {
     axios
       .get(`http://localhost:5005/api/users/${userId}`)
       .then((response) => {
@@ -22,23 +22,12 @@ export default function UserPersonalPage() {
       });
   };
 
-  /*   const getUserWatchlist = async () => {
-    axios
-      .get(`http://localhost:5005/api/users/${userId}`)
-      .then((response) => {
-        setUser(response.data.watchList);
-      })
-      .catch((error) => {
-        console.error("Error fetching sightings:", error);
-      });
-  }; */
-
   if (!user) return <p>Loading...</p>;
 
   return (
     <>
       <div>
-        <h1>Welcome {user.name}</h1>
+        <h1>Welcome {user.username}</h1>
         <h3>This is your current watchlist</h3>
         {user.watchList && user.watchList ? (
           user.watchList.map((watchItem) => (

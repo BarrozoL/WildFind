@@ -18,7 +18,6 @@ export default function MapListing({ location, sightings }) {
             )}
           </div>
           <div className="sighting-card">
-            {console.log("mapList sightings", sightings)}
             {sightings.map((sight) => (
               <div key={sight._id}>
                 <h4 style={{ color: "rgb(44, 140, 121)", width: "100px" }}>

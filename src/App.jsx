@@ -15,8 +15,10 @@ import WatchListPage from "./pages/WatchListPage";
 import MapPage from "./pages/MapPage";
 import PersonalWatchlistPage from "./pages/PersonalWatchlistPage";
 import SocialFeedPage from "./pages/SocialFeedPage";
-/* import Errorpage from "./pages/Errorpage";
+import UserProfilePage from "./pages/UserProfilePage";
+import Errorpage from "./pages/Errorpage";
 
+/* 
 import WatchDetailsPage from "./pages/WatchDetailsPage"; */
 /* 
 
@@ -237,7 +239,7 @@ function App() {
           }
         />
         <Route
-          path="/users/:userId"
+          path="/watchlist/:userId"
           element={
             <IsUnique>
               <PersonalWatchlistPage />
@@ -245,6 +247,9 @@ function App() {
           }
         />
         <Route path="/actions" element={<SocialFeedPage />} />
+        <Route path="/user-profile/:userId" element={<UserProfilePage />} />
+
+        <Route path="/*" element={<Errorpage />} />
         {/* 
 
         <Route
@@ -272,7 +277,7 @@ function App() {
 
         <Route path="/watch/:watchId/details" element={<WatchDetailsPage />} />
 
-        <Route path="/*" element={<Errorpage />} /> */}
+       */}
       </Routes>
 
       <Footer />

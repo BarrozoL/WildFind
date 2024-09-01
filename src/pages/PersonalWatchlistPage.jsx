@@ -2,15 +2,16 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-export default function PersonalWatchlistPage() {
+export default function UserWatchlistPage() {
   const [user, setUser] = useState();
   const { userId } = useParams();
 
   useEffect(() => {
-    getUserWatchlist();
+    getUserInfo();
   }, []);
 
-  const getUserWatchlist = async () => {
+  //GET all of the user information
+  const getUserInfo = async () => {
     axios
       .get(`http://localhost:5005/api/users/${userId}`)
       .then((response) => {
@@ -26,7 +27,7 @@ export default function PersonalWatchlistPage() {
   return (
     <>
       <div>
-        <h1>Welcome {user.name}</h1>
+        <h1>Welcome {user.username}</h1>
         <h3>This is your current watchlist</h3>
         {user.watchList && user.watchList ? (
           user.watchList.map((watchItem) => (

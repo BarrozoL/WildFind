@@ -16,6 +16,7 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
   //Running jwtDecode function to decode the user's authToken
   const decodedToken = token ? jwtDecode(token) : null;
   const userId = decodedToken ? decodedToken._id : null; // Extract userId
+  const username = decodedToken ? decodedToken.username : null; // Extract username
 
   const navigate = useNavigate();
 
@@ -43,6 +44,7 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
     /*    const typeId = animals[animalNumber]?.typeId; */
 
     const requestBody = {
+      username,
       userId,
       specimenId,
       description,

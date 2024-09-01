@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import WatchCard from "../components/WatchCard";
 import { getAllWatchlistItems } from "../../lib";
-import watchService from "../../services/watch-service";
+import watchService from "../../services/watchlist-service";
 
 export default function WatchList({ /* watches */ deleteWatch }) {
   const [search, setSearch] = useState("");

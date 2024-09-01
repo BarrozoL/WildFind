@@ -53,10 +53,12 @@ const Navbar = () => {
 
           {isLoggedIn && (
             <>
-              <NavLink to={`/users/${user._id}`} className="NavLink">
+              <NavLink to={`/watchlist/${user._id}`} className="NavLink">
                 View your Watchlist
               </NavLink>
-
+              <NavLink to={`/user-profile/${user._id}`} className="NavLink">
+                User Profile
+              </NavLink>
               <button onClick={logOutUser}>Logout</button>
               {/* <span>{user && user.name}</span> */}
             </>

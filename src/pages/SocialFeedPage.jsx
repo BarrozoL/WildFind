@@ -34,7 +34,6 @@ export default function SocialFeedPage() {
               </h3>
               <h4>Sighting description: {action.sighting.description}</h4>
               <p>Entry added at: {action.sighting.date}</p>
-              {console.log("action:", action)}
             </div>
           );
         })}

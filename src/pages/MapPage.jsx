@@ -21,8 +21,6 @@ export default function MapPage({}) {
       const response = await axios.get(
         `${ANIMALS_DB}/api/sightings/${location}`
       );
-
-      console.log("console responseData:", response.data, "sight:", sightings);
       return response.data;
     } catch (error) {
       console.log(error);

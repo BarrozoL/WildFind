@@ -41,7 +41,6 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
       alert("All fields are mandatory");
       return;
     }
-    /*    const typeId = animals[animalNumber]?.typeId; */
 
     const requestBody = {
       username,

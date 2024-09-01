@@ -28,7 +28,7 @@ export default function UserProfilePage() {
     <>
       <div>
         <h1>Profile Page</h1>
-        <h2>Welcome {user.username}</h2>
+        <h2>{user.username}'s profile</h2>
         <p>You have added {user.sightings.length} sightings</p>
       </div>
     </>

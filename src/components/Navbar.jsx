@@ -42,7 +42,9 @@ const Navbar = () => {
           <NavLink to="/map" className="NavLink">
             Map
           </NavLink>
-
+          <NavLink to="/actions" className="NavLink">
+            See Recent Sightings
+          </NavLink>
           {/* <NavLink to="/animal-add">Seen a new animal? Add it!</NavLink> */}
 
           {/* <NavLink to="/watch" className="NavLink">

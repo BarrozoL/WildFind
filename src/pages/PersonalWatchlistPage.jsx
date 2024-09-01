@@ -2,16 +2,15 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-export default function UserPersonalPage() {
+export default function PersonalWatchlistPage() {
   const [user, setUser] = useState();
-  /*   const [userWatchlist, setUserWatchlist] = useState([]); */
   const { userId } = useParams();
 
   useEffect(() => {
-    getUser();
+    getUserWatchlist();
   }, []);
 
-  const getUser = async () => {
+  const getUserWatchlist = async () => {
     axios
       .get(`http://localhost:5005/api/users/${userId}`)
       .then((response) => {
@@ -21,17 +20,6 @@ export default function UserPersonalPage() {
         console.error("Error fetching sightings:", error);
       });
   };
-
-  /*   const getUserWatchlist = async () => {
-    axios
-      .get(`http://localhost:5005/api/users/${userId}`)
-      .then((response) => {
-        setUser(response.data.watchList);
-      })
-      .catch((error) => {
-        console.error("Error fetching sightings:", error);
-      });
-  }; */
 
   if (!user) return <p>Loading...</p>;
 

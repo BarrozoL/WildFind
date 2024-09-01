@@ -32,6 +32,12 @@ export default function UserWatchlistPage() {
         {user.watchList && user.watchList ? (
           user.watchList.map((watchItem) => (
             <div key={watchItem._id}>
+              <img
+                src={watchItem.image}
+                alt={watchItem.name}
+                width="20%"
+                height="20%"
+              />
               <p>{watchItem.name}</p>
 
               <p>Location: {watchItem.location}</p>

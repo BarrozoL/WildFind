@@ -28,12 +28,14 @@ export default function SocialFeedPage() {
         {sightings.map((action) => {
           return (
             <div style={{ border: "1px solid black" }} key={action._id}>
+              {console.log("action:", action.sighting?.specimenId?.name)}
               <h3>
-                {action.user.username} Has spotted{" "}
-                {action.sighting.specimenId.name} in {action.sighting.location}
+                {action?.user?.username} Has spotted{" "}
+                {action?.sighting?.specimenId?.name} in{" "}
+                {action?.sighting?.location}
               </h3>
-              <h4>Sighting description: {action.sighting.description}</h4>
-              <p>Entry added at: {action.sighting.date}</p>
+              <h4>Sighting description: {action?.sighting?.description}</h4>
+              <p>Entry added at: {action?.sighting?.date}</p>
             </div>
           );
         })}

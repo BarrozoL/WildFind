@@ -36,7 +36,7 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
   const handleDateChange = (date) => {
     setDate(date);
   };
-
+  console.log(decodedToken);
   const handleFileUpload = (e) => {
     console.log("The file to be uploaded is: ", e.target.files[0]);
 

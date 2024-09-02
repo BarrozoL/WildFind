@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import "../css/SocialFeedPage.css";
 
 import "../pages.css/SocialFeedPage.css";
 

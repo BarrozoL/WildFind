@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { /* addToWatchList, */ getAnimal } from "../../lib";
 import { jwtDecode } from "jwt-decode";
 import watchService from "../../services/watchlist-service";
+import "../css/AnimalDetailsPage.css";
 
 export default function AnimalCard({ animals }) {
   const [foundAnimal, setFoundAnimal] = useState();

@@ -1,5 +1,6 @@
 /* import { Link } from "react-router-dom";
 import { useState } from "react";
+import "../css/PlantListPage.css";
 
 export default function PlantList({ plants }) {
   const [search, setSearch] = useState("");

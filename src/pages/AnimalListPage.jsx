@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import "../css/AnimalListPage.css";
 
 //Receive the {animals} as a prop from the App, since the state stored and altered there.
 export default function AnimalList({ animals }) {

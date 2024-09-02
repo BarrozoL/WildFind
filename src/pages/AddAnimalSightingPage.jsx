@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import sightingService from "../../services/sighting-services";
 import { jwtDecode } from "jwt-decode";
 import "react-datepicker/dist/react-datepicker.css";
+import "../css/AddAnimalSightingPage.css";
 
 export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
   const [date, setDate] = useState(new Date());

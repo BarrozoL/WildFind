@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import "../css/WatchCard.css";
 
 function WatchCard({ watch, deleteWatch }) {
   const navigate = useNavigate();

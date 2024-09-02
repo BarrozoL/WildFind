@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import "./Map.css";
+import "../css/Map.css";
 import Map from "../components/Map";
 import MapListing from "../components/MapListing";
 

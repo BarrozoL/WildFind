@@ -1,6 +1,7 @@
 /* import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getPlant } from "../../lib";
+import "../css/PlantDetailsPage.css";
 
 export default function PlantDetails() {
   const [foundPlant, setFoundPlant] = useState();

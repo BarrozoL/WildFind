@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getAnimal } from "../../lib";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
+import "../css/SightingsPage.css";
 
 export default function Sightings({ sightings, getAnimalsWithSightings }) {
   const [sights, setSights] = useState([]);

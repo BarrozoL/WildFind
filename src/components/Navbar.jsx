@@ -1,5 +1,7 @@
+
 import { NavLink, useNavigate, Link } from "react-router-dom";
-import "./Navbar.css";
+import "../css/Navbar.css";
+
 import WildFindLogo from "../assets/images/WildFind-logo-5.png";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
@@ -65,17 +67,18 @@ const Navbar = () => {
               <NavLink to={`/user-profile/${user._id}`} className="NavLink">
                 User Profile
               </NavLink>
-              <button onClick={handleLogout}>Logout</button>
+              <button className="logout" onClick={handleLogout}>Logout</button>
+
               {/* <span>{user && user.name}</span> */}
             </>
           )}
           {!isLoggedIn && (
             <>
               <Link to="/signup">
-                <button>Sign Up</button>
+                <button className="button">Sign Up</button>
               </Link>
               <Link to="/login">
-                <button>Login</button>
+                <button className="button">Login</button>
               </Link>
             </>
           )}

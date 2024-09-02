@@ -3,6 +3,7 @@ import unselectedSun from "../assets/images/unselected-sun.png";
 import unselectedMoon from "../assets/images/unselected-moon.png";
 import selectedSun from "../assets/images/selected-sun.png";
 import selectedMoon from "../assets/images/selected-moon.png";
+import "../css/Footer.css";
 
 const Footer = () => {
   const [theme, setTheme] = useState("light-mode");

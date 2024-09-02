@@ -1,0 +1,73 @@
+.sighting-form {
+  width: 1000px;
+  height: 520px;
+  padding: 20px;
+  margin-top: 50px;
+  border-radius: 10px;
+}
+
+body.light-mode .sighting-form {
+  background-color: #d7e8c0;
+}
+
+body.light-mode .sighting-form button {
+  background-color: rgb(44, 140, 121);
+  border-color: rgb(44, 140, 121);
+}
+
+body.dark-mode .sighting-form {
+  background-color: #b581e4;
+  color: #b5fff0;
+}
+
+body.dark-mode .sighting-form button {
+  background: #b5fff0;
+  color: darkslategray;
+}
+
+body.light-mode .sighting-inputs input {
+  background-color: white;
+  border-color: rgb(44, 140, 121);
+  border-width: 1px;
+  border-radius: 5px;
+  color: black;
+}
+body.light-mode .sighting-inputs select {
+  background-color: white;
+  border-color: rgb(44, 140, 121);
+  border-radius: 5px;
+  color: black;
+}
+
+body.dark-mode .sighting-inputs input {
+  border-color: rgb(44, 140, 121);
+  border-width: 1px;
+  border-radius: 5px;
+}
+body.dark-mode .sighting-inputs select {
+  border-radius: 5px;
+}
+
+.sighting-inputs {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sighting-inputs {
+  height: 330px;
+}
+
+.sighting-inputs select {
+  width: 500px;
+}
+
+.sighting-inputs input {
+  width: 500px;
+}
+
+.sighting-submit {
+  text-align: center;
+  width: 1000px;
+}

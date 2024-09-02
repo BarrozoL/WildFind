@@ -1,0 +1,34 @@
+.footer a {
+  color: white;
+}
+
+body.light-mode .footer {
+  background-color: rgba(116, 172, 0, 255);
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height: 40px;
+  /* height: 200px; */
+  z-index: 1001;
+  left: 0;
+}
+
+body.dark-mode .footer {
+  background-color: blueviolet;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height: 40px;
+  /* height: 200px; */
+  z-index: 1001;
+  left: 0;
+}
+
+body.other-theme .footer {
+  background-color: #20c9c1;
+  color: white;
+}

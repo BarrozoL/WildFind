@@ -7,8 +7,8 @@ import "../css/SocialFeedPage.css";
 import "../pages.css/SocialFeedPage.css";
 
 export default function SocialFeedPage() {
-  const [sightings, setSightings] = useState();
-  const [commentText, setCommentText] = useState("");
+  const [sightings, setSightings] = useState([]);
+  const [commentText, setCommentText] = useState();
   const [selectedActionId, setSelectedActionId] = useState();
   const token = localStorage.getItem("authToken");
   //Running jwtDecode function to decode the user's authToken
@@ -23,24 +23,28 @@ export default function SocialFeedPage() {
     axios
       .get("http://localhost:5005/api/actions")
       .then((response) => {
-        setSightings(response.data);
+        const foundSightings = response.data;
+        setSightings(foundSightings);
+        if (!sightings) return <p>Loading...</p>;
+        setCommentText(new Array(foundSightings.length).fill(""));
       })
       .catch((error) => {
         console.error("Error fetching sightings:", error);
       });
   };
 
-  const postComment = async (actionId) => {
+  const postComment = async (actionId, index) => {
     axios
       .post("http://localhost:5005/api/comments", {
         userId,
         actionId,
-        text: commentText,
+        text: commentText[index],
       })
       .then((response) => {
         console.log("Comment added", response.data);
         setCommentText("");
         getActions();
+        setCommentText(new Array(sightings.length).fill(""));
       })
       .catch((error) => {
         console.error("Error posting comment:", error);
@@ -49,19 +53,21 @@ export default function SocialFeedPage() {
 
   if (!sightings) return <p>Loading...</p>;
 
-  const handleCommentSubmit = (e, actionId) => {
+  const handleCommentSubmit = (e, actionId, index) => {
     e.preventDefault();
-    postComment(actionId);
+    postComment(actionId, index);
   };
 
-  const handleCommentTextChange = (e) => {
-    setCommentText(e.target.value);
+  const handleCommentTextChange = (e, index) => {
+    const newCommentText = [...commentText];
+    newCommentText[index] = e.target.value;
+    setCommentText(newCommentText);
   };
 
   return (
     <>
       <div className="itemWrapper">
-        {sightings.map((action) => {
+        {sightings.map((action, index) => {
           return (
             <div className="social-feed-sighting-card" key={action._id}>
               <img src={action?.sighting?.image} />
@@ -73,11 +79,11 @@ export default function SocialFeedPage() {
               <h4>Sighting description: {action?.sighting?.description}</h4>
               <p>Entry added at: {action?.sighting?.date}</p>
               {/* form to send a post request with the comment */}
-              <form onSubmit={(e) => handleCommentSubmit(e, action._id)}>
+              <form onSubmit={(e) => handleCommentSubmit(e, action._id, index)}>
                 <input
                   type="text"
-                  value={commentText}
-                  onChange={handleCommentTextChange}
+                  value={commentText[index]}
+                  onChange={(e) => handleCommentTextChange(e, index)}
                   placeholder="Add a comment"
                 />
                 <button type="submit">Post comment</button>
@@ -90,15 +96,15 @@ export default function SocialFeedPage() {
                       key={comment._id}
                       style={{ border: "1px solid black" }}
                     >
-                      {console.log("comment text", comment)}
-                      <p>{comment.text} </p>
+                      <p>{comment.text}</p>
 
-                      <p>
+                      <div>
                         Added by{" "}
                         <Link to={`/user-profile/${comment?.userId?._id}`}>
                           {comment?.userId?.username}
                         </Link>
-                      </p>
+                        <p>Posted at: {comment.createdAt}</p>
+                      </div>
                     </div>
                   ))}
                 </div>

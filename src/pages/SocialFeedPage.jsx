@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 import "../pages.css/SocialFeedPage.css";
@@ -90,7 +91,13 @@ export default function SocialFeedPage() {
                     >
                       {console.log("comment text", comment)}
                       <p>{comment.text} </p>
-                      <p>Added by {comment?.userId?.username}</p>
+
+                      <p>
+                        Added by{" "}
+                        <Link to={`/user-profile/${comment?.userId?._id}`}>
+                          {comment?.userId?.username}
+                        </Link>
+                      </p>
                     </div>
                   ))}
                 </div>

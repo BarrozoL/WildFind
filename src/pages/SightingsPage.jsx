@@ -19,7 +19,7 @@ export default function Sightings({ sightings, getAnimalsWithSightings }) {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate(`/specimens/${specimenId}`);
+    navigate(`/animals/${specimenId}`);
   };
 
   useEffect(() => {

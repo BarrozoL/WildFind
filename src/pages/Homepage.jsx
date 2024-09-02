@@ -14,7 +14,7 @@ export default function HomePage() {
   };
 
   const handleAnimalNavigate = () => {
-    navigate("/specimens");
+    navigate("/animals");
   };
 
   return (

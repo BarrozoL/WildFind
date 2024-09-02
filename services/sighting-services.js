@@ -23,6 +23,10 @@ class SightingService {
   createSighting = (requestBody) => {
     return this.api.post("/api/sightings", requestBody);
   };
+
+  uploadImage = (file) => {
+    return this.api.post("/api/upload", file);
+  };
 }
 
 const sightingService = new SightingService();

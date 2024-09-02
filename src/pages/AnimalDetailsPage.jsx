@@ -40,7 +40,7 @@ export default function AnimalCard({ animals }) {
   };
 
   const handleSightingNavigate = () => {
-    navigate(`/specimens/${specimensId}/sightings`);
+    navigate(`/animals/${specimensId}/sightings`);
   };
 
   const handleNewSighting = () => {
@@ -70,7 +70,7 @@ export default function AnimalCard({ animals }) {
         setImage(""); */
       })
       .catch((error) => console.log(error));
-    navigate("/specimens");
+    navigate("/animals");
   };
 
   if (!foundAnimal) return <p>Loading...</p>;

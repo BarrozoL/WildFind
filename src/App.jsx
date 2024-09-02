@@ -18,6 +18,9 @@ import SocialFeedPage from "./pages/SocialFeedPage";
 import UserProfilePage from "./pages/UserProfilePage";
 import Errorpage from "./pages/Errorpage";
 
+import PlantListPage from "./pages/PlantListPage";
+import PlantDetailsPage from "./pages/PlantDetailsPage";
+
 /* 
 import WatchDetailsPage from "./pages/WatchDetailsPage"; */
 /* 
@@ -155,12 +158,12 @@ function App() {
         <Route exact path="/" element={<Homepage />} />
         <Route
           exact
-          path="/specimens"
+          path="/animals"
           element={<AnimalListPage animals={animals} />}
         />
         <Route
           exact
-          path={`/specimens/:specimensId`}
+          path={`/animals/:specimensId`}
           element={
             <AnimalDetailsPage
               animals={animals} /* watchState={watchState} */
@@ -169,7 +172,7 @@ function App() {
         />
         <Route
           exact
-          path={`/specimens/:specimenId/sightings`}
+          path={`/animals/:specimenId/sightings`}
           element={
             <SightingsPage
               /*  getAnimalsWithSightings={getAnimalsWithSightings} */
@@ -184,6 +187,28 @@ function App() {
             <AddAnimalSightingPage
               animals={animals}
               addAnimalSighting={newSighting}
+            />
+          }
+        />
+        <Route
+          exact
+          path="/plants"
+          element={<PlantListPage animals={animals} />}
+        />
+        <Route
+          exact
+          path={`/plants/:specimensId`}
+          element={
+            <PlantDetailsPage animals={animals} /* watchState={watchState} */ />
+          }
+        />
+        <Route
+          exact
+          path={`/plants/:specimenId/sightings`}
+          element={
+            <SightingsPage
+              /*  getAnimalsWithSightings={getAnimalsWithSightings} */
+              sightings={sightings}
             />
           }
         />

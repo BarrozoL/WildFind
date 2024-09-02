@@ -1,58 +1,24 @@
-/* import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { getPlant } from "../../lib";
-import "../css/PlantDetailsPage.css";
-
-export default function PlantDetails() {
-  const [foundPlant, setFoundPlant] = useState();
-  const { plantId } = useParams();
-  const navigate = useNavigate();
-
-  const handleNewSighting = () => {
-    navigate(`/${plantId}/add-plant-sighting`);
-  };
-
-  useEffect(() => {
-    getPlant(plantId).then((data) => {
-      setFoundPlant(data);
-    });
-  }, [plantId]);
-
-  if (!foundPlant) return <p>Loading...</p>;
-
-  return (
-    <div className="plantDetailWrapper" key={foundPlant.id}>
-      {console.log(foundPlant)}
-      <h3>{foundPlant.name}</h3>
-      <img width="300px" src={foundPlant.image} />
-      <p>{foundPlant.description}</p>
-      <p>Native to {foundPlant.location}</p>
-      <p>{foundPlant.edible}</p>
-      <button onClick={handleNewSighting}>Add a sighting</button>
-    </div>
-  );
-}
- */
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { /* addToWatchList, */ getAnimal } from "../../lib";
+import { /* addToWatchList, */ getAnimal, deleteAnimal } from "../../lib";
 import { jwtDecode } from "jwt-decode";
-/* import jwt_decode from "jwt-decode"; */
 import watchService from "../../services/watchlist-service";
+import "../css/AnimalDetailsPage.css";
 
-export default function PlantCard({ animals }) {
+export default function AnimalCard({ animals }) {
   const [foundPlant, setFoundPlant] = useState();
-  const { specimensId } = useParams();
+  const { specimenId } = useParams();
+  console.log("specimenId:", specimenId);
   const token = localStorage.getItem("authToken");
   const decodedToken = token ? jwtDecode(token) : null;
   const userId = decodedToken ? decodedToken._id : null; // Extract userId
+  const username = decodedToken ? decodedToken.username : null; // Extract username
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    getAnimal(specimensId).then((data) => setFoundPlant(data));
-    console.log(specimensId);
-  }, [specimensId]);
+    getAnimal(specimenId).then((data) => setFoundPlant(data));
+  }, [specimenId]);
 
   useEffect(() => {
     if (foundPlant?.typeId === 8) {
@@ -68,24 +34,28 @@ export default function PlantCard({ animals }) {
   }, [foundPlant]);
 
   const handleNavigate = () => {
-    navigate("/plant-list");
+    navigate("/plants");
   };
 
   const handleWatchNavigate = () => {
-    navigate("/watch");
+    navigate("/watchlist");
   };
 
   const handleSightingNavigate = () => {
-    navigate(`/plants/${specimensId}/sightings`);
+    navigate(`/plants/${specimenId}/sightings`);
+  };
+
+  const handleEdit = () => {
+    navigate(`/${specimenId}/edit`);
   };
 
   const handleNewSighting = () => {
-    navigate(`/${specimensId}/add-sighting`);
+    navigate(`/plants/${specimenId}/add-sighting`);
   };
 
   const handleAddToWatchList = async () => {
     const requestBody = {
-      specimenId: specimensId,
+      specimenId: specimenId,
       userId: userId,
       typeId: foundPlant.typeId, // Accessing typeId here
       name: foundPlant.name,
@@ -108,7 +78,21 @@ export default function PlantCard({ animals }) {
       .catch((error) => console.log(error));
     navigate("/plants");
   };
-  console.log(foundPlant);
+
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this plant?"
+    );
+    if (!confirmDelete) return;
+
+    try {
+      await deleteAnimal(specimenId);
+      navigate("/plants");
+    } catch (error) {
+      console.error("Error deleting plant:", error);
+      alert("There was an error deleting the plant. Please try again.");
+    }
+  };
 
   if (!foundPlant) return <p>Loading...</p>;
 
@@ -117,15 +101,22 @@ export default function PlantCard({ animals }) {
       <div className="animalDetailWrapper">
         <div key={foundPlant._id}></div>
         <h3>{foundPlant.name}</h3>
+        {console.log(foundPlant)}
         <img src={foundPlant.image} alt={foundPlant.name} width="300px" />
-        <p>{`Danger level: ${foundPlant.dangerLevel}`}</p>
-        <p>{foundPlant.description}</p>
+        <p>{`Edible: ${foundPlant.edible}`}</p>
+        <p>{`Description: ${foundPlant.description}`}</p>
         <p>Native to {foundPlant.location}</p>
         <div className="button-details">
           <button onClick={handleSightingNavigate} className="sightings-button">
             Click to view locations where the {`${foundPlant.name}`} has been
             seen
           </button>
+          {foundPlant.userId === userId && (
+            <button onClick={handleEdit}>Edit</button>
+          )}
+          {foundPlant.userId === userId && (
+            <button onClick={handleDelete}>Delete</button>
+          )}
           <button onClick={handleNewSighting} className="detail-button">
             Add a sighting
           </button>

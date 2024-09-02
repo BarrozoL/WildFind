@@ -70,12 +70,12 @@ export default function AnimalList(/*{ animals }*/) {
     const selectedType = e.target.value;
     setType(selectedType);
 
-    // Update the theme state based on the selected type
-    if (selectedType === "Other") {
-      setTheme("other-theme");
-    } else {
-      setTheme("");
-    }
+    // // Update the theme state based on the selected type
+    // if (selectedType === "Other") {
+    //   setTheme("other-theme");
+    // } else {
+    //   setTheme("");
+    // }
   };
 
   // const [movies, setMovies] = useState([]);

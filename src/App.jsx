@@ -20,6 +20,9 @@ import Errorpage from "./pages/Errorpage";
 
 import PlantListPage from "./pages/PlantListPage";
 import PlantDetailsPage from "./pages/PlantDetailsPage";
+import AddPlantSightingPage from "./pages/AddPlantSightingPage";
+
+import EditAnimalPage from "./pages/EditAnimalPage";
 
 /* 
 import WatchDetailsPage from "./pages/WatchDetailsPage"; */
@@ -163,7 +166,7 @@ function App() {
         />
         <Route
           exact
-          path={`/animals/:specimensId`}
+          path={`/animals/:specimenId`}
           element={
             <AnimalDetailsPage
               animals={animals} /* watchState={watchState} */
@@ -182,12 +185,26 @@ function App() {
         />
         <Route
           exact
-          path="/:specimenId/add-sighting"
+          path="/animals/:specimenId/add-sighting"
           element={
-            <AddAnimalSightingPage
-              animals={animals}
-              addAnimalSighting={newSighting}
-            />
+            <IsPrivate>
+              <AddAnimalSightingPage
+                animals={animals}
+                addAnimalSighting={newSighting}
+              />
+            </IsPrivate>
+          }
+        />
+        <Route
+          exact
+          path="/plants/:specimenId/add-sighting"
+          element={
+            <IsPrivate>
+              <AddPlantSightingPage
+                animals={animals}
+                addAnimalSighting={newSighting}
+              />
+            </IsPrivate>
           }
         />
         <Route
@@ -197,7 +214,7 @@ function App() {
         />
         <Route
           exact
-          path={`/plants/:specimensId`}
+          path={`/plants/:specimenId`}
           element={
             <PlantDetailsPage animals={animals} /* watchState={watchState} */ />
           }
@@ -216,17 +233,22 @@ function App() {
           exact
           path="/animal-add"
           element={
-            <AddAnimalPage
-              types={types}
-              /*  addAnimal={newAnimal} */
-              animals={animals}
-              /*   animalState={animalState} */
-            />
+            <IsPrivate>
+              <AddAnimalPage
+                types={types}
+                /*  addAnimal={newAnimal} */
+                animals={animals}
+                /*   animalState={animalState} */
+              />
+            </IsPrivate>
           }
         />
+
+        <Route path={`:specimenId/edit`} element={<EditAnimalPage />} />
+
         <Route
           exact
-          path="/watch"
+          path="/watchlist"
           element={
             <IsPrivate>
               <WatchListPage watches={watches} /*deleteWatch={deleteWatch}*/ />

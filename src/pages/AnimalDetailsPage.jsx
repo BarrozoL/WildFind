@@ -1,22 +1,24 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { /* addToWatchList, */ getAnimal } from "../../lib";
+import { /* addToWatchList, */ getAnimal, deleteAnimal } from "../../lib";
 import { jwtDecode } from "jwt-decode";
 import watchService from "../../services/watchlist-service";
 import "../css/AnimalDetailsPage.css";
 
 export default function AnimalCard({ animals }) {
   const [foundAnimal, setFoundAnimal] = useState();
-  const { specimensId } = useParams();
+  const { specimenId } = useParams();
+  console.log("specimenId:", specimenId);
   const token = localStorage.getItem("authToken");
   const decodedToken = token ? jwtDecode(token) : null;
   const userId = decodedToken ? decodedToken._id : null; // Extract userId
+  const username = decodedToken ? decodedToken.username : null; // Extract username
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    getAnimal(specimensId).then((data) => setFoundAnimal(data));
-  }, [specimensId]);
+    getAnimal(specimenId).then((data) => setFoundAnimal(data));
+  }, [specimenId]);
 
   useEffect(() => {
     if (foundAnimal?.typeId === 8) {
@@ -32,24 +34,28 @@ export default function AnimalCard({ animals }) {
   }, [foundAnimal]);
 
   const handleNavigate = () => {
-    navigate("/animal-list");
+    navigate("/animals");
   };
 
   const handleWatchNavigate = () => {
-    navigate("/watch");
+    navigate("/watchlist");
   };
 
   const handleSightingNavigate = () => {
-    navigate(`/animals/${specimensId}/sightings`);
+    navigate(`/animals/${specimenId}/sightings`);
+  };
+
+  const handleEdit = () => {
+    navigate(`/${specimenId}/edit`);
   };
 
   const handleNewSighting = () => {
-    navigate(`/${specimensId}/add-sighting`);
+    navigate(`/animals/${specimenId}/add-sighting`);
   };
 
   const handleAddToWatchList = async () => {
     const requestBody = {
-      specimenId: specimensId,
+      specimenId: specimenId,
       userId: userId,
       typeId: foundAnimal.typeId, // Accessing typeId here
       name: foundAnimal.name,
@@ -73,22 +79,44 @@ export default function AnimalCard({ animals }) {
     navigate("/animals");
   };
 
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this animal?"
+    );
+    if (!confirmDelete) return;
+
+    try {
+      await deleteAnimal(specimenId);
+      navigate("/animals");
+    } catch (error) {
+      console.error("Error deleting animal:", error);
+      alert("There was an error deleting the animal. Please try again.");
+    }
+  };
+
   if (!foundAnimal) return <p>Loading...</p>;
 
   return (
     <>
       <div className="animalDetailWrapper">
         <div key={foundAnimal._id}></div>
+        {console.log(foundAnimal)}
         <h3>{foundAnimal.name}</h3>
         <img src={foundAnimal.image} alt={foundAnimal.name} width="300px" />
         <p>{`Danger level: ${foundAnimal.dangerLevel}`}</p>
-        <p>{foundAnimal.description}</p>
+        <p>{`Description: ${foundAnimal.description}`}</p>
         <p>Native to {foundAnimal.location}</p>
         <div className="button-details">
           <button onClick={handleSightingNavigate} className="sightings-button">
             Click to view locations where the {`${foundAnimal.name}`} has been
             seen
           </button>
+          {foundAnimal.userId === userId && (
+            <button onClick={handleEdit}>Edit</button>
+          )}
+          {foundAnimal.userId === userId && (
+            <button onClick={handleDelete}>Delete</button>
+          )}
           <button onClick={handleNewSighting} className="detail-button">
             Add a sighting
           </button>

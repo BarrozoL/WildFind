@@ -5,13 +5,13 @@ function WatchCard({ watch, deleteWatch }) {
   const navigate = useNavigate();
 
   const handleEditNavigate = () => {
-    navigate(`/watch/${watch.id}/edit-watch`);
+    navigate(`/watchlist/${watch.id}/edit-watch`);
   };
 
   return (
     <li className="WatchCard" style={{ listStyleType: "none" }}>
       <div className="watch-cards">
-        <Link to={`/watch/${watch.id}/details`}>
+        <Link to={`/watchlist/${watch.id}/details`}>
           <h3>{watch.name}</h3>
           <img
             src={watch.image}

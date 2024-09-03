@@ -60,37 +60,26 @@ export default function PrivateMessagePage() {
     <div className="private-messages-wrapper">
       <h2>Private Messages:</h2>
       <h3>Received Messages:</h3>
-      {user?.receivedMessages.map((message) => {
+      {user?.conversations?.map((conversation) => {
         return (
-          <div className="received-messages" key={message._id}>
-            <p>{message?.text}</p>
+          <div key={conversation?._id} className="conversation-wrapper">
             <p>
-              Sent by:{" "}
-              <Link to={`/user-profile/${message?.sender._id}`}>
-                {message?.sender.username}
-              </Link>
+              Conversation between {conversation?.user1Id?.username} and{" "}
+              {conversation?.user2Id?.username}
             </p>
-            <p>Received at: {message.createdAt}</p>
+            {conversation?.messages?.map((message) => {
+              return (
+                <div key={message?._id} className="individual-message-wrapper">
+                  <p>{message?.text}</p>
+                  {console.log("message", message)}
+                  <p>Sent by: {message?.sender?.username} </p>
+                </div>
+              );
+            })}
           </div>
         );
       })}
-      <br />
-      <br />
-      <h3>Sent Messages:</h3>
-      {user?.sentMessages.map((message) => {
-        return (
-          <div className="sent-messages" key={message._id}>
-            <p>{message?.text}</p>
-            <p>
-              Sent to:{" "}
-              <Link to={`/user-profile/${message?.receiver._id}`}>
-                {message?.receiver.username}
-              </Link>
-            </p>
-            <p>Sent at: {message.createdAt}</p>
-          </div>
-        );
-      })}
+      <p></p>
       <input
         type="text"
         onChange={handleMessageTextChange}
@@ -102,3 +91,38 @@ export default function PrivateMessagePage() {
     </div>
   );
 }
+
+/* {user?.receivedMessages.map((message) => {
+    {
+      console.log(user);
+    }
+    return (
+      <div className="received-messages" key={message._id}>
+        <p>{message?.text}</p>
+        <p>
+          Sent by:{" "}
+          <Link to={`/user-profile/${message?.sender._id}`}>
+            {message?.sender.username}
+          </Link>
+        </p>
+        <p>Received at: {message.createdAt}</p>
+      </div>
+    );
+  })}
+  <br />
+  <br />
+  <h3>Sent Messages:</h3>
+  {user?.sentMessages.map((message) => {
+    return (
+      <div className="sent-messages" key={message._id}>
+        <p>{message?.text}</p>
+        <p>
+          Sent to:{" "}
+          <Link to={`/user-profile/${message?.receiver._id}`}>
+            {message?.receiver.username}
+          </Link>
+        </p>
+        <p>Sent at: {message.createdAt}</p>
+      </div>
+    );
+  })} */

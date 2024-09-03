@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { getAllAnimals } from "../../lib";
 import "../css/AddAnimalPage.css";
+import { jwtDecode } from "jwt-decode";
 
 import specimenService from "../../services/specimen-service";
 
@@ -17,7 +19,16 @@ import defaultBerryImage from "../assets/images/berry.jpeg";
 import defaultFlowerImage from "../assets/images/flower.jpeg";
 import defaultPlantImage from "../assets/images/plant.jpeg";
 
-export default function AddAnimal({ types, addAnimal, animals, animalState }) {
+export default function AddAnimal() {
+  const [animals, setAnimals] = useState([]);
+
+  //Retrieving the user's authToken token from the localStorage
+  const token = localStorage.getItem("authToken");
+  //Running jwtDecode function to decode the user's authToken
+  const decodedToken = token ? jwtDecode(token) : null;
+  const userId = decodedToken ? decodedToken._id : null; // Extract userId
+  const username = decodedToken ? decodedToken.username : null; // Extract username
+
   /*console.log(addAnimal);*/
   const [selectedAnimalType, setSelectedAnimalType] = useState("");
   const [name, setName] = useState("");
@@ -28,6 +39,17 @@ export default function AddAnimal({ types, addAnimal, animals, animalState }) {
   const [location, setLocation] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [isAnimal, setIsAnimal] = useState("");
+
+  useEffect(() => {
+    getAllAnimals()
+      .then((data) => {
+        // Filter data to include only those with typeId <= 8
+        const filteredData = data.filter((animal) => animal.typeId <= 8);
+        setAnimals(filteredData);
+        console.log(animals);
+      })
+      .catch((error) => console.error("Error fetching animals:", error));
+  }, []);
 
   const navigate = useNavigate();
 
@@ -83,7 +105,7 @@ export default function AddAnimal({ types, addAnimal, animals, animalState }) {
         prevAnimal.name.toLowerCase() === animal.name.toLowerCase()
     );
 
-    return foundAnimal ? foundAnimal.id : null;
+    return foundAnimal ? foundAnimal._id : null;
   };
 
   const handleFileUpload = (e) => {
@@ -108,14 +130,6 @@ export default function AddAnimal({ types, addAnimal, animals, animalState }) {
     let typeId;
 
     const existingAnimalId = animalExists({ name });
-
-    if (existingAnimalId) {
-      alert(
-        "This animal has already been spotted! Please add a new sighting instead. Redirecting to the animal's page."
-      );
-      navigate(`/animal-list/${existingAnimalId}/`);
-      return;
-    }
 
     if (selectedAnimalType === "bird") {
       typeId = 1;
@@ -143,10 +157,26 @@ export default function AddAnimal({ types, addAnimal, animals, animalState }) {
       typeId = 12;
     }
 
+    if (existingAnimalId && typeId <= 8) {
+      alert(
+        "This animal has already been spotted! Please add a new sighting instead. Redirecting to the animal's page."
+      );
+      navigate(`/animals/${existingAnimalId}/`);
+      return;
+    }
+
+    if (existingAnimalId && typeId > 8 && typeId < 13) {
+      alert(
+        "This plant has already been spotted! Please add a new sighting instead. Redirecting to the plant's page."
+      );
+      navigate(`/plants/${existingAnimalId}/`);
+      return;
+    }
+
     //we had a section of our old database that was just an array of type objects: id and name. the ids were 1-8.
     //maybe we need to change things so that we have a document with different types and then typeId is something that isnt 1-13 but rather the actual id of that type
 
-    if (!name || !description || !location || !typeId) {
+    if (!name || !description || !typeId) {
       alert("All fields are mandatory");
       return;
     }
@@ -198,10 +228,13 @@ export default function AddAnimal({ types, addAnimal, animals, animalState }) {
     navigate("/animal-list"); */
 
     const requestBody = {
+      username,
+      userId,
       name,
       typeId,
       description,
       location,
+      dangerLevel: danger,
       image: img,
       edible,
     };
@@ -214,19 +247,24 @@ export default function AddAnimal({ types, addAnimal, animals, animalState }) {
         setSelectedAnimalType("");
         setDescription("");
         setLocation("");
-        setImage("");
+        setDanger("");
+        setImageUrl("");
         setEdible("");
       })
       .catch((error) => console.log(error));
-    navigate("/animals");
+    if (typeId <= 8) {
+      navigate("/animals");
+    } else if (typeId > 8 && typeId < 13) {
+      navigate("/plants");
+    }
   };
 
   return (
     <div className="add-form">
       <h1>What did you spot and where?</h1>
       <h3>
-        Please check the list of animals to make sure your animal hasn't already
-        been added...
+        Please check the lists of animals and plants to make sure it hasn't
+        already been added...
       </h3>
       <form className="add-inputs">
         <div className="add-heading">
@@ -293,6 +331,7 @@ export default function AddAnimal({ types, addAnimal, animals, animalState }) {
             </select>
           </div>
         )}
+
 
         {isAnimal === "animal" && (
           <div className="add-row">
@@ -430,6 +469,77 @@ export default function AddAnimal({ types, addAnimal, animals, animalState }) {
             </button>
           </div>
         )}
+
+//         <div>
+//           {isAnimal === "" && <label>Specimen name: </label>}
+//           {isAnimal === "animal" && <label>Animal name: </label>}
+//           {isAnimal === "plant" && <label>Plant name: </label>}
+//           <input
+//             type="text"
+//             name="name"
+//             value={name}
+//             onChange={handleNameChange}
+//           />
+//         </div>
+//         <div>
+//           <label>Image: </label>
+//           <input
+//             type="file"
+//             // name="image"
+//             // value={image}
+//             onChange={(e) => handleFileUpload(e)}
+//           />
+//         </div>
+//         <div>
+//           {isAnimal === "animal" && (
+//             <div>
+//               <label>{`Estimated Danger Level (1-5)`}:</label>
+//               <input
+//                 type="text"
+//                 name="danger"
+//                 value={danger}
+//                 onChange={handleDangerChange}
+//                 className="danger-input"
+//               />
+//             </div>
+//           )}
+//           {isAnimal === "plant" && (
+//             <div>
+//               <label>{`Edible`}:</label>
+//               <input
+//                 type="text"
+//                 name="edible"
+//                 value={edible}
+//                 onChange={handleEdibleChange}
+//                 className="danger-input"
+//               />
+//             </div>
+//           )}
+//         </div>
+//         <div>
+//           <label>Description: </label>
+//           <input
+//             type="text"
+//             name="description"
+//             value={description}
+//             onChange={handleDescriptionChange}
+//           />
+//         </div>
+//         <div>
+//           <label>Native to: </label>
+//           <input
+//             type="text"
+//             name="location"
+//             value={location}
+//             onChange={handleLocationChange}
+//           />
+//         </div>
+//         <div className="add-submit">
+//           <button type="submit" onClick={handleSubmit}>
+//             Submit
+//           </button>
+//         </div>
+
       </form>
     </div>
   );

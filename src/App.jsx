@@ -13,13 +13,18 @@ import AddAnimalSightingPage from "./pages/AddAnimalSightingPage";
 import AddAnimalPage from "./pages/AddAnimalPage";
 import WatchListPage from "./pages/WatchListPage";
 import MapPage from "./pages/MapPage";
-import PersonalWatchlistPage from "./pages/PersonalWatchlistPage";
-import SocialFeedPage from "./pages/SocialFeedPage";
-import UserProfilePage from "./pages/UserProfilePage";
 import Errorpage from "./pages/Errorpage";
 
 import PlantListPage from "./pages/PlantListPage";
 import PlantDetailsPage from "./pages/PlantDetailsPage";
+import AddPlantSightingPage from "./pages/AddPlantSightingPage";
+
+import EditAnimalPage from "./pages/EditAnimalPage";
+
+import PersonalWatchlistPage from "./pages/PersonalWatchlistPage";
+import SocialFeedPage from "./pages/SocialFeedPage";
+import UserProfilePage from "./pages/UserProfilePage";
+import PrivateMessagePage from "./pages/PrivateMessagePage";
 
 /* 
 import WatchDetailsPage from "./pages/WatchDetailsPage"; */
@@ -163,7 +168,7 @@ function App() {
         />
         <Route
           exact
-          path={`/animals/:specimensId`}
+          path={`/animals/:specimenId`}
           element={
             <AnimalDetailsPage
               animals={animals} /* watchState={watchState} */
@@ -182,12 +187,26 @@ function App() {
         />
         <Route
           exact
-          path="/:specimenId/add-sighting"
+          path="/animals/:specimenId/add-sighting"
           element={
-            <AddAnimalSightingPage
-              animals={animals}
-              addAnimalSighting={newSighting}
-            />
+            <IsPrivate>
+              <AddAnimalSightingPage
+                animals={animals}
+                addAnimalSighting={newSighting}
+              />
+            </IsPrivate>
+          }
+        />
+        <Route
+          exact
+          path="/plants/:specimenId/add-sighting"
+          element={
+            <IsPrivate>
+              <AddPlantSightingPage
+                animals={animals}
+                addAnimalSighting={newSighting}
+              />
+            </IsPrivate>
           }
         />
         <Route
@@ -197,7 +216,7 @@ function App() {
         />
         <Route
           exact
-          path={`/plants/:specimensId`}
+          path={`/plants/:specimenId`}
           element={
             <PlantDetailsPage animals={animals} /* watchState={watchState} */ />
           }
@@ -216,17 +235,22 @@ function App() {
           exact
           path="/animal-add"
           element={
-            <AddAnimalPage
-              types={types}
-              /*  addAnimal={newAnimal} */
-              animals={animals}
-              /*   animalState={animalState} */
-            />
+            <IsPrivate>
+              <AddAnimalPage
+                types={types}
+                /*  addAnimal={newAnimal} */
+                animals={animals}
+                /*   animalState={animalState} */
+              />
+            </IsPrivate>
           }
         />
+
+        <Route path={`:specimenId/edit`} element={<EditAnimalPage />} />
+
         <Route
           exact
-          path="/watch"
+          path="/watchlist"
           element={
             <IsPrivate>
               <WatchListPage watches={watches} /*deleteWatch={deleteWatch}*/ />
@@ -266,13 +290,16 @@ function App() {
         <Route
           path="/watchlist/:userId"
           element={
-            <IsUnique>
-              <PersonalWatchlistPage />
-            </IsUnique>
+            // <IsUnique>
+            // <PersonalWatchlistPage />
+            // </IsUnique>
+            <PersonalWatchlistPage />
           }
         />
         <Route path="/actions" element={<SocialFeedPage />} />
         <Route path="/user-profile/:userId" element={<UserProfilePage />} />
+
+        <Route path="/user/messages/:userId" element={<PrivateMessagePage />} />
 
         <Route path="/*" element={<Errorpage />} />
         {/* 

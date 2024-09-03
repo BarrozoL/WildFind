@@ -1,19 +1,25 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import "../css/UserProfilePage.css";
 
 export default function UserProfilePage() {
-  const [user, setUser] = useState();
-  const { userId } = useParams();
+  const [user, setUser] = useState(null);
+  const { userId } = useParams(); //id of the user profile page you are on
+
+  //Pick up id from the currently logged in user
+  const token = localStorage.getItem("authToken");
+  const decodedToken = token ? jwtDecode(token) : null;
+  const loggedUserId = decodedToken ? decodedToken._id : null; // Extract userId
 
   useEffect(() => {
     getUserInformation();
-  }, []);
+  }, []); //to reload the info after logged user changes
 
   //GET all of the user information
   const getUserInformation = async () => {
-    axios
+    await axios
       .get(`http://localhost:5005/api/users/${userId}`)
       .then((response) => {
         setUser(response.data);
@@ -23,8 +29,30 @@ export default function UserProfilePage() {
       });
   };
 
-  if (!user) return <p>Loading...</p>;
+  //POST a new follower after clicking follow user
+  const followUser = async () => {
+    //check if user is already being followed
+    for (let follower of user.followers) {
+      if (follower._id === loggedUserId) {
+        alert("You already follow this user!");
+        return;
+      }
+    }
+    try {
+      await axios.post(`http://localhost:5005/api/users/${userId}/following`, {
+        userId: loggedUserId, //userId of the user that is currently logged in, for the request in the backend
+      });
+      await getUserInformation();
+    } catch (error) {
+      console.error("Error following user", error);
+    }
+  };
 
+  const handleFollowUser = () => {
+    followUser();
+  };
+
+  if (!user) return <p>Loading...</p>;
   function renderAchievements() {
     const achievements = [];
 
@@ -64,11 +92,9 @@ export default function UserProfilePage() {
 
   function renderFollowers() {
     if (user.followers.length > 0) {
-      {
-        user.followers.map((follower) => {
-          return <li>{follower}</li>;
-        });
-      }
+      return user.followers.map((follower) => {
+        return <li key={follower._id}>{follower.username}</li>;
+      });
     } else {
       return <li>No followers yet</li>;
     }
@@ -76,11 +102,9 @@ export default function UserProfilePage() {
 
   function renderFollowing() {
     if (user.following.length > 0) {
-      {
-        user.following.map((followed) => {
-          return <li>{followed}</li>;
-        });
-      }
+      return user.following.map((followed) => {
+        return <li key={followed._id}>{followed.username}</li>;
+      });
     } else {
       return <li>You don't follow anyone yet</li>;
     }
@@ -91,6 +115,11 @@ export default function UserProfilePage() {
       <div>
         <h1>Profile Page</h1>
         <h2>{user.username}'s profile</h2>
+        <Link to={`/user/messages/${userId}`}>
+          <button className="send-user-a-message-button">
+            Send {user.username} a message!
+          </button>{" "}
+        </Link>
         <p>You have added {user.sightings.length} sightings</p>
         <p>Achievements:</p>
         {renderAchievements()}
@@ -100,6 +129,7 @@ export default function UserProfilePage() {
         {renderFollowers()}
       </div>
       <div>Send {user.username} a message!</div>
+      <button onClick={handleFollowUser}>Follow this user!</button>
     </>
   );
 }

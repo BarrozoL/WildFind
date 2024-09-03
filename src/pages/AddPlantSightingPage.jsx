@@ -1,16 +1,25 @@
-/* import { useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
+import sightingService from "../../services/sighting-services";
+import { jwtDecode } from "jwt-decode";
 import "react-datepicker/dist/react-datepicker.css";
-import "../css/AddPlantSightingPage.css";
+import "../css/AddAnimalSightingPage.css";
 
-export default function AddPlantSighting({ plants, addPlantSighting }) {
+export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
   const [date, setDate] = useState(new Date());
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
-  const [image, setImage] = useState("");
-  const plantId = useParams().plantId;
-  const plantNumber = Number(plantId) - 1;
+  // const [image, setImage] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const { specimenId } = useParams();
+  //Retrieving the user's authToken token from the localStorage
+  const token = localStorage.getItem("authToken");
+  //Running jwtDecode function to decode the user's authToken
+  const decodedToken = token ? jwtDecode(token) : null;
+  const userId = decodedToken ? decodedToken._id : null; // Extract userId
+  const username = decodedToken ? decodedToken.username : null; // Extract username
+
   const navigate = useNavigate();
 
   const handleDescriptionChange = (e) => {
@@ -20,12 +29,28 @@ export default function AddPlantSighting({ plants, addPlantSighting }) {
     setLocation(e.target.value);
   };
 
-  const handleImageChange = (e) => {
-    setImage(e.target.value);
-  };
+  // const handleImageChange = (e) => {
+  //   setImage(e.target.value);
+  // };
 
   const handleDateChange = (date) => {
     setDate(date);
+  };
+
+  const handleFileUpload = (e) => {
+    console.log("The file to be uploaded is: ", e.target.files[0]);
+
+    const uploadData = new FormData();
+    uploadData.append("imageUrl", e.target.files[0]); // Append the file with the key "imageUrl"
+
+    sightingService
+      .uploadImage(uploadData)
+      .then((response) => {
+        console.log("response is: ", response);
+
+        setImageUrl(response.data.fileUrl);
+      })
+      .catch((err) => console.log("Error while uploading the file: ", err));
   };
 
   const handleSubmit = (e) => {
@@ -34,24 +59,34 @@ export default function AddPlantSighting({ plants, addPlantSighting }) {
       alert("All fields are mandatory");
       return;
     }
-    const newPlantSpotting = {
-      plantId,
-      location,
-      date,
-      description,
-      image,
-    };
-    addPlantSighting(newPlantSpotting);
 
-    setDescription("");
-    setLocation("");
-    setImage("");
-    navigate("/plant-list");
+    const requestBody = {
+      username,
+      userId,
+      specimenId,
+      description,
+      location,
+      image: imageUrl,
+    };
+
+    sightingService
+      .createSighting(requestBody)
+      .then((response) => {
+        setDescription("");
+        setLocation("");
+        setImageUrl("");
+        navigate("/plants");
+      })
+      .catch((error) => console.log(error));
   };
+
+  const foundSpecimen = animals.find((animal) => animal._id === specimenId);
 
   return (
     <div className="sighting-form">
-      <h1>Where and when did you spot {`${plants[plantNumber].name}`}?</h1>
+      {foundSpecimen && (
+        <h1>Where and when did you spot {foundSpecimen.name}?</h1>
+      )}
       <form className="sighting-inputs">
         <div className="sighting-row">
           <label>Location:</label>
@@ -85,8 +120,12 @@ export default function AddPlantSighting({ plants, addPlantSighting }) {
           <label>Date:</label>
           <DatePicker selected={date} onChange={handleDateChange} />
         </div>
+
         <div className="sighting-row">
           <label>Description of sighting:</label>
+
+        <div>
+          <label>Comment:</label>
           <input
             type="text"
             name="description"
@@ -96,13 +135,7 @@ export default function AddPlantSighting({ plants, addPlantSighting }) {
         </div>
         <div className="sighting-row">
           <label>{`Picture of sighting (optional):`}</label>
-          <input
-            type="text"
-            name="image"
-            value={image}
-            onChange={handleImageChange}
-            className="sighting-img"
-          />
+          <input type="file" onChange={(e) => handleFileUpload(e)} />
         </div>
         <div className="sighting-submit">
           <button type="submit" onClick={handleSubmit}>
@@ -113,4 +146,3 @@ export default function AddPlantSighting({ plants, addPlantSighting }) {
     </div>
   );
 }
- */

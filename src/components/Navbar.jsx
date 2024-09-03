@@ -37,7 +37,7 @@ const Navbar = () => {
           </NavLink> */}
 
           <NavLink to="/animal-add" className="NavLink">
-            Seen a new animal? Add it!
+            Seen a new plant or animal? Add it!
           </NavLink>
 
           <NavLink to="/animals" className="NavLink">
@@ -67,6 +67,12 @@ const Navbar = () => {
               <NavLink to={`/user-profile/${user._id}`} className="NavLink">
                 User Profile
               </NavLink>
+
+
+              <NavLink to={`/user/messages/${user._id}`} className="NavLink">
+                Private Messages
+              </NavLink>
+
               <button className="logout" onClick={handleLogout}>
                 Logout
               </button>

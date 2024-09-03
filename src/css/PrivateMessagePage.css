@@ -1,0 +1,13 @@
+body {
+  margin-top: 60px;
+  padding-bottom: 20px;
+}
+
+.conversation-wrapper {
+  border: 2px solid black;
+  padding: 20px;
+}
+
+.individual-message-wrapper {
+  border: 1px solid black;
+}

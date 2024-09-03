@@ -6,70 +6,28 @@
   margin: 0 20px 0 20px;
 }
 
-body.light-mode .watch-detail-button {
+.watch-detail-button {
   height: 38px;
   margin: 0 20px 3px 20px;
-  background-color: rgb(44, 140, 121);
-}
-body.dark-mode .watch-detail-button {
-  height: 38px;
-  margin: 0 20px 3px 20px;
-  background-color: black;
-}
-body.other-theme .watch-detail-button {
-  height: 38px;
-  margin: 0 20px 3px 20px;
-  border: 2px solid #20c9c1;
 }
 
-body.other-theme .animalDetailWrapper {
-  margin-top: 0;
-  padding-top: 10px;
-  background-color: #1c8e66;
-  color: #b5fff0;
-  border-radius: 5px;
-  width: 1100px;
-  height: 600px;
-}
-
-body.other-theme .animalDetailWrapper img {
-  border: 2px solid #20c9c1;
+.watch-detail-button {
+  height: 38px;
+  margin: 0 20px 3px 20px;
 }
 
 .animalDetailWrapper {
   margin-top: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.animalDetailWrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-body.light-mode .animalDetailWrapper {
-  margin-top: 0;
   padding-top: 10px;
-  background-color: #d7e8c0;
-  color: rgb(44, 140, 121);
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 1100px;
   height: 600px;
 }
+
 .animalDetailWrapper img {
   border-radius: 5px;
   width: 300px;
-}
-
-body.dark-mode .animalDetailWrapper {
-  margin-top: 0;
-  padding-top: 10px;
-  background-color: #b581e4;
-  color: #b5fff0;
-  border-radius: 5px;
-  width: 1100px;
-  height: 600px;
 }

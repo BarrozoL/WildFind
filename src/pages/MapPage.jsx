@@ -54,8 +54,10 @@ export default function MapPage({}) {
 
   return (
     <>
-      <Map findLocation={findLocation} />
-      <MapListing location={location} sightings={sightings} />
+      <div className="map-wrapper">
+        <Map findLocation={findLocation} />
+        <MapListing location={location} sightings={sightings} />
+      </div>
     </>
   );
 }

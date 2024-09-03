@@ -1,4 +1,4 @@
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
   .map-sightings {
     display: flex;
     flex-direction: row;
@@ -41,7 +41,6 @@
 
   .location-tag {
     position: absolute;
-    /* top: 10%;*/
     left: 13%;
     width: 200px;
   }
@@ -198,6 +197,10 @@
     left: 10%;
     width: 300px;
   }
+} */
+
+.map-wrapper {
+  height: 800px;
 }
 
 @media (min-width: 1200px) {

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import "../css/PersonalWatchlistPage.css";
 
 export default function UserWatchlistPage() {
   const [user, setUser] = useState();
@@ -26,7 +27,7 @@ export default function UserWatchlistPage() {
 
   return (
     <>
-      <div>
+      <div className="watchlist">
         <h1>Welcome {user.username}</h1>
         <h3>This is your current watchlist</h3>
         {user.watchList && user.watchList ? (

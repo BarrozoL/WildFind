@@ -1,35 +1,15 @@
-body.light-mode .animal-cards {
+.animal-cards {
   margin: 30px;
-  /* border: 2px solid black; */
-  background-color: #d7e8c0;
-  color: rgb(44, 140, 121);
   border-radius: 5px;
   width: 200px;
   height: 280px;
 }
 
-body.dark-mode .animal-cards {
+.animal-cards {
   margin: 30px;
-  /* border: 2px solid black; */
-  background-color: #b581e4;
-  color: #b5fff0;
   border-radius: 5px;
   width: 200px;
   height: 280px;
-}
-
-body.other-theme .animal-cards {
-  margin: 30px;
-  /* border: 2px solid black; */
-  background-color: #1c8e66;
-  color: #b5fff0;
-  border-radius: 5px;
-  width: 200px;
-  height: 280px;
-}
-
-body.other-theme .animal-cards img {
-  border: 2px solid #20c9c1;
 }
 
 .animalWrapper h3 {

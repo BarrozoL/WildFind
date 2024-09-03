@@ -1,22 +1,14 @@
-body.light-mode .plantDetailWrapper {
-  margin-top: 0;
-  padding-top: 10px;
-  background-color: #d7e8c0;
-  color: rgb(44, 140, 121);
+.animalDetailWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10% 0 10% 0;
   border-radius: 5px;
   width: 1100px;
-  height: 600px;
+  height: 800px;
 }
 .plantDetailWrapper img {
   border-radius: 5px;
   width: 300px;
-}
-body.dark-mode .plantDetailWrapper {
-  margin-top: 0;
-  padding-top: 10px;
-  background-color: #b581e4;
-  color: #b5fff0;
-  border-radius: 5px;
-  width: 1100px;
-  height: 600px;
 }

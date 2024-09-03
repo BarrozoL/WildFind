@@ -1,6 +1,6 @@
 /* import { useState, useEffect } from "react";
 import { useParams, useNavigate, Navigate } from "react-router-dom";
-import "../css/EditWatchPage.css";
+import "../css/EditAnimalPage.css";
 
 function EditWatchPage({ editWatch, watches }) {
   const { watchId } = useParams();

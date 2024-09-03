@@ -1,28 +1,7 @@
-body.light-mode .home {
-  background-color: #d7e8c0;
-}
-
-body.light-mode .home button {
-  background-color: rgb(44, 140, 121);
-  border-color: rgb(44, 140, 121);
-}
-
-body.dark-mode .home {
-  background-color: #b581e4;
-  color: #b5fff0;
-}
-
-body.dark-mode .home button {
-  background-color: rgb(44, 140, 121);
-  border-color: rgb(44, 140, 121);
-  color: #b5fff0;
-}
-
 .home {
   width: 1200px;
-  height: 630px;
+  height: 650px;
   padding: 20px;
-  margin-top: 70px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -46,14 +25,4 @@ body.dark-mode .home button {
   width: 500px;
   height: 500px;
   margin-bottom: 0;
-}
-
-body.light-mode .animal-list .home {
-  padding-top: 0;
-  margin-top: 0;
-}
-
-body.dark-mode .animal-list .home {
-  padding-top: 0;
-  margin-top: 0;
 }

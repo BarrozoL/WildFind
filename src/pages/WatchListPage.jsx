@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import WatchCard from "../components/WatchCard";
+// import WatchCard from "../components/WatchCard";
 import { getAllWatchlistItems } from "../../lib";
 import watchService from "../../services/watchlist-service";
 import "../css/WatchListPage.css";

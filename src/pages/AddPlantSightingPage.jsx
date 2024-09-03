@@ -53,7 +53,7 @@ export default function AddPlantSighting({ plants, addPlantSighting }) {
     <div className="sighting-form">
       <h1>Where and when did you spot {`${plants[plantNumber].name}`}?</h1>
       <form className="sighting-inputs">
-        <div>
+        <div className="sighting-row">
           <label>Location:</label>
           <select
             value={location}
@@ -81,11 +81,11 @@ export default function AddPlantSighting({ plants, addPlantSighting }) {
             <option value="Viseu">Viseu</option>
           </select>
         </div>
-        <div>
+        <div className="sighting-row">
           <label>Date:</label>
           <DatePicker selected={date} onChange={handleDateChange} />
         </div>
-        <div>
+        <div className="sighting-row">
           <label>Description of sighting:</label>
           <input
             type="text"
@@ -94,7 +94,7 @@ export default function AddPlantSighting({ plants, addPlantSighting }) {
             onChange={handleDescriptionChange}
           />
         </div>
-        <div>
+        <div className="sighting-row">
           <label>{`Picture of sighting (optional):`}</label>
           <input
             type="text"

@@ -156,7 +156,7 @@ export default function AddAnimal({ types, addAnimal, animals, animalState }) {
     if (typeId === 1) {
       img = imageUrl || defaultBirdImage;
     } else if (typeId === 2) {
-      img = image || defaultMammalImage;
+      img = imageUrl || defaultMammalImage;
     } else if (typeId === 3) {
       img = imageUrl || defaultReptileImage;
     } else if (typeId === 4) {
@@ -223,14 +223,14 @@ export default function AddAnimal({ types, addAnimal, animals, animalState }) {
 
   return (
     <div className="add-form">
-      <h1>What and where did you spot?</h1>
+      <h1>What did you spot and where?</h1>
       <h3>
         Please check the list of animals to make sure your animal hasn't already
         been added...
       </h3>
       <form className="add-inputs">
-        <div>
-          <label>Have you seen a plant or animal? </label>
+        <div className="add-heading">
+          <label>Have you seen a plant or an animal? </label>
           <select
             name="category"
             id="category"
@@ -256,8 +256,8 @@ export default function AddAnimal({ types, addAnimal, animals, animalState }) {
           </div>
         )} */}
         {isAnimal === "plant" && (
-          <div>
-            <label>Select the type of plant seen: </label>
+          <div className="add-row">
+            <label>Type of plant: </label>
             <select
               name="animalType"
               id="animalType"
@@ -273,8 +273,8 @@ export default function AddAnimal({ types, addAnimal, animals, animalState }) {
           </div>
         )}
         {isAnimal === "animal" && (
-          <div>
-            <label>Select the type of animal seen: </label>
+          <div className="add-row">
+            <label>Type of animal: </label>
             <select
               name="animalType"
               id="animalType"
@@ -294,75 +294,142 @@ export default function AddAnimal({ types, addAnimal, animals, animalState }) {
           </div>
         )}
 
-        <div>
-          {isAnimal === "" && <label>Specimen name: </label>}
-          {isAnimal === "animal" && <label>Animal name: </label>}
-          {isAnimal === "plant" && <label>Plant name: </label>}
-          <input
-            type="text"
-            name="name"
-            value={name}
-            onChange={handleNameChange}
-          />
-        </div>
-        <div>
-          <label>Image: </label>
-          <input
-            type="file"
-            // name="image"
-            // value={image}
-            onChange={(e) => handleFileUpload(e)}
-          />
-        </div>
-        <div>
-          {isAnimal === "animal" && (
-            <div>
-              <label>{`Estimated Danger Level (1-5)`}:</label>
-              <input
-                type="text"
-                name="danger"
-                value={danger}
-                onChange={handleDangerChange}
-                className="danger-input"
-              />
-            </div>
-          )}
-          {isAnimal === "plant" && (
-            <div>
-              <label>{`Edible`}:</label>
-              <input
-                type="text"
-                name="danger"
-                value={danger}
-                onChange={handleDangerChange}
-                className="danger-input"
-              />
-            </div>
-          )}
-        </div>
-        <div>
-          <label>Description: </label>
-          <input
-            type="text"
-            name="description"
-            value={description}
-            onChange={handleDescriptionChange}
-          />
-        </div>
-        <div>
-          <label>Native to: </label>
-          <input
-            type="text"
-            name="location"
-            value={location}
-            onChange={handleLocationChange}
-          />
-        </div>
-        <div className="add-submit">
-          <button type="submit" onClick={handleSubmit}>
-            Submit
-          </button>
-        </div>
+        {isAnimal === "animal" && (
+          <div className="add-row">
+            <label>Animal name: </label>
+            <input
+              type="text"
+              name="name"
+              value={name}
+              onChange={handleNameChange}
+            />
+          </div>
+        )}
+
+        {isAnimal === "plant" && (
+          <div className="add-row">
+            <label>Plant name: </label>
+            <input
+              type="text"
+              name="name"
+              value={name}
+              onChange={handleNameChange}
+            />
+          </div>
+        )}
+
+        {isAnimal === "animal" && (
+          <div className="add-row">
+            <label>Image: </label>
+            <input
+              type="file"
+              // name="image"
+              // value={image}
+              onChange={(e) => handleFileUpload(e)}
+            />
+          </div>
+        )}
+
+        {isAnimal === "plant" && (
+          <div className="add-row">
+            <label>Image: </label>
+            <input
+              type="file"
+              // name="image"
+              // value={image}
+              onChange={(e) => handleFileUpload(e)}
+            />
+          </div>
+        )}
+
+        {isAnimal === "animal" && (
+          <div className="add-row">
+            <label>{`Estimated Danger Level (1-5)`}:</label>
+            <input
+              type="text"
+              name="danger"
+              value={danger}
+              onChange={handleDangerChange}
+              className="danger-input"
+            />
+          </div>
+        )}
+        {isAnimal === "plant" && (
+          <div className="add-row">
+            <label>{`Edible`}:</label>
+            <input
+              type="text"
+              name="edible"
+              value={edible}
+              onChange={handleEdibleChange}
+              className="danger-input"
+            />
+          </div>
+        )}
+
+        {isAnimal === "animal" && (
+          <div className="add-row">
+            <label>Description: </label>
+            <input
+              type="text"
+              name="description"
+              value={description}
+              onChange={handleDescriptionChange}
+            />
+          </div>
+        )}
+
+        {isAnimal === "plant" && (
+          <div className="add-row">
+            <label>Description: </label>
+            <input
+              type="text"
+              name="description"
+              value={description}
+              onChange={handleDescriptionChange}
+            />
+          </div>
+        )}
+
+        {isAnimal === "animal" && (
+          <div className="add-row">
+            <label>Native to: </label>
+            <input
+              type="text"
+              name="location"
+              value={location}
+              onChange={handleLocationChange}
+            />
+          </div>
+        )}
+
+        {isAnimal === "plant" && (
+          <div className="add-row">
+            <label>Native to: </label>
+            <input
+              type="text"
+              name="location"
+              value={location}
+              onChange={handleLocationChange}
+            />
+          </div>
+        )}
+
+        {isAnimal === "animal" && (
+          <div className="add-submit">
+            <button type="submit" onClick={handleSubmit}>
+              Submit
+            </button>
+          </div>
+        )}
+
+        {isAnimal === "plant" && (
+          <div className="add-submit">
+            <button type="submit" onClick={handleSubmit}>
+              Submit
+            </button>
+          </div>
+        )}
       </form>
     </div>
   );

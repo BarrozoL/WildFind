@@ -1,62 +1,51 @@
-body.light-mode .add-form {
-  background-color: #d7e8c0;
-}
-
-body.light-mode .add-form button {
-  background-color: rgb(44, 140, 121);
-  border-color: rgb(44, 140, 121);
-}
-
-body.light-mode .add-inputs input {
-  background-color: white;
-  border-color: rgb(44, 140, 121);
-  border-width: 1px;
-  border-radius: 5px;
-  color: black;
-}
-body.light-mode .add-inputs select {
-  background-color: white;
-  border-color: rgb(44, 140, 121);
-  border-radius: 5px;
-  color: black;
-}
-body.light-mode .add-inputs textarea {
-  background-color: white;
-  border-color: rgb(44, 140, 121);
-  border-width: 1px;
-  border-radius: 5px;
-  color: black;
-}
-
-body.dark-mode .add-form {
-  background-color: #b581e4;
-  color: #b5fff0;
-}
-
-body.dark-mode .add-inputs input {
-  border-color: rgb(44, 140, 121);
-  border-width: 1px;
-  border-radius: 5px;
-}
-body.dark-mode .add-inputs select {
-  border-radius: 5px;
-}
-body.light-mode .add-inputs textarea {
-  border-color: rgb(44, 140, 121);
-  border-width: 1px;
-  border-radius: 5px;
-}
-
 .add-inputs {
-  text-align: left;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 10px;
+}
+
+h3 {
+  margin-top: 0;
+  margin-bottom: 5%;
+}
+
+.add-row {
+  display: flex;
+  align-items: center;
+}
+
+.add-heading {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 5%;
+  width: 100%;
+}
+
+.add-heading select {
+  width: 18%;
+}
+
+select {
+  width: auto;
+}
+
+.add-row label {
+  width: 35%;
+  padding-right: 1%;
+  font-size: 1.1rem;
+  text-align: left;
+}
+
+.add-row input,
+.add-row select,
+.add-row textarea {
+  max-width: 40%;
+  border-radius: 5px;
 }
 
 .add-form {
   width: 1000px;
-  height: 520px;
+  height: auto;
   padding: 20px;
   margin-top: 50px;
   border-radius: 10px;
@@ -67,27 +56,6 @@ body.light-mode .add-inputs textarea {
 
 .add-submit {
   text-align: center;
-  width: 1000px;
-}
-
-body.dark-mode .add-form button {
-  background: #b5fff0;
-  color: darkslategray;
-}
-
-.add-inputs {
-  height: 330px;
-}
-
-.add-inputs select {
-  width: 500px;
-}
-
-.add-inputs input {
-  width: 500px;
-}
-
-body.other-theme .add-form {
-  background-color: #1c8e66;
-  color: #b5fff0;
+  width: 100%;
+  margin-top: 20px;
 }

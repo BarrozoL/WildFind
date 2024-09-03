@@ -1,45 +1,22 @@
 .sighting-cards img {
   border-radius: 10px;
 }
-body.light-mode .sighting-cards {
-  margin-top: 0;
+.sighting-cards {
+  display: flex;
+  margin-bottom: 2%;
   padding-top: 20px;
-  background-color: #d7e8c0;
-  color: rgb(44, 140, 121);
   border-radius: 5px;
   width: 900px;
+  justify-content: center;
 }
-body.dark-mode .sighting-cards {
-  margin-top: 0;
-  padding-top: 20px;
-  background-color: #b581e4;
-  color: #b5fff0;
-  border-radius: 5px;
-  width: 900px;
-}
-body.other-theme .sighting-cards {
-  margin-top: 0;
-  padding-top: 20px;
-  background-color: #1c8e66;
-  color: #b5fff0;
-  border-radius: 5px;
-  width: 900px;
+
+.sighting-cards .card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .spottingWrapper {
   padding-top: 5vw;
   padding-bottom: 1vw;
-}
-body.light-mode .spottingWrapper button {
-  background-color: rgb(44, 140, 121);
-  border-color: rgb(44, 140, 121);
-}
-
-body.dark-mode .spottingWrapper button {
-  background-color: rgb(44, 140, 121);
-  border-color: rgb(44, 140, 121);
-}
-body.other-theme .spottingWrapper button {
-  background-color: black;
-  border: 2px solid rgb(44, 140, 121);
 }

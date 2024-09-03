@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import sightingService from "../../services/sighting-services";
 import { jwtDecode } from "jwt-decode";
+import { getAnimal } from "../../lib";
 import "react-datepicker/dist/react-datepicker.css";
 import "../css/AddAnimalSightingPage.css";
 
@@ -22,12 +23,31 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
 
   const navigate = useNavigate();
 
+  const [foundAnimal, setFoundAnimal] = useState();
+
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
   };
   const handleLocationChange = (e) => {
     setLocation(e.target.value);
   };
+
+  useEffect(() => {
+    getAnimal(specimenId).then((data) => setFoundAnimal(data));
+  }, [specimenId]);
+
+  useEffect(() => {
+    if (foundAnimal?.typeId === 8) {
+      document.body.classList.add("other-theme");
+    } else {
+      document.body.classList.remove("other-theme");
+    }
+
+    // Clean up when the component is unmounted or `foundAnimal` changes
+    return () => {
+      document.body.classList.remove("other-theme");
+    };
+  }, [foundAnimal]);
 
   // const handleImageChange = (e) => {
   //   setImage(e.target.value);
@@ -88,7 +108,7 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
         <h1>Where and when did you spot {foundSpecimen.name}?</h1>
       )}
       <form className="sighting-inputs">
-        <div>
+        <div className="sighting-row">
           <label>Location:</label>
           <select
             value={location}
@@ -116,22 +136,27 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
             <option value="Viseu">Viseu</option>
           </select>
         </div>
-        <div>
+        <div className="sighting-row">
           <label>Date:</label>
           <DatePicker selected={date} onChange={handleDateChange} />
         </div>
-        <div>
+        <div className="sighting-row">
           <label>Comment:</label>
-          <input
-            type="text"
+          <textarea
+            rows="4"
+            cols="40"
             name="description"
             value={description}
             onChange={handleDescriptionChange}
           />
         </div>
-        <div>
+        <div className="sighting-row">
           <label>{`Picture of sighting (optional):`}</label>
-          <input type="file" onChange={(e) => handleFileUpload(e)} />
+          <input
+            className="img-input"
+            type="file"
+            onChange={(e) => handleFileUpload(e)}
+          />
         </div>
         <div className="sighting-submit">
           <button type="submit" onClick={handleSubmit}>

@@ -121,11 +121,10 @@ export default function PlantCard({ animals }) {
         <p>{`Danger level: ${foundPlant.dangerLevel}`}</p>
         <p>{foundPlant.description}</p>
         <p>Native to {foundPlant.location}</p>
+        <button onClick={handleSightingNavigate} className="sightings-button">
+          Click to view locations where the {`${foundPlant.name}`} has been seen
+        </button>
         <div className="button-details">
-          <button onClick={handleSightingNavigate} className="sightings-button">
-            Click to view locations where the {`${foundPlant.name}`} has been
-            seen
-          </button>
           <button onClick={handleNewSighting} className="detail-button">
             Add a sighting
           </button>

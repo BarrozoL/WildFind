@@ -124,23 +124,24 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
         <div className="sighting-row">
           <label>Description of sighting:</label>
 
-        <div>
-          <label>Comment:</label>
-          <input
-            type="text"
-            name="description"
-            value={description}
-            onChange={handleDescriptionChange}
-          />
-        </div>
-        <div className="sighting-row">
-          <label>{`Picture of sighting (optional):`}</label>
-          <input type="file" onChange={(e) => handleFileUpload(e)} />
-        </div>
-        <div className="sighting-submit">
-          <button type="submit" onClick={handleSubmit}>
-            Submit
-          </button>
+          <div>
+            <label>Comment:</label>
+            <input
+              type="text"
+              name="description"
+              value={description}
+              onChange={handleDescriptionChange}
+            />
+          </div>
+          <div className="sighting-row">
+            <label>{`Picture of sighting (optional):`}</label>
+            <input type="file" onChange={(e) => handleFileUpload(e)} />
+          </div>
+          <div className="sighting-submit">
+            <button type="submit" onClick={handleSubmit}>
+              Submit
+            </button>
+          </div>
         </div>
       </form>
     </div>

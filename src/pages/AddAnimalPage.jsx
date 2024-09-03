@@ -332,7 +332,6 @@ export default function AddAnimal() {
           </div>
         )}
 
-
         {isAnimal === "animal" && (
           <div className="add-row">
             <label>Animal name: </label>
@@ -470,76 +469,75 @@ export default function AddAnimal() {
           </div>
         )}
 
-//         <div>
-//           {isAnimal === "" && <label>Specimen name: </label>}
-//           {isAnimal === "animal" && <label>Animal name: </label>}
-//           {isAnimal === "plant" && <label>Plant name: </label>}
-//           <input
-//             type="text"
-//             name="name"
-//             value={name}
-//             onChange={handleNameChange}
-//           />
-//         </div>
-//         <div>
-//           <label>Image: </label>
-//           <input
-//             type="file"
-//             // name="image"
-//             // value={image}
-//             onChange={(e) => handleFileUpload(e)}
-//           />
-//         </div>
-//         <div>
-//           {isAnimal === "animal" && (
-//             <div>
-//               <label>{`Estimated Danger Level (1-5)`}:</label>
-//               <input
-//                 type="text"
-//                 name="danger"
-//                 value={danger}
-//                 onChange={handleDangerChange}
-//                 className="danger-input"
-//               />
-//             </div>
-//           )}
-//           {isAnimal === "plant" && (
-//             <div>
-//               <label>{`Edible`}:</label>
-//               <input
-//                 type="text"
-//                 name="edible"
-//                 value={edible}
-//                 onChange={handleEdibleChange}
-//                 className="danger-input"
-//               />
-//             </div>
-//           )}
-//         </div>
-//         <div>
-//           <label>Description: </label>
-//           <input
-//             type="text"
-//             name="description"
-//             value={description}
-//             onChange={handleDescriptionChange}
-//           />
-//         </div>
-//         <div>
-//           <label>Native to: </label>
-//           <input
-//             type="text"
-//             name="location"
-//             value={location}
-//             onChange={handleLocationChange}
-//           />
-//         </div>
-//         <div className="add-submit">
-//           <button type="submit" onClick={handleSubmit}>
-//             Submit
-//           </button>
-//         </div>
-
+        <div>
+          {isAnimal === "" && <label>Specimen name: </label>}
+          {isAnimal === "animal" && <label>Animal name: </label>}
+          {isAnimal === "plant" && <label>Plant name: </label>}
+          <input
+            type="text"
+            name="name"
+            value={name}
+            onChange={handleNameChange}
+          />
+        </div>
+        <div>
+          <label>Image: </label>
+          <input
+            type="file"
+            // name="image"
+            // value={image}
+            onChange={(e) => handleFileUpload(e)}
+          />
+        </div>
+        <div>
+          {isAnimal === "animal" && (
+            <div>
+              <label>{`Estimated Danger Level (1-5)`}:</label>
+              <input
+                type="text"
+                name="danger"
+                value={danger}
+                onChange={handleDangerChange}
+                className="danger-input"
+              />
+            </div>
+          )}
+          {isAnimal === "plant" && (
+            <div>
+              <label>{`Edible`}:</label>
+              <input
+                type="text"
+                name="edible"
+                value={edible}
+                onChange={handleEdibleChange}
+                className="danger-input"
+              />
+            </div>
+          )}
+        </div>
+        <div>
+          <label>Description: </label>
+          <input
+            type="text"
+            name="description"
+            value={description}
+            onChange={handleDescriptionChange}
+          />
+        </div>
+        <div>
+          <label>Native to: </label>
+          <input
+            type="text"
+            name="location"
+            value={location}
+            onChange={handleLocationChange}
+          />
+        </div>
+        <div className="add-submit">
+          <button type="submit" onClick={handleSubmit}>
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );

@@ -18,7 +18,7 @@ export default function PrivateMessagePage() {
 
   useEffect(() => {
     getMessages();
-  }, [userId]); //could insert user here to constantly track and update page with new messages
+  }, [sentMessages]);
 
   const getMessages = async () => {
     axios
@@ -38,6 +38,9 @@ export default function PrivateMessagePage() {
         text: messageText,
       })
       .then((response) => {
+        //set sentMessages state to be able to update useEffect
+        //when message is send and render it without a page refresh
+        setSentMessages(response.data);
         console.log("Message sent", response.data);
       })
       .catch((error) => {
@@ -48,6 +51,7 @@ export default function PrivateMessagePage() {
 
   const handleSendMessage = (e) => {
     e.preventDefault();
+    setMessageText("");
     sendMessage();
     getMessages();
   };
@@ -62,22 +66,30 @@ export default function PrivateMessagePage() {
     <div className="private-messages-wrapper">
       <h2>Private Messages:</h2>
       <h3>Received Messages:</h3>
-      {user?.conversations?.map((conversation) => {
+      {user?.conversations?.map((conversation, index) => {
         return (
-          <div key={conversation?._id} className="conversation-wrapper">
-            <p>
-              Conversation between {conversation?.user1Id?.username} and{" "}
-              {conversation?.user2Id?.username}
-            </p>
-            {conversation?.messages?.map((message) => {
-              return (
-                <div key={message?._id} className="individual-message-wrapper">
-                  <p>{message?.text}</p>
-                  {console.log("message", message)}
-                  <p>Sent by: {message?.sender?.username} </p>
+          //we also map over the index to use it as a key. We we getting a repeated keys error
+          <div key={`${conversation?._id}${index}`}>
+            {conversation?.user1Id?._id === currentUserId ||
+              (conversation?.user2Id?._id === currentUserId && (
+                <div className="conversation-wrapper">
+                  <p>
+                    Conversation between {conversation?.user1Id?.username} and{" "}
+                    {conversation?.user2Id?.username}
+                  </p>
+                  {conversation?.messages?.map((message) => {
+                    return (
+                      <div
+                        key={message?._id}
+                        className="individual-message-wrapper"
+                      >
+                        <p>{message?.text}</p>
+                        <p>Sent by: {message?.sender?.username} </p>
+                      </div>
+                    );
+                  })}
                 </div>
-              );
-            })}
+              ))}
           </div>
         );
       })}
@@ -93,38 +105,3 @@ export default function PrivateMessagePage() {
     </div>
   );
 }
-
-/* {user?.receivedMessages.map((message) => {
-    {
-      console.log(user);
-    }
-    return (
-      <div className="received-messages" key={message._id}>
-        <p>{message?.text}</p>
-        <p>
-          Sent by:{" "}
-          <Link to={`/user-profile/${message?.sender._id}`}>
-            {message?.sender.username}
-          </Link>
-        </p>
-        <p>Received at: {message.createdAt}</p>
-      </div>
-    );
-  })}
-  <br />
-  <br />
-  <h3>Sent Messages:</h3>
-  {user?.sentMessages.map((message) => {
-    return (
-      <div className="sent-messages" key={message._id}>
-        <p>{message?.text}</p>
-        <p>
-          Sent to:{" "}
-          <Link to={`/user-profile/${message?.receiver._id}`}>
-            {message?.receiver.username}
-          </Link>
-        </p>
-        <p>Sent at: {message.createdAt}</p>
-      </div>
-    );
-  })} */

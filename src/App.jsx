@@ -290,9 +290,10 @@ function App() {
         <Route
           path="/watchlist/:userId"
           element={
-            <IsUnique>
-              <PersonalWatchlistPage />
-            </IsUnique>
+            // <IsUnique>
+            // <PersonalWatchlistPage />
+            // </IsUnique>
+            <PersonalWatchlistPage />
           }
         />
         <Route path="/actions" element={<SocialFeedPage />} />

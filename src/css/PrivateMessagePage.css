@@ -1,0 +1,21 @@
+body {
+  margin-top: 60px;
+  padding-bottom: 20px;
+}
+
+.private-messages-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.received-messages {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+}
+
+.sent-messages {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+}

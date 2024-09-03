@@ -21,9 +21,9 @@ export default function MapListing({ location, sightings }) {
             {sightings.map((sight) => (
               <div key={sight._id}>
                 <h4 style={{ color: "rgb(44, 140, 121)", width: "100px" }}>
-                  {sight.specimenId.name}
+                  {sight?.specimenId?.name}
                 </h4>
-                <img width="100px" src={sight.specimenId.image} />
+                <img width="100px" src={sight?.specimenId?.image} />
               </div>
             ))}
           </div>

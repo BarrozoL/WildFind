@@ -23,6 +23,18 @@ body.dark-mode .add-form {
   align-items: center;
 }
 
+
+body.light-mode .edit-inputs input {
+  border-width: 1px;
+  border-radius: 5px;
+}
+body.light-mode .edit-inputs select {
+  border-radius: 5px;
+}
+body.light-mode .edit-inputs textarea {
+  border-width: 1px;
+  border-radius: 5px;
+}
 body.other-theme .add-form {
   background-color: #1c8e66;
   color: #b5fff0;
@@ -85,6 +97,7 @@ body.other-theme .edit-inputs textarea {
 body.other-theme .edit-inputs button {
   background-color: black;
   border: 2px solid #20c9c1;
+
 }
 
 .edit-inputs {

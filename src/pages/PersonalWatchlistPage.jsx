@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
+import "../css/PersonalWatchlistPage.css";
 
 export default function UserWatchlistPage() {
   const token = localStorage.getItem("authToken");
@@ -33,8 +34,9 @@ export default function UserWatchlistPage() {
 
   return (
     <>
+
       {userId === userIdCode && (
-        <div>
+        <div className="watchlist">
           <h1>Welcome {user.username}</h1>
           <h3>This is your current watchlist</h3>
           {user.watchList && user.watchList ? (
@@ -61,6 +63,7 @@ export default function UserWatchlistPage() {
         </div>
       )}
       {userId !== userIdCode && navigate("/error")}
+
     </>
   );
 }

@@ -56,9 +56,9 @@ export default function Sightings({ sightings, getAnimalsWithSightings }) {
         {sights.map((sighting) => {
           const formattedDate = new Date(sighting.date).toString();
           return (
-            <div key={sighting._id}>
+            <div className="sighting-cards" key={sighting._id}>
               {console.log(sighting)}
-              <ul style={{ listStyleType: "none" }} className="sighting-cards">
+              <ul className="card-content" style={{ listStyleType: "none" }}>
                 {sighting.image && sighting.image.trim() !== "" && (
                   <img
                     src={sighting.image}

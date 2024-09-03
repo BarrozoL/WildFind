@@ -88,7 +88,7 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
         <h1>Where and when did you spot {foundSpecimen.name}?</h1>
       )}
       <form className="sighting-inputs">
-        <div>
+        <div className="sighting-row">
           <label>Location:</label>
           <select
             value={location}
@@ -116,10 +116,14 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
             <option value="Viseu">Viseu</option>
           </select>
         </div>
-        <div>
+        <div className="sighting-row">
           <label>Date:</label>
           <DatePicker selected={date} onChange={handleDateChange} />
         </div>
+
+        <div className="sighting-row">
+          <label>Description of sighting:</label>
+
         <div>
           <label>Comment:</label>
           <input
@@ -129,7 +133,7 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
             onChange={handleDescriptionChange}
           />
         </div>
-        <div>
+        <div className="sighting-row">
           <label>{`Picture of sighting (optional):`}</label>
           <input type="file" onChange={(e) => handleFileUpload(e)} />
         </div>

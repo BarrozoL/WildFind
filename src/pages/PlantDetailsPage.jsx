@@ -106,7 +106,11 @@ export default function AnimalCard({ animals }) {
         <p>{`Edible: ${foundPlant.edible}`}</p>
         <p>{`Description: ${foundPlant.description}`}</p>
         <p>Native to {foundPlant.location}</p>
+        <button onClick={handleSightingNavigate} className="sightings-button">
+          Click to view locations where the {`${foundPlant.name}`} has been seen
+        </button>
         <div className="button-details">
+
           <button onClick={handleSightingNavigate} className="sightings-button">
             Click to view locations where the {`${foundPlant.name}`} has been
             seen

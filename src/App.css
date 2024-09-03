@@ -70,20 +70,3 @@
 /* .NavLink {
     width: 140px;
   } */
-
-body.light-mode {
-  background-color: rgba(234, 243, 216, 255);
-  color: rgb(44, 140, 121);
-  padding-top: 0;
-}
-
-body.dark-mode {
-  background-color: #242424;
-  color: rgb(44, 140, 121);
-  padding-top: 0;
-}
-
-body.other-theme {
-  background-color: #4d4d4d;
-  color: white;
-}

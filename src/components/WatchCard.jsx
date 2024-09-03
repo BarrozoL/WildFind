@@ -1,8 +1,8 @@
-import { Link, useNavigate } from "react-router-dom";
-import "../css/WatchCard.css";
+// import { Link, useNavigate } from "react-router-dom";
+// import "../css/WatchCard.css";
 
-function WatchCard({ watch, deleteWatch }) {
-  const navigate = useNavigate();
+// function WatchCard({ watch, deleteWatch }) {
+//   const navigate = useNavigate();
 
   const handleEditNavigate = () => {
     navigate(`/watchlist/${watch.id}/edit-watch`);
@@ -31,4 +31,5 @@ function WatchCard({ watch, deleteWatch }) {
   );
 }
 
-export default WatchCard;
+
+// export default WatchCard;

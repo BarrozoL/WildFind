@@ -1,116 +1,33 @@
 .animalDetailWrapper {
-  margin-top: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.animalDetailWrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-body.light-mode .animalDetailWrapper {
-  margin-top: 0;
-  padding-top: 10px;
-  background-color: #d7e8c0;
-  color: rgb(44, 140, 121);
+  margin: 10% 0 10% 0;
   border-radius: 5px;
   width: 1100px;
-  height: 600px;
+  height: 800px;
 }
+
 .animalDetailWrapper img {
   border-radius: 5px;
   width: 300px;
 }
 
-body.dark-mode .animalDetailWrapper {
-  margin-top: 0;
-  padding-top: 10px;
-  background-color: #b581e4;
-  color: #b5fff0;
-  border-radius: 5px;
-  width: 1100px;
-  height: 600px;
-}
-
-body.other-theme .animalDetailWrapper {
-  margin-top: 0;
-  padding-top: 10px;
-  background-color: #1c8e66;
-  color: #b5fff0;
-  border-radius: 5px;
-  width: 1100px;
-  height: 600px;
-}
-
-body.other-theme .animalDetailWrapper img {
-  border: 2px solid #20c9c1;
-}
-
 .button-details {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  height: 100px;
 }
 
-.button-details {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  height: 100px;
+.sightings-button {
+  width: 30%;
+  margin: 1%;
 }
 
-.button-details {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  height: 100px;
-}
-
-body.light-mode .detail-button {
-  height: 38px;
-  margin-bottom: 3px;
-  background-color: rgb(44, 140, 121);
-}
-
-body.dark-mode .detail-button {
-  height: 38px;
-  margin-bottom: 3px;
-  background-color: rgb(44, 140, 121);
-  color: white;
-}
-
-body.other-theme .detail-button {
-  height: 38px;
-  margin-bottom: 3px;
-  border: 2px solid #20c9c1;
-}
-
-body.light-mode .sightings-button {
-  width: 280px;
-  height: 72px;
-  margin-bottom: 3px;
-  background-color: rgb(44, 140, 121);
-}
-
-body.dark-mode .sightings-button {
-  width: 280px;
-  height: 72px;
-  margin-bottom: 3px;
-  background-color: rgb(44, 140, 121);
-  color: white;
-}
-
-body.other-theme .sightings-button {
-  width: 280px;
-  height: 72px;
-  margin-bottom: 3px;
-  border: 2px solid #20c9c1;
+.detail-button {
+  margin: 1%;
+  width: 50%;
+  height: 90%;
 }

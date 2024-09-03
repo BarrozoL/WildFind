@@ -106,7 +106,13 @@ export default function AnimalCard({ animals }) {
         <p>{`Danger level: ${foundAnimal.dangerLevel}`}</p>
         <p>{`Description: ${foundAnimal.description}`}</p>
         <p>Native to {foundAnimal.location}</p>
+
+        <button onClick={handleSightingNavigate} className="sightings-button">
+          Click to view locations where the {`${foundAnimal.name}`} has been
+          seen
+        </button>
         <div className="button-details">
+
           <button onClick={handleSightingNavigate} className="sightings-button">
             Click to view locations where the {`${foundAnimal.name}`} has been
             seen
@@ -117,6 +123,7 @@ export default function AnimalCard({ animals }) {
           {foundAnimal.userId === userId && (
             <button onClick={handleDelete}>Delete</button>
           )}
+
           <button onClick={handleNewSighting} className="detail-button">
             Add a sighting
           </button>

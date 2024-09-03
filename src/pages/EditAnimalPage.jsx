@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import "../css/EditAnimalPage.css";
 import { editAnimal, getAnimal } from "../../lib";
 import specimenService from "../../services/specimen-service";
-
 import defaultBirdImage from "../assets/images/bird.jpeg";
 import defaultMammalImage from "../assets/images/fox.jpeg";
 import defaultReptileImage from "../assets/images/lizard.jpeg";
@@ -16,13 +15,11 @@ import defaultTreeImage from "../assets/images/tree.jpeg";
 import defaultBerryImage from "../assets/images/berry.jpeg";
 import defaultFlowerImage from "../assets/images/flower.jpeg";
 import defaultPlantImage from "../assets/images/plant.jpeg";
-
 function EditAnimalPage() {
   const [foundAnimal, setFoundAnimal] = useState();
   const { specimenId } = useParams();
   console.log("specimenId:", specimenId);
   const navigate = useNavigate();
-
   const [isAnimal, setIsAnimal] = useState("");
   const [name, setName] = useState("");
   const [selectedAnimalType, setSelectedAnimalType] = useState("");
@@ -32,13 +29,11 @@ function EditAnimalPage() {
   const [dangerLevel, setDangerLevel] = useState("");
   const [edible, setEdible] = useState("");
   let typeId;
-
   useEffect(() => {
     if (specimenId) {
       getAnimal(specimenId).then((data) => setFoundAnimal(data));
     }
   }, [specimenId]);
-
   useEffect(() => {
     if (foundAnimal) {
       setIsAnimal(foundAnimal.typeId <= 8 ? "animal" : "plant");
@@ -51,7 +46,6 @@ function EditAnimalPage() {
       setEdible(foundAnimal.edible);
     }
   }, [foundAnimal]);
-
   const animalTypeToName = (typeId) => {
     const typeMap = {
       1: "bird",
@@ -69,7 +63,6 @@ function EditAnimalPage() {
     };
     return typeMap[typeId] || "";
   };
-
   const nameToAnimalType = (typeName) => {
     const typeMap = {
       bird: 1,
@@ -87,9 +80,7 @@ function EditAnimalPage() {
     };
     return typeMap[typeName] || null;
   };
-
   if (!foundAnimal) return <p>Loading...</p>;
-
   const handleNameChange = (e) => setName(e.target.value);
   const handleTypeChange = (e) => setSelectedAnimalType(e.target.value);
   const handleCategoryChange = (e) => setIsAnimal(e.target.value);
@@ -97,28 +88,21 @@ function EditAnimalPage() {
   const handleEdibleChange = (e) => setEdible(e.target.value);
   const handleDescriptionChange = (e) => setDescription(e.target.value);
   const handleLocationChange = (e) => setLocation(e.target.value);
-
   const handleFileUpload = (e) => {
     console.log("The file to be uploaded is: ", e.target.files[0]);
-
     const uploadData = new FormData();
     uploadData.append("imageUrl", e.target.files[0]); // Append the file with the key "imageUrl"
-
     specimenService
       .uploadImage(uploadData)
       .then((response) => {
         console.log("response is: ", response);
-
         setImageUrl(response.data.fileUrl);
       })
       .catch((err) => console.log("Error while uploading the file: ", err));
   };
-
   const handleFormSubmit = (e) => {
     e.preventDefault();
-
     typeId = nameToAnimalType(selectedAnimalType);
-
     const defaultImageMap = {
       1: defaultBirdImage,
       2: defaultMammalImage,
@@ -133,7 +117,6 @@ function EditAnimalPage() {
       11: defaultFlowerImage,
       12: defaultPlantImage,
     };
-
     const updatedAnimal = {
       ...foundAnimal,
       name,
@@ -144,7 +127,6 @@ function EditAnimalPage() {
       dangerLevel: isAnimal === "animal" ? dangerLevel : undefined,
       edible: isAnimal === "plant" ? edible : undefined,
     };
-
     editAnimal(specimenId, updatedAnimal)
       .then(() => {
         if (typeId <= 8) {
@@ -158,19 +140,16 @@ function EditAnimalPage() {
         // Optionally, set an error state to display to the user
       });
   };
-
   // useEffect(() => {
   //   if (foundAnimal?.typeId === 8) {
   //     document.body.classList.add("other-theme");
   //   } else {
   //     document.body.classList.remove("other-theme");
   //   }
-
   //   return () => {
   //     document.body.classList.remove("other-theme");
   //   };
   // }, [foundAnimal]);
-
   return (
     <div className="edit-form">
       <div key={foundAnimal._id}>
@@ -192,7 +171,6 @@ function EditAnimalPage() {
             <option value="plant">Plant</option>
           </select>
         </div>
-
         <form onSubmit={handleFormSubmit} className="edit-inputs">
           <div>
             <label>
@@ -206,7 +184,6 @@ function EditAnimalPage() {
               required
             />
           </div>
-
           <div>
             <label>
               {isAnimal === "animal"
@@ -242,12 +219,10 @@ function EditAnimalPage() {
               )}
             </select>
           </div>
-
           <div>
             <label>Image: </label>
             <input type="file" onChange={handleFileUpload} />
           </div>
-
           {isAnimal === "animal" ? (
             <div>
               <label>Estimated Danger Level (1-5): </label>
@@ -273,7 +248,6 @@ function EditAnimalPage() {
               />
             </div>
           )}
-
           <div>
             <label>Description: </label>
             <textarea
@@ -283,7 +257,6 @@ function EditAnimalPage() {
               required
             />
           </div>
-
           <div>
             <label>Native to: </label>
             <input
@@ -294,7 +267,6 @@ function EditAnimalPage() {
               required
             />
           </div>
-
           <div className="edit-submit">
             <button type="submit">Submit</button>
           </div>
@@ -303,5 +275,4 @@ function EditAnimalPage() {
     </div>
   );
 }
-
 export default EditAnimalPage;

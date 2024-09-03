@@ -4,6 +4,7 @@ import "../css/Navbar.css";
 import WildFindLogo from "../assets/images/WildFind-logo-5.png";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
+import { ThemeContext } from "../context/theme.context";
 
 const Navbar = () => {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
@@ -66,6 +67,7 @@ const Navbar = () => {
               <NavLink to={`/user-profile/${user._id}`} className="NavLink">
                 User Profile
               </NavLink>
+
 
               <NavLink to={`/user/messages/${user._id}`} className="NavLink">
                 Private Messages

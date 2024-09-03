@@ -298,14 +298,7 @@ function App() {
         <Route path="/actions" element={<SocialFeedPage />} />
         <Route path="/user-profile/:userId" element={<UserProfilePage />} />
 
-        <Route
-          path="/user/messages/:userId"
-          element={
-            <IsUnique>
-              <PrivateMessagePage />
-            </IsUnique>
-          }
-        />
+        <Route path="/user/messages/:userId" element={<PrivateMessagePage />} />
 
         <Route path="/*" element={<Errorpage />} />
         {/* 

@@ -18,7 +18,7 @@ export default function PrivateMessagePage() {
 
   useEffect(() => {
     getMessages();
-  }, []); //could insert user here to constantly track and update page with new messages
+  }, [userId]); //could insert user here to constantly track and update page with new messages
 
   const getMessages = async () => {
     axios
@@ -43,11 +43,13 @@ export default function PrivateMessagePage() {
       .catch((error) => {
         console.error("Error posting comment:", error);
       });
+    getMessages();
   };
 
   const handleSendMessage = (e) => {
     e.preventDefault();
     sendMessage();
+    getMessages();
   };
 
   const handleMessageTextChange = (e) => {

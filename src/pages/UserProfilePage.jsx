@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import "../css/UserProfilePage.css";
 
 export default function UserProfilePage() {
   const [user, setUser] = useState(null);
-  const [followers, setFollowers] = useState();
-  const [following, setFollowing] = useState();
   const { userId } = useParams(); //id of the user profile page you are on
 
   //Pick up id from the currently logged in user
@@ -33,6 +31,7 @@ export default function UserProfilePage() {
 
   //POST a new follower after clicking follow user
   const followUser = async () => {
+    //check if user is already being followed
     for (let follower of user.followers) {
       if (follower._id === loggedUserId) {
         alert("You already follow this user!");
@@ -116,6 +115,11 @@ export default function UserProfilePage() {
       <div>
         <h1>Profile Page</h1>
         <h2>{user.username}'s profile</h2>
+        <Link to={`/user/messages/${userId}`}>
+          <button className="send-user-a-message-button">
+            Send {user.username} a message!
+          </button>{" "}
+        </Link>
         <p>You have added {user.sightings.length} sightings</p>
         <p>Achievements:</p>
         {renderAchievements()}

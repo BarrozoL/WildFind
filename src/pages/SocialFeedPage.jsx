@@ -26,6 +26,8 @@ export default function SocialFeedPage() {
         const foundSightings = response.data;
         setSightings(foundSightings);
         if (!sightings) return <p>Loading...</p>;
+        //Setting the comment texts to an array the same length as the sightings array
+        //and using .fill() to populate them with empty strings
         setCommentText(new Array(foundSightings.length).fill(""));
       })
       .catch((error) => {
@@ -72,8 +74,10 @@ export default function SocialFeedPage() {
             <div className="social-feed-sighting-card" key={action._id}>
               <img src={action?.sighting?.image} />
               <h3>
-                {action?.user?.username} Has spotted{" "}
-                {action?.sighting?.specimenId?.name} in{" "}
+                <Link to={`/user-profile/${action?.user?._id}`}>
+                  {action?.user?.username}{" "}
+                </Link>{" "}
+                Has spotted {action?.sighting?.specimenId?.name} in{" "}
                 {action?.sighting?.location}
               </h3>
               <h4>Sighting description: {action?.sighting?.description}</h4>

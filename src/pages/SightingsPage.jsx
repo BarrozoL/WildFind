@@ -75,14 +75,17 @@ export default function Sightings({ sightings, getAnimalsWithSightings }) {
                   <b>Comment:</b> <br />
                   {sighting.description}
                 </li>
-                <li>Animal spotted by: {sighting.username}</li>
+                <li>
+                  <b>Spotted by: </b>
+                  {sighting.username}
+                </li>
                 <br />
                 <br />
               </ul>
             </div>
           );
         })}
-        <button onClick={handleNavigate}>{`Back to Animal Details`}</button>
+        <button onClick={handleNavigate}>{`Back to Details Page`}</button>
       </div>
     </>
   );

@@ -451,9 +451,21 @@ body.light-mode .spottingWrapper button {
   border-color: rgb(44, 140, 121);
   color: white;
 }
+
+body.light-mode .spottingWrapper button:hover {
+  background-color: rgb(44, 140, 121);
+  border-color: white;
+  color: white;
+}
 body.dark-mode .spottingWrapper button {
   background-color: rgb(44, 140, 121);
   border-color: rgb(44, 140, 121);
+  color: white;
+}
+
+body.dark-mode .spottingWrapper button:hover {
+  background-color: rgb(44, 140, 121);
+  border-color: white;
   color: white;
 }
 body.other-theme .sighting-form {
@@ -471,6 +483,12 @@ body.other-theme .sighting-cards {
 }
 body.other-theme .spottingWrapper button {
   background-color: rgb(44, 140, 121);
+  color: white;
+}
+
+body.other-theme .spottingWrapper button:hover {
+  background-color: rgb(44, 140, 121);
+  border-color: white;
   color: white;
 }
 /*

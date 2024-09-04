@@ -105,18 +105,17 @@ export default function AnimalCard({ animals }) {
         <img src={foundAnimal.image} alt={foundAnimal.name} width="300px" />
         <p>{`Danger level: ${foundAnimal.dangerLevel}`}</p>
         <p>{`Description: ${foundAnimal.description}`}</p>
-        <p>Native to {foundAnimal.location}</p>
+        <p>{`Native to: ${foundAnimal.location.join(", ")}`}</p>
 
         <button onClick={handleSightingNavigate} className="sightings-button">
           Click to view locations where the {`${foundAnimal.name}`} has been
           seen
         </button>
         <div className="button-details">
-
-          <button onClick={handleSightingNavigate} className="sightings-button">
+          {/* <button onClick={handleSightingNavigate} className="sightings-button">
             Click to view locations where the {`${foundAnimal.name}`} has been
             seen
-          </button>
+          </button> */}
           {foundAnimal.userId === userId && (
             <button onClick={handleEdit}>Edit</button>
           )}

@@ -70,26 +70,26 @@ export default function PrivateMessagePage() {
         return (
           //we also map over the index to use it as a key. We we getting a repeated keys error
           <div key={`${conversation?._id}${index}`}>
-            {conversation?.user1Id?._id === currentUserId ||
-              (conversation?.user2Id?._id === currentUserId && (
-                <div className="conversation-wrapper">
-                  <p>
-                    Conversation between {conversation?.user1Id?.username} and{" "}
-                    {conversation?.user2Id?.username}
-                  </p>
-                  {conversation?.messages?.map((message) => {
-                    return (
-                      <div
-                        key={message?._id}
-                        className="individual-message-wrapper"
-                      >
-                        <p>{message?.text}</p>
-                        <p>Sent by: {message?.sender?.username} </p>
-                      </div>
-                    );
-                  })}
-                </div>
-              ))}
+            {(conversation?.user1Id?._id === currentUserId ||
+              conversation?.user2Id?._id === currentUserId) && (
+              <div className="conversation-wrapper">
+                <p>
+                  Conversation between {conversation?.user1Id?.username} and{" "}
+                  {conversation?.user2Id?.username}
+                </p>
+                {conversation?.messages?.map((message) => {
+                  return (
+                    <div
+                      key={message?._id}
+                      className="individual-message-wrapper"
+                    >
+                      <p>{message?.text}</p>
+                      <p>Sent by: {message?.sender?.username} </p>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
         );
       })}

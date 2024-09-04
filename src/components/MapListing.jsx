@@ -1,10 +1,4 @@
-import { Link } from "react-router-dom";
-
 export default function MapListing({ location, sightings }) {
-  /* const firstSightingLocation = animalsArray.find((animal) => {
-    animal.sightings && animal.sightings[0] && animal.sightings[0].location;
-  }); */
-
   return (
     <>
       <div className="map-wrap">

@@ -84,7 +84,7 @@ export default function SocialFeedPage() {
                   {action?.user?.username}{" "}
                 </Link>{" "}
                 Has spotted{" "}
-                <Link to={`/animals/${action?.sighting?.specimenId._id}`}>
+                <Link to={`/animals/${action?.sighting?.specimenId?._id}`}>
                   {action?.sighting?.specimenId?.name}
                 </Link>{" "}
                 in {action?.sighting?.location}

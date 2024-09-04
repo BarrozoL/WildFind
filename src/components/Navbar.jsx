@@ -47,8 +47,8 @@ const Navbar = () => {
           <NavLink to="/plants" className="NavLink">
             All Plants
           </NavLink>
-          <NavLink to="/map" className="NavLink">
-            Map
+          <NavLink to="/maps" className="NavLink">
+            Maps
           </NavLink>
           <NavLink to="/actions" className="NavLink">
             See Recent Sightings

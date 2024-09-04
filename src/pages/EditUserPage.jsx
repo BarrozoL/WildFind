@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import authService from "../../services/auth.service";
-import axios from "axios";
 import { editUser } from "../../lib";
 import specimenService from "../../services/specimen-service";
 import "../css/EditUserPage.css";
@@ -25,6 +24,9 @@ function EditUserPage() {
   const [showPasswordResetForm, setShowPasswordResetForm] = useState(false);
   const [resetEmail, setResetEmail] = useState(""); // State for email input in password reset form
   const [resetEmailSent, setResetEmailSent] = useState(false); // State to manage confirmation message
+
+  const [errorMessage, setErrorMessage] = useState(""); // State for error messages
+  const [updateSuccessful, setUpdateSuccessful] = useState(false); // State to manage update success
 
   const navigate = useNavigate();
 
@@ -90,19 +92,43 @@ function EditUserPage() {
 
     editUser(userId, updatedUser)
       .then(() => {
-        navigate(`/user-profile/${userId}`);
+        setUpdateSuccessful(true); // Set success flag
+        if (!errorMessage) {
+          navigate(`/user-profile/${userId}`);
+        }
       })
       .catch((error) => {
         console.error("Error updating user:", error);
+        const errorDescription =
+          error.response?.data?.message || "An error occurred.";
+        setErrorMessage(errorDescription);
+        setUpdateSuccessful(false); // Ensure success flag is not set
       });
+
+    console.log(updatedUser);
   };
 
   const handlePasswordResetRequest = async () => {
     try {
+      // Attempt to request a password reset
       await authService.requestPasswordReset(resetEmail);
-      setResetEmailSent(true); // Show confirmation message
+
+      // On success, update state to show a confirmation message
+      setResetEmailSent(true);
+      setErrorMessage(""); // Clear any previous error messages
     } catch (error) {
-      console.error("Error sending password reset link:", error);
+      // Log the error for debugging
+      console.error("Error requesting password reset:", error);
+
+      // Set specific error message based on the error response
+      const errorDescription =
+        error.response?.data?.message === "Username or email already taken"
+          ? "Username or email already taken"
+          : "An error occurred.";
+
+      // Update state with the error message and ensure success flag is not set
+      setErrorMessage(errorDescription);
+      setResetEmailSent(false); // Ensure success flag is not set
     }
   };
 
@@ -173,6 +199,8 @@ function EditUserPage() {
                 <button type="submit">Submit</button>
               </div>
             </form>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}{" "}
+            {/* Display error message */}
           </div>
         </div>
       )}

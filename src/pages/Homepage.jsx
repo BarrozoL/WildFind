@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import WildFindLogo from "../assets/images/WildFind-logo-5.png";
-import "../css/HomePage.css";
+import "../css/Homepage.css";
 
 export default function HomePage() {
   const navigate = useNavigate();

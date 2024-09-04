@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 // import axios from "axios";
 import authService from "../../services/auth.service";
 import "../css/SignupPage.css";
+import defaultUserImage from "../assets/images/default-user-img1.jpeg";
 
 // const API_URL = "http://localhost:5005";
 
@@ -21,7 +22,12 @@ function SignupPage(props) {
   const handleSignupSubmit = (e) => {
     e.preventDefault();
     // Create an object representing the request body
-    const requestBody = { email, password, username };
+    const requestBody = {
+      email,
+      password,
+      username,
+      image: defaultUserImage,
+    };
 
     // Make an axios request to the API
     // If the POST request is a successful redirect to the login page

@@ -110,10 +110,6 @@ export default function AnimalCard({ animals }) {
           Click to view locations where the {`${foundPlant.name}`} has been seen
         </button>
         <div className="button-details">
-          <button onClick={handleSightingNavigate} className="sightings-button">
-            Click to view locations where the {`${foundPlant.name}`} has been
-            seen
-          </button>
           {foundPlant.userId === userId && (
             <button onClick={handleEdit}>Edit</button>
           )}

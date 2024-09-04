@@ -68,3 +68,10 @@
   flex-wrap: wrap;
   padding-top: 5vw;
 }
+
+.animal-cards:hover {
+  margin: 28px;
+  border-radius: 5px;
+  width: 200px;
+  height: 280px;
+}

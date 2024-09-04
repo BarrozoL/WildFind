@@ -137,7 +137,7 @@ export default function AnimalList(/*{ animals }*/) {
           <select className="type-select" onChange={handleTypeFilter}>
             <option value="">Show All Plants</option>
             <option value="Trees">Show Trees</option>
-            <option value="Berries">Show Berries</option>
+            <option value="Berries">Show Fruit</option>
             <option value="Flowers">Show Flowers</option>
             <option value="Other">Show Other Plants</option>
           </select>

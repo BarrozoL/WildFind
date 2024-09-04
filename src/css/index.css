@@ -102,6 +102,13 @@ body.light-mode .sighting-form button {
   border-color: rgb(44, 140, 121);
   color: white;
 }
+
+body.light-mode .sighting-form button:hover {
+  background-color: rgb(44, 140, 121);
+  border-color: white;
+  color: white;
+}
+
 body.dark-mode .sighting-form {
   background-color: #b581e4;
   color: #b5fff0;
@@ -167,6 +174,14 @@ body.other-theme .sightings-button {
   border: 2px solid #20c9c1;
   color: white;
 }
+body.other-theme .detail-button:hover {
+  border: 2px solid white;
+  color: white;
+}
+body.other-theme .sightings-button:hover {
+  border: 2px solid white;
+  color: white;
+}
 /*
 //// Animal List Page themes
 */
@@ -214,6 +229,33 @@ body.other-theme .animal-cards {
 }
 body.other-theme .animal-cards img {
   border: 2px solid #20c9c1;
+}
+body.light-mode .animal-cards:hover {
+  background-color: #d7e8c0;
+  color: rgb(44, 140, 121);
+  border: 2px solid white;
+  box-shadow: -2px 2px 5px black;
+}
+body.dark-mode .animal-cards:hover {
+  background-color: #b581e4;
+  color: #b5fff0;
+  border: 2px solid white;
+  box-shadow: -2px 2px 10px white;
+}
+body.other-theme .animal-cards:hover {
+  background-color: #1c8e66;
+  color: #b5fff0;
+  border: 2px solid white;
+  box-shadow: -2px 2px 5px rgb(37, 183, 231);
+}
+body.dark-mode .sidebar button:hover {
+  border: 1px solid white;
+}
+body.light-mode .sidebar button:hover {
+  border: 1px solid white;
+}
+body.other-theme .sidebar button:hover {
+  border: 1px solid white;
 }
 /*
 //// Edit Animal Page themes

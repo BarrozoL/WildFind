@@ -565,7 +565,7 @@ export default function AddAnimal() {
             >
               <option value=""></option>
               <option value="tree">Tree</option>
-              <option value="berry">Berry</option>
+              <option value="berry">Fruit</option>
               <option value="flower">Flower</option>
               <option value="other-plant">Other</option>
             </select>

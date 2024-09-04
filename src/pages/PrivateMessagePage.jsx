@@ -84,7 +84,12 @@ export default function PrivateMessagePage() {
                         className="individual-message-wrapper"
                       >
                         <p>{message?.text}</p>
-                        <p>Sent by: {message?.sender?.username} </p>
+                        <p>
+                          Sent by:{" "}
+                          <Link to={`/user-profile/${message?.sender?._id}`}>
+                            {message?.sender?.username}{" "}
+                          </Link>
+                        </p>
                       </div>
                     );
                   })}

@@ -15,7 +15,7 @@ export default function UserProfilePage() {
 
   useEffect(() => {
     getUserInformation();
-  }, []); //to reload the info after logged user changes
+  }, [userId]); //to reload the info after logged user changes
 
   //GET all of the user information
   const getUserInformation = async () => {
@@ -93,7 +93,13 @@ export default function UserProfilePage() {
   function renderFollowers() {
     if (user.followers.length > 0) {
       return user.followers.map((follower) => {
-        return <li key={follower._id}>{follower.username}</li>;
+        return (
+          <li key={follower._id}>
+            <Link to={`/user-profile/${follower?._id}`}>
+              {follower.username}
+            </Link>
+          </li>
+        );
       });
     } else {
       return <li>No followers yet</li>;
@@ -103,7 +109,13 @@ export default function UserProfilePage() {
   function renderFollowing() {
     if (user.following.length > 0) {
       return user.following.map((followed) => {
-        return <li key={followed._id}>{followed.username}</li>;
+        return (
+          <li key={followed._id}>
+            <Link to={`/user-profile/${followed?._id}`}>
+              {followed.username}
+            </Link>
+          </li>
+        );
       });
     } else {
       return <li>You don't follow anyone yet</li>;
@@ -128,7 +140,6 @@ export default function UserProfilePage() {
         <p>Followers:</p>
         {renderFollowers()}
       </div>
-      <div>Send {user.username} a message!</div>
       <button onClick={handleFollowUser}>Follow this user!</button>
     </>
   );

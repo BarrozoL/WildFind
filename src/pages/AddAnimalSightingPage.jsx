@@ -11,7 +11,7 @@ import "../css/AddAnimalSightingPage.css";
 export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
   const [date, setDate] = useState(new Date());
   const [description, setDescription] = useState("");
-  const [locations, setLocations] = useState([]);
+  const [location, setLocation] = useState(null);
   // const [image, setImage] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const { specimenId } = useParams();
@@ -29,8 +29,8 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
   };
-  const handleLocationChange = (selectedOptions) => {
-    setLocations(selectedOptions || []); // Handle the selection of multiple locations
+  const handleLocationChange = (selectedOption) => {
+    setLocation(selectedOption);
   };
 
   useEffect(() => {
@@ -76,7 +76,8 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!date || !description) {
+    if (!date || !description || !location) {
+      // Make sure location is selected
       alert("All fields are mandatory");
       return;
     }
@@ -86,8 +87,7 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
       userId,
       specimenId,
       description,
-      // location,
-      location: locations.map((location) => location.value),
+      location: location.value, // No need to map or convert to an array
       image: imageUrl,
     };
 
@@ -95,7 +95,7 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
       .createSighting(requestBody)
       .then((response) => {
         setDescription("");
-        setLocations("");
+        setLocation(null); // Reset to an empty string
         setImageUrl("");
         navigate("/animals");
       })
@@ -419,13 +419,12 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
         <div className="sighting-row">
           <label>Location:</label>
           <Select
-            name="locations"
+            name="location"
             options={locationOptions}
-            className="basic-multi-select"
-            // classNamePrefix="select"
+            className="basic-select"
             placeholder="Type or scroll to select..."
             onChange={handleLocationChange}
-            value={locations}
+            value={location}
           />
         </div>
         <div className="sighting-row">

@@ -2,17 +2,14 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 a {
   font-weight: 500;
   color: #646cff;
@@ -21,7 +18,6 @@ a {
 a:hover {
   color: #535bf2;
 }
-
 body {
   margin: 0;
   display: flex;
@@ -29,12 +25,10 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
-
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
-
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -47,32 +41,27 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: white;
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-
-/* 
+/*
 ////
 //////// THEME STYLING
 ////
 */
-
-/* 
+/*
 //// AddAnimals themes
 */
-
 body.light-mode .add-form {
   background-color: #d7e8c0;
 }
-
 body.light-mode .add-form button {
   background-color: rgb(44, 140, 121);
   border-color: rgb(44, 140, 121);
 }
-
 body.light-mode .add-inputs input {
   background-color: white;
   border-color: rgb(44, 140, 121);
@@ -88,48 +77,39 @@ body.light-mode .add-inputs textarea {
   border-color: rgb(44, 140, 121);
   color: black;
 }
-
 body.dark-mode .add-form button {
-  background: #b5fff0;
-  color: darkslategray;
+  background: rgb(44, 140, 121);
+  color: white;
 }
-
 body.light-mode .add-inputs textarea {
   border-color: rgb(44, 140, 121);
 }
-
 body.dark-mode .add-inputs input {
   border-color: rgb(44, 140, 121);
 }
-
 body.dark-mode .add-form {
   background-color: #b581e4;
   color: #b5fff0;
 }
-
-/* 
+/*
 //// AddAnimalSighting themes
 */
-
 body.light-mode .sighting-form {
   background-color: #d7e8c0;
 }
-
 body.light-mode .sighting-form button {
   background-color: rgb(44, 140, 121);
   border-color: rgb(44, 140, 121);
+  color: white;
 }
-
 body.dark-mode .sighting-form {
   background-color: #b581e4;
   color: #b5fff0;
 }
-
 body.dark-mode .sighting-form button {
-  background: #b5fff0;
-  color: darkslategray;
+  background: rgb(44, 140, 121);
+  color: white;
 }
-
 body.light-mode .sighting-inputs input {
   background-color: white;
   border-color: rgb(44, 140, 121);
@@ -139,121 +119,105 @@ body.light-mode .sighting-inputs select {
   border-color: rgb(44, 140, 121);
   color: black;
 }
-
 body.dark-mode .sighting-inputs input {
   border-color: rgb(44, 140, 121);
 }
-
-/* 
+body.other-theme .sighting-form button {
+  border: 1px solid #b5fff0;
+}
+/*
 //// AnimalDetails Page themes
 */
-
 body.light-mode .animalDetailWrapper {
   background-color: #d7e8c0;
   color: rgb(44, 140, 121);
 }
-
 body.dark-mode .animalDetailWrapper {
   background-color: #b581e4;
   color: #b5fff0;
 }
-
 body.light-mode .detail-button {
   background-color: rgb(44, 140, 121);
+  color: white;
 }
-
 body.dark-mode .detail-button {
   background-color: rgb(44, 140, 121);
   color: white;
 }
-
 body.light-mode .sightings-button {
   background-color: rgb(44, 140, 121);
+  color: white;
 }
-
 body.dark-mode .sightings-button {
   background-color: rgb(44, 140, 121);
   color: white;
 }
-
 body.other-theme .animalDetailWrapper {
   background-color: #1c8e66;
   color: #b5fff0;
 }
-
 body.other-theme .animalDetailWrapper img {
   border: 2px solid #20c9c1;
 }
-
 body.other-theme .detail-button {
   border: 2px solid #20c9c1;
+  color: white;
 }
-
 body.other-theme .sightings-button {
   border: 2px solid #20c9c1;
+  color: white;
 }
-
-/* 
+/*
 //// Animal List Page themes
 */
-
 body.dark-mode .sidebar select {
   background-color: black;
   border: 2px solid rgb(44, 140, 121);
   color: white;
 }
-
 body.dark-mode .sidebar input {
   background-color: black;
   border: 2px solid rgb(44, 140, 121);
   color: white;
 }
-
 body.dark-mode .sidebar button {
   background-color: rgb(44, 140, 121);
   border: 1px solid rgb(44, 140, 121);
+  color: white;
 }
-
 body.light-mode .sidebar button {
   background-color: rgb(44, 140, 121);
   border: 1px solid rgb(44, 140, 121);
+  color: white;
 }
-
 body.light-mode .sidebar input {
   background-color: white;
   border: 2px solid rgb(44, 140, 121);
   color: black;
 }
-
 body.light-mode .sidebar select {
   background-color: white;
   border: 2px solid rgb(44, 140, 121);
   color: black;
 }
-
 body.light-mode .animal-cards {
   background-color: #d7e8c0;
   color: rgb(44, 140, 121);
 }
-
 body.dark-mode .animal-cards {
   background-color: #b581e4;
   color: #b5fff0;
 }
-
 body.other-theme .animal-cards {
   background-color: #1c8e66;
   color: #b5fff0;
 }
-
 body.other-theme .animal-cards img {
   border: 2px solid #20c9c1;
 }
-
-/* 
+/*
 //// Edit Animal Page themes
 */
-
 body.light-mode .edit-inputs input {
   background-color: white;
   border-color: rgb(44, 140, 121);
@@ -269,7 +233,6 @@ body.light-mode .edit-inputs textarea {
   border-color: rgb(44, 140, 121);
   color: black;
 }
-
 body.dark-mode .edit-inputs input {
   border-color: rgb(44, 140, 121);
 }
@@ -279,12 +242,10 @@ body.dark-mode .edit-inputs select {
 body.dark-mode .edit-inputs textarea {
   border-color: rgb(44, 140, 121);
 }
-
 body.other-theme .add-form {
   background-color: #1c8e66;
   color: #b5fff0;
 }
-
 body.other-theme .edit-inputs input {
   border-color: rgb(44, 140, 121);
   background-color: #3b3b3b;
@@ -302,162 +263,139 @@ body.other-theme .edit-inputs textarea {
 body.other-theme .edit-inputs button {
   background-color: black;
   border: 2px solid #20c9c1;
+  color: white;
 }
-
-/* 
+/*
 //// Errorpage themes
 */
-
 body.light-mode .error button {
   background-color: rgb(44, 140, 121);
   border-color: rgb(44, 140, 121);
+  color: white;
 }
-
 body.dark-mode .error button {
   background-color: rgb(44, 140, 121);
   border-color: rgb(44, 140, 121);
-  color: #b5fff0;
+  color: white;
 }
-
-/* 
+/*
 //// Footer themes
 */
-
 body.light-mode .footer {
   background-color: rgba(116, 172, 0, 255);
 }
-
 body.dark-mode .footer {
   background-color: blueviolet;
 }
-
 body.other-theme .footer {
   background-color: #20c9c1;
   color: white;
 }
-
-/* 
+/*
 //// Homepage themes
 */
-
 body.light-mode .home {
   background-color: #d7e8c0;
 }
-
 body.light-mode .home button {
   background-color: rgb(44, 140, 121);
   border-color: rgb(44, 140, 121);
+  color: white;
 }
-
 body.dark-mode .home {
   background-color: #b581e4;
-  color: #b5fff0;
+  color: white;
 }
-
 body.dark-mode .home button {
   background-color: rgb(44, 140, 121);
   border-color: rgb(44, 140, 121);
-  color: #b5fff0;
+  color: white;
 }
-
-/* 
+body.dark-mode .home button:hover {
+  border: 1px solid white;
+  border-color: white;
+}
+body.light-mode .home button:hover {
+  border: 1px solid white;
+  border-color: white;
+}
+/*
 //// Map themes
 */
-
-/* 
+/*
 //// Navbar themes
 */
-
 body.light-mode .navbar {
   background-color: rgba(116, 172, 0, 255);
   color: white;
 }
-
 body.dark-mode .navbar {
   background-color: blueviolet;
   color: white;
 }
-
 body.light-mode .button {
   background: rgb(44, 140, 121);
-  color: black;
+  color: white;
 }
-
 body.dark-mode .button {
   background: #b581e4;
   color: white;
 }
-
 body.light-mode .logout {
   background: rgb(44, 140, 121);
-  color: black;
+  color: white;
 }
-
 body.dark-mode .logout {
   background: #b581e4;
   color: white;
 }
-
 body.other-theme .navbar {
   background-color: #20c9c1;
   color: white;
 }
-
 body.other-theme .logout {
   background-color: rgb(159, 103, 211);
   color: white;
 }
-
-/* 
+/*
 //// Plant Details Page themes
 */
-
 body.light-mode .animalDetailWrapper {
   background-color: #d7e8c0;
   color: rgb(44, 140, 121);
 }
-
 body.dark-mode .animalDetailWrapper {
   background-color: #b581e4;
   color: #b5fff0;
 }
-
 body.other-theme .animalDetailWrapper {
   background-color: #1c8e66;
   color: #b5fff0;
 }
-
 body.other-theme .animalDetailWrapper img {
   border: 2px solid #20c9c1;
 }
-
-/* 
+/*
 //// Plant List Page themes
 */
-
 body.light-mode .animal-cards {
   background-color: #d7e8c0;
   color: rgb(44, 140, 121);
 }
-
 body.dark-mode .animal-cards {
   background-color: #b581e4;
   color: #b5fff0;
 }
-
 body.other-theme .animal-cards {
   background-color: #1c8e66;
   color: #b5fff0;
 }
-
 body.other-theme .animal-cards img {
   border: 2px solid #20c9c1;
 }
-
-/* 
+/*
 //// Sightings Page themes
 */
-
 body.light-mode .sighting-cards {
   background-color: #d7e8c0;
   color: rgb(44, 140, 121);
@@ -466,115 +404,98 @@ body.dark-mode .sighting-cards {
   background-color: #b581e4;
   color: #b5fff0;
 }
-
 body.light-mode .spottingWrapper button {
   background-color: rgb(44, 140, 121);
   border-color: rgb(44, 140, 121);
+  color: white;
 }
-
 body.dark-mode .spottingWrapper button {
   background-color: rgb(44, 140, 121);
   border-color: rgb(44, 140, 121);
+  color: white;
 }
-
 body.other-theme .sighting-form {
   background-color: #1c8e66;
   color: #b5fff0;
 }
-
 body.other-theme button {
   border: 2px solid #20c9c1;
   background-color: rgb(44, 140, 121);
-  color: #b5fff0;
+  color: white;
 }
-
 body.other-theme .sighting-cards {
   background-color: #1c8e66;
   color: #b5fff0;
 }
-
 body.other-theme .spottingWrapper button {
-  background-color: black;
-  border: 2px solid rgb(44, 140, 121);
+  background-color: rgb(44, 140, 121);
+  color: white;
 }
-
-/* 
+/*
 //// Signup/Login themes
 */
-
-body.light-mode .btn {
+body.light-mode button {
   background: rgb(44, 140, 121);
-  color: black;
+  color: white;
 }
-
-body.dark-mode .btn {
+body.dark-mode button {
   background: #b581e4;
   color: white;
 }
-
-/* 
+/*
 //// WatchDetailsPage themes
 */
-
 body.light-mode .watch-detail-button {
   background-color: rgb(44, 140, 121);
+  color: white;
 }
 body.dark-mode .watch-detail-button {
   background-color: black;
+  color: white;
 }
-
 body.light-mode .animalDetailWrapper {
   background-color: #d7e8c0;
   color: rgb(44, 140, 121);
 }
-
 body.dark-mode .animalDetailWrapper {
   background-color: #b581e4;
   color: #b5fff0;
 }
-
 body.other-theme .watch-detail-button {
   border: 2px solid #20c9c1;
+  color: white;
 }
-
 body.other-theme .animalDetailWrapper {
   margin-top: 0;
   padding-top: 10px;
   background-color: #1c8e66;
   color: #b5fff0;
 }
-
 body.other-theme .animalDetailWrapper img {
   border: 2px solid #20c9c1;
 }
-
-/* 
+/*
 //// Default themes
 */
-
 body.light-mode {
   background-color: rgba(234, 243, 216, 255);
   color: rgb(44, 140, 121);
   padding-top: 0;
 }
-
 body.dark-mode {
   background-color: #242424;
   color: rgb(44, 140, 121);
   padding-top: 0;
 }
-
 body.other-theme {
   background-color: #4d4d4d;
   color: white;
 }
-
-/* 
+/*
 ////
 //////// MEDIA QUERIES
 ////
 */
-
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

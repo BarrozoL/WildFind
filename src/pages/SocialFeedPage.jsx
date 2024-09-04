@@ -74,13 +74,33 @@ export default function SocialFeedPage() {
         {sightings.map((action, index) => {
           return (
             <div className="social-feed-sighting-card" key={action._id}>
-              <img
-                src={action?.sighting?.image || DefaultSightingImage}
-                alt={action?.sighting?.specimenId?.name}
-                width="30%"
-                height="30%"
-                style={{ borderRadius: "10%", marginTop: "3%" }}
-              />
+              <div
+                style={{
+                  width: "180px",
+                  height: "130px",
+                  overflow: "hidden",
+                  position: "relative",
+                  marginLeft: "5%",
+                }}
+              >
+                <img
+                  src={action?.sighting?.image || DefaultSightingImage}
+                  alt={action?.sighting?.specimenId?.name}
+                  // width="30%"
+                  // height="30%"
+                  style={{
+                    borderRadius: "10px",
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    position: "absolute",
+                    top: "0",
+                    left: "0",
+                    marginTop: "3%",
+                  }}
+                />
+              </div>
+
               <h3>
                 <Link to={`/user-profile/${action?.user?._id}`}>
                   <img

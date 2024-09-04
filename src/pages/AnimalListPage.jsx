@@ -121,9 +121,10 @@ export default function AnimalList(/*{ animals }*/) {
                 <div
                   style={{
                     width: "180px",
-                    height: "140px",
+                    height: "130px",
                     overflow: "hidden",
                     position: "relative",
+                    marginLeft: "5%",
                   }}
                 >
                   <img

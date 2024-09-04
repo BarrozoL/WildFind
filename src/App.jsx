@@ -303,6 +303,12 @@ function App() {
 
         <Route path="/user/messages/:userId" element={<PrivateMessagePage />} />
 
+        <Route path="/maps" element={<ChooseMapsPage />} />
+        <Route path="/maps/south-america" element={<SouthAmericaMap />} />
+        <Route path="/maps/north-america" element={<NorthAmericaMap />} />
+        <Route path="/maps/europe" element={<EuropeMap />} />
+        <Route path="/maps/africa" element={<AfricaMap />} />
+        <Route path="/maps/world-map" element={<WorldMap />} />
 
         <Route
           path="/edit-user/:userId"
@@ -313,7 +319,6 @@ function App() {
           }
         />
         <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
-
 
         <Route path="/*" element={<Errorpage />} />
         {/* 

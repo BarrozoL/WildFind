@@ -63,7 +63,6 @@ export default function PrivateMessagePage() {
 
   const handleConversationClick = (e) => {
     const conversationId = e.currentTarget.dataset.id;
-    console.log("Clicked conversation ID:", conversationId);
     findAndSetConversation(conversationId);
   };
 
@@ -72,7 +71,6 @@ export default function PrivateMessagePage() {
       (conversation) => conversation._id === conversationId
     );
     setSelectedConversation(clickedConversation);
-    console.log("selectedConversation", selectedConversation);
   }
 
   if (!user) return <p>Loading...</p>;

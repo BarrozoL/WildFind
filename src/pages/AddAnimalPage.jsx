@@ -34,12 +34,13 @@ export default function AddAnimal() {
   const [selectedAnimalType, setSelectedAnimalType] = useState("");
   const [name, setName] = useState("");
   // const [image, setImage] = useState("");
-  const [danger, setDanger] = useState("");
+  const [dangerNumber, setDangerNumber] = useState("");
   const [edible, setEdible] = useState("");
   const [description, setDescription] = useState("");
   const [locations, setLocations] = useState([]);
   const [imageUrl, setImageUrl] = useState("");
   const [isAnimal, setIsAnimal] = useState("");
+  const [comment, setComment] = useState("");
 
   useEffect(() => {
     getAllAnimals()
@@ -67,7 +68,11 @@ export default function AddAnimal() {
   };
 
   const handleDangerChange = (e) => {
-    setDanger(e.target.value);
+    setDangerNumber(e.target.value);
+  };
+
+  const handleCommentChange = (event) => {
+    setComment(event.target.value);
   };
 
   const handleEdibleChange = (e) => {
@@ -203,6 +208,8 @@ export default function AddAnimal() {
       img = imageUrl || defaultPlantImage;
     }
 
+    let danger = dangerNumber.concat(" ", "(", comment, ")");
+
     const requestBody = {
       username,
       userId,
@@ -223,8 +230,9 @@ export default function AddAnimal() {
         setName("");
         setSelectedAnimalType("");
         setDescription("");
-        setLocation("");
-        setDanger("");
+        setLocations("");
+        setDangerNumber("");
+        setComment("");
         setImageUrl("");
         setEdible("");
       })
@@ -635,26 +643,75 @@ export default function AddAnimal() {
 
         {isAnimal === "animal" && (
           <div className="add-row">
-            <label>{`Estimated Danger Level (1-5)`}:</label>
-            <input
-              type="text"
-              name="danger"
-              value={danger}
+            <label htmlFor="dangerNumber">
+              Estimated Danger Level (0-5) - optional
+            </label>
+            <select
+              name="dangerNumber"
+              id="dangerNumber"
               onChange={handleDangerChange}
+              value={dangerNumber}
               className="danger-input"
-            />
+            >
+              <option value="">Select a level</option>
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+
+            <div className="comment-section">
+              <label htmlFor="comment">Comment:</label>
+              <input
+                type="text"
+                name="comment"
+                id="comment"
+                placeholder="about danger-level..."
+                value={comment}
+                onChange={handleCommentChange}
+                className="comment-input"
+              />
+            </div>
           </div>
         )}
+
         {isAnimal === "plant" && (
           <div className="add-row">
-            <label>{`Edible`}:</label>
-            <input
-              type="text"
-              name="edible"
-              value={edible}
-              onChange={handleEdibleChange}
-              className="danger-input"
-            />
+            <label>Edible:</label>
+            <div>
+              <label>
+                <input
+                  type="radio"
+                  name="edible"
+                  value="yes"
+                  checked={edible === "yes"}
+                  onChange={handleEdibleChange}
+                />
+                Yes
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="edible"
+                  value="no"
+                  checked={edible === "no"}
+                  onChange={handleEdibleChange}
+                />
+                No
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="edible"
+                  value="unknown"
+                  checked={edible === "unknown"}
+                  onChange={handleEdibleChange}
+                />
+                Unknown
+              </label>
+            </div>
           </div>
         )}
 

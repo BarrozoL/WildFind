@@ -105,6 +105,7 @@ export default function AnimalCard({ animals }) {
         <img src={foundAnimal.image} alt={foundAnimal.name} width="300px" />
         <p>{`Danger level: ${foundAnimal.dangerLevel}`}</p>
         <p>{`Description: ${foundAnimal.description}`}</p>
+        {console.log(foundAnimal.location)}
         <p>{`Native to: ${foundAnimal.location.join(", ")}`}</p>
 
         <button onClick={handleSightingNavigate} className="sightings-button">

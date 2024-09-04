@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import "../css/UserProfilePage.css";
@@ -12,6 +12,8 @@ export default function UserProfilePage() {
   const token = localStorage.getItem("authToken");
   const decodedToken = token ? jwtDecode(token) : null;
   const loggedUserId = decodedToken ? decodedToken._id : null; // Extract userId
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     getUserInformation();
@@ -126,12 +128,24 @@ export default function UserProfilePage() {
     <>
       <div>
         <h1>Profile Page</h1>
+        {console.log(user)}
         <h2>{user.username}'s profile</h2>
+        <img src={user.image} alt={user.username} width="20%" height="20%" />
         <Link to={`/user/messages/${userId}`}>
           <button className="send-user-a-message-button">
             Send {user.username} a message!
           </button>{" "}
         </Link>
+        {userId === loggedUserId && (
+          <div>
+            <button
+              className="edit-user-btn"
+              onClick={() => navigate(`/edit-user/${userId}`)}
+            >
+              Edit Profile
+            </button>
+          </div>
+        )}
         <p>You have added {user.sightings.length} sightings</p>
         <p>Achievements:</p>
         {renderAchievements()}

@@ -75,6 +75,12 @@ export default function SocialFeedPage() {
               <img src={action?.sighting?.image} />
               <h3>
                 <Link to={`/user-profile/${action?.user?._id}`}>
+                  <img
+                    src={action?.user?.image}
+                    alt={action?.user?.username}
+                    width="20%"
+                    height="20%"
+                  />
                   {action?.user?.username}{" "}
                 </Link>{" "}
                 Has spotted{" "}

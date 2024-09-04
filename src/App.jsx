@@ -19,6 +19,8 @@ import PlantDetailsPage from "./pages/PlantDetailsPage";
 import AddPlantSightingPage from "./pages/AddPlantSightingPage";
 
 import EditAnimalPage from "./pages/EditAnimalPage";
+import EditUserPage from "./pages/EditUserPage"; // Import the EditUserPage
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 
 import PersonalWatchlistPage from "./pages/PersonalWatchlistPage";
 import SocialFeedPage from "./pages/SocialFeedPage";
@@ -301,13 +303,17 @@ function App() {
 
         <Route path="/user/messages/:userId" element={<PrivateMessagePage />} />
 
-        <Route path="/maps" element={<ChooseMapsPage />} />
 
-        <Route path="/maps/south-america" element={<SouthAmericaMap />} />
-        <Route path="/maps/north-america" element={<NorthAmericaMap />} />
-        <Route path="/maps/europe" element={<EuropeMap />} />
-        <Route path="/maps/africa" element={<AfricaMap />} />
-        <Route path="/maps/world-map" element={<WorldMap />} />
+        <Route
+          path="/edit-user/:userId"
+          element={
+            <IsPrivate>
+              <EditUserPage />
+            </IsPrivate>
+          }
+        />
+        <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
+
 
         <Route path="/*" element={<Errorpage />} />
         {/* 

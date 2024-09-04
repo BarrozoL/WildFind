@@ -9,6 +9,7 @@ export default function PrivateMessagePage() {
   const [receivedMessages, setReceivedMessages] = useState([]);
   const [messageText, setMessageText] = useState("");
   const [user, setUser] = useState(null);
+  const [conversation, setConversation] = useState();
   const token = localStorage.getItem("authToken");
   //Running jwtDecode function to decode the user's authToken
   const decodedToken = token ? jwtDecode(token) : null;
@@ -25,11 +26,16 @@ export default function PrivateMessagePage() {
       .get(`http://localhost:5005/api/users/${userId}`)
       .then((response) => {
         setUser(response.data);
+        setConversation(response?.data?.conversations);
       })
       .catch((error) => {
         console.error("Error fetching sightings:", error);
       });
   };
+
+  if (conversation) {
+    console.log(conversation);
+  }
 
   const sendMessage = async () => {
     axios
@@ -109,4 +115,53 @@ export default function PrivateMessagePage() {
       </button>
     </div>
   );
+}
+
+//Old render
+{
+  /* <div className="private-messages-wrapper">
+      <h2>Private Messages:</h2>
+      <h3>Received Messages:</h3>
+      {user?.conversations?.map((conversation, index) => {
+        return (
+          //we also map over the index to use it as a key. We we getting a repeated keys error
+          <div key={`${conversation?._id}${index}`}>
+            {(conversation?.user1Id?._id === currentUserId ||
+              conversation?.user2Id?._id === currentUserId) && (
+              <div className="conversation-wrapper">
+                <p>
+                  Conversation between {conversation?.user1Id?.username} and{" "}
+                  {conversation?.user2Id?.username}
+                </p>
+                {conversation?.messages?.map((message) => {
+                  return (
+                    <div
+                      key={message?._id}
+                      className="individual-message-wrapper"
+                    >
+                      <p>{message?.text}</p>
+                      <p>
+                        Sent by:{" "}
+                        <Link to={`/user-profile/${message?.sender?._id}`}>
+                          {message?.sender?.username}{" "}
+                        </Link>
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        );
+      })}
+      <p></p>
+      <input
+        type="text"
+        onChange={handleMessageTextChange}
+        value={messageText}
+      />
+      <button onClick={handleSendMessage} type="submit">
+        Send
+      </button>
+    </div> */
 }

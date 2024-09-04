@@ -37,18 +37,18 @@ const Navbar = () => {
           </NavLink> */}
 
           <NavLink to="/animal-add" className="NavLink">
-            Seen a new plant or animal? Add it!
+            Add New Plant or Animal!
           </NavLink>
 
           <NavLink to="/animals" className="NavLink">
-            See all Animals
+            All Animals
           </NavLink>
 
           <NavLink to="/plants" className="NavLink">
-            See all Plants
+            All Plants
           </NavLink>
-          <NavLink to="/map" className="NavLink">
-            Map
+          <NavLink to="/maps" className="NavLink">
+            Maps
           </NavLink>
           <NavLink to="/actions" className="NavLink">
             See Recent Sightings
@@ -62,12 +62,11 @@ const Navbar = () => {
           {isLoggedIn && (
             <>
               <NavLink to={`/watchlist/${user._id}`} className="NavLink">
-                View your Watchlist
+                Personal Watchlist
               </NavLink>
               <NavLink to={`/user-profile/${user._id}`} className="NavLink">
-                User Profile
+                Profile
               </NavLink>
-
 
               <NavLink to={`/user/messages/${user._id}`} className="NavLink">
                 Private Messages

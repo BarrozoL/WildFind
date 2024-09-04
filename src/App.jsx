@@ -12,7 +12,6 @@ import SightingsPage from "./pages/SightingsPage";
 import AddAnimalSightingPage from "./pages/AddAnimalSightingPage";
 import AddAnimalPage from "./pages/AddAnimalPage";
 import WatchListPage from "./pages/WatchListPage";
-import MapPage from "./pages/MapPage";
 import Errorpage from "./pages/Errorpage";
 
 import PlantListPage from "./pages/PlantListPage";
@@ -27,6 +26,15 @@ import PersonalWatchlistPage from "./pages/PersonalWatchlistPage";
 import SocialFeedPage from "./pages/SocialFeedPage";
 import UserProfilePage from "./pages/UserProfilePage";
 import PrivateMessagePage from "./pages/PrivateMessagePage";
+
+//Maps
+import ChooseMapsPage from "./pages/ChooseMapsPage";
+import MapPage from "./pages/MapPage";
+import WorldMap from "./maps.svg/WorldMap";
+import EuropeMap from "./maps.svg/Europe.map";
+import AfricaMap from "./maps.svg/Africa.map";
+import SouthAmericaMap from "./maps.svg/SouthAmerica.map";
+import NorthAmericaMap from "./maps.svg/NorthAmerica.map";
 
 /* 
 import WatchDetailsPage from "./pages/WatchDetailsPage"; */
@@ -289,19 +297,12 @@ function App() {
             </IsAnon>
           }
         />
-        <Route
-          path="/watchlist/:userId"
-          element={
-            // <IsUnique>
-            // <PersonalWatchlistPage />
-            // </IsUnique>
-            <PersonalWatchlistPage />
-          }
-        />
+        <Route path="/watchlist/:userId" element={<PersonalWatchlistPage />} />
         <Route path="/actions" element={<SocialFeedPage />} />
         <Route path="/user-profile/:userId" element={<UserProfilePage />} />
 
         <Route path="/user/messages/:userId" element={<PrivateMessagePage />} />
+
 
         <Route
           path="/edit-user/:userId"
@@ -312,6 +313,7 @@ function App() {
           }
         />
         <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
+
 
         <Route path="/*" element={<Errorpage />} />
         {/* 

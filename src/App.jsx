@@ -35,6 +35,8 @@ import EuropeMap from "./maps.svg/Europe.map";
 import AfricaMap from "./maps.svg/Africa.map";
 import SouthAmericaMap from "./maps.svg/SouthAmerica.map";
 import NorthAmericaMap from "./maps.svg/NorthAmerica.map";
+import AsiaMap from "./maps.svg/Asia.map";
+import OceaniaMap from "./maps.svg/Oceania.map";
 
 /* 
 import WatchDetailsPage from "./pages/WatchDetailsPage"; */
@@ -308,7 +310,10 @@ function App() {
         <Route path="/maps/north-america" element={<NorthAmericaMap />} />
         <Route path="/maps/europe" element={<EuropeMap />} />
         <Route path="/maps/africa" element={<AfricaMap />} />
+        <Route path="/maps/asia" element={<AsiaMap />} />
+        <Route path="/maps/oceania" element={<OceaniaMap />} />
         <Route path="/maps/world-map" element={<WorldMap />} />
+       
 
         <Route
           path="/edit-user/:userId"

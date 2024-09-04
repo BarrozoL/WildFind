@@ -20,6 +20,12 @@ export default function ChooseMapsPage() {
       <Link to="/maps/africa">
         <h2>Africa</h2>
       </Link>
+      <Link to="/maps/asia">
+        <h2>Asia</h2>
+      </Link>
+      <Link to="/maps/oceania">
+        <h2>Oceania</h2>
+      </Link>
       <Link to="/map">
         <h2>Portugal</h2>
       </Link>

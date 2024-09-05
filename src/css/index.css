@@ -109,6 +109,10 @@ body.light-mode .sighting-form button:hover {
   color: white;
 }
 
+.basic-select {
+  color: black;
+}
+
 body.dark-mode .sighting-form {
   background-color: #b581e4;
   color: #b5fff0;
@@ -399,6 +403,15 @@ body.other-theme .logout {
   background-color: rgb(159, 103, 211);
   color: white;
 }
+
+.NavLink:hover {
+  text-decoration: underline;
+}
+
+.navbar img:hover {
+  height: 102px;
+}
+
 /*
 //// Plant Details Page themes
 */
@@ -451,9 +464,21 @@ body.light-mode .spottingWrapper button {
   border-color: rgb(44, 140, 121);
   color: white;
 }
+
+body.light-mode .spottingWrapper button:hover {
+  background-color: rgb(44, 140, 121);
+  border-color: white;
+  color: white;
+}
 body.dark-mode .spottingWrapper button {
   background-color: rgb(44, 140, 121);
   border-color: rgb(44, 140, 121);
+  color: white;
+}
+
+body.dark-mode .spottingWrapper button:hover {
+  background-color: rgb(44, 140, 121);
+  border-color: white;
   color: white;
 }
 body.other-theme .sighting-form {
@@ -471,6 +496,12 @@ body.other-theme .sighting-cards {
 }
 body.other-theme .spottingWrapper button {
   background-color: rgb(44, 140, 121);
+  color: white;
+}
+
+body.other-theme .spottingWrapper button:hover {
+  background-color: rgb(44, 140, 121);
+  border-color: white;
   color: white;
 }
 /*

@@ -71,6 +71,7 @@ export default function SocialFeedPage() {
   return (
     <>
       <div className="itemWrapper">
+
         {sightings.map((action, index) => (
           <>
             {action?.sighting && (

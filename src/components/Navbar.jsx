@@ -2,12 +2,39 @@ import { NavLink, useNavigate, Link } from "react-router-dom";
 import "../css/Navbar.css";
 
 import WildFindLogo from "../assets/images/WildFind-logo-5.png";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/auth.context";
 import { ThemeContext } from "../context/theme.context";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 const Navbar = () => {
+  const token = localStorage.getItem("authToken");
+  //Running jwtDecode function to decode the user's authToken
+  const decodedToken = token ? jwtDecode(token) : null; //user info
+
+  const [currentUser, setCurrentUser] = useState();
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
+  if (currentUser) {
+    console.log("current", currentUser);
+  }
+
+  const fetchUser = async () => {
+    axios
+      .get(`http://localhost:5005/api/users/${decodedToken?._id}`)
+      .then((response) => {
+        setCurrentUser(response.data);
+        console.log("response.data", response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching user:", error);
+      });
+  };
 
   const navigate = useNavigate();
 
@@ -37,18 +64,18 @@ const Navbar = () => {
           </NavLink> */}
 
           <NavLink to="/animal-add" className="NavLink">
-            Seen a new plant or animal? Add it!
+            Add New Plant or Animal!
           </NavLink>
 
           <NavLink to="/animals" className="NavLink">
-            See all Animals
+            All Animals
           </NavLink>
 
           <NavLink to="/plants" className="NavLink">
-            See all Plants
+            All Plants
           </NavLink>
-          <NavLink to="/map" className="NavLink">
-            Map
+          <NavLink to="/maps" className="NavLink">
+            Maps
           </NavLink>
           <NavLink to="/actions" className="NavLink">
             See Recent Sightings
@@ -62,15 +89,27 @@ const Navbar = () => {
           {isLoggedIn && (
             <>
               <NavLink to={`/watchlist/${user._id}`} className="NavLink">
-                View your Watchlist
+                Personal Watchlist
               </NavLink>
               <NavLink to={`/user-profile/${user._id}`} className="NavLink">
-                User Profile
+                Profile
               </NavLink>
-
 
               <NavLink to={`/user/messages/${user._id}`} className="NavLink">
                 Private Messages
+              </NavLink>
+
+              <NavLink
+                style={{ border: "1px solid black" }}
+                to={`/user/messages/${user._id}`}
+                className="NavLink"
+              >
+                <img
+                  width="30px"
+                  src="https://cdn-icons-png.flaticon.com/512/3119/3119338.png"
+                />
+                {console.log("notif size", currentUser?.notifications?.length)}
+                {currentUser?.notifications?.length}
               </NavLink>
 
               <button className="logout" onClick={handleLogout}>

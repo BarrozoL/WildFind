@@ -63,8 +63,8 @@ export default function Sightings({ sightings, getAnimalsWithSightings }) {
                   <img
                     src={sighting.image}
                     alt="image of sighting"
-                    width="40%"
-                    height="40%"
+                    width="50%"
+                    height="50%"
                   />
                 )}
                 <li>
@@ -76,7 +76,8 @@ export default function Sightings({ sightings, getAnimalsWithSightings }) {
                   {sighting.description}
                 </li>
                 <li>
-                  <b>Spotted By:</b> {sighting.username}
+                  <b>Spotted by: </b>
+                  {sighting.username}
                 </li>
                 <br />
                 <br />

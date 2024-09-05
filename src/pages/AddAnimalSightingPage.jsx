@@ -434,7 +434,7 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
         <div className="sighting-row">
           <label>Comment:</label>
           <textarea
-            rows="4"
+            rows="2"
             cols="40"
             name="description"
             value={description}

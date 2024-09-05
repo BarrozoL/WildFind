@@ -76,6 +76,7 @@ export default function AnimalCard({ animals }) {
         setImage(""); */
       })
       .catch((error) => console.log(error));
+    console.log(foundAnimal?.location);
     navigate(`/watchlist/${userId}`);
   };
 

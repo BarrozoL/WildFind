@@ -76,11 +76,12 @@ export default function SocialFeedPage() {
             <div className="social-feed-sighting-card" key={action._id}>
               <div
                 style={{
-                  width: "180px",
-                  height: "130px",
+                  width: "300px",
+                  height: "250px",
                   overflow: "hidden",
                   position: "relative",
-                  marginLeft: "5%",
+                  marginLeft: "30%",
+                  borderRadius: "5%",
                 }}
               >
                 <img
@@ -89,7 +90,7 @@ export default function SocialFeedPage() {
                   // width="30%"
                   // height="30%"
                   style={{
-                    borderRadius: "10px",
+                    borderRadius: "5%",
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
@@ -101,7 +102,7 @@ export default function SocialFeedPage() {
                 />
               </div>
 
-              <h3>
+              <h3 style={{ marginTop: "3%" }}>
                 <Link to={`/user-profile/${action?.user?._id}`}>
                   <img
                     src={action?.user?.image}

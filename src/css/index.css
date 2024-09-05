@@ -109,6 +109,10 @@ body.light-mode .sighting-form button:hover {
   color: white;
 }
 
+.basic-select {
+  color: black;
+}
+
 body.dark-mode .sighting-form {
   background-color: #b581e4;
   color: #b5fff0;

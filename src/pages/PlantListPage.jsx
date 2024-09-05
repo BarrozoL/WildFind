@@ -137,7 +137,7 @@ export default function AnimalList(/*{ animals }*/) {
           <select className="type-select" onChange={handleTypeFilter}>
             <option value="">Show All Plants</option>
             <option value="Trees">Show Trees</option>
-            <option value="Berries">Show Berries</option>
+            <option value="Berries">Show Fruit</option>
             <option value="Flowers">Show Flowers</option>
             <option value="Other">Show Other Plants</option>
           </select>
@@ -152,11 +152,30 @@ export default function AnimalList(/*{ animals }*/) {
             <Link to={`/plants/${plant._id}`} key={plant._id}>
               <div className="animal-cards">
                 <h3>{plant.name}</h3>
-                <img
-                  width="180px"
-                  src={plant.image}
-                  style={{ borderRadius: "10px" }}
-                />
+                <div
+                  style={{
+                    width: "180px",
+                    height: "130px",
+                    overflow: "hidden",
+                    position: "relative",
+                    marginLeft: "5%",
+                  }}
+                >
+                  <img
+                    // width="100%"
+                    // height="100%"
+                    src={plant.image}
+                    style={{
+                      borderRadius: "10px",
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      position: "absolute",
+                      top: "0",
+                      left: "0",
+                    }}
+                  />
+                </div>
               </div>
             </Link>
           );

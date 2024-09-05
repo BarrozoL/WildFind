@@ -6,6 +6,8 @@ import "../css/SocialFeedPage.css";
 
 import "../pages.css/SocialFeedPage.css";
 
+import DefaultSightingImage from "../assets/images/default-sighting.jpeg";
+
 export default function SocialFeedPage() {
   const [sightings, setSightings] = useState([]);
   const [commentText, setCommentText] = useState();
@@ -72,14 +74,42 @@ export default function SocialFeedPage() {
         {sightings.map((action, index) => {
           return (
             <div className="social-feed-sighting-card" key={action._id}>
-              <img src={action?.sighting?.image} />
-              <h3>
+              <div
+                style={{
+                  width: "300px",
+                  height: "250px",
+                  overflow: "hidden",
+                  position: "relative",
+                  marginLeft: "30%",
+                  borderRadius: "5%",
+                }}
+              >
+                <img
+                  src={action?.sighting?.image || DefaultSightingImage}
+                  alt={action?.sighting?.specimenId?.name}
+                  // width="30%"
+                  // height="30%"
+                  style={{
+                    borderRadius: "5%",
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    position: "absolute",
+                    top: "0",
+                    left: "0",
+                    marginTop: "3%",
+                  }}
+                />
+              </div>
+
+              <h3 style={{ marginTop: "3%" }}>
                 <Link to={`/user-profile/${action?.user?._id}`}>
                   <img
                     src={action?.user?.image}
                     alt={action?.user?.username}
-                    width="20%"
-                    height="20%"
+                    width="5%"
+                    height="5%"
+                    style={{ borderRadius: "50%" }}
                   />
                   {action?.user?.username}{" "}
                 </Link>{" "}

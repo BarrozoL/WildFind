@@ -130,7 +130,13 @@ export default function UserProfilePage() {
         <h1>Profile Page</h1>
         {console.log(user)}
         <h2>{user.username}'s profile</h2>
-        <img src={user.image} alt={user.username} width="20%" height="20%" />
+        <img
+          src={user.image}
+          alt={user.username}
+          width="20%"
+          height="20%"
+          style={{ borderRadius: "50%", border: "1px solid black" }}
+        />
         <Link to={`/user/messages/${userId}`}>
           <button className="send-user-a-message-button">
             Send {user.username} a message!

@@ -118,11 +118,30 @@ export default function AnimalList(/*{ animals }*/) {
             <Link to={`/animals/${animal._id}`} key={animal._id}>
               <div className="animal-cards">
                 <h3>{animal.name}</h3>
-                <img
-                  width="180px"
-                  src={animal.image}
-                  style={{ borderRadius: "10px" }}
-                />
+                <div
+                  style={{
+                    width: "180px",
+                    height: "130px",
+                    overflow: "hidden",
+                    position: "relative",
+                    marginLeft: "5%",
+                  }}
+                >
+                  <img
+                    // width="100%"
+                    // height="100%"
+                    src={animal.image}
+                    style={{
+                      borderRadius: "10px",
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      position: "absolute",
+                      top: "0",
+                      left: "0",
+                    }}
+                  />
+                </div>
               </div>
             </Link>
           );

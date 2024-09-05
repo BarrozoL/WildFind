@@ -31,7 +31,7 @@ root {
 }
 
 .conversation-wrapper:hover {
-  background-color: #a6eeb3;
+  background-color: #c8e8d0;
 }
 
 .conversation-wrapper p {
@@ -46,14 +46,13 @@ root {
   width: 140%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* Ensures messages are at the bottom */
+  justify-content: flex-end;
   background-color: #fff;
   position: relative;
 }
 
 .messages-wrapper {
   padding: 20px;
-
   flex-grow: 1;
   display: flex;
   flex-direction: column-reverse; /* Messages appear from top to bottom */
@@ -62,7 +61,7 @@ root {
 
 /* Styling individual messages */
 .message {
-  max-width: 60%;
+  max-width: 20%;
   padding: 10px 15px;
   border-radius: 20px;
   word-wrap: break-word;
@@ -77,12 +76,14 @@ root {
   align-self: flex-end;
   background-color: #dcf8c6; /* Light green for sender messages */
   color: #000;
+  margin: 5px;
 }
 
 .message.receiver {
   align-self: flex-start;
   background-color: #ececec; /* Light grey for receiver messages */
   color: #000;
+  margin: 5px;
 }
 
 /* Input area fixed at the bottom */
@@ -147,20 +148,11 @@ root {
 
 .send-button {
   border-radius: 20%;
-  width: 60px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: rgb(15, 149, 47);
-}
-
-.refreshChat:hover {
-  background-color: rgb(15, 155, 10);
-  border: 1px solid green;
-}
-.refreshChat {
-  text-align: center;
-  justify-self: center;
 }

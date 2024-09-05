@@ -32,33 +32,57 @@ export default function PrivateMessagePage() {
       });
   };
 
+  const getUpdatedConversation = async (receiverId) => {
+    axios
+      .get(`https://wildfindserver.adaptable.app/api/users/${userId}`)
+      .then((response) => {
+        const updatedUser = response.data;
+        const updatedConversation = updatedUser?.conversations?.find(
+          (conversation) =>
+            (conversation?.user1Id?._id === currentUserId &&
+              conversation?.user2Id?._id === receiverId) ||
+            (conversation?.user2Id?._id === currentUserId &&
+              conversation?.user1Id?._id === receiverId)
+        );
+        setUser(updatedUser);
+        setSelectedConversation(updatedConversation);
+      })
+      .catch((err) => {
+        console.log("Error updating conversation", err);
+      });
+  };
+
   const sendMessage = async () => {
     if (!selectedConversation) return;
 
     const receiverId =
-      selectedConversation.user1Id._id === currentUserId
-        ? selectedConversation.user2Id._id
-        : selectedConversation.user1Id._id;
+      selectedConversation?.user1Id?._id === currentUserId
+        ? selectedConversation?.user2Id?._id
+        : selectedConversation?.user1Id?._id;
     axios
       .post(`https://wildfindserver.adaptable.app/api/messages/${receiverId}`, {
         sender: currentUserId,
         text: messageText,
       })
+
       .then((response) => {
-        //set sentMessages state to be able to update useEffect
+        getUpdatedConversation(receiverId);
+        /*   //no longer need to do this. Now we can use getUpdatedConversation() 
+      to update the user and conversation state in another get request and nest it inside the sendMessage()
+      //set sentMessages state to be able to update useEffect
         //when message is sent and render it without a page refresh
         setSentMessages([...sentMessages, response.data]);
         //also update selected conversation messages with new response.data
         setSelectedConversation({
           ...selectedConversation,
           messages: [...selectedConversation?.messages, response.data],
-        });
-        console.log("Message sent", response.data);
+        }); */
+
+        console.log("Message sent", response?.data);
       })
       .catch((error) => {
         console.error("Error posting comment:", error);
       });
-    getMessages();
   };
 
   const handleSendMessage = (e) => {
@@ -105,7 +129,6 @@ export default function PrivateMessagePage() {
                     Conversation between {conversation?.user1Id?.username} and{" "}
                     {conversation?.user2Id?.username}
                   </p>
-                  <p className="refreshChat">[Click to refresh chat]</p>
                 </div>
               )}
             </div>

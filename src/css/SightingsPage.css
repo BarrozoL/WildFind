@@ -6,13 +6,7 @@
   margin-bottom: 2%;
   padding-top: 20px;
   border-radius: 5px;
-  width: 900px;
-  justify-content: center;
-}
-
-.sighting-cards .card-content {
-  display: flex;
-  flex-direction: column;
+  width: 50vw;
   justify-content: center;
 }
 

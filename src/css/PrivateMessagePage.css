@@ -49,12 +49,11 @@ root {
   justify-content: flex-end; /* Ensures messages are at the bottom */
   background-color: #fff;
   position: relative;
-  overflow-y: scroll;
 }
 
 .messages-wrapper {
   padding: 20px;
-  overflow-y: auto;
+
   flex-grow: 1;
   display: flex;
   flex-direction: column-reverse; /* Messages appear from top to bottom */

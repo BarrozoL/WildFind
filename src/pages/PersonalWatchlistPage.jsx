@@ -34,7 +34,6 @@ export default function UserWatchlistPage() {
 
   return (
     <>
-
       {userId === userIdCode && (
         <div className="watchlist">
           <h1>Welcome {user.username}</h1>
@@ -43,15 +42,16 @@ export default function UserWatchlistPage() {
             user.watchList.map((watchItem) => (
               <div key={watchItem._id}>
                 <img
-                  src={watchItem.image}
-                  alt={watchItem.name}
+                  src={watchItem?.image}
+                  alt={watchItem?.name}
                   width="20%"
                   height="20%"
                 />
-                <p>{watchItem.name}</p>
-
-                <p>Location: {watchItem.location}</p>
-                <p>Sightings: {watchItem.sightings.length}</p>
+                <p>{watchItem?.name}</p>
+                {console.log(watchItem?.name)}
+                <p>Location: {watchItem?.location}</p>
+                {console.log(watchItem?.locaton)}
+                <p>Sightings: {watchItem?.sightings?.length}</p>
               </div>
             ))
           ) : (
@@ -63,7 +63,6 @@ export default function UserWatchlistPage() {
         </div>
       )}
       {userId !== userIdCode && navigate("/error")}
-
     </>
   );
 }

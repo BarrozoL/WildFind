@@ -25,12 +25,12 @@ export default function SocialFeedPage() {
     axios
       .get("http://localhost:5005/api/actions")
       .then((response) => {
-        const foundSightings = response.data;
-        setSightings(foundSightings);
+        const foundActions = response.data;
+        setSightings(foundActions);
         if (!sightings) return <p>Loading...</p>;
         //Setting the comment texts to an array the same length as the sightings array
         //and using .fill() to populate them with empty strings
-        setCommentText(new Array(foundSightings.length).fill(""));
+        setCommentText(new Array(foundActions.length).fill(""));
       })
       .catch((error) => {
         console.error("Error fetching sightings:", error);
@@ -72,65 +72,223 @@ export default function SocialFeedPage() {
     <>
       <div className="itemWrapper">
         {sightings.map((action, index) => (
-          <div className="social-feed-sighting-card" key={action._id}>
-            <div className="post-container">
-              <div className="post-image">
-                <img
-                  src={action?.sighting?.image || DefaultSightingImage}
-                  alt={action?.sighting?.specimenId?.name}
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                />
-              </div>
-
-              <div className="post-details">
-                <h3>
-                  <Link to={`/user-profile/${action?.user?._id}`}>
-                    <img
-                      src={action?.user?.image}
-                      alt={action?.user?.username}
-                      width="5%"
-                      height="5%"
-                      style={{ borderRadius: "50%" }}
-                    />
-                    {action?.user?.username}
-                  </Link>{" "}
-                  Has spotted {action?.sighting?.specimenId?.name} in{" "}
-                  {action?.sighting?.location}
-                </h3>
-                <h4>Sighting description: {action?.sighting?.description}</h4>
-                <p>Entry added at: {action?.sighting?.date}</p>
-
-                <form
-                  onSubmit={(e) => handleCommentSubmit(e, action._id, index)}
-                >
-                  <input
-                    type="text"
-                    value={commentText[index]}
-                    onChange={(e) => handleCommentTextChange(e, index)}
-                    placeholder="Add a comment"
-                  />
-                  <button type="submit">Post comment</button>
-                </form>
-              </div>
-            </div>
-
-            <div className="comments-container">
-              {action.comments &&
-                action.comments.length > 0 &&
-                action.comments.map((comment) => (
-                  <div key={comment._id} className="comment">
-                    <p>{comment.text}</p>
-                    <div>
-                      Added by{" "}
-                      <Link to={`/user-profile/${comment?.userId?._id}`}>
-                        {comment?.userId?.username}
-                      </Link>
-                      <p>Posted at: {comment.createdAt}</p>
+          <>
+            {action?.sighting && (
+              <div className="post-comment-wrapper" key={action._id}>
+                <div className="social-feed-sighting-card">
+                  <div
+                    style={{
+                      border: "2px solid red",
+                      width: "70%",
+                      height: "500px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "300px",
+                        height: "250px",
+                        overflow: "hidden",
+                        position: "relative",
+                        marginLeft: "30%",
+                        borderRadius: "5%",
+                      }}
+                    >
+                      <img
+                        src={action?.sighting?.image || DefaultSightingImage}
+                        alt={action?.sighting?.specimenId?.name}
+                        style={{
+                          borderRadius: "5%",
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                          position: "absolute",
+                          top: "0",
+                          left: "0",
+                          marginTop: "3%",
+                        }}
+                      />
                     </div>
+
+                    <h3 style={{ marginTop: "3%" }}>
+                      <Link to={`/user-profile/${action?.user?._id}`}>
+                        <img
+                          src={action?.user?.image}
+                          alt={action?.user?.username}
+                          width="5%"
+                          height="5%"
+                          style={{ borderRadius: "50%" }}
+                        />
+                        {action?.user?.username}{" "}
+                      </Link>{" "}
+                      has spotted {action?.sighting?.specimenId?.name} in{" "}
+                      {action?.sighting?.location}
+                    </h3>
+                    <p>
+                      <b>Description: </b>
+                      {action?.sighting?.description}
+                    </p>
+                    <p>Entry added at: {action?.sighting?.date}</p>
                   </div>
-                ))}
-            </div>
-          </div>
+                  <div style={{ height: "500px", width: "30%" }}>
+                    <div
+                      className="comment-box"
+                      style={{
+                        border: "2px solid blue",
+                        width: "100%",
+                        height: "450px",
+                        overflowY: "scroll",
+                      }}
+                    >
+                      {action.comments && action.comments.length > 0 && (
+                        <div>
+                          {action.comments.map((comment) => (
+                            <div
+                              key={comment._id}
+                              style={{ border: "1px solid black" }}
+                            >
+                              <p>{comment.text}</p>
+                              <div>
+                                Added by{" "}
+                                <Link
+                                  to={`/user-profile/${comment?.userId?._id}`}
+                                >
+                                  {comment?.userId?.username}
+                                </Link>
+                                <p>Posted at: {comment.createdAt}</p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    <form
+                      onSubmit={(e) =>
+                        handleCommentSubmit(e, action._id, index)
+                      }
+                    >
+                      <input
+                        type="text"
+                        value={commentText[index]}
+                        onChange={(e) => handleCommentTextChange(e, index)}
+                        placeholder="Add a comment"
+                      />
+                      <button type="submit">Post comment</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {action?.addition && (
+              <div className="post-comment-wrapper" key={action._id}>
+                <div className="social-feed-sighting-card">
+                  <div
+                    style={{
+                      border: "2px solid red",
+                      width: "70%",
+                      height: "500px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "300px",
+                        height: "250px",
+                        overflow: "hidden",
+                        position: "relative",
+                        marginLeft: "30%",
+                        borderRadius: "5%",
+                      }}
+                    >
+                      <img
+                        src={action?.addition?.image || DefaultSightingImage}
+                        alt={action?.addition?.specimenId?.name}
+                        style={{
+                          borderRadius: "5%",
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                          position: "absolute",
+                          top: "0",
+                          left: "0",
+                          marginTop: "3%",
+                        }}
+                      />
+                    </div>
+
+                    <h3 style={{ marginTop: "3%" }}>
+                      <Link to={`/user-profile/${action?.user?._id}`}>
+                        <img
+                          src={action?.user?.image}
+                          alt={action?.user?.username}
+                          width="5%"
+                          height="5%"
+                          style={{ borderRadius: "50%" }}
+                        />
+                        {action?.user?.username}{" "}
+                      </Link>{" "}
+                      has added the {action?.addition?.name}
+                      {console.log(action?.addition?.name)}
+                    </h3>
+                    <p>
+                      <b>Description: </b>
+                      {action?.addition?.description}
+                    </p>
+                    <p>
+                      <b>Native to </b>
+                      {action?.addition?.location}
+                    </p>
+                    <p>Entry added at: {action?.addition?.createdAt}</p>
+                  </div>
+                  <div style={{ height: "500px", width: "30%" }}>
+                    <div
+                      className="comment-box"
+                      style={{
+                        border: "2px solid blue",
+                        width: "100%",
+                        height: "450px",
+                        overflowY: "scroll",
+                      }}
+                    >
+                      {action.comments && action.comments.length > 0 && (
+                        <div>
+                          {action.comments.map((comment) => (
+                            <div
+                              key={comment._id}
+                              style={{ border: "1px solid black" }}
+                            >
+                              <p>{comment.text}</p>
+                              <div>
+                                Added by{" "}
+                                <Link
+                                  to={`/user-profile/${comment?.userId?._id}`}
+                                >
+                                  {comment?.userId?.username}
+                                </Link>
+                                <p>Posted at: {comment.createdAt}</p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    <form
+                      onSubmit={(e) =>
+                        handleCommentSubmit(e, action._id, index)
+                      }
+                    >
+                      <input
+                        type="text"
+                        value={commentText[index]}
+                        onChange={(e) => handleCommentTextChange(e, index)}
+                        placeholder="Add a comment"
+                      />
+                      <button type="submit">Post comment</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            )}
+          </>
         ))}
       </div>
     </>

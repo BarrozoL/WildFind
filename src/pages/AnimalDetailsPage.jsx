@@ -57,13 +57,13 @@ export default function AnimalCard({ animals }) {
     const requestBody = {
       specimenId: specimenId,
       userId: userId,
-      typeId: foundAnimal.typeId, // Accessing typeId here
-      name: foundAnimal.name,
-      image: foundAnimal.image,
-      description: foundAnimal.description,
-      location: foundAnimal.location,
-      dangerLevel: foundAnimal.dangerLevel,
-      edible: foundAnimal.edible,
+      typeId: foundAnimal?.typeId, // Accessing typeId here
+      name: foundAnimal?.name,
+      image: foundAnimal?.image,
+      description: foundAnimal?.description,
+      location: foundAnimal?.location,
+      dangerLevel: foundAnimal?.dangerLevel,
+      edible: foundAnimal?.edible,
     };
 
     watchService
@@ -76,7 +76,7 @@ export default function AnimalCard({ animals }) {
         setImage(""); */
       })
       .catch((error) => console.log(error));
-    navigate("/animals");
+    navigate(`/watchlist/${userId}`);
   };
 
   const handleDelete = async () => {
@@ -99,17 +99,17 @@ export default function AnimalCard({ animals }) {
   return (
     <>
       <div className="animalDetailWrapper">
-        <div key={foundAnimal._id}></div>
+        <div key={foundAnimal?._id}></div>
         {console.log(foundAnimal)}
-        <h3>{foundAnimal.name}</h3>
-        <img src={foundAnimal.image} alt={foundAnimal.name} width="300px" />
-        <p>{`Danger level: ${foundAnimal.dangerLevel}`}</p>
-        <p>{`Description: ${foundAnimal.description}`}</p>
-        {console.log(foundAnimal.location)}
-        <p>{`Native to: ${foundAnimal.location.join(", ")}`}</p>
+        <h3>{foundAnimal?.name}</h3>
+        <img src={foundAnimal.image} alt={foundAnimal?.name} width="300px" />
+        <p>{`Danger level: ${foundAnimal?.dangerLevel}`}</p>
+        <p>{`Description: ${foundAnimal?.description}`}</p>
+        {console.log(foundAnimal?.location)}
+        <p>{`Native to: ${foundAnimal?.location.join(", ")}`}</p>
 
         <button onClick={handleSightingNavigate} className="sightings-button">
-          Click to view locations where the {`${foundAnimal.name}`} has been
+          Click to view locations where the {`${foundAnimal?.name}`} has been
           seen
         </button>
         <div className="button-details">

@@ -3,7 +3,9 @@ import axios from "axios";
 class SpecimenService {
   constructor() {
     this.api = axios.create({
-      baseURL: import.meta.env.SERVER_URL || "http://localhost:5005",
+      baseURL:
+        import.meta.env.VITE_SERVER_URL ||
+        "https://wildfindserver.adaptable.app/",
     });
 
     // Automatically set JWT token in the headers for every request
@@ -12,7 +14,11 @@ class SpecimenService {
       const storedToken = localStorage.getItem("authToken");
 
       if (storedToken) {
-        config.headers = { Authorization: `Bearer ${storedToken}` };
+        // Merge existing headers with the Authorization header
+        config.headers = {
+          ...config.headers,
+          Authorization: `Bearer ${storedToken}`,
+        };
       }
 
       return config;
@@ -22,6 +28,10 @@ class SpecimenService {
   // POST /api/specimens
   createSpecimen = (requestBody) => {
     return this.api.post("/api/specimens", requestBody);
+  };
+
+  uploadImage = (file) => {
+    return this.api.post("/api/upload", file);
   };
 }
 

@@ -1,8 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import WatchCard from "../components/WatchCard";
+// import WatchCard from "../components/WatchCard";
 import { getAllWatchlistItems } from "../../lib";
-import watchService from "../../services/watch-service";
+import watchService from "../../services/watchlist-service";
+import "../css/WatchListPage.css";
 
 export default function WatchList({ /* watches */ deleteWatch }) {
   const [search, setSearch] = useState("");
@@ -46,7 +47,7 @@ export default function WatchList({ /* watches */ deleteWatch }) {
     };
   }, [theme]);
 
-  /*   let filteredWatches = watches.filter((watch) => {
+  let filteredWatches = watches.filter((watch) => {
     // Filter by type
     const typeMatch =
       (!type && watch.typeId !== 7 && watch.typeId !== 8) ||
@@ -67,7 +68,7 @@ export default function WatchList({ /* watches */ deleteWatch }) {
 
   const sortedWatches = filteredWatches.sort((a, b) =>
     a.name.localeCompare(b.name)
-  ); */
+  );
 
   return (
     <div className="watch-list">
@@ -99,7 +100,7 @@ export default function WatchList({ /* watches */ deleteWatch }) {
 
       <div className="watchWrapper">
         {console.log("watch:", watches)}
-        {watches.map((watch) => (
+        {sortedWatches.map((watch) => (
           <WatchCard key={watch.id} watch={watch} deleteWatch={deleteWatch} />
         ))}
       </div>

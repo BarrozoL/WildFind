@@ -1,0 +1,23 @@
+.footer a {
+  display: flex;
+  justify-content: center;
+  padding-top: 0.5%;
+  color: white;
+}
+
+.footer {
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height: 40px;
+  z-index: 1001;
+  left: 0;
+}
+
+.theme-btn {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}

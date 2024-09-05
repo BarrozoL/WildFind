@@ -1,0 +1,31 @@
+.animal-cards {
+  margin: 30px;
+  border-radius: 5px;
+  width: 200px;
+  height: 280px;
+}
+
+.animal-cards {
+  margin: 30px;
+  border-radius: 5px;
+  width: 200px;
+  height: 280px;
+}
+
+.animalWrapper h3 {
+  height: 45px;
+}
+
+.animalWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 5vw;
+}
+
+.search-bar {
+  position: absolute;
+  top: 9vw;
+  right: 6vw;
+  height: 20px;
+  font-size: 16px;
+}

@@ -1,16 +1,29 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { getAllAnimals } from "../../lib";
+import "../css/AnimalListPage.css";
 
 //Receive the {animals} as a prop from the App, since the state stored and altered there.
-export default function AnimalList({ animals }) {
+export default function AnimalList(/*{ animals }*/) {
   const [search, setSearch] = useState("");
   const [type, setType] = useState("");
   const [theme, setTheme] = useState("");
+  const [animals, setAnimals] = useState([]);
   const navigate = useNavigate();
 
   const handleNavigate = () => {
     navigate("/animal-add");
   };
+
+  useEffect(() => {
+    getAllAnimals()
+      .then((data) => {
+        // Filter data to include only those with typeId <= 8
+        const filteredData = data.filter((animal) => animal.typeId <= 8);
+        setAnimals(filteredData);
+      })
+      .catch((error) => console.error("Error fetching animals:", error));
+  }, []);
 
   const handleTypeFilter = (e) => {
     const selectedType = e.target.value;
@@ -23,6 +36,18 @@ export default function AnimalList({ animals }) {
       setTheme("");
     }
   };
+
+  // const [movies, setMovies] = useState([]);
+
+  // // Run the effect after the initial render to get a list of movies from the server
+  // useEffect(() => {
+  //   service.getMovies()
+  //     .then((data) => {
+  //       // console.log("data", data);
+  //       setMovies(data);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []); //  <-- This effect will run only once, after the initial render
 
   useEffect(() => {
     if (theme) {
@@ -90,14 +115,34 @@ export default function AnimalList({ animals }) {
       <div className="animalWrapper">
         {sortedAnimals.map((animal) => {
           return (
-            <Link to={`/specimens/${animal._id}`} key={animal._id}>
+            <Link to={`/animals/${animal._id}`} key={animal._id}>
               <div className="animal-cards">
                 <h3>{animal.name}</h3>
-                <img
-                  width="180px"
-                  src={animal.image}
-                  style={{ borderRadius: "10px" }}
-                />
+                {console.log(animal.location)}
+                <div
+                  style={{
+                    width: "180px",
+                    height: "130px",
+                    overflow: "hidden",
+                    position: "relative",
+                    marginLeft: "5%",
+                  }}
+                >
+                  <img
+                    // width="100%"
+                    // height="100%"
+                    src={animal.image}
+                    style={{
+                      borderRadius: "10px",
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      position: "absolute",
+                      top: "0",
+                      left: "0",
+                    }}
+                  />
+                </div>
               </div>
             </Link>
           );

@@ -1,0 +1,16 @@
+.sighting-cards img {
+  border-radius: 10px;
+}
+.sighting-cards {
+  display: flex;
+  margin-bottom: 2%;
+  padding-top: 20px;
+  border-radius: 5px;
+  width: 50vw;
+  justify-content: center;
+}
+
+.spottingWrapper {
+  padding-top: 5vw;
+  padding-bottom: 1vw;
+}

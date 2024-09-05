@@ -1,0 +1,82 @@
+.sighting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2%;
+}
+
+.sighting-row label {
+  width: 40%;
+  padding-right: 1%;
+  font-size: 1.3rem;
+  text-align: left;
+}
+
+.sighting-row input,
+.sighting-row select,
+.sighting-row textarea {
+  width: 60%;
+}
+
+.sighting-row .react-datepicker-wrapper {
+  width: 60%;
+}
+
+.sighting-row .basic-select input {
+  height: 30px;
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+.react-datepicker__triangle {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.react-datepicker__header {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.react-datepicker-wrapper input {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.sighting-form {
+  max-width: 750px;
+  height: auto;
+  padding: 20px;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sighting-inputs input {
+  border-width: 1px;
+  border-radius: 5px;
+}
+.sighting-inputs select {
+  border-radius: 5px;
+}
+
+.sighting-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+.sighting-submit {
+  text-align: center;
+  width: 100%;
+  margin-top: 20px;
+}

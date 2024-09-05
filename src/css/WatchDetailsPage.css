@@ -1,0 +1,33 @@
+.button-details-watch {
+  height: 100px;
+  width: 100%;
+}
+.button-details-watch button {
+  margin: 0 20px 0 20px;
+}
+
+.watch-detail-button {
+  height: 38px;
+  margin: 0 20px 3px 20px;
+}
+
+.watch-detail-button {
+  height: 38px;
+  margin: 0 20px 3px 20px;
+}
+
+.animalDetailWrapper {
+  margin-top: 0;
+  padding-top: 10px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 1100px;
+  height: 600px;
+}
+
+.animalDetailWrapper img {
+  border-radius: 5px;
+  width: 300px;
+}

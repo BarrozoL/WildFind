@@ -1,0 +1,93 @@
+/* body.light-mode .watch-cards button {
+  background-color: rgb(44, 140, 121);
+  border: 1px solid rgb(44, 140, 121);
+}
+
+.watch-cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.watch-buttons {
+  width: 130px;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 77%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.watch-buttons {
+  width: 130px;
+  height: 100px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.watch-buttons button {
+  height: 40px;
+}
+
+.watch-cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+body.light-mode .watch-cards {
+  margin: 30px;
+  background-color: #d7e8c0;
+  color: rgb(44, 140, 121);
+  border-radius: 5px;
+  width: 200px;
+  height: 280px;
+}
+
+body.light-mode .watch-cards button {
+  background-color: rgb(44, 140, 121);
+  border: 1px solid rgb(44, 140, 121);
+}
+
+body.dark-mode .watch-cards {
+  margin: 30px;
+  background-color: #b581e4;
+  border-radius: 5px;
+  width: 200px;
+  height: 280px;
+}
+
+body.dark-mode .watch-cards button {
+  background-color: rgb(44, 140, 121);
+  border: 1px solid rgb(44, 140, 121);
+}
+
+body.dark-mode .watch-cards h3 {
+  color: #b5fff0;
+}
+
+body.other-theme .watch-cards button {
+  background-color: #20c9c1;
+  border: 1px solid #20c9c1;
+}
+
+body.other-theme .watch-cards {
+  margin: 30px;
+  background-color: #1c8e66;
+  color: #b5fff0;
+  border-radius: 5px;
+  width: 200px;
+  height: 280px;
+}
+
+body.other-theme .watch-cards img {
+  border: 2px solid #20c9c1;
+}
+
+body.other-theme .watch-cards h3 {
+  color: #b5fff0;
+} */

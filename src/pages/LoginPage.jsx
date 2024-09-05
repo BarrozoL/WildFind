@@ -3,6 +3,7 @@ import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import authService from "../../services/auth.service";
+import "../css/LoginPage.css";
 
 // const API_URL = "http://localhost:5005";
 
@@ -57,7 +58,9 @@ function LoginPage(props) {
           onChange={handlePassword}
         />
 
-        <button type="submit">Login</button>
+        <button className="btn" type="submit">
+          Login
+        </button>
       </form>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 

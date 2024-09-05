@@ -3,7 +3,8 @@ import axios from "axios";
 class WatchService {
   constructor() {
     this.api = axios.create({
-      baseURL: import.meta.env.SERVER_URL || "http://localhost:5005",
+      baseURL:
+        import.meta.env.SERVER_URL || "https://wildfindserver.adaptable.app/",
     });
 
     // Automatically set JWT token in the headers for every request
@@ -19,11 +20,18 @@ class WatchService {
     });
   }
 
+  //POST watch to user
+  createWatch = (userId, requestBody) => {
+    return this.api.post(`/api/watchlist/${userId}`, requestBody);
+  };
+}
+
+/* 
   // POST /api/sightings
   createWatch = (requestBody) => {
     return this.api.post("/api/watchlist", requestBody);
-  };
-}
+  }
+ */
 
 const watchService = new WatchService();
 

@@ -1,0 +1,20 @@
+.animalDetailWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10% 0 10% 0;
+  border-radius: 5px;
+  width: 1100px;
+  height: 800px;
+}
+.plantDetailWrapper img {
+  border-radius: 5px;
+  width: 300px;
+}
+
+.detail-button {
+  margin: 1%;
+  width: auto;
+  height: 80%;
+}

@@ -1,17 +1,24 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { /* addToWatchList, */ getAnimal } from "../../lib";
-import watchService from "../../services/watch-service";
+import { /* addToWatchList, */ getAnimal, deleteAnimal } from "../../lib";
+import { jwtDecode } from "jwt-decode";
+import watchService from "../../services/watchlist-service";
+import "../css/AnimalDetailsPage.css";
 
 export default function AnimalCard({ animals }) {
   const [foundAnimal, setFoundAnimal] = useState();
-  const { specimensId } = useParams();
+  const { specimenId } = useParams();
+  console.log("specimenId:", specimenId);
+  const token = localStorage.getItem("authToken");
+  const decodedToken = token ? jwtDecode(token) : null;
+  const userId = decodedToken ? decodedToken._id : null; // Extract userId
+  const username = decodedToken ? decodedToken.username : null; // Extract username
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    getAnimal(specimensId).then((data) => setFoundAnimal(data));
-    console.log(specimensId);
-  }, [specimensId]);
+    getAnimal(specimenId).then((data) => setFoundAnimal(data));
+  }, [specimenId]);
 
   useEffect(() => {
     if (foundAnimal?.typeId === 8) {
@@ -27,80 +34,101 @@ export default function AnimalCard({ animals }) {
   }, [foundAnimal]);
 
   const handleNavigate = () => {
-    navigate("/animal-list");
+    navigate("/animals");
   };
 
   const handleWatchNavigate = () => {
-    navigate("/watch");
+    navigate("/watchlist");
   };
 
   const handleSightingNavigate = () => {
-    navigate(`/specimens/${specimensId}/sightings`);
+    navigate(`/animals/${specimenId}/sightings`);
+  };
+
+  const handleEdit = () => {
+    navigate(`/${specimenId}/edit`);
   };
 
   const handleNewSighting = () => {
-    navigate(`/${specimensId}/add-sighting`);
+    navigate(`/animals/${specimenId}/add-sighting`);
   };
 
   const handleAddToWatchList = async () => {
-    /*  try {
-      const response = await addToWatchList(
-        specimensId,
-        foundAnimal.typeId,
-        foundAnimal.name,
-        foundAnimal.image,
-        foundAnimal.description,
-        foundAnimal.location,
-        foundAnimal.dangerLevel
-      );
-      watchState(response);
-      handleWatchNavigate();
-      console.log("animal added to watch list", response);
-    } catch (error) {
-      console.log(error, "can't add to watch list");
-    } */
-
     const requestBody = {
-      specimenId: specimensId,
-      typeId: foundAnimal.typeId, // Accessing typeId here
-      name: foundAnimal.name,
-      image: foundAnimal.image,
-      description: foundAnimal.description,
-      location: foundAnimal.location,
-      dangerLevel: foundAnimal.dangerLevel,
-      edible: foundAnimal.edible,
+      specimenId: specimenId,
+      userId: userId,
+      typeId: foundAnimal?.typeId, // Accessing typeId here
+      name: foundAnimal?.name,
+      image: foundAnimal?.image,
+      description: foundAnimal?.description,
+      location: foundAnimal?.location,
+      dangerLevel: foundAnimal?.dangerLevel,
+      edible: foundAnimal?.edible,
     };
 
     watchService
-      .createWatch(requestBody)
+      .createWatch(userId, requestBody)
       .then((response) => {
-        setName("");
-        setSelectedAnimalType("");
-        setDescription("");
-        setLocation("");
-        setImage("");
+        /*  setName("");
+        setSelectedAnimalType("") */
+        /* setDescription(""); */
+        /*  setLocation("");
+        setImage(""); */
       })
       .catch((error) => console.log(error));
-    navigate("/specimens");
+    console.log(foundAnimal?.location);
+    navigate(`/watchlist/${userId}`);
   };
-  console.log(foundAnimal);
+
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this animal?"
+    );
+    if (!confirmDelete) return;
+
+    try {
+      await deleteAnimal(specimenId);
+      navigate("/animals");
+    } catch (error) {
+      console.error("Error deleting animal:", error);
+      alert("There was an error deleting the animal. Please try again.");
+    }
+  };
 
   if (!foundAnimal) return <p>Loading...</p>;
 
   return (
     <>
       <div className="animalDetailWrapper">
-        <div key={foundAnimal._id}></div>
-        <h3>{foundAnimal.name}</h3>
-        <img src={foundAnimal.image} alt={foundAnimal.name} width="300px" />
-        <p>{`Danger level: ${foundAnimal.dangerLevel}`}</p>
-        <p>{foundAnimal.description}</p>
-        <p>Native to {foundAnimal.location}</p>
+        <div key={foundAnimal?._id}></div>
+        {console.log(foundAnimal)}
+        <h3>{foundAnimal?.name}</h3>
+        <img src={foundAnimal.image} alt={foundAnimal?.name} width="300px" />
+        <p>{`Danger level: ${foundAnimal?.dangerLevel}`}</p>
+        <p>{`Description: ${foundAnimal?.description}`}</p>
+        {console.log(foundAnimal?.location)}
+        <p>{`Native to: ${foundAnimal?.location.join(", ")}`}</p>
+
+        <button onClick={handleSightingNavigate} className="sightings-button">
+          Click to view locations where the {`${foundAnimal?.name}`} has been
+          seen
+        </button>
         <div className="button-details">
-          <button onClick={handleSightingNavigate} className="sightings-button">
+          {/* <button onClick={handleSightingNavigate} className="sightings-button">
             Click to view locations where the {`${foundAnimal.name}`} has been
             seen
-          </button>
+          </button> */}
+          {foundAnimal.userId === userId && (
+            <button onClick={handleEdit} className="detail-button">
+              Edit
+            </button>
+          )}
+          {foundAnimal.userId === userId && (
+            <button onClick={handleDelete} className="detail-button">
+              Delete
+            </button>
+          )}
+
           <button onClick={handleNewSighting} className="detail-button">
             Add a sighting
           </button>

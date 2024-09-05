@@ -1,17 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
+import "../css/WatchCard.css";
 
 function WatchCard({ watch, deleteWatch }) {
-  console.log("WatchCard props:", watch);
   const navigate = useNavigate();
 
   const handleEditNavigate = () => {
-    navigate(`/watch/${watch.id}/edit-watch`);
+    navigate(`/watchlist/${watch.id}/edit-watch`);
   };
 
   return (
     <li className="WatchCard" style={{ listStyleType: "none" }}>
       <div className="watch-cards">
-        <Link to={`/watch/${watch.id}/details`}>
+        <Link to={`/watchlist/${watch.id}/details`}>
           <h3>{watch.name}</h3>
           <img
             src={watch.image}
@@ -31,4 +31,4 @@ function WatchCard({ watch, deleteWatch }) {
   );
 }
 
-export default WatchCard;
+// export default WatchCard;

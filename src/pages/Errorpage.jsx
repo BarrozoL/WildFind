@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import pageNotFound from "../assets/images/404-not-found.jpg";
+import "../css/Errorpage.css";
 
 export default function Error() {
   const navigate = useNavigate();
@@ -9,16 +10,7 @@ export default function Error() {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        minHeight: "90vh",
-        gap: "50px",
-      }}
-    >
+    <div className="error">
       <img
         src={pageNotFound}
         alt="Not found Page"

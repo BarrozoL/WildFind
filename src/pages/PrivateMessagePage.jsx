@@ -19,7 +19,7 @@ export default function PrivateMessagePage() {
 
   useEffect(() => {
     getMessages();
-  }, [selectedConversation, messageText]);
+  }, [selectedConversation]);
 
   const getMessages = async () => {
     axios
@@ -33,25 +33,26 @@ export default function PrivateMessagePage() {
   };
 
   const sendMessage = async () => {
-    /*   if (selectedConversation) {
-      const receiverId =
-        selectedConversation.user1Id._id === currentUserId
-          ? selectedConversation.user2Id._id
-          : selectedConversation.user1Id._id;
+    if (!selectedConversation) return;
 
-      console.log("receiverId", receiverId);
-    } */
-
+    const receiverId =
+      selectedConversation.user1Id._id === currentUserId
+        ? selectedConversation.user2Id._id
+        : selectedConversation.user1Id._id;
     axios
-      .post(`https://wildfindserver.adaptable.app/api/messages/${userId}`, {
+      .post(`https://wildfindserver.adaptable.app/api/messages/${receiverId}`, {
         sender: currentUserId,
         text: messageText,
       })
       .then((response) => {
         //set sentMessages state to be able to update useEffect
-        //when message is send and render it without a page refresh
+        //when message is sent and render it without a page refresh
         setSentMessages([...sentMessages, response.data]);
-
+        //also update selected conversation messages with new response.data
+        setSelectedConversation({
+          ...selectedConversation,
+          messages: [...selectedConversation?.messages, response.data],
+        });
         console.log("Message sent", response.data);
       })
       .catch((error) => {
@@ -62,9 +63,8 @@ export default function PrivateMessagePage() {
 
   const handleSendMessage = (e) => {
     e.preventDefault();
-    setMessageText("");
     sendMessage();
-    getMessages();
+    setMessageText("");
   };
 
   const handleMessageTextChange = (e) => {
@@ -105,6 +105,7 @@ export default function PrivateMessagePage() {
                     Conversation between {conversation?.user1Id?.username} and{" "}
                     {conversation?.user2Id?.username}
                   </p>
+                  <p className="refreshChat">[Click to refresh chat]</p>
                 </div>
               )}
             </div>

@@ -87,8 +87,8 @@ const Navbar = () => {
           <NavLink to="/plants" className="NavLink">
             All Plants
           </NavLink>
-          <NavLink to="/maps" className="NavLink">
-            Maps
+          <NavLink to="/maps/world-map" className="NavLink">
+            World Map
           </NavLink>
           <NavLink to="/actions" className="NavLink">
             See Community Activity

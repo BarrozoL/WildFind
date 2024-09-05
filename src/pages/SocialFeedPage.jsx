@@ -11,21 +11,26 @@ import DefaultSightingImage from "../assets/images/default-sighting.jpeg";
 export default function SocialFeedPage() {
   const [sightings, setSightings] = useState([]);
   const [commentText, setCommentText] = useState();
+  // const [user, setUser] = useState(null);
   const [selectedActionId, setSelectedActionId] = useState();
+  const [filterOption, setFilterOption] = useState("All Posts");
   const token = localStorage.getItem("authToken");
   //Running jwtDecode function to decode the user's authToken
   const decodedToken = token ? jwtDecode(token) : null;
   const userId = decodedToken ? decodedToken._id : null; // Extract userId
+  const currentUserFollowed = decodedToken ? decodedToken.followed : null;
 
   useEffect(() => {
     getActions();
-  }, []);
+    // getUserInformation();
+  }, [filterOption]);
 
   const getActions = async () => {
     axios
       .get("http://localhost:5005/api/actions")
       .then((response) => {
         const foundActions = response.data;
+
         setSightings(foundActions);
         if (!sightings) return <p>Loading...</p>;
         //Setting the comment texts to an array the same length as the sightings array
@@ -33,9 +38,19 @@ export default function SocialFeedPage() {
         setCommentText(new Array(foundActions.length).fill(""));
       })
       .catch((error) => {
-        console.error("Error fetching sightings:", error);
+        console.error("Error fetching actions:", error);
       });
   };
+
+  let filteredActions = sightings.filter((action) => {
+    if (filterOption === "Followed Posts") {
+      // Filter by posts where the user is followed by the current user
+      return action?.user && currentUserFollowed.includes(action.user._id);
+    } else {
+      // If not filtering by "Followed Posts", return all actions (foundActions)
+      return sightings.includes(action);
+    }
+  });
 
   const postComment = async (actionId, index) => {
     axios
@@ -55,7 +70,13 @@ export default function SocialFeedPage() {
       });
   };
 
+  const handleFilterOption = (e) => {
+    const selectedOption = e.target.value;
+    setFilterOption(selectedOption);
+  };
+
   if (!sightings) return <p>Loading...</p>;
+  if (!filteredActions) return <p>Loading...</p>;
 
   const handleCommentSubmit = (e, actionId, index) => {
     e.preventDefault();
@@ -69,10 +90,13 @@ export default function SocialFeedPage() {
   };
 
   return (
-    <>
+    <div style={{ marginTop: "10%" }}>
+      <select onChange={handleFilterOption}>
+        <option value="All Posts">All Posts</option>
+        <option value="Followed Posts">Followed Posts</option>
+      </select>
       <div className="itemWrapper">
-
-        {sightings.map((action, index) => (
+        {filteredActions.map((action, index) => (
           <>
             {action?.sighting && (
               <div className="post-comment-wrapper" key={action._id}>
@@ -292,6 +316,6 @@ export default function SocialFeedPage() {
           </>
         ))}
       </div>
-    </>
+    </div>
   );
 }

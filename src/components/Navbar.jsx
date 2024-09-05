@@ -78,7 +78,7 @@ const Navbar = () => {
             Maps
           </NavLink>
           <NavLink to="/actions" className="NavLink">
-            See Recent Sightings
+            See Community Activity
           </NavLink>
           {/* <NavLink to="/animal-add">Seen a new animal? Add it!</NavLink> */}
 
@@ -88,21 +88,10 @@ const Navbar = () => {
 
           {isLoggedIn && (
             <>
-              <NavLink to={`/watchlist/${user._id}`} className="NavLink">
-                Personal Watchlist
-              </NavLink>
-              <NavLink to={`/user-profile/${user._id}`} className="NavLink">
-                Profile
-              </NavLink>
-
-              <NavLink to={`/user/messages/${user._id}`} className="NavLink">
-                Private Messages
-              </NavLink>
-
               <NavLink
                 style={{ border: "1px solid black" }}
                 to={`/user/messages/${user._id}`}
-                className="NavLink"
+                className="dropdown-item"
               >
                 <img
                   width="30px"
@@ -111,14 +100,43 @@ const Navbar = () => {
                 {console.log("notif size", currentUser?.notifications?.length)}
                 {currentUser?.notifications?.length}
               </NavLink>
+              <div className="profile-dropdown">
+                <NavLink
+                  to={`/user-profile/${user._id}`}
+                  className="NavLink profile-link"
+                >
+                  {user.username}'s Profile
+                </NavLink>
+                <div className="dropdown-content">
+                  <NavLink
+                    to={`/user-profile/${user._id}`}
+                    className="NavLink profile-link"
+                  >
+                    Profile Page
+                  </NavLink>
+                  <NavLink
+                    to={`/watchlist/${user._id}`}
+                    className="dropdown-item"
+                  >
+                    Personal Watchlist
+                  </NavLink>
+                  <NavLink
+                    to={`/user/messages/${user._id}`}
+                    className="dropdown-item"
+                  >
+                    Private Messages
+                  </NavLink>
 
-              <button className="logout" onClick={handleLogout}>
-                Logout
-              </button>
+                  <button className="dropdown-item" onClick={handleLogout}>
+                    Logout
+                  </button>
+                </div>
+              </div>
 
               {/* <span>{user && user.name}</span> */}
             </>
           )}
+
           {!isLoggedIn && (
             <>
               <Link to="/signup">

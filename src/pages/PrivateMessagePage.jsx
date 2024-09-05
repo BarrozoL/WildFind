@@ -21,6 +21,18 @@ export default function PrivateMessagePage() {
     getMessages();
   }, [userId]);
 
+  const clearNotifications = async () => {
+    axios;
+    try {
+      await axios.put(
+        `http://localhost:5005/api/users/${userId}/notifications`
+      );
+      console.log("Notifications cleared successfully");
+    } catch (error) {
+      console.error("Error clearing notifications:", error);
+    }
+  };
+
   const getMessages = async () => {
     axios
       .get(`http://localhost:5005/api/users/${userId}`)
@@ -28,8 +40,9 @@ export default function PrivateMessagePage() {
         setUser(response.data);
       })
       .catch((error) => {
-        console.error("Error fetching sightings:", error);
+        console.error("Error fetching messages:", error);
       });
+    clearNotifications();
   };
 
   const sendMessage = async () => {
@@ -122,13 +135,20 @@ export default function PrivateMessagePage() {
       </div>
       <div className="message-input">
         <input
+          className="message-input-bar"
           type="text"
           onChange={handleMessageTextChange}
           value={messageText}
         />
-        <button onClick={handleSendMessage} type="submit">
-          Send
-        </button>
+        <span>
+          <button
+            className="send-button"
+            onClick={handleSendMessage}
+            type="submit"
+          >
+            <p>Send</p>
+          </button>
+        </span>
       </div>
     </div>
   );

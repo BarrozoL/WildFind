@@ -3,7 +3,9 @@ import axios from "axios";
 class SpecimenService {
   constructor() {
     this.api = axios.create({
-      baseURL: import.meta.env.VITE_SERVER_URL || "http://localhost:5005",
+      baseURL:
+        import.meta.env.VITE_SERVER_URL ||
+        "https://wildfindserver.adaptable.app/",
     });
 
     // Automatically set JWT token in the headers for every request

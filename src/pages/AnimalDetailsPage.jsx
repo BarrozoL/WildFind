@@ -119,10 +119,14 @@ export default function AnimalCard({ animals }) {
             seen
           </button> */}
           {foundAnimal.userId === userId && (
-            <button onClick={handleEdit}>Edit</button>
+            <button onClick={handleEdit} className="detail-button">
+              Edit
+            </button>
           )}
           {foundAnimal.userId === userId && (
-            <button onClick={handleDelete}>Delete</button>
+            <button onClick={handleDelete} className="detail-button">
+              Delete
+            </button>
           )}
 
           <button onClick={handleNewSighting} className="detail-button">

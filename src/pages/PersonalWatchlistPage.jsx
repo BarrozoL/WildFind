@@ -21,7 +21,7 @@ export default function UserWatchlistPage() {
   //GET all of the user information
   const getUserInfo = async () => {
     axios
-      .get(`http://localhost:5005/api/users/${userId}`)
+      .get(`https://wildfindserver.adaptable.app/api/users/${userId}`)
       .then((response) => {
         setUser(response.data);
       })

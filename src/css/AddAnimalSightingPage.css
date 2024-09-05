@@ -20,6 +20,10 @@
   border-radius: 5px;
 }
 
+.sighting-row .basic-select input {
+  height: 30px;
+}
+
 .sighting-form {
   max-width: 750px;
   height: auto;

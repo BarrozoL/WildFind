@@ -25,7 +25,7 @@ export default function PrivateMessagePage() {
     axios;
     try {
       await axios.put(
-        `http://localhost:5005/api/users/${userId}/notifications`
+        `https://wildfindserver.adaptable.app/api/users/${userId}/notifications`
       );
       console.log("Notifications cleared successfully");
     } catch (error) {
@@ -35,7 +35,7 @@ export default function PrivateMessagePage() {
 
   const getMessages = async () => {
     axios
-      .get(`http://localhost:5005/api/users/${userId}`)
+      .get(`https://wildfindserver.adaptable.app/api/users/${userId}`)
       .then((response) => {
         setUser(response.data);
       })
@@ -47,7 +47,7 @@ export default function PrivateMessagePage() {
 
   const sendMessage = async () => {
     axios
-      .post(`http://localhost:5005/api/messages/${userId}`, {
+      .post(`https://wildfindserver.adaptable.app/api/messages/${userId}`, {
         sender: currentUserId,
         text: messageText,
       })

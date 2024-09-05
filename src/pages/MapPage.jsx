@@ -8,7 +8,7 @@ export default function MapPage({}) {
   const [location, setLocation] = useState("");
   const [sightings, setSightings] = useState([]);
 
-  const ANIMALS_DB = "http://localhost:5005";
+  const ANIMALS_DB = "https://wildfindserver.adaptable.app/";
 
   useEffect(() => {
     if (location) {

@@ -26,7 +26,9 @@ const Navbar = () => {
 
   const fetchUser = async () => {
     axios
-      .get(`http://localhost:5005/api/users/${decodedToken?._id}`)
+      .get(
+        `https://wildfindserver.adaptable.app/api/users/${decodedToken?._id}`
+      )
       .then((response) => {
         setCurrentUser(response.data);
         console.log("response.data", response.data);
@@ -100,9 +102,8 @@ const Navbar = () => {
               </NavLink>
 
               <NavLink
-                style={{ border: "1px solid black" }}
                 to={`/user/messages/${user._id}`}
-                className="NavLink"
+                className="notification-img"
               >
                 <img
                   width="30px"

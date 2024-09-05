@@ -1,4 +1,4 @@
-.sighting-form {
+/* .sighting-form {
   width: 1000px;
   height: 520px;
   padding: 20px;
@@ -70,4 +70,62 @@ body.dark-mode .sighting-inputs select {
 .sighting-submit {
   text-align: center;
   width: 1000px;
+} */
+/* 
+.sighting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2%;
+} */
+
+/* .sighting-row label {
+  width: 40%;
+  padding-right: 1%;
+  font-size: 1.3rem;
+  text-align: left;
+} */
+/* 
+.sighting-row input,
+.sighting-row select,
+.sighting-row textarea,
+.sighting-row .react-datepicker-wrapper {
+  width: 60%;
+  border-radius: 5px;
+} */
+
+/* .sighting-row .basic-select input {
+  height: 30px;
+} */
+
+/* .sighting-form {
+  max-width: 750px;
+  height: auto;
+  padding: 20px;
+  margin-top: 50px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} */
+
+/* .sighting-inputs input {
+  border-width: 1px;
+  border-radius: 5px;
 }
+.sighting-inputs select {
+  border-radius: 5px;
+} */
+
+/* .sighting-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+} */
+/* 
+.sighting-submit {
+  text-align: center;
+  width: 100%;
+  margin-top: 20px;
+} */

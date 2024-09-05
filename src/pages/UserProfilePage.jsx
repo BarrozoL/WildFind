@@ -64,7 +64,7 @@ export default function UserProfilePage() {
     if (user.sightings.length >= 2) {
       achievements.push(
         <p key="achievement-1">
-          Congratulations! You have made at least 2 sightings
+          {/* Congratulations! You have made at least 2 sightings */}2 sightings
         </p>
       );
     }
@@ -72,22 +72,24 @@ export default function UserProfilePage() {
     if (user.sightings.length >= 5) {
       achievements.push(
         <p key="achievement-2">
-          Congratulations! You have made at least 5 sightings
+          {/* Congratulations! You have made at least 5 sightings */}5 sightings
         </p>
       );
     }
     if (user.sightings.length >= 10) {
       achievements.push(
         <p key="achievement-3">
-          Congratulations! You have made at least 10 sightings
+          {/* Congratulations! You have made at least 10 sightings */}
+          10 sightings
         </p>
       );
     }
 
     if (achievements.length >= 2) {
       achievements.push(
-        <p key="achievement-3">
-          Congratulations! You have earned at least 2 achievements!
+        <p key="achievement-4">
+          {/* Congratulations! You have earned at least 2 achievements! */}2
+          achievements
         </p>
       );
     }
@@ -107,7 +109,7 @@ export default function UserProfilePage() {
         );
       });
     } else {
-      return <li>No followers yet</li>;
+      return <li>{user.username} doesn't have any followers yet</li>;
     }
   }
 
@@ -123,47 +125,98 @@ export default function UserProfilePage() {
         );
       });
     } else {
-      return <li>You don't follow anyone yet</li>;
+      return <li>{user.username} doesn't follow anyone yet</li>;
     }
   }
 
   return (
     <>
-      <div>
-        <h1>Profile Page</h1>
+      <div
+        className="banner"
+        style={{
+          backgroundImage: `url(${user.banner})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      ></div>
+      <div className="profile">
         {console.log(user)}
-        <h2>{user.username}'s profile</h2>
-        <img
-          src={user.image}
-          alt={user.username}
-          width="20%"
-          height="20%"
-          style={{ borderRadius: "50%", border: "1px solid black" }}
-        />
-        <Link to={`/user/messages/${userId}`}>
-          <button className="send-user-a-message-button">
-            Send {user.username} a message!
-          </button>{" "}
-        </Link>
-        {userId === loggedUserId && (
-          <div>
-            <button
-              className="edit-user-btn"
-              onClick={() => navigate(`/edit-user/${userId}`)}
-            >
-              Edit Profile
-            </button>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <div className="users-profile-page">
+            <h1>{user.username}'s Profile Page</h1>
           </div>
-        )}
-        <p>You have added {user.sightings.length} sightings</p>
-        <p>Achievements:</p>
-        {renderAchievements()}
-        <p>Following: </p>
-        {renderFollowing()}
-        <p>Followers:</p>
-        {renderFollowers()}
+        </div>
+        <div className="profile-header">
+          <img
+            src={user.image}
+            alt={user.username}
+            width="250px"
+            height="250px"
+            style={{ borderRadius: "50%" }}
+          />
+          <div className="profile-stats">
+            <div className="achievements" style={{ width: "50%" }}>
+              <h4>Achievements:</h4>
+              <div className="achievements-container">
+                {renderAchievements()}
+              </div>
+            </div>
+            <div>
+              <div>
+                <p>
+                  <b>Following: </b>
+                  {user.following.length}
+                </p>
+                <div className="follow">{renderFollowing()}</div>
+              </div>
+              <div>
+                <p>
+                  <b>Followers: </b>
+                  {user.followers.length}
+                </p>
+                <div className="follow">{renderFollowers()}</div>
+              </div>
+            </div>
+            <div className="edit-profile">
+              {userId === loggedUserId && (
+                <Link to={`/edit-user/${userId}`}>
+                  <button className="edit-user-btn">Edit Profile</button>
+                </Link>
+              )}
+              {userId !== loggedUserId && (
+                <div>
+                  <button
+                    onClick={handleFollowUser}
+                    style={{ marginBottom: "10%" }}
+                    className="edit-user-btn"
+                  >
+                    Follow this user!
+                  </button>
+                  <Link to={`/user/messages/${userId}`}>
+                    <button className="edit-user-btn">
+                      Send {user.username} a message!
+                    </button>
+                  </Link>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="about-user">
+          <h4>About Me:</h4>
+          <p>
+            {user.username} has added {user.sightings.length} sightings
+          </p>
+          <p>{user.bio}</p>
+        </div>
       </div>
-      <button onClick={handleFollowUser}>Follow this user!</button>
     </>
   );
 }

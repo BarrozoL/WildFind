@@ -76,7 +76,7 @@ export default function AnimalCard({ animals }) {
         setImage(""); */
       })
       .catch((error) => console.log(error));
-    navigate("/plants");
+    navigate(`/watchlist/${userId}`);
   };
 
   const handleDelete = async () => {

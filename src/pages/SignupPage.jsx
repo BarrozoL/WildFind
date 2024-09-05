@@ -27,6 +27,7 @@ function SignupPage(props) {
       password,
       username,
       image: defaultUserImage,
+      bio: "",
     };
 
     // Make an axios request to the API

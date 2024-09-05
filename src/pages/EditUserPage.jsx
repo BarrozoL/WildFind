@@ -19,7 +19,9 @@ function EditUserPage() {
   const [username, setUsername] = useState("");
   // const [password, setPassword] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [bannerUrl, setBannerUrl] = useState("");
   const [email, setEmail] = useState("");
+  const [bio, setBio] = useState("");
 
   const [showPasswordResetForm, setShowPasswordResetForm] = useState(false);
   const [resetEmail, setResetEmail] = useState(""); // State for email input in password reset form
@@ -51,13 +53,18 @@ function EditUserPage() {
     if (user) {
       setUsername(user.username);
       setImageUrl(user.image);
+      setBannerUrl(user.banner);
       setEmail(user.email);
+      setBio(user.bio);
     }
   }, [user]);
 
   if (!user) return <p>Loading...</p>;
 
   const handleUsernameChange = (e) => setUsername(e.target.value);
+
+  const handleBioChange = (e) => setBio(e.target.value);
+
   // const handlePasswordChange = (e) => setPassword(e.target.value);
   const handleEmailChange = (e) => setEmail(e.target.value);
 
@@ -79,6 +86,26 @@ function EditUserPage() {
       .catch((err) => console.log("Error while uploading the file: ", err));
   };
 
+  const handleBannerUpload = (e) => {
+    console.log("The file to be uploaded is: ", e.target.files[0]);
+
+    const uploadData = new FormData();
+    uploadData.append("imageUrl", e.target.files[0]); // Append the file with the key "imageUrl"
+
+    specimenService
+      .uploadImage(uploadData)
+      .then((response) => {
+        console.log("response is: ", response);
+
+        setBannerUrl(response.data.fileUrl);
+      })
+      .catch((err) => console.log("Error while uploading the file: ", err));
+  };
+
+  const handleBannerDelete = () => {
+    setBannerUrl(""); // Remove banner image by setting it to an empty string
+  };
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
@@ -87,7 +114,9 @@ function EditUserPage() {
       username,
       // password,
       image: imageUrl || defaultUserImage,
+      banner: bannerUrl,
       email,
+      bio,
     };
 
     editUser(userId, updatedUser)
@@ -145,7 +174,23 @@ function EditUserPage() {
             <form onSubmit={handleFormSubmit} className="edit-inputs">
               <div>
                 <label>Profile Image: </label>
-                <input type="file" onChange={handleFileUpload} />
+                <input
+                  type="file"
+                  placeholder={user.image}
+                  onChange={handleFileUpload}
+                />
+              </div>
+              <div>
+                <label>Banner Image: </label>
+                <input
+                  type="file"
+                  placeholder={user.banner}
+                  onChange={handleBannerUpload}
+                />
+
+                <button type="button" onClick={handleBannerDelete}>
+                  Delete Banner Image
+                </button>
               </div>
               <div>
                 <label>Username: </label>
@@ -168,6 +213,18 @@ function EditUserPage() {
                 />
               </div>
               <div>
+                <label htmlFor="bio">About Me: </label>
+                <textarea
+                  rows="2"
+                  cols="40"
+                  name="bio"
+                  value={bio}
+                  onChange={handleBioChange}
+                  className="bio-input"
+                />
+              </div>
+
+              {/* <div>
                 <button type="button" onClick={togglePasswordResetForm}>
                   {showPasswordResetForm
                     ? "Hide Password Reset"
@@ -194,7 +251,7 @@ function EditUserPage() {
                     )}
                   </div>
                 )}
-              </div>
+              </div> */}
               <div className="edit-submit">
                 <button type="submit">Submit</button>
               </div>

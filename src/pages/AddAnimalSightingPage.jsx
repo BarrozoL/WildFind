@@ -421,6 +421,38 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
           <Select
             name="location"
             options={locationOptions}
+            styles={{
+              control: (base) => ({
+                ...base,
+                height: "50px", // Set the desired height of the input box
+                minHeight: "50px",
+                width: "100%",
+                minWidth: "100%",
+              }),
+              valueContainer: (base) => ({
+                ...base,
+                height: "50px", // Ensure the text stays vertically aligned
+                padding: "0 8px", // Adjust padding inside the container if needed
+              }),
+              input: (base) => ({
+                ...base,
+                margin: "0", // Prevent input text from shifting vertically
+                padding: "0",
+                width: "100%",
+                minWidth: "20vw",
+                flex: "1 1 auto",
+              }),
+              dropdownIndicator: (base) => ({
+                ...base,
+                padding: "0", // Adjust padding around the dropdown arrow
+                height: "40px", // Adjust the height of the dropdown arrow to fit the box
+                width: "40px", // Adjust width of the dropdown arrow if needed
+              }),
+              menu: (base) => ({
+                ...base,
+                maxHeight: "auto", // Dropdown list max height
+              }),
+            }}
             className="basic-select"
             placeholder="Type or scroll to select..."
             onChange={handleLocationChange}

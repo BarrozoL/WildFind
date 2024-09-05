@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { /* addToWatchList, */ getAnimal, deleteAnimal } from "../../lib";
 import { jwtDecode } from "jwt-decode";
 import watchService from "../../services/watchlist-service";
-import "../css/AnimalDetailsPage.css";
+import "../css/PlantDetailsPage.css";
 
 export default function AnimalCard({ animals }) {
   const [foundPlant, setFoundPlant] = useState();
@@ -111,10 +111,14 @@ export default function AnimalCard({ animals }) {
         </button>
         <div className="button-details">
           {foundPlant.userId === userId && (
-            <button onClick={handleEdit}>Edit</button>
+            <button onClick={handleEdit} className="detail-button">
+              Edit
+            </button>
           )}
           {foundPlant.userId === userId && (
-            <button onClick={handleDelete}>Delete</button>
+            <button onClick={handleDelete} className="detail-button">
+              Delete
+            </button>
           )}
           <button onClick={handleNewSighting} className="detail-button">
             Add a sighting

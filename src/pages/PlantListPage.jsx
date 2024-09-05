@@ -42,6 +42,7 @@ export default function PlantList({ plants }) {
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getAllAnimals } from "../../lib";
+import "../css/AnimalListPage.css";
 
 //Receive the {animals} as a prop from the App, since the state stored and altered there.
 export default function AnimalList(/*{ animals }*/) {
@@ -71,7 +72,7 @@ export default function AnimalList(/*{ animals }*/) {
     const selectedType = e.target.value;
     setType(selectedType);
 
-    // // Update the theme state based on the selected type
+    // Update the theme state based on the selected type
     // if (selectedType === "Other") {
     //   setTheme("other-theme");
     // } else {
@@ -91,16 +92,16 @@ export default function AnimalList(/*{ animals }*/) {
   //     .catch((err) => console.log(err));
   // }, []); //  <-- This effect will run only once, after the initial render
 
-  useEffect(() => {
-    if (theme) {
-      document.body.classList.add(theme);
-    } else {
-      document.body.classList.remove("other-theme");
-    }
-    return () => {
-      document.body.classList.remove("other-theme");
-    };
-  }, [theme]);
+  // useEffect(() => {
+  //   if (theme) {
+  //     document.body.classList.add(theme);
+  //   } else {
+  //     document.body.classList.remove("other-theme");
+  //   }
+  //   return () => {
+  //     document.body.classList.remove("other-theme");
+  //   };
+  // }, [theme]);
 
   let filteredPlants = plants.filter((plant) => {
     // Filter by type

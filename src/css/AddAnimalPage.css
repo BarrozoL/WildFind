@@ -15,14 +15,16 @@ h3 {
 }
 
 .add-heading {
+  display: flex;
+  justify-content: space-between;
   text-align: center;
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  width: 100%;
+  width: 40vw;
 }
 
 .add-heading select {
-  width: 18%;
+  width: 25%;
 }
 
 select {
@@ -30,17 +32,25 @@ select {
 }
 
 .add-row label {
-  width: 35%;
+  width: 30%;
   padding-right: 1%;
   font-size: 1.1rem;
   text-align: left;
 }
 
-.add-row input,
-.add-row select,
+.add-row select:not(.basic-multi-select),
 .add-row textarea {
   max-width: 40%;
   border-radius: 5px;
+}
+.add-row input:not(.basic-multi-select__input) {
+  max-width: 50%;
+  border-radius: 5px;
+}
+
+.add-row label input {
+  width: 4%;
+  margin-right: 2%;
 }
 
 .add-form {
@@ -52,27 +62,6 @@ select {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.add-row .basic-multi-select .select__control {
-  height: 30px; /* Adjust height */
-  font-size: 14px; /* Adjust font size */
-  padding: 0 8px; /* Adjust padding */
-  border: 1px solid #ccc; /* Ensure border does not add extra height */
-}
-
-.add-row .basic-multi-select .select__menu {
-  max-height: 20px; /* Adjust dropdown menu height */
-  overflow-y: auto;
-}
-
-.add-row .basic-multi-select .select__single-value {
-  line-height: 30px; /* Align text vertically */
-  font-size: 14px; /* Ensure font size matches */
-}
-
-.add-row .basic-multi-select .select__multi-value {
-  margin: 2px; /* Adjust spacing around selected items */
 }
 
 .add-submit {

@@ -634,6 +634,7 @@ export default function AddAnimal() {
             <div className="add-row">
               <label>Image: </label>
               <input
+                className="img"
                 type="file"
                 // name="image"
                 // value={image}
@@ -747,8 +748,54 @@ export default function AddAnimal() {
                 isMulti
                 name="locations"
                 options={locationOptions}
+                styles={{
+                  control: (base) => ({
+                    ...base,
+                    height: "40px", // Set the desired height of the input box
+                    minHeight: "30px",
+                    width: "100%",
+                    minWidth: "100%",
+                  }),
+                  valueContainer: (base) => ({
+                    ...base,
+                    height: "10px !important",
+                    width: "30vw", // Ensure the text stays vertically aligned
+                    padding: "0 8px", // Adjust padding inside the container if needed
+                  }),
+                  valueContainer: (provided) => ({
+                    ...provided,
+                    alignItems: "center",
+                    flexWrap: "nowrap",
+                    padding: "0 5px",
+                    maxWidth: "none",
+                  }),
+                  input: (provided) => ({
+                    ...provided,
+                    width: "100%",
+                    paddingLeft: "5px",
+                  }),
+                  input: (base) => ({
+                    ...base,
+                    margin: "0", // Prevent input text from shifting vertically
+                    padding: "0",
+                    width: "100%",
+                    minWidth: "20vw",
+                    flex: "1 1 auto",
+                  }),
+                  dropdownIndicator: (base) => ({
+                    ...base,
+                    padding: "0", // Adjust padding around the dropdown arrow
+                    height: "40px", // Adjust the height of the dropdown arrow to fit the box
+                    width: "40px", // Adjust width of the dropdown arrow if needed
+                  }),
+                  menu: (base) => ({
+                    ...base,
+                    maxHeight: "auto", // Dropdown list max height
+                  }),
+                }}
+                menuPlacement="auto"
                 className="basic-multi-select"
-                // classNamePrefix="select"
+                classNamePrefix="custom"
                 placeholder="Type or scroll to select..."
                 onChange={handleLocationChange}
                 value={locations}
@@ -763,8 +810,67 @@ export default function AddAnimal() {
                 isMulti
                 name="locations"
                 options={locationOptions}
+                styles={{
+                  control: (base) => ({
+                    ...base,
+                    height: "40px", // Set the desired height of the input box
+                    minHeight: "30px",
+                    width: "100%",
+                    minWidth: "100%",
+                  }),
+                  valueContainer: (base) => ({
+                    ...base,
+                    height: "10px", // Ensure the text stays vertically aligned
+                    padding: "0 8px", // Adjust padding inside the container if needed
+                  }),
+                  valueContainer: (provided) => ({
+                    ...provided,
+                    alignItems: "center",
+                    flexWrap: "nowrap",
+                    padding: "0 5px",
+                    maxWidth: "none",
+                  }),
+                  multiValue: (provided) => ({
+                    ...provided,
+                    fontSize: "20px",
+                    padding: 0,
+                    margin: 0,
+                    maxHeight: "20px",
+                    maxWidth: "30px",
+                    overflow: "hidden",
+                  }),
+                  multiValueLabel: (provided) => ({
+                    ...provided,
+                    fontSize: "16px", // Adjust the font size of the selected text
+                  }),
+                  input: (provided) => ({
+                    ...provided,
+                    width: "100%",
+                    paddingLeft: "5px",
+                    fontSize: "12px",
+                  }),
+                  input: (base) => ({
+                    ...base,
+                    margin: "0", // Prevent input text from shifting vertically
+                    padding: "0",
+                    width: "100%",
+                    minWidth: "20vw",
+                    flex: "1 1 auto",
+                  }),
+                  dropdownIndicator: (base) => ({
+                    ...base,
+                    padding: "0", // Adjust padding around the dropdown arrow
+                    height: "40px", // Adjust the height of the dropdown arrow to fit the box
+                    width: "40px", // Adjust width of the dropdown arrow if needed
+                  }),
+                  menu: (base) => ({
+                    ...base,
+                    maxHeight: "auto", // Dropdown list max height
+                  }),
+                }}
+                menuPlacement="auto"
                 className="basic-multi-select"
-                // classNamePrefix="select"
+                classNamePrefix="custom"
                 placeholder="Type or scroll to select..."
                 onChange={handleLocationChange}
                 value={locations}

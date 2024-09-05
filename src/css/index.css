@@ -94,6 +94,10 @@ body.dark-mode .add-form {
   color: #b5fff0;
 }
 
+body.dark-mode .custom__option {
+  color: black;
+}
+
 /*
 //// AddAnimalSighting themes
 */

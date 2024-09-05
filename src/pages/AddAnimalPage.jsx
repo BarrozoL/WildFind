@@ -533,260 +533,262 @@ export default function AddAnimal() {
   ];
 
   return (
-    <div className="add-form">
-      <h1>What did you spot and where?</h1>
-      <h3>
-        Please check the lists of animals and plants to make sure it hasn't
-        already been added...
-      </h3>
-      <form className="add-inputs">
-        <div className="add-heading">
-          <label>Have you seen a plant or an animal? </label>
-          <select
-            name="category"
-            id="category"
-            onChange={handleCategoryChange}
-            value={isAnimal}
-          >
-            <option value=""></option>
-            <option value="animal">Animal</option>
-            <option value="plant">Plant</option>
-          </select>
-        </div>
-
-        {isAnimal === "plant" && (
-          <div className="add-row">
-            <label>Type of plant: </label>
+    <div className="page">
+      <div className="add-form">
+        <h1>What did you spot and where?</h1>
+        <h3>
+          Please check the lists of animals and plants to make sure it hasn't
+          already been added...
+        </h3>
+        <form className="add-inputs">
+          <div className="add-heading">
+            <label>Have you seen a plant or an animal? </label>
             <select
-              name="animalType"
-              id="animalType"
-              onChange={handleSelectedAnimalType}
-              value={selectedAnimalType}
+              name="category"
+              id="category"
+              onChange={handleCategoryChange}
+              value={isAnimal}
             >
               <option value=""></option>
-              <option value="tree">Tree</option>
-              <option value="berry">Fruit</option>
-              <option value="flower">Flower</option>
-              <option value="other-plant">Other</option>
+              <option value="animal">Animal</option>
+              <option value="plant">Plant</option>
             </select>
           </div>
-        )}
-        {isAnimal === "animal" && (
-          <div className="add-row">
-            <label>Type of animal: </label>
-            <select
-              name="animalType"
-              id="animalType"
-              onChange={handleSelectedAnimalType}
-              value={selectedAnimalType}
-            >
-              <option value=""></option>
-              <option value="bird">Bird</option>
-              <option value="mammal">Mammal</option>
-              <option value="reptile">Reptile</option>
-              <option value="insect">Insect</option>
-              <option value="amphibian">Amphibian</option>
-              <option value="aquatic">Aquatic Animal</option>
-              <option value="pet">Pet</option>
-              <option value="other-animal">Other</option>
-            </select>
-          </div>
-        )}
 
-        {isAnimal === "animal" && (
-          <div className="add-row">
-            <label>Animal name: </label>
-            <input
-              type="text"
-              name="name"
-              value={name}
-              onChange={handleNameChange}
-            />
-          </div>
-        )}
+          {isAnimal === "plant" && (
+            <div className="add-row">
+              <label>Type of plant: </label>
+              <select
+                name="animalType"
+                id="animalType"
+                onChange={handleSelectedAnimalType}
+                value={selectedAnimalType}
+              >
+                <option value=""></option>
+                <option value="tree">Tree</option>
+                <option value="berry">Fruit</option>
+                <option value="flower">Flower</option>
+                <option value="other-plant">Other</option>
+              </select>
+            </div>
+          )}
+          {isAnimal === "animal" && (
+            <div className="add-row">
+              <label>Type of animal: </label>
+              <select
+                name="animalType"
+                id="animalType"
+                onChange={handleSelectedAnimalType}
+                value={selectedAnimalType}
+              >
+                <option value=""></option>
+                <option value="bird">Bird</option>
+                <option value="mammal">Mammal</option>
+                <option value="reptile">Reptile</option>
+                <option value="insect">Insect</option>
+                <option value="amphibian">Amphibian</option>
+                <option value="aquatic">Aquatic Animal</option>
+                <option value="pet">Pet</option>
+                <option value="other-animal">Other</option>
+              </select>
+            </div>
+          )}
 
-        {isAnimal === "plant" && (
-          <div className="add-row">
-            <label>Plant name: </label>
-            <input
-              type="text"
-              name="name"
-              value={name}
-              onChange={handleNameChange}
-            />
-          </div>
-        )}
-
-        {isAnimal === "animal" && (
-          <div className="add-row">
-            <label>Image: </label>
-            <input
-              type="file"
-              // name="image"
-              // value={image}
-              onChange={(e) => handleFileUpload(e)}
-            />
-          </div>
-        )}
-
-        {isAnimal === "plant" && (
-          <div className="add-row">
-            <label>Image: </label>
-            <input
-              type="file"
-              // name="image"
-              // value={image}
-              onChange={(e) => handleFileUpload(e)}
-            />
-          </div>
-        )}
-
-        {isAnimal === "animal" && (
-          <div className="add-row">
-            <label htmlFor="dangerNumber">
-              Estimated Danger Level (0-5) - optional
-            </label>
-            <select
-              name="dangerNumber"
-              id="dangerNumber"
-              onChange={handleDangerChange}
-              value={dangerNumber}
-              className="danger-input"
-            >
-              <option value="">Select a level</option>
-              <option value="0">0</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-
-            <div className="comment-section">
-              <label htmlFor="comment">Comment:</label>
+          {isAnimal === "animal" && (
+            <div className="add-row">
+              <label>Animal name: </label>
               <input
                 type="text"
-                name="comment"
-                id="comment"
-                placeholder="about danger-level..."
-                value={comment}
-                onChange={handleCommentChange}
-                className="comment-input"
+                name="name"
+                value={name}
+                onChange={handleNameChange}
               />
             </div>
-          </div>
-        )}
+          )}
 
-        {isAnimal === "plant" && (
-          <div className="add-row">
-            <label>Edible:</label>
-            <div>
-              <label>
-                <input
-                  type="radio"
-                  name="edible"
-                  value="yes"
-                  checked={edible === "yes"}
-                  onChange={handleEdibleChange}
-                />
-                Yes
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="edible"
-                  value="no"
-                  checked={edible === "no"}
-                  onChange={handleEdibleChange}
-                />
-                No
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="edible"
-                  value="unknown"
-                  checked={edible === "unknown"}
-                  onChange={handleEdibleChange}
-                />
-                Unknown
-              </label>
+          {isAnimal === "plant" && (
+            <div className="add-row">
+              <label>Plant name: </label>
+              <input
+                type="text"
+                name="name"
+                value={name}
+                onChange={handleNameChange}
+              />
             </div>
-          </div>
-        )}
+          )}
 
-        {isAnimal === "animal" && (
-          <div className="add-row">
-            <label>Description: </label>
-            <input
-              type="text"
-              name="description"
-              value={description}
-              onChange={handleDescriptionChange}
-            />
-          </div>
-        )}
+          {isAnimal === "animal" && (
+            <div className="add-row">
+              <label>Image: </label>
+              <input
+                type="file"
+                // name="image"
+                // value={image}
+                onChange={(e) => handleFileUpload(e)}
+              />
+            </div>
+          )}
 
-        {isAnimal === "plant" && (
-          <div className="add-row">
-            <label>Description: </label>
-            <input
-              type="text"
-              name="description"
-              value={description}
-              onChange={handleDescriptionChange}
-            />
-          </div>
-        )}
+          {isAnimal === "plant" && (
+            <div className="add-row">
+              <label>Image: </label>
+              <input
+                type="file"
+                // name="image"
+                // value={image}
+                onChange={(e) => handleFileUpload(e)}
+              />
+            </div>
+          )}
 
-        {isAnimal === "animal" && (
-          <div className="add-row">
-            <label>Native to: </label>
-            <Select
-              isMulti
-              name="locations"
-              options={locationOptions}
-              className="basic-multi-select"
-              // classNamePrefix="select"
-              placeholder="Type or scroll to select..."
-              onChange={handleLocationChange}
-              value={locations}
-            />
-          </div>
-        )}
+          {isAnimal === "animal" && (
+            <div className="add-row">
+              <label htmlFor="dangerNumber">
+                Estimated Danger Level (0-5) - optional
+              </label>
+              <select
+                name="dangerNumber"
+                id="dangerNumber"
+                onChange={handleDangerChange}
+                value={dangerNumber}
+                className="danger-input"
+              >
+                <option value="">Select a level</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
 
-        {isAnimal === "plant" && (
-          <div className="add-row">
-            <label>Native to: </label>
-            <Select
-              isMulti
-              name="locations"
-              options={locationOptions}
-              className="basic-multi-select"
-              // classNamePrefix="select"
-              placeholder="Type or scroll to select..."
-              onChange={handleLocationChange}
-              value={locations}
-            />
-          </div>
-        )}
+              <div className="comment-section">
+                <label htmlFor="comment">Comment:</label>
+                <input
+                  type="text"
+                  name="comment"
+                  id="comment"
+                  placeholder="about danger-level..."
+                  value={comment}
+                  onChange={handleCommentChange}
+                  className="comment-input"
+                />
+              </div>
+            </div>
+          )}
 
-        {isAnimal === "animal" && (
-          <div className="add-submit">
-            <button type="submit" onClick={handleSubmit}>
-              Submit
-            </button>
-          </div>
-        )}
+          {isAnimal === "plant" && (
+            <div className="add-row">
+              <label>Edible:</label>
+              <div>
+                <label>
+                  <input
+                    type="radio"
+                    name="edible"
+                    value="yes"
+                    checked={edible === "yes"}
+                    onChange={handleEdibleChange}
+                  />
+                  Yes
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="edible"
+                    value="no"
+                    checked={edible === "no"}
+                    onChange={handleEdibleChange}
+                  />
+                  No
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="edible"
+                    value="unknown"
+                    checked={edible === "unknown"}
+                    onChange={handleEdibleChange}
+                  />
+                  Unknown
+                </label>
+              </div>
+            </div>
+          )}
 
-        {isAnimal === "plant" && (
-          <div className="add-submit">
-            <button type="submit" onClick={handleSubmit}>
-              Submit
-            </button>
-          </div>
-        )}
-      </form>
+          {isAnimal === "animal" && (
+            <div className="add-row">
+              <label>Description: </label>
+              <input
+                type="text"
+                name="description"
+                value={description}
+                onChange={handleDescriptionChange}
+              />
+            </div>
+          )}
+
+          {isAnimal === "plant" && (
+            <div className="add-row">
+              <label>Description: </label>
+              <input
+                type="text"
+                name="description"
+                value={description}
+                onChange={handleDescriptionChange}
+              />
+            </div>
+          )}
+
+          {isAnimal === "animal" && (
+            <div className="add-row">
+              <label>Native to: </label>
+              <Select
+                isMulti
+                name="locations"
+                options={locationOptions}
+                className="basic-multi-select"
+                // classNamePrefix="select"
+                placeholder="Type or scroll to select..."
+                onChange={handleLocationChange}
+                value={locations}
+              />
+            </div>
+          )}
+
+          {isAnimal === "plant" && (
+            <div className="add-row">
+              <label>Native to: </label>
+              <Select
+                isMulti
+                name="locations"
+                options={locationOptions}
+                className="basic-multi-select"
+                // classNamePrefix="select"
+                placeholder="Type or scroll to select..."
+                onChange={handleLocationChange}
+                value={locations}
+              />
+            </div>
+          )}
+
+          {isAnimal === "animal" && (
+            <div className="add-submit">
+              <button type="submit" onClick={handleSubmit}>
+                Submit
+              </button>
+            </div>
+          )}
+
+          {isAnimal === "plant" && (
+            <div className="add-submit">
+              <button type="submit" onClick={handleSubmit}>
+                Submit
+              </button>
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 }

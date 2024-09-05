@@ -87,8 +87,8 @@ const Navbar = () => {
           <NavLink to="/plants" className="NavLink">
             All Plants
           </NavLink>
-          <NavLink to="/maps" className="NavLink">
-            Maps
+          <NavLink to="/maps/world-map" className="NavLink">
+            World Map
           </NavLink>
           <NavLink to="/actions" className="NavLink">
             See Community Activity
@@ -113,6 +113,7 @@ const Navbar = () => {
 
                 {currentUser?.notifications?.length}
               </NavLink>
+
               <div className="profile-dropdown">
                 <NavLink
                   to={`/user-profile/${user._id}`}
@@ -145,7 +146,18 @@ const Navbar = () => {
                   </button>
                 </div>
               </div>
-
+              <NavLink
+                onClick={handleNotifications}
+                style={{ border: "1px solid black" }}
+                to={`/user/messages/${user._id}`}
+                className="notification-img"
+              >
+                <img
+                  width="30px"
+                  src="https://cdn-icons-png.flaticon.com/512/3119/3119338.png"
+                />
+                {currentUser?.notifications?.length}
+              </NavLink>
               {/* <span>{user && user.name}</span> */}
             </>
           )}

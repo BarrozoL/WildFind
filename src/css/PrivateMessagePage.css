@@ -155,3 +155,12 @@ root {
   justify-content: center;
   background-color: rgb(15, 149, 47);
 }
+
+.refreshChat:hover {
+  background-color: rgb(15, 155, 10);
+  border: 1px solid green;
+}
+.refreshChat {
+  text-align: center;
+  justify-self: center;
+}

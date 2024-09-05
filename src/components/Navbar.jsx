@@ -18,7 +18,7 @@ const Navbar = () => {
 
   useEffect(() => {
     fetchUser();
-  }, [currentUser.notifications]);
+  }, [currentUser?.notifications]);
 
   const clearNotifications = async () => {
     axios;
@@ -104,9 +104,7 @@ const Navbar = () => {
               <NavLink
                 onClick={handleNotifications}
                 style={{ border: "1px solid black" }}
-
                 to={`/user/messages/${user._id}`}
-
                 className="notification-img"
               >
                 <img

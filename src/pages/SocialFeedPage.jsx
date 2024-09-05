@@ -97,7 +97,6 @@ export default function SocialFeedPage() {
       </select>
       <div className="itemWrapper">
         {filteredActions.map((action, index) => (
-        {sightings.map((action, index) => (
           <>
             {action?.sighting && (
               <div className="post-comment-wrapper" key={action._id}>

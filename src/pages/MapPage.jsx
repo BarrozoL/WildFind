@@ -31,27 +31,6 @@ export default function MapPage({}) {
     setLocation(e.target.id);
   }
 
-  /*  let matchingPlants = new Set([]);
-
-  plantSightings.map((plant) => {
-    plant.sightings.map((sight) => {
-      if (location === sight.location) {
-        console.log("this is a plant", plant, matchingPlants);
-        matchingPlants.add(plant);
-      }
-    });
-  });
-
-  let matchingAnimals = new Set([]);
-
-  animalSightings.map((animal) => {
-    animal.sightings.map((sight) => {
-      if (location === sight.location) {
-        matchingAnimals.add(animal);
-      }
-    });
-  }); */
-
   return (
     <>
       <div className="map-wrapper">

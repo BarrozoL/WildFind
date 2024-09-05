@@ -113,8 +113,11 @@ export default function SocialFeedPage() {
                   />
                   {action?.user?.username}{" "}
                 </Link>{" "}
-                Has spotted {action?.sighting?.specimenId?.name} in{" "}
-                {action?.sighting?.location}
+                Has spotted{" "}
+                <Link to={`/animals/${action?.sighting?.specimenId?._id}`}>
+                  {action?.sighting?.specimenId?.name}
+                </Link>{" "}
+                in {action?.sighting?.location}
               </h3>
               <h4>Sighting description: {action?.sighting?.description}</h4>
               <p>Entry added at: {action?.sighting?.date}</p>

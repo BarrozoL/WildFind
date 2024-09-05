@@ -1,0 +1,14 @@
+.world-map-svg {
+  fill: purple;
+  stroke: black;
+}
+
+svg {
+  width: 100%;
+  height: auto;
+  margin-top: 80px;
+}
+
+.landxx {
+  fill: black;
+}

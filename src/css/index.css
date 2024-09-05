@@ -403,6 +403,15 @@ body.other-theme .logout {
   background-color: rgb(159, 103, 211);
   color: white;
 }
+
+.NavLink:hover {
+  text-decoration: underline;
+}
+
+.navbar img:hover {
+  height: 102px;
+}
+
 /*
 //// Plant Details Page themes
 */

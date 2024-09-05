@@ -390,17 +390,69 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
   ];
 
   return (
-    <div className="sighting-form">
+    <div
+      className="sighting-form"
+      style={{
+        maxWidth: "750px",
+        height: "auto",
+        padding: "20px",
+        marginTop: "50px",
+        borderRadius: "10px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
       {foundSpecimen && (
         <h1>Where and when did you spot {foundSpecimen.name}?</h1>
       )}
-      <form className="sighting-inputs">
+      <form
+        className="sighting-inputs"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+          textAlign: "left",
+        }}
+      >
         <div className="sighting-row">
           <label>Location:</label>
           <Select
             name="location"
             options={locationOptions}
             className="basic-select"
+            styles={{
+              control: (base) => ({
+                ...base,
+                height: "50px", // Set the desired height of the input box
+                minHeight: "50px",
+                width: "100%",
+                minWidth: "100%",
+              }),
+              valueContainer: (base) => ({
+                ...base,
+                height: "50px", // Ensure the text stays vertically aligned
+                padding: "0 8px", // Adjust padding inside the container if needed
+              }),
+              input: (base) => ({
+                ...base,
+                margin: "0", // Prevent input text from shifting vertically
+                padding: "0",
+                width: "100%",
+                minWidth: "20vw",
+                flex: "1 1 auto",
+              }),
+              dropdownIndicator: (base) => ({
+                ...base,
+                padding: "0", // Adjust padding around the dropdown arrow
+                height: "40px", // Adjust the height of the dropdown arrow to fit the box
+                width: "40px", // Adjust width of the dropdown arrow if needed
+              }),
+              menu: (base) => ({
+                ...base,
+                maxHeight: "auto", // Dropdown list max height
+              }),
+            }}
             placeholder="Type or scroll to select..."
             onChange={handleLocationChange}
             value={location}
@@ -410,28 +462,24 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
           <label>Date:</label>
           <DatePicker selected={date} onChange={handleDateChange} />
         </div>
-
         <div className="sighting-row">
-          <label>Description of sighting:</label>
-
-          <div>
-            <label>Comment:</label>
-            <input
-              type="text"
-              name="description"
-              value={description}
-              onChange={handleDescriptionChange}
-            />
-          </div>
-          <div className="sighting-row">
-            <label>{`Picture of sighting (optional):`}</label>
-            <input type="file" onChange={(e) => handleFileUpload(e)} />
-          </div>
-          <div className="sighting-submit">
-            <button type="submit" onClick={handleSubmit}>
-              Submit
-            </button>
-          </div>
+          <label>Comment:</label>
+          <textarea
+            rows="2"
+            cols="40"
+            name="description"
+            value={description}
+            onChange={handleDescriptionChange}
+          />
+        </div>
+        <div className="sighting-row">
+          <label>{`Picture of sighting (optional):`}</label>
+          <input type="file" onChange={(e) => handleFileUpload(e)} />
+        </div>
+        <div className="sighting-submit">
+          <button type="submit" onClick={handleSubmit}>
+            Submit
+          </button>
         </div>
       </form>
     </div>

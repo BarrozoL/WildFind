@@ -6,7 +6,7 @@
 
 h3 {
   margin-top: 0;
-  margin-bottom: 5%;
+  margin-bottom: 1rem;
 }
 
 .add-row {
@@ -17,7 +17,7 @@ h3 {
 .add-heading {
   text-align: center;
   font-size: 1.5rem;
-  margin-bottom: 5%;
+  margin-bottom: 1rem;
   width: 100%;
 }
 
@@ -45,7 +45,7 @@ select {
 
 .add-form {
   width: 1000px;
-  height: auto;
+  min-height: 100vh;
   padding: 20px;
   margin-top: 50px;
   border-radius: 10px;
@@ -54,8 +54,28 @@ select {
   align-items: center;
 }
 
+.add-row .basic-multi-select .select__control {
+  height: 30px; /* Adjust height */
+  font-size: 14px; /* Adjust font size */
+  padding: 0 8px; /* Adjust padding */
+  border: 1px solid #ccc; /* Ensure border does not add extra height */
+}
+
+.add-row .basic-multi-select .select__menu {
+  max-height: 20px; /* Adjust dropdown menu height */
+  overflow-y: auto;
+}
+
+.add-row .basic-multi-select .select__single-value {
+  line-height: 30px; /* Align text vertically */
+  font-size: 14px; /* Ensure font size matches */
+}
+
+.add-row .basic-multi-select .select__multi-value {
+  margin: 2px; /* Adjust spacing around selected items */
+}
+
 .add-submit {
   text-align: center;
   width: 100%;
-  margin-top: 20px;
 }

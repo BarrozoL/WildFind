@@ -19,13 +19,13 @@ export default function PrivateMessagePage() {
 
   useEffect(() => {
     getMessages();
-  }, [userId]);
+  }, [selectedConversation, messageText]);
 
   const clearNotifications = async () => {
     axios;
     try {
       await axios.put(
-        `http://localhost:5005/api/users/${userId}/notifications`
+        `https://wildfindserver.adaptable.app/api/users/${userId}/notifications`
       );
       console.log("Notifications cleared successfully");
     } catch (error) {
@@ -35,26 +35,35 @@ export default function PrivateMessagePage() {
 
   const getMessages = async () => {
     axios
-      .get(`http://localhost:5005/api/users/${userId}`)
+      .get(`https://wildfindserver.adaptable.app/api/users/${userId}`)
       .then((response) => {
         setUser(response.data);
       })
       .catch((error) => {
         console.error("Error fetching messages:", error);
       });
-    clearNotifications();
   };
 
   const sendMessage = async () => {
+    /*   if (selectedConversation) {
+      const receiverId =
+        selectedConversation.user1Id._id === currentUserId
+          ? selectedConversation.user2Id._id
+          : selectedConversation.user1Id._id;
+
+      console.log("receiverId", receiverId);
+    } */
+
     axios
-      .post(`http://localhost:5005/api/messages/${userId}`, {
+      .post(`https://wildfindserver.adaptable.app/api/messages/${userId}`, {
         sender: currentUserId,
         text: messageText,
       })
       .then((response) => {
         //set sentMessages state to be able to update useEffect
         //when message is send and render it without a page refresh
-        setSentMessages(response.data);
+        setSentMessages([...sentMessages, response.data]);
+
         console.log("Message sent", response.data);
       })
       .catch((error) => {
@@ -148,6 +157,7 @@ export default function PrivateMessagePage() {
           >
             <p>Send</p>
           </button>
+          <button onClick={handleConversationClick}>Refresh Chat</button>
         </span>
       </div>
     </div>

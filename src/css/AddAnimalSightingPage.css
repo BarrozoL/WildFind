@@ -14,10 +14,40 @@
 
 .sighting-row input,
 .sighting-row select,
-.sighting-row textarea,
+.sighting-row textarea {
+  width: 60%;
+}
+
 .sighting-row .react-datepicker-wrapper {
   width: 60%;
-  border-radius: 5px;
+}
+
+.sighting-row .basic-select input {
+  height: 30px;
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+.react-datepicker__triangle {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.react-datepicker__header {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.react-datepicker-wrapper input {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .sighting-form {
@@ -25,7 +55,6 @@
   height: auto;
   padding: 20px;
   margin-top: 50px;
-  border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;

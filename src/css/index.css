@@ -52,9 +52,11 @@ button:focus-visible {
 //////// THEME STYLING
 ////
 */
+
 /*
 //// AddAnimals themes
 */
+
 body.light-mode .add-form {
   background-color: #d7e8c0;
 }
@@ -91,9 +93,11 @@ body.dark-mode .add-form {
   background-color: #b581e4;
   color: #b5fff0;
 }
+
 /*
 //// AddAnimalSighting themes
 */
+
 body.light-mode .sighting-form {
   background-color: #d7e8c0;
 }
@@ -136,6 +140,11 @@ body.dark-mode .sighting-inputs input {
 body.other-theme .sighting-form button {
   border: 1px solid #b5fff0;
 }
+
+/*
+//// AddAPLantSighting themes
+*/
+
 /*
 //// AnimalDetails Page themes
 */
@@ -365,6 +374,7 @@ body.light-mode .home button:hover {
   border: 1px solid white;
   border-color: white;
 }
+
 /*
 //// Map themes
 */
@@ -404,12 +414,42 @@ body.other-theme .logout {
   color: white;
 }
 
+body.other-theme .logout:hover {
+  border-color: white;
+  background-color: rgb(159, 103, 211);
+  color: white;
+}
+
 .NavLink:hover {
   text-decoration: underline;
 }
 
-.navbar img:hover {
+.nav-img:hover {
   height: 102px;
+}
+
+body.light-mode .notification-img:hover {
+  border: 1px solid white;
+}
+
+body.dark-mode .notification-img:hover {
+  border: 1px solid white;
+}
+
+body.other-theme .notification-img:hover {
+  border: 1px solid white;
+}
+
+body.light-mode .notification-img {
+  border: 1px solid rgba(116, 172, 0, 255);
+}
+
+body.dark-mode .notification-img {
+  border: 1px solid blueviolet;
+}
+
+body.other-theme .notification-img {
+  border: 1px solid #20c9c1;
 }
 
 /*

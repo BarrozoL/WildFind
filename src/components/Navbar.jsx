@@ -18,18 +18,27 @@ const Navbar = () => {
 
   useEffect(() => {
     fetchUser();
-  }, []);
+  }, [currentUser.notifications]);
 
-  if (currentUser) {
-    console.log("current", currentUser);
-  }
+  const clearNotifications = async () => {
+    axios;
+    try {
+      await axios.put(
+        `http://localhost:5005/api/users/${currentUser._id}/notifications`
+      );
+      console.log("Notifications cleared successfully");
+    } catch (error) {
+      console.error("Error clearing notifications:", error);
+    }
+  };
 
   const fetchUser = async () => {
     axios
-      .get(`http://localhost:5005/api/users/${decodedToken?._id}`)
+      .get(
+        `https://wildfindserver.adaptable.app/api/users/${decodedToken?._id}`
+      )
       .then((response) => {
         setCurrentUser(response.data);
-        console.log("response.data", response.data);
       })
       .catch((error) => {
         console.error("Error fetching user:", error);
@@ -41,6 +50,10 @@ const Navbar = () => {
   const handleLogout = () => {
     logOutUser();
     navigate("/");
+  };
+
+  const handleNotifications = () => {
+    clearNotifications();
   };
 
   return (
@@ -89,15 +102,18 @@ const Navbar = () => {
           {isLoggedIn && (
             <>
               <NavLink
+                onClick={handleNotifications}
                 style={{ border: "1px solid black" }}
+
                 to={`/user/messages/${user._id}`}
-                className="dropdown-item"
+
+                className="notification-img"
               >
                 <img
                   width="30px"
                   src="https://cdn-icons-png.flaticon.com/512/3119/3119338.png"
                 />
-                {console.log("notif size", currentUser?.notifications?.length)}
+
                 {currentUser?.notifications?.length}
               </NavLink>
               <div className="profile-dropdown">

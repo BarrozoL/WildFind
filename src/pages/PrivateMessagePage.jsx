@@ -21,18 +21,6 @@ export default function PrivateMessagePage() {
     getMessages();
   }, [selectedConversation, messageText]);
 
-  const clearNotifications = async () => {
-    axios;
-    try {
-      await axios.put(
-        `https://wildfindserver.adaptable.app/api/users/${userId}/notifications`
-      );
-      console.log("Notifications cleared successfully");
-    } catch (error) {
-      console.error("Error clearing notifications:", error);
-    }
-  };
-
   const getMessages = async () => {
     axios
       .get(`https://wildfindserver.adaptable.app/api/users/${userId}`)
@@ -157,7 +145,6 @@ export default function PrivateMessagePage() {
           >
             <p>Send</p>
           </button>
-          <button onClick={handleConversationClick}>Refresh Chat</button>
         </span>
       </div>
     </div>

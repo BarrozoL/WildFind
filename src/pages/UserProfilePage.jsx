@@ -72,8 +72,8 @@ export default function UserProfilePage() {
             <img
               src={twoSightingsBadge}
               alt="Congratulations! You have made at least 2 sightings"
-              width="50px"
-              height="50px"
+              width="60px"
+              height="60px"
               style={{ border: "none" }}
             />
             <span className="tooltip-text">
@@ -91,8 +91,8 @@ export default function UserProfilePage() {
             <img
               src={fiveSightingsBadge}
               alt="Congratulations! You have made at least 5 sightings"
-              width="50px"
-              height="50px"
+              width="60px"
+              height="60px"
               style={{ border: "none" }}
             />
             <span className="tooltip-text">
@@ -109,8 +109,8 @@ export default function UserProfilePage() {
             <img
               src={tenSightingsBadge}
               alt="Congratulations! You have made at least 10 sightings"
-              width="50px"
-              height="50px"
+              width="60px"
+              height="60px"
               style={{ border: "none" }}
             />
             <span className="tooltip-text">
@@ -128,8 +128,8 @@ export default function UserProfilePage() {
             <img
               src={twoAchievementsBadge}
               alt="Congratulations! You have earned at least 2 achievements"
-              width="50px"
-              height="50px"
+              width="60px"
+              height="6Le0px"
               style={{ border: "none" }}
             />
             <span className="tooltip-text">

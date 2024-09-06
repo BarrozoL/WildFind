@@ -64,7 +64,7 @@ export default function WatchDetailsPage() {
 
   return (
     <>
-      <div className="animalDetailWrapper" style={{ marginTop: "11%" }}>
+      <div className="animalDetailWrapper">
         {console.log("animal: ", watchItem)}
         {console.log("note: ", watchItem.note)}
         <h3>{watchItem.name}</h3>

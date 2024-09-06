@@ -123,7 +123,7 @@ export default function AnimalList(/*{ animals }*/) {
                   style={{
                     width: "180px",
                     height: "130px",
-                    overflow: "hidden",
+                    // overflow: "hidden",
                     position: "relative",
                     marginLeft: "5%",
                   }}
@@ -140,6 +140,7 @@ export default function AnimalList(/*{ animals }*/) {
                       position: "absolute",
                       top: "0",
                       left: "0",
+                      marginTop: "5%",
                     }}
                   />
                 </div>

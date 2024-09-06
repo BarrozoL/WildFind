@@ -23,6 +23,7 @@ import EditUserPage from "./pages/EditUserPage"; // Import the EditUserPage
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 
 import PersonalWatchlistPage from "./pages/PersonalWatchlistPage";
+import WatchDetailsPage from "./pages/WatchDetailsPage";
 import SocialFeedPage from "./pages/SocialFeedPage";
 import UserProfilePage from "./pages/UserProfilePage";
 import PrivateMessagePage from "./pages/PrivateMessagePage";
@@ -243,6 +244,7 @@ function App() {
             />
           }
         />
+
         <Route
           exact
           path="/animal-add"
@@ -300,6 +302,11 @@ function App() {
           }
         />
         <Route path="/watchlist/:userId" element={<PersonalWatchlistPage />} />
+        <Route
+          exact
+          path={`/watchlist/:userId/:watchItemId`}
+          element={<WatchDetailsPage />}
+        />
         <Route path="/actions" element={<SocialFeedPage />} />
         <Route path="/user-profile/:userId" element={<UserProfilePage />} />
 
@@ -313,7 +320,6 @@ function App() {
         <Route path="/maps/asia" element={<AsiaMap />} />
         <Route path="/maps/oceania" element={<OceaniaMap />} />
         <Route path="/maps/world-map" element={<WorldMap />} />
-       
 
         <Route
           path="/edit-user/:userId"

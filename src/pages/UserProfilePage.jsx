@@ -3,6 +3,10 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import "../css/UserProfilePage.css";
+import twoSightingsBadge from "../assets/images/bunny-badge.png";
+import fiveSightingsBadge from "../assets/images/fox-badge.png";
+import tenSightingsBadge from "../assets/images/bear-badge.png";
+import twoAchievementsBadge from "../assets/images/bronze-badge.png";
 
 export default function UserProfilePage() {
   const [user, setUser] = useState(null);
@@ -64,7 +68,18 @@ export default function UserProfilePage() {
     if (user.sightings.length >= 2) {
       achievements.push(
         <p key="achievement-1">
-          {/* Congratulations! You have made at least 2 sightings */}2 sightings
+          <div className="tooltip">
+            <img
+              src={twoSightingsBadge}
+              alt="Congratulations! You have made at least 2 sightings"
+              width="60px"
+              height="60px"
+              style={{ border: "none" }}
+            />
+            <span className="tooltip-text">
+              Congratulations! You have made at least 2 sightings
+            </span>
+          </div>
         </p>
       );
     }
@@ -72,15 +87,36 @@ export default function UserProfilePage() {
     if (user.sightings.length >= 5) {
       achievements.push(
         <p key="achievement-2">
-          {/* Congratulations! You have made at least 5 sightings */}5 sightings
+          <div className="tooltip">
+            <img
+              src={fiveSightingsBadge}
+              alt="Congratulations! You have made at least 5 sightings"
+              width="60px"
+              height="60px"
+              style={{ border: "none" }}
+            />
+            <span className="tooltip-text">
+              Congratulations! You have made at least 5 sightings
+            </span>
+          </div>
         </p>
       );
     }
     if (user.sightings.length >= 10) {
       achievements.push(
         <p key="achievement-3">
-          {/* Congratulations! You have made at least 10 sightings */}
-          10 sightings
+          <div className="tooltip">
+            <img
+              src={tenSightingsBadge}
+              alt="Congratulations! You have made at least 10 sightings"
+              width="60px"
+              height="60px"
+              style={{ border: "none" }}
+            />
+            <span className="tooltip-text">
+              Congratulations! You have made at least 10 sightings
+            </span>
+          </div>
         </p>
       );
     }
@@ -88,8 +124,18 @@ export default function UserProfilePage() {
     if (achievements.length >= 2) {
       achievements.push(
         <p key="achievement-4">
-          {/* Congratulations! You have earned at least 2 achievements! */}2
-          achievements
+          <div className="tooltip">
+            <img
+              src={twoAchievementsBadge}
+              alt="Congratulations! You have earned at least 2 achievements"
+              width="60px"
+              height="60px"
+              style={{ border: "none" }}
+            />
+            <span className="tooltip-text">
+              Congratulations! You have earned at least 2 achievements
+            </span>
+          </div>
         </p>
       );
     }

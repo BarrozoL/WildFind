@@ -85,6 +85,22 @@ body.dark-mode .comment-add input {
   border-radius: 5px;
 }
 
+body.light-mode .comment-add-addition input {
+  background-color: #eaf3d7;
+  border-color: rgb(44, 140, 121);
+  border-width: 2px;
+  color: rgb(44, 140, 121);
+  border-radius: 5px;
+}
+
+body.dark-mode .comment-add-addition input {
+  background-color: #121212;
+  border-color: rgb(44, 140, 121);
+  border-width: 2px;
+  color: rgb(44, 140, 121);
+  border-radius: 5px;
+}
+
 body.dark-mode .comment-add button {
   background-color: #8a2be2;
 }

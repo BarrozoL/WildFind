@@ -64,7 +64,10 @@ export default function AnimalCard({ animals }) {
       location: foundAnimal?.location,
       dangerLevel: foundAnimal?.dangerLevel,
       edible: foundAnimal?.edible,
+      note: "",
     };
+
+    console.log("Request Body:", requestBody);
 
     watchService
       .createWatch(userId, requestBody)
@@ -101,7 +104,7 @@ export default function AnimalCard({ animals }) {
     <>
       <div className="animalDetailWrapper">
         <div key={foundAnimal?._id}></div>
-        {console.log(foundAnimal)}
+        {console.log("animal: ", foundAnimal)}
         <h3>{foundAnimal?.name}</h3>
         <img src={foundAnimal.image} alt={foundAnimal?.name} width="300px" />
         <p>{`Danger level: ${foundAnimal?.dangerLevel}`}</p>

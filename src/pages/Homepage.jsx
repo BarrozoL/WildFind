@@ -18,7 +18,18 @@ export default function HomePage() {
   };
 
   return (
-    <div className="home">
+    <div className="home" style={{ marginTop: "5%" }}>
+      {/* <h2
+        style={{
+          textAlign: "center",
+          textShadow:
+            "-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff, 5px 5px 5px rgba(0, 0, 0, 0.1)",
+          transform: "rotate(3deg)",
+          display: "inline-block",
+        }}
+      >
+        Discover, Share, and Connect with Nature in Every Corner
+      </h2> */}
       <img src={WildFindLogo} alt="WildFind logo" width="50%" height="50%" />
 
       <br />

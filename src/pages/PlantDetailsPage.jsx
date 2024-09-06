@@ -64,6 +64,7 @@ export default function AnimalCard({ animals }) {
       location: foundPlant.location,
       dangerLevel: foundPlant.dangerLevel,
       edible: foundPlant.edible,
+      note: "",
     };
 
     watchService

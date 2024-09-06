@@ -1,84 +1,113 @@
-/* import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getWatch } from "../../lib";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 import "../css/WatchDetailsPage.css";
 
-function WatchDetails() {
-  const [foundWatch, setFoundWatch] = useState(null);
-  const { watchId } = useParams();
+export default function WatchDetailsPage() {
+  const { watchItemId } = useParams();
+  const [watchItem, setWatchItem] = useState(null);
+  const [newNote, setNewNote] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    getWatch(watchId)
-      .then((data) => {
-        console.log("Fetched watch:", data);
-        setFoundWatch(data);
-      })
-      .catch((error) => console.error("Error fetching watch:", error));
-  }, [watchId]);
+  const token = localStorage.getItem("authToken");
+  const decodedToken = token ? jwtDecode(token) : null;
+  const loggedInUserId = decodedToken ? decodedToken._id : null;
 
   useEffect(() => {
-    if (foundWatch && foundWatch.typeId === 8) {
-      document.body.classList.add("other-theme");
-    } else {
-      document.body.classList.remove("other-theme");
+    if (loggedInUserId && watchItemId) {
+      fetchWatchItem();
     }
+  }, [loggedInUserId, watchItemId]);
 
-    // Cleanup function
-    return () => {
-      document.body.classList.remove("other-theme");
-    };
-  }, [foundWatch]);
-
-  const handleNavigate = () => {
-    navigate("/watch");
+  const fetchWatchItem = async () => {
+    try {
+      const response = await axios.get(
+        `https://wildfindserver.adaptable.app/api/watchlist/${watchItemId}`
+      );
+      setWatchItem(response.data);
+    } catch (error) {
+      console.error("Error fetching watch item details:", error);
+    }
   };
 
-  const handleEditNavigate = () => {
-    navigate(`/watch/${watchId}/edit-watch`);
+  const handleNavigateBack = () => {
+    navigate(`/watchlist/${loggedInUserId}`);
   };
 
-  if (!foundWatch) return <p>Loading...</p>;
+  const handleNoteChange = (e) => {
+    setNewNote(e.target.value);
+  };
 
-  console.log(
-    foundWatch ? `location: ${foundWatch.location}` : "foundWatch is null"
-  );
-  console.log(
-    foundWatch ? `dangerLevel: ${foundWatch.dangerLevel}` : "foundWatch is null"
-  );
-  console.log(
-    foundWatch ? `description: ${foundWatch.description}` : "foundWatch is null"
-  );
+  const handleUpdateNote = async () => {
+    try {
+      await axios.put(
+        `https://wildfindserver.adaptable.app/api/watchlist/${watchItemId}`,
+        { note: newNote } // Only send the `note` field
+      );
+      fetchWatchItem(); // Fetch the updated watch item
+      setIsEditing(false); // Hide the edit form after updating
+    } catch (error) {
+      console.error("Error updating note:", error);
+    }
+  };
+
+  const handleEditToggle = () => {
+    if (!isEditing) {
+      setNewNote(watchItem.note || ""); // Initialize the note field when starting to edit
+    }
+    setIsEditing(!isEditing); // Toggle the edit form visibility
+  };
+
+  if (!watchItem) return <p>Loading...</p>;
 
   return (
-    <div className="animalDetailWrapper">
-      <div key={foundWatch.id}>
-        <h3>{foundWatch.name}</h3>
-        <img src={foundWatch.image} alt={foundWatch.name} width="300px" />
-        <p>Danger Level: {foundWatch.dangerLevel}</p>
-        <p>{foundWatch.description}</p>
-        <p>Native to {foundWatch.location}</p>
-        <div className="button-details-watch">
-          <button className="watch-detail-button" onClick={handleEditNavigate}>
-            Edit
-          </button>
-          <button className="watch-detail-button" onClick={handleNavigate}>
-            Back
+    <>
+      <div className="watchItemDetailWrapper">
+        {console.log("animal: ", watchItem)}
+        {console.log("note: ", watchItem.note)}
+        <h3>{watchItem.name}</h3>
+        <img src={watchItem.image} alt={watchItem.name} width="300px" />
+        <p>
+          <b>Description: </b>
+          {`${watchItem.description || "No description available"}`}
+        </p>
+        <p>
+          <b>Location: </b>
+          {`${watchItem.location?.join(", ") || "Location unknown"}`}
+        </p>
+        {/* <p>
+          <b>Note: </b>
+          {`${watchItem.note || "Add a note"}`}
+        </p>
+
+      
+        <button onClick={handleEditToggle} className="edit-note-button">
+          {isEditing ? "Cancel Edit" : "Edit Note"}
+        </button>
+
+
+        {isEditing && (
+          <div className="edit-note">
+            <textarea
+              value={newNote}
+              onChange={handleNoteChange}
+              placeholder={watchItem.note || "Edit your note here..."}
+            />
+            <button onClick={handleUpdateNote} className="update-note-button">
+              Save Note
+            </button>
+          </div>
+        )} */}
+
+        {/* Back to Watchlist Button */}
+        <div className="button-details">
+          <button onClick={handleNavigateBack} className="detail-button">
+            Back to Watchlist
           </button>
         </div>
       </div>
-    </div>
+    </>
   );
 }
-
-export default WatchDetails;
-
-/*
-note:
-.location is printing danger level, .dangerLevel is printing description, and .description is printing location. 
-Also .description prints "native to ..." so if I do <p>Native to: {foundWatch.description}</p> it returns Native to: Native to ...
-I noticed in AnimalCard.jsx it was exporting `Native to ${foundAnimal.location}, but I fixed this and still have this issue
-I have been trying to fix it and I am tired and stuck.
-Will go back to fix. 
-
- */

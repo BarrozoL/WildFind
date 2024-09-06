@@ -102,7 +102,10 @@ export default function AnimalCard({ animals }) {
 
   return (
     <>
-      <div className="animalDetailWrapper">
+      <div
+        className="animalDetailWrapper"
+        style={{ margin: "20% 0 20% 0", height: "90vh" }}
+      >
         <div key={foundAnimal?._id}></div>
         {console.log("animal: ", foundAnimal)}
         <h3>{foundAnimal?.name}</h3>

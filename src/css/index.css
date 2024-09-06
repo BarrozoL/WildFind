@@ -94,6 +94,10 @@ body.dark-mode .add-form {
   color: #b5fff0;
 }
 
+body.dark-mode .custom__option {
+  color: black;
+}
+
 /*
 //// AddAnimalSighting themes
 */
@@ -385,10 +389,22 @@ body.light-mode .navbar {
   background-color: rgba(116, 172, 0, 255);
   color: white;
 }
+
+body.light-mode .dropdown-content {
+  background-color: rgba(116, 172, 0, 255);
+  color: white;
+}
+
 body.dark-mode .navbar {
   background-color: blueviolet;
   color: white;
 }
+
+body.dark-mode .dropdown-content {
+  background-color: blueviolet;
+  color: white;
+}
+
 body.light-mode .button {
   background: rgb(44, 140, 121);
   color: white;
@@ -409,12 +425,18 @@ body.other-theme .navbar {
   background-color: #20c9c1;
   color: white;
 }
+
+body.other-theme .dropdown-content {
+  background-color: #20c9c1;
+  color: white;
+}
+
 body.other-theme .logout {
   background-color: rgb(159, 103, 211);
   color: white;
 }
 
-body.other-theme .logout:hover {
+body.other-theme .dropdown-content button:hover {
   border-color: white;
   background-color: rgb(159, 103, 211);
   color: white;

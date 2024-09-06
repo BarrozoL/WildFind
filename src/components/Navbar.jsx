@@ -124,7 +124,7 @@ const Navbar = () => {
                 <div className="dropdown-content">
                   <NavLink
                     to={`/user-profile/${user._id}`}
-                    className="NavLink profile-link"
+                    className="dropdown-item"
                   >
                     Profile Page
                   </NavLink>
@@ -141,9 +141,7 @@ const Navbar = () => {
                     Private Messages
                   </NavLink>
 
-                  <button className="dropdown-item" onClick={handleLogout}>
-                    Logout
-                  </button>
+                  <button onClick={handleLogout}>Logout</button>
                 </div>
               </div>
               <NavLink

@@ -172,7 +172,7 @@ function EditUserPage() {
           <div key={user._id}>
             <h3>Edit Profile Page</h3>
             <form onSubmit={handleFormSubmit} className="edit-inputs">
-              <div>
+              <div className="edit-row">
                 <label>Profile Image: </label>
                 <input
                   type="file"
@@ -180,19 +180,20 @@ function EditUserPage() {
                   onChange={handleFileUpload}
                 />
               </div>
-              <div>
+              <div className="edit-row">
                 <label>Banner Image: </label>
                 <input
                   type="file"
                   placeholder={user.banner}
                   onChange={handleBannerUpload}
                 />
-
-                <button type="button" onClick={handleBannerDelete}>
-                  Delete Banner Image
-                </button>
+                <div className="delete-button">
+                  <button type="button" onClick={handleBannerDelete}>
+                    Delete Banner Image
+                  </button>
+                </div>
               </div>
-              <div>
+              <div className="edit-row">
                 <label>Username: </label>
                 <input
                   type="text"
@@ -202,7 +203,7 @@ function EditUserPage() {
                   required
                 />
               </div>
-              <div>
+              <div className="edit-row">
                 <label>Email Address: </label>
                 <input
                   type="text"
@@ -212,7 +213,7 @@ function EditUserPage() {
                   required
                 />
               </div>
-              <div>
+              <div className="edit-row">
                 <label htmlFor="bio">About Me: </label>
                 <textarea
                   rows="2"

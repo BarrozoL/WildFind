@@ -31,10 +31,6 @@ nav {
   align-self: center;
 }
 
-.logout {
-  margin-right: 2%;
-}
-
 /* Style for the profile link and dropdown */
 .profile-dropdown {
   position: relative;
@@ -45,26 +41,31 @@ nav {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f9f9f9;
-  color: black;
   min-width: 160px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
+.dropdown-content button {
+  align-self: center;
+  width: 40%;
+  height: 40%;
+  margin-bottom: 5%;
+  font-size: 0.7rem;
+}
+
 /* Style the dropdown items */
 .dropdown-item {
-  color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
+  text-align: center;
 }
-
-.dropdown
 
 /* Change background on hover */
 .dropdown-item:hover {
   background-color: #f1f1f1;
+  color: black;
 }
 
 /* Show the dropdown content when hovering over profile */

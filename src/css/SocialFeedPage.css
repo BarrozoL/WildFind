@@ -1,0 +1,181 @@
+.post-card {
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
+.post-card a {
+  text-decoration: underline;
+  font-weight: bolder;
+}
+
+body.light-mode .post-card {
+  background-color: #d7e8c0;
+}
+
+body.dark-mode .post-card {
+  background-color: #b581e4;
+  color: #b5fff0;
+}
+
+body.dark-mode .post-card a {
+  color: #b5fff0;
+}
+
+body.light-mode .post-card a {
+  color: rgb(44, 140, 121);
+}
+
+.comment-boxes {
+  border-radius: 10px;
+  margin-bottom: 10px;
+  width: 90%;
+  margin-left: 5%;
+}
+
+.comment-boxes a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+body.light-mode .comment-boxes {
+  background-color: #eaf3d7;
+}
+
+body.dark-mode .comment-boxes {
+  background-color: #242424;
+  color: #b5fff0;
+}
+
+body.dark-mode .comment-boxes a {
+  color: rgb(44, 140, 121);
+}
+
+body.light-mode .comment-boxes a {
+  color: #8bc34a;
+}
+
+.comment-add {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 60px;
+  padding-top: 15px;
+}
+
+body.light-mode .comment-add {
+  background-color: #d7e8c0;
+}
+
+body.dark-mode .comment-add {
+  background-color: #b581e4;
+  color: #b5fff0;
+}
+
+body.light-mode .comment-add input {
+  background-color: #eaf3d7;
+  border-color: rgb(44, 140, 121);
+  border-width: 2px;
+  color: rgb(44, 140, 121);
+  border-radius: 5px;
+}
+
+body.dark-mode .comment-add input {
+  background-color: #121212;
+  border-color: rgb(44, 140, 121);
+  border-width: 2px;
+  color: rgb(44, 140, 121);
+  border-radius: 5px;
+}
+
+body.light-mode .comment-add-addition input {
+  background-color: #eaf3d7;
+  border-color: rgb(44, 140, 121);
+  border-width: 2px;
+  color: rgb(44, 140, 121);
+  border-radius: 5px;
+}
+
+body.dark-mode .comment-add-addition input {
+  background-color: #121212;
+  border-color: rgb(44, 140, 121);
+  border-width: 2px;
+  color: rgb(44, 140, 121);
+  border-radius: 5px;
+}
+
+body.dark-mode .comment-add button {
+  background-color: #8a2be2;
+}
+
+.comment-add-addition {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 55px;
+  /* padding-top: 15px; */
+}
+
+body.light-mode .comment-add-addition {
+  background-color: #d7e8c0;
+}
+
+body.dark-mode .comment-add-addition {
+  background-color: #b581e4;
+  color: #b5fff0;
+}
+
+body.dark-mode .comment-add-addition button {
+  background-color: #8a2be2;
+}
+
+/* Style the scrollbar for webkit browsers */
+.comment-box::-webkit-scrollbar {
+  width: 12px; /* width of the scrollbar */
+}
+
+/* Track of the scrollbar */
+.comment-box::-webkit-scrollbar-track {
+  background: #d7e8c0; /* Scrollbar track color (matches light mode background) */
+  border-radius: 10px; /* Rounded corners */
+}
+
+/* Thumb (the draggable part of the scrollbar) */
+.comment-box::-webkit-scrollbar-thumb {
+  background-color: #8bc34a; /* Scrollbar thumb color */
+  border-radius: 10px; /* Rounded edges */
+  border: 3px solid #d7e8c0; /* Optional: padding to give some space around thumb */
+}
+
+/* Dark mode scrollbar colors */
+body.dark-mode .comment-box::-webkit-scrollbar-track {
+  background: #b581e4;
+}
+
+body.dark-mode .comment-box::-webkit-scrollbar-thumb {
+  background-color: #a346d2;
+  border: 3px solid #b581e4;
+}
+
+comment-box {
+  border-radius: 10px;
+}
+
+body.light-mode .comment-box {
+  background-color: #d7e8c0;
+}
+
+body.dark-mode .comment-box {
+  background-color: #b581e4;
+  color: #b5fff0;
+}
+
+body.light-mode .select-feed select {
+  background-color: #d7e8c0;
+  border-color: rgb(44, 140, 121);
+  border-width: 2px;
+  color: rgb(44, 140, 121);
+}
+
+body.dark-mode .select-feed select {
+  background-color: #121212;
+  border-color: #b581e4;
+  border-width: 2px;
+  color: rgb(44, 140, 121);
+}

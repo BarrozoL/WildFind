@@ -18,11 +18,12 @@ export default function SocialFeedPage() {
   //Running jwtDecode function to decode the user's authToken
   const decodedToken = token ? jwtDecode(token) : null;
   const userId = decodedToken ? decodedToken._id : null; // Extract userId
-  const currentUserFollowed = decodedToken ? decodedToken.followed : null;
+  const currentUserFollowed = decodedToken ? decodedToken.following : null;
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     getActions();
-    // getUserInformation();
+    getUserInformation();
   }, [filterOption]);
 
   const getActions = async () => {
@@ -36,19 +37,37 @@ export default function SocialFeedPage() {
         //Setting the comment texts to an array the same length as the sightings array
         //and using .fill() to populate them with empty strings
         setCommentText(new Array(foundActions.length).fill(""));
+
+        console.log("userId is...", userId);
+        console.log("user is...", decodedToken);
       })
       .catch((error) => {
         console.error("Error fetching actions:", error);
       });
   };
 
+  const getUserInformation = async () => {
+    await axios
+      .get(`https://wildfindserver.adaptable.app/api/users/${userId}`)
+      .then((response) => {
+        setUser(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching sightings:", error);
+      });
+  };
+
   let filteredActions = sightings.filter((action) => {
     if (filterOption === "Followed Posts") {
-      // Filter by posts where the user is followed by the current user
-      return action?.user && currentUserFollowed.includes(action.user._id);
+      // Ensure user and followers exist, and also ensure action.user exists
+      if (user?.followers && action?.user) {
+        return user.followers.some(
+          (follower) => follower._id === action.user._id
+        );
+      }
+      return false; // If there are no followers or action.user is null, exclude this action
     } else {
-      // If not filtering by "Followed Posts", return all actions (foundActions)
-      return sightings.includes(action);
+      return true; // For "All Posts", return all actions
     }
   });
 
@@ -91,19 +110,33 @@ export default function SocialFeedPage() {
 
   return (
     <div style={{ marginTop: "10%" }}>
-      <select onChange={handleFilterOption}>
-        <option value="All Posts">All Posts</option>
-        <option value="Followed Posts">Followed Posts</option>
-      </select>
+      <div style={{ display: "flex", justifyContent: "space-around" }}>
+        <h1>Community Activity Page</h1>
+        <div style={{ paddingTop: "5%" }} className="select-feed">
+          <select
+            onChange={handleFilterOption}
+            style={{ width: "300px", height: "30px", borderRadius: "5px" }}
+          >
+            <option value="All Posts">See All Posts</option>
+            <option value="Followed Posts">See Your Friends' Posts</option>
+          </select>
+        </div>
+      </div>
+
       <div className="itemWrapper">
         {filteredActions.map((action, index) => (
           <>
             {action?.sighting && (
-              <div className="post-comment-wrapper" key={action._id}>
+              <div
+                className="post-comment-wrapper"
+                key={action._id}
+                style={{ marginBottom: "50px" }}
+              >
                 <div className="social-feed-sighting-card">
                   <div
+                    className="post-card"
                     style={{
-                      border: "2px solid red",
+                      // border: "2px solid red",
                       width: "70%",
                       height: "500px",
                     }}
@@ -129,7 +162,7 @@ export default function SocialFeedPage() {
                           position: "absolute",
                           top: "0",
                           left: "0",
-                          marginTop: "3%",
+                          marginTop: "10%",
                         }}
                       />
                     </div>
@@ -139,8 +172,8 @@ export default function SocialFeedPage() {
                         <img
                           src={action?.user?.image}
                           alt={action?.user?.username}
-                          width="5%"
-                          height="5%"
+                          width="50px"
+                          height="50px"
                           style={{ borderRadius: "50%" }}
                         />
                         {action?.user?.username}{" "}
@@ -154,14 +187,16 @@ export default function SocialFeedPage() {
                     </p>
                     <p>Entry added at: {action?.sighting?.date}</p>
                   </div>
-                  <div style={{ height: "500px", width: "30%" }}>
+                  <div style={{ height: "400px", width: "30%" }}>
                     <div
                       className="comment-box"
                       style={{
-                        border: "2px solid blue",
+                        // border: "2px solid blue",
                         width: "100%",
-                        height: "450px",
+                        height: "430px",
                         overflowY: "scroll",
+                        borderTopLeftRadius: "10px",
+                        borderTopRightRadius: "10px",
                       }}
                     >
                       {action.comments && action.comments.length > 0 && (
@@ -169,7 +204,8 @@ export default function SocialFeedPage() {
                           {action.comments.map((comment) => (
                             <div
                               key={comment._id}
-                              style={{ border: "1px solid black" }}
+                              // style={{ border: "1px solid green" }}
+                              className="comment-boxes"
                             >
                               <p>{comment.text}</p>
                               <div>
@@ -191,13 +227,17 @@ export default function SocialFeedPage() {
                         handleCommentSubmit(e, action._id, index)
                       }
                     >
-                      <input
-                        type="text"
-                        value={commentText[index]}
-                        onChange={(e) => handleCommentTextChange(e, index)}
-                        placeholder="Add a comment"
-                      />
-                      <button type="submit">Post comment</button>
+                      <div className="comment-add">
+                        <input
+                          type="text"
+                          value={commentText[index]}
+                          onChange={(e) => handleCommentTextChange(e, index)}
+                          placeholder="Add a comment"
+                        />
+                        <button type="submit" className="comment-button">
+                          Post comment
+                        </button>
+                      </div>
                     </form>
                   </div>
                 </div>
@@ -205,14 +245,15 @@ export default function SocialFeedPage() {
             )}
 
             {action?.addition && (
-              <div className="post-comment-wrapper" key={action._id}>
+              <div
+                className="post-comment-wrapper"
+                key={action._id}
+                style={{ marginBottom: "50px" }}
+              >
                 <div className="social-feed-sighting-card">
                   <div
-                    style={{
-                      border: "2px solid red",
-                      width: "70%",
-                      height: "500px",
-                    }}
+                    className="post-card"
+                    style={{ width: "70%", height: "500px" }}
                   >
                     <div
                       style={{
@@ -235,7 +276,7 @@ export default function SocialFeedPage() {
                           position: "absolute",
                           top: "0",
                           left: "0",
-                          marginTop: "3%",
+                          marginTop: "10%",
                         }}
                       />
                     </div>
@@ -245,8 +286,8 @@ export default function SocialFeedPage() {
                         <img
                           src={action?.user?.image}
                           alt={action?.user?.username}
-                          width="5%"
-                          height="5%"
+                          width="50px"
+                          height="50px"
                           style={{ borderRadius: "50%" }}
                         />
                         {action?.user?.username}{" "}
@@ -264,14 +305,16 @@ export default function SocialFeedPage() {
                     </p>
                     <p>Entry added at: {action?.addition?.createdAt}</p>
                   </div>
-                  <div style={{ height: "500px", width: "30%" }}>
+                  <div style={{ height: "400px", width: "30%" }}>
                     <div
                       className="comment-box"
                       style={{
-                        border: "2px solid blue",
+                        // border: "2px solid blue",
                         width: "100%",
                         height: "450px",
                         overflowY: "scroll",
+                        borderTopLeftRadius: "10px",
+                        borderTopRightRadius: "10px",
                       }}
                     >
                       {action.comments && action.comments.length > 0 && (
@@ -279,7 +322,8 @@ export default function SocialFeedPage() {
                           {action.comments.map((comment) => (
                             <div
                               key={comment._id}
-                              style={{ border: "1px solid black" }}
+                              // style={{ border: "1px solid black" }}
+                              className="comment-boxes"
                             >
                               <p>{comment.text}</p>
                               <div>
@@ -301,13 +345,17 @@ export default function SocialFeedPage() {
                         handleCommentSubmit(e, action._id, index)
                       }
                     >
-                      <input
-                        type="text"
-                        value={commentText[index]}
-                        onChange={(e) => handleCommentTextChange(e, index)}
-                        placeholder="Add a comment"
-                      />
-                      <button type="submit">Post comment</button>
+                      <div className="comment-add-addition">
+                        <input
+                          type="text"
+                          value={commentText[index]}
+                          onChange={(e) => handleCommentTextChange(e, index)}
+                          placeholder="Add a comment"
+                        />
+                        <button type="submit" className="comment-button">
+                          Post comment
+                        </button>
+                      </div>
                     </form>
                   </div>
                 </div>

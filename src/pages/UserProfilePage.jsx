@@ -129,7 +129,7 @@ export default function UserProfilePage() {
               src={twoAchievementsBadge}
               alt="Congratulations! You have earned at least 2 achievements"
               width="60px"
-              height="6Le0px"
+              height="60px"
               style={{ border: "none" }}
             />
             <span className="tooltip-text">

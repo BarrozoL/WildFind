@@ -24,7 +24,7 @@ const Navbar = () => {
     axios;
     try {
       await axios.put(
-        `http://localhost:5005/api/users/${currentUser._id}/notifications`
+        `https://wildfindserver.adaptable.app/api/users/${currentUser._id}/notifications`
       );
       console.log("Notifications cleared successfully");
     } catch (error) {

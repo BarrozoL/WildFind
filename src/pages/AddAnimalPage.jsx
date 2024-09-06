@@ -748,7 +748,7 @@ export default function AddAnimal() {
                 isMulti
                 name="locations"
                 options={locationOptions}
-                styles={{
+                /*  styles={{
                   control: (base) => ({
                     ...base,
                     height: "40px", // Set the desired height of the input box
@@ -792,7 +792,7 @@ export default function AddAnimal() {
                     ...base,
                     maxHeight: "auto", // Dropdown list max height
                   }),
-                }}
+                }} */
                 menuPlacement="auto"
                 className="basic-multi-select"
                 classNamePrefix="custom"
@@ -810,7 +810,7 @@ export default function AddAnimal() {
                 isMulti
                 name="locations"
                 options={locationOptions}
-                styles={{
+                /* styles={{
                   control: (base) => ({
                     ...base,
                     height: "40px", // Set the desired height of the input box
@@ -867,7 +867,7 @@ export default function AddAnimal() {
                     ...base,
                     maxHeight: "auto", // Dropdown list max height
                   }),
-                }}
+                }} */
                 menuPlacement="auto"
                 className="basic-multi-select"
                 classNamePrefix="custom"

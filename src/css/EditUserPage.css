@@ -1,0 +1,48 @@
+.edit-inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.edit-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.edit-row label {
+  width: 20%;
+  font-size: 1.1rem;
+  text-align: left;
+}
+
+.edit-row input,
+.edit-row select,
+.edit-row textarea {
+  max-width: 60%;
+  border-radius: 5px;
+}
+
+.edit-form {
+  width: 70vw;
+  min-height: 100vh;
+  margin-top: 10%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.delete-button {
+  margin-bottom: 5%;
+  text-align: left;
+}
+
+.edit-submit {
+  text-align: left;
+}

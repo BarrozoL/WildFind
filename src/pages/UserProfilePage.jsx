@@ -67,7 +67,7 @@ export default function UserProfilePage() {
 
     if (user.sightings.length >= 2) {
       achievements.push(
-        <p key="achievement-1">
+        <div key="achievement-1">
           <div className="tooltip">
             <img
               src={twoSightingsBadge}
@@ -80,13 +80,13 @@ export default function UserProfilePage() {
               Congratulations! You have made at least 2 sightings
             </span>
           </div>
-        </p>
+        </div>
       );
     }
 
     if (user.sightings.length >= 5) {
       achievements.push(
-        <p key="achievement-2">
+        <div key="achievement-2">
           <div className="tooltip">
             <img
               src={fiveSightingsBadge}
@@ -99,12 +99,12 @@ export default function UserProfilePage() {
               Congratulations! You have made at least 5 sightings
             </span>
           </div>
-        </p>
+        </div>
       );
     }
     if (user.sightings.length >= 10) {
       achievements.push(
-        <p key="achievement-3">
+        <div key="achievement-3">
           <div className="tooltip">
             <img
               src={tenSightingsBadge}
@@ -117,13 +117,13 @@ export default function UserProfilePage() {
               Congratulations! You have made at least 10 sightings
             </span>
           </div>
-        </p>
+        </div>
       );
     }
 
     if (achievements.length >= 2) {
       achievements.push(
-        <p key="achievement-4">
+        <div key="achievement-4">
           <div className="tooltip">
             <img
               src={twoAchievementsBadge}
@@ -136,7 +136,7 @@ export default function UserProfilePage() {
               Congratulations! You have earned at least 2 achievements
             </span>
           </div>
-        </p>
+        </div>
       );
     }
 
@@ -161,9 +161,9 @@ export default function UserProfilePage() {
 
   function renderFollowing() {
     if (user.following.length > 0) {
-      return user.following.map((followed) => {
+      return user.following.map((followed, index) => {
         return (
-          <li key={followed._id}>
+          <li key={followed._id + index}>
             <Link to={`/user-profile/${followed?._id}`}>
               {followed.username}
             </Link>

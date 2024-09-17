@@ -21,9 +21,10 @@ export default function PrivateMessagePage() {
     getMessages();
   }, [selectedConversation]);
 
+  //render all of the user's messages and conversations
   const getMessages = async () => {
     axios
-      .get(`https://wildfindserver.adaptable.app/api/users/${userId}`)
+      .get(`https://wildfindserver.adaptable.app/api/users/${currentUserId}`)
       .then((response) => {
         setUser(response.data);
       })
@@ -32,9 +33,11 @@ export default function PrivateMessagePage() {
       });
   };
 
+  //Update the conversation in real time. By updating the state in this request and nesting
+  //it in the sendMessage function, the conversation is updated instantly
   const getUpdatedConversation = async (receiverId) => {
     axios
-      .get(`https://wildfindserver.adaptable.app/api/users/${userId}`)
+      .get(`https://wildfindserver.adaptable.app/api/users/${currentUserId}`)
       .then((response) => {
         const updatedUser = response.data;
         const updatedConversation = updatedUser?.conversations?.find(
@@ -53,12 +56,14 @@ export default function PrivateMessagePage() {
   };
 
   const sendMessage = async () => {
-    if (!selectedConversation) return;
+    /*  if (!selectedConversation) return; */
 
-    const receiverId =
-      selectedConversation?.user1Id?._id === currentUserId
+    const receiverId = selectedConversation
+      ? selectedConversation?.user1Id?._id === currentUserId
         ? selectedConversation?.user2Id?._id
-        : selectedConversation?.user1Id?._id;
+        : selectedConversation?.user1Id?._id
+      : userId;
+    console.log("receiverId", receiverId, "userId", userId);
     axios
       .post(`https://wildfindserver.adaptable.app/api/messages/${receiverId}`, {
         sender: currentUserId,

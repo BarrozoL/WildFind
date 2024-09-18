@@ -58,6 +58,7 @@ export default function PrivateMessagePage() {
   const sendMessage = async () => {
     /*  if (!selectedConversation) return; */
 
+    //setting the receiver of the message either to the id of the clicked conversation or to the userId from the url
     const receiverId = selectedConversation
       ? selectedConversation?.user1Id?._id === currentUserId
         ? selectedConversation?.user2Id?._id
@@ -133,6 +134,7 @@ export default function PrivateMessagePage() {
                   <p>
                     Conversation between {conversation?.user1Id?.username} and{" "}
                     {conversation?.user2Id?.username}
+                    {console.log(conversation)}
                   </p>
                 </div>
               )}
@@ -149,12 +151,19 @@ export default function PrivateMessagePage() {
               key={`${message?._id}${index}`}
             >
               <p>{message?.text}</p>
-              <p>
-                Sent by:{" "}
-                <Link to={`/user-profile/${message?.sender?._id}`}>
-                  {message?.sender?.username}{" "}
-                </Link>
-              </p>
+              <div className="message-info">
+                <p>
+                  Sent by:{" "}
+                  <Link to={`/user-profile/${message?.sender?._id}`}>
+                    {message?.sender?.username}
+                    {"    "}
+                  </Link>
+                  <br />
+                  {message?.createdAt.slice(11, 16)}
+                  {", "}
+                  {message?.createdAt.slice(0, 10)}
+                </p>
+              </div>
             </div>
           );
         })}

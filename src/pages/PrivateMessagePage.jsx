@@ -120,6 +120,10 @@ export default function PrivateMessagePage() {
       <div className="conversation-sidebar">
         <h2>Private Messages:</h2>
         {user?.conversations?.map((conversation, index) => {
+          const notYou =
+            conversation?.user1Id?._id === currentUserId
+              ? conversation?.user2Id?.username
+              : conversation?.user1Id?.username;
           return (
             //we also map over the index to use it as a key. We we getting a repeated keys error
             <div
@@ -131,11 +135,7 @@ export default function PrivateMessagePage() {
               {(conversation?.user1Id?._id === currentUserId ||
                 conversation?.user2Id?._id === currentUserId) && (
                 <div>
-                  <p>
-                    Conversation between {conversation?.user1Id?.username} and{" "}
-                    {conversation?.user2Id?.username}
-                    {console.log(conversation)}
-                  </p>
+                  <p>Conversation with {notYou} </p>
                 </div>
               )}
             </div>

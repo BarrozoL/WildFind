@@ -37,9 +37,6 @@ export default function SocialFeedPage() {
         //Setting the comment texts to an array the same length as the sightings array
         //and using .fill() to populate them with empty strings
         setCommentText(new Array(foundActions.length).fill(""));
-
-        console.log("userId is...", userId);
-        console.log("user is...", decodedToken);
       })
       .catch((error) => {
         console.error("Error fetching actions:", error);
@@ -125,11 +122,11 @@ export default function SocialFeedPage() {
 
       <div className="itemWrapper">
         {filteredActions.map((action, index) => (
-          <>
+          <div key={action._id}>
             {action?.sighting && (
               <div
                 className="post-comment-wrapper"
-                key={action._id}
+                key={action._id + "sighting"}
                 style={{ marginBottom: "50px" }}
               >
                 <div className="social-feed-sighting-card">
@@ -247,7 +244,7 @@ export default function SocialFeedPage() {
             {action?.addition && (
               <div
                 className="post-comment-wrapper"
-                key={action._id}
+                key={action._id + "addition"}
                 style={{ marginBottom: "50px" }}
               >
                 <div className="social-feed-sighting-card">
@@ -293,7 +290,6 @@ export default function SocialFeedPage() {
                         {action?.user?.username}{" "}
                       </Link>{" "}
                       has added the {action?.addition?.name}
-                      {console.log(action?.addition?.name)}
                     </h3>
                     <p>
                       <b>Description: </b>
@@ -361,7 +357,7 @@ export default function SocialFeedPage() {
                 </div>
               </div>
             )}
-          </>
+          </div>
         ))}
       </div>
     </div>

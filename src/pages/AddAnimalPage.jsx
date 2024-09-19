@@ -216,7 +216,6 @@ export default function AddAnimal() {
       name,
       typeId,
       description,
-      // location,
       location: locations.map((location) => location.value),
       dangerLevel: danger,
       image: img,

@@ -8,7 +8,6 @@ import "../css/AnimalDetailsPage.css";
 export default function AnimalCard({ animals }) {
   const [foundAnimal, setFoundAnimal] = useState();
   const { specimenId } = useParams();
-  console.log("specimenId:", specimenId);
   const token = localStorage.getItem("authToken");
   const decodedToken = token ? jwtDecode(token) : null;
   const userId = decodedToken ? decodedToken._id : null; // Extract userId
@@ -67,8 +66,6 @@ export default function AnimalCard({ animals }) {
       note: "",
     };
 
-    console.log("Request Body:", requestBody);
-
     watchService
       .createWatch(userId, requestBody)
       .then((response) => {
@@ -79,7 +76,7 @@ export default function AnimalCard({ animals }) {
         setImage(""); */
       })
       .catch((error) => console.log(error));
-    console.log(foundAnimal?.location);
+    console.log("foundAnimal?.location:", foundAnimal?.location);
     navigate(`/watchlist/${userId}`);
   };
 
@@ -107,12 +104,10 @@ export default function AnimalCard({ animals }) {
         style={{ margin: "20% 0 20% 0", height: "90vh" }}
       >
         <div key={foundAnimal?._id}></div>
-        {console.log("animal: ", foundAnimal)}
         <h3>{foundAnimal?.name}</h3>
         <img src={foundAnimal.image} alt={foundAnimal?.name} width="300px" />
         <p>{`Danger level: ${foundAnimal?.dangerLevel}`}</p>
         <p>{`Description: ${foundAnimal?.description}`}</p>
-        {console.log(foundAnimal?.location)}
         <p>{`Native to: ${foundAnimal?.location.join(", ")}`}</p>
 
         <button onClick={handleSightingNavigate} className="sightings-button">

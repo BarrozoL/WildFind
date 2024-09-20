@@ -115,12 +115,7 @@ function App() {
         <Route
           exact
           path={`/animals/:specimenId/sightings`}
-          element={
-            <SightingsPage
-              /*  getAnimalsWithSightings={getAnimalsWithSightings} */
-              sightings={sightings}
-            />
-          }
+          element={<SightingsPage sightings={sightings} />}
         />
         <Route
           exact
@@ -161,12 +156,7 @@ function App() {
         <Route
           exact
           path={`/plants/:specimenId/sightings`}
-          element={
-            <SightingsPage
-              /*  getAnimalsWithSightings={getAnimalsWithSightings} */
-              sightings={sightings}
-            />
-          }
+          element={<SightingsPage sightings={sightings} />}
         />
 
         <Route

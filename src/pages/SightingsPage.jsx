@@ -5,7 +5,7 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import "../css/SightingsPage.css";
 
-export default function Sightings({ sightings, getAnimalsWithSightings }) {
+export default function Sightings() {
   const [sights, setSights] = useState([]);
   const [foundAnimal, setFoundAnimal] = useState();
   const { specimenId } = useParams();
@@ -23,6 +23,24 @@ export default function Sightings({ sightings, getAnimalsWithSightings }) {
   };
 
   useEffect(() => {
+    getSpecimenSightings();
+    getAnimal(specimenId).then((data) => setFoundAnimal(data));
+    setSpecimenTheme();
+  }, [specimenId, foundAnimal]);
+
+  function setSpecimenTheme() {
+    if (foundAnimal?.typeId === 8) {
+      document.body.classList.add("other-theme");
+    } else {
+      document.body.classList.remove("other-theme");
+    }
+
+    return () => {
+      document.body.classList.remove("other-theme");
+    };
+  }
+
+  const getSpecimenSightings = async () => {
     axios
       .get(
         `https://wildfindserver.adaptable.app/api/specimens/${specimenId}/sightings`
@@ -33,23 +51,7 @@ export default function Sightings({ sightings, getAnimalsWithSightings }) {
       .catch((error) => {
         console.error("Error fetching sightings:", error);
       });
-  }, []);
-
-  useEffect(() => {
-    getAnimal(specimenId).then((data) => setFoundAnimal(data));
-  }, [specimenId]);
-
-  useEffect(() => {
-    if (foundAnimal?.typeId === 8) {
-      document.body.classList.add("other-theme");
-    } else {
-      document.body.classList.remove("other-theme");
-    }
-
-    return () => {
-      document.body.classList.remove("other-theme");
-    };
-  }, [foundAnimal]);
+  };
 
   return (
     <>
@@ -59,7 +61,6 @@ export default function Sightings({ sightings, getAnimalsWithSightings }) {
           const formattedDate = new Date(sighting.date).toString();
           return (
             <div className="sighting-cards" key={sighting._id}>
-              {console.log(sighting)}
               <ul className="card-content" style={{ listStyleType: "none" }}>
                 {sighting.image && sighting.image.trim() !== "" && (
                   <img
@@ -70,7 +71,7 @@ export default function Sightings({ sightings, getAnimalsWithSightings }) {
                   />
                 )}
                 <li>
-                  <b>Sighting Location:</b> {sighting.location}
+                  <b>Sighting Location:</b> {sighting?.locationId?.name}
                 </li>
                 <li>{formattedDate}</li>
                 <li>

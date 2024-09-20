@@ -112,6 +112,8 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
       userId,
       specimenId,
       description,
+      // this needs to be location because. for unkown reason it only works like this
+      // eventhough the backend request asks for a locationId, not location
       location: selectedLocation?.value,
       image: imageUrl,
     };

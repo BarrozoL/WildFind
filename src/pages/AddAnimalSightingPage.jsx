@@ -112,7 +112,7 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
       userId,
       specimenId,
       description,
-      locationId: selectedLocation?.value, // No need to map or convert to an array
+      location: selectedLocation?.value,
       image: imageUrl,
     };
 

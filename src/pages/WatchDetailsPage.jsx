@@ -24,7 +24,7 @@ export default function WatchDetailsPage() {
   const fetchWatchItem = async () => {
     try {
       const response = await axios.get(
-        `https://wildfindserver.adaptable.app/api/watchlist/${watchItemId}`
+        `http://localhost:5005/api/watchlist/${watchItemId}`
       );
       setWatchItem(response.data);
     } catch (error) {
@@ -43,7 +43,7 @@ export default function WatchDetailsPage() {
   const handleUpdateNote = async () => {
     try {
       await axios.put(
-        `https://wildfindserver.adaptable.app/api/watchlist/${watchItemId}`,
+        `http://localhost:5005/api/watchlist/${watchItemId}`,
         { note: newNote } // Only send the `note` field
       );
       fetchWatchItem(); // Fetch the updated watch item

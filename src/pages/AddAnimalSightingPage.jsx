@@ -12,46 +12,27 @@ import "../css/AddAnimalSightingPage.css";
 export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
   const [date, setDate] = useState(new Date());
   const [description, setDescription] = useState("");
-  // const [image, setImage] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [foundAnimal, setFoundAnimal] = useState();
 
-  const [locations, setLocations] = useState([]);
-  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [countries, setCountries] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState();
+  const [districts, setDistricts] = useState([]);
+  const [selectedDistrict, setSelectedDistrict] = useState();
+  const [pointsOfInterest, setPointsOfInterest] = useState([]);
+  const [selectedPointOfInterest, setSelectedPointOfInterest] = useState();
 
-  const { specimenId } = useParams();
   //Retrieving the user's authToken token from the localStorage
   const token = localStorage.getItem("authToken");
-  //Running jwtDecode function to decode the user's authToken
   const decodedToken = token ? jwtDecode(token) : null;
   const userId = decodedToken ? decodedToken._id : null; // Extract userId
   const username = decodedToken ? decodedToken.username : null; // Extract username
+  const { specimenId } = useParams();
 
   const navigate = useNavigate();
 
-  const [foundAnimal, setFoundAnimal] = useState();
-
-  const handleDescriptionChange = (e) => {
-    setDescription(e.target.value);
-  };
-
-  const handleLocationChange = (selectedOption) => {
-    setSelectedLocation(selectedOption);
-  };
-
   useEffect(() => {
-    getLocations();
-    /*  .then((response) => {
-        const locationOptions = response.map((location) => ({
-          value: location._id,
-          label: location.name,
-        }));
-       
-      })
-      .catch((err) => console.log(err)); */
     getAnimal(specimenId).then((data) => setFoundAnimal(data));
-  }, [specimenId]);
-
-  useEffect(() => {
     if (foundAnimal?.typeId === 8) {
       document.body.classList.add("other-theme");
     } else {
@@ -62,11 +43,17 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
     return () => {
       document.body.classList.remove("other-theme");
     };
-  }, [foundAnimal]);
+  }, [foundAnimal, specimenId]);
 
-  // const handleImageChange = (e) => {
-  //   setImage(e.target.value);
-  // };
+  //getting countries, mapping over them, and creating value and label to populate input options
+  const getCountries = async () => {
+    axios.get("http://localhost:5005/api/countries").then((response) => {
+      const countryOptions = response.data.map((country) => {
+        return { value: country._id, label: country.name };
+      });
+      setCountries(countryOptions);
+    });
+  };
 
   const handleDateChange = (date) => {
     setDate(date);
@@ -87,16 +74,12 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
       .catch((err) => console.log("Error while uploading the file: ", err));
   };
 
-  //get all of the existing locations
-  const getLocations = async () => {
-    axios
-      .get("http://localhost:5005/api/locations")
-      .then((response) => {
-        setLocations(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
+  };
+
+  const handleLocationChange = (selectedOption) => {
+    setSelectedLocation(selectedOption);
   };
 
   const handleSubmit = (e) => {

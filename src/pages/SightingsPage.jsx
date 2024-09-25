@@ -26,7 +26,7 @@ export default function Sightings() {
     getSpecimenSightings();
     getAnimal(specimenId).then((data) => setFoundAnimal(data));
     setSpecimenTheme();
-  }, [specimenId, foundAnimal]);
+  }, [specimenId]);
 
   function setSpecimenTheme() {
     if (foundAnimal?.typeId === 8) {
@@ -42,9 +42,7 @@ export default function Sightings() {
 
   const getSpecimenSightings = async () => {
     axios
-      .get(
-        `https://wildfindserver.adaptable.app/api/specimens/${specimenId}/sightings`
-      )
+      .get(`http://localhost:5005/api/specimens/${specimenId}/sightings`)
       .then((response) => {
         setSights(response.data);
       })
@@ -70,8 +68,9 @@ export default function Sightings() {
                     height="50%"
                   />
                 )}
+
                 <li>
-                  <b>Sighting Location:</b> {sighting?.locationId?.name}
+                  <b>Sighting Location: </b>
                 </li>
                 <li>{formattedDate}</li>
                 <li>

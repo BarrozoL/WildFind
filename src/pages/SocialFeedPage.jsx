@@ -28,7 +28,7 @@ export default function SocialFeedPage() {
 
   const getActions = async () => {
     axios
-      .get("https://wildfindserver.adaptable.app/api/actions")
+      .get("http://localhost:5005/api/actions")
       .then((response) => {
         const foundActions = response.data;
 
@@ -45,7 +45,7 @@ export default function SocialFeedPage() {
 
   const getUserInformation = async () => {
     await axios
-      .get(`https://wildfindserver.adaptable.app/api/users/${userId}`)
+      .get(`http://localhost:5005/api/users/${userId}`)
       .then((response) => {
         setUser(response.data);
       })
@@ -70,7 +70,7 @@ export default function SocialFeedPage() {
 
   const postComment = async (actionId, index) => {
     axios
-      .post("https://wildfindserver.adaptable.app/api/comments", {
+      .post("http://localhost:5005/api/comments", {
         userId,
         actionId,
         text: commentText[index],

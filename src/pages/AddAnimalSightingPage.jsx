@@ -8,6 +8,7 @@ import { getAnimal } from "../../lib";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 import "../css/AddAnimalSightingPage.css";
+import { set } from "react-hook-form";
 
 export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
   const [date, setDate] = useState(new Date());
@@ -19,8 +20,8 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
   const [selectedCountry, setSelectedCountry] = useState();
   const [districts, setDistricts] = useState([]);
   const [selectedDistrict, setSelectedDistrict] = useState();
-  const [pointsOfInterest, setPointsOfInterest] = useState([]);
-  const [selectedPointOfInterest, setSelectedPointOfInterest] = useState();
+  const [placesOfInterest, setPlacesOfInterest] = useState([]);
+  const [selectedPlaceOfInterest, setSelectedPlaceOfInterest] = useState();
 
   //Retrieving the user's authToken token from the localStorage
   const token = localStorage.getItem("authToken");
@@ -31,28 +32,59 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    getAnimal(specimenId).then((data) => setFoundAnimal(data));
-    if (foundAnimal?.typeId === 8) {
-      document.body.classList.add("other-theme");
-    } else {
-      document.body.classList.remove("other-theme");
-    }
+  useEffect(
+    () => {
+      getCountries();
+      /*   getDistricts(); */
+      getAnimal(specimenId).then((data) => setFoundAnimal(data));
+      if (foundAnimal?.typeId === 8) {
+        document.body.classList.add("other-theme");
+      } else {
+        document.body.classList.remove("other-theme");
+      }
 
-    // Clean up when the component is unmounted or `foundAnimal` changes
-    return () => {
-      document.body.classList.remove("other-theme");
-    };
-  }, [foundAnimal, specimenId]);
+      // Clean up when the component is unmounted or `foundAnimal` changes
+      return () => {
+        document.body.classList.remove("other-theme");
+      };
+    },
+    [
+      /* foundAnimal, specimenId */
+    ]
+  );
 
   //getting countries, mapping over them, and creating value and label to populate input options
   const getCountries = async () => {
     axios.get("http://localhost:5005/api/countries").then((response) => {
       const countryOptions = response.data.map((country) => {
-        return { value: country._id, label: country.name };
+        return {
+          value: country._id,
+          label: country.name,
+          districts: country.districts,
+        };
       });
       setCountries(countryOptions);
     });
+  };
+
+  const getDistricts = async () => {
+    axios.get("http://localhost:5005/api/districts").then((response) => {
+      const districtOptions = response.data.map((district) => {
+        return { value: district._id, label: district.name };
+      });
+      setDistricts(districtOptions);
+    });
+  };
+
+  const getPlacesOfInterest = async () => {
+    axios
+      .get("http://localhost:5005/api/places-of-interest")
+      .then((response) => {
+        const placeOfInterestOptions = response.data.map((placeOfInterest) => {
+          return { value: placeOfInterest._id, label: placeOfInterest.name };
+        });
+        setPlacesOfInterest(placeOfInterestOptions);
+      });
   };
 
   const handleDateChange = (date) => {
@@ -78,26 +110,34 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
     setDescription(e.target.value);
   };
 
-  const handleLocationChange = (selectedOption) => {
-    setSelectedLocation(selectedOption);
+  const handleCountryChange = (e) => {
+    setSelectedCountry(e);
+    setDistricts(e.districts);
+  };
+
+  const handleDistrictChange = (e) => {
+    setSelectedDistrict(e);
+  };
+
+  const handlePlaceOfInterestChange = (e) => {
+    setSelectedPlaceOfInterest(e);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!date || !description || !selectedLocation?.value) {
+    if (!date || !description || !selectedCountry) {
       // Make sure location is selected
       alert("All fields are mandatory");
       return;
     }
-
     const requestBody = {
       username,
       userId,
       specimenId,
       description,
-      // this needs to be location because. for unkown reason it only works like this
-      // eventhough the backend request asks for a locationId, not location
-      location: selectedLocation?.value,
+      country: selectedCountry.value,
+      district: selectedDistrict.value,
+      placeOfInterest: selectedPlaceOfInterest.value,
       image: imageUrl,
     };
 
@@ -114,6 +154,26 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
 
   const foundSpecimen = animals.find((animal) => animal._id === specimenId);
 
+  const selectedCountryDistricts = selectedCountry?.districts.map(
+    (district) => {
+      return {
+        value: district._id,
+        label: district.name,
+        placesOfInterest: district.placesOfInterest,
+      };
+    }
+  );
+
+  /*   console.log("selectedCountryDistricts", selectedCountryDistricts); */
+
+  const selectedDistrictPlacesOfInterest =
+    selectedDistrict?.placesOfInterest.map((placeOfInterest) => {
+      return {
+        value: placeOfInterest._id,
+        label: placeOfInterest.name,
+      };
+    });
+
   return (
     <div className="sighting-form">
       {foundSpecimen && (
@@ -121,18 +181,102 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
       )}
       <form className="sighting-inputs">
         <div className="sighting-row">
-          <label>Location:</label>
+          <label>Country:</label>
 
           <Select
-            name="location"
-            options={locations.map((location) => ({
-              value: location._id,
-              label: location.name,
-            }))}
+            name="country"
+            options={countries}
             className="basic-select"
             placeholder="Type or scroll to select..."
-            onChange={handleLocationChange}
-            value={selectedLocation}
+            onChange={handleCountryChange}
+            value={selectedCountry}
+            styles={{
+              control: (base) => ({
+                ...base,
+                height: "50px", // Set the desired height of the input box
+                minHeight: "50px",
+                width: "100%",
+                minWidth: "100%",
+              }),
+              valueContainer: (base) => ({
+                ...base,
+                height: "50px", // Ensure the text stays vertically aligned
+                padding: "0 8px", // Adjust padding inside the container if needed
+              }),
+              input: (base) => ({
+                ...base,
+                margin: "0", // Prevent input text from shifting vertically
+                padding: "0",
+                width: "100%",
+                minWidth: "20vw",
+                flex: "1 1 auto",
+              }),
+              dropdownIndicator: (base) => ({
+                ...base,
+                padding: "0", // Adjust padding around the dropdown arrow
+                height: "40px", // Adjust the height of the dropdown arrow to fit the box
+                width: "40px", // Adjust width of the dropdown arrow if needed
+              }),
+              menu: (base) => ({
+                ...base,
+                maxHeight: "auto", // Dropdown list max height
+              }),
+            }}
+          />
+        </div>
+        <div>
+          <label>District:</label>
+
+          <Select
+            name="district"
+            options={selectedCountryDistricts}
+            className="basic-select"
+            placeholder="Type or scroll to select..."
+            onChange={handleDistrictChange}
+            value={selectedDistrict}
+            styles={{
+              control: (base) => ({
+                ...base,
+                height: "50px", // Set the desired height of the input box
+                minHeight: "50px",
+                width: "100%",
+                minWidth: "100%",
+              }),
+              valueContainer: (base) => ({
+                ...base,
+                height: "50px", // Ensure the text stays vertically aligned
+                padding: "0 8px", // Adjust padding inside the container if needed
+              }),
+              input: (base) => ({
+                ...base,
+                margin: "0", // Prevent input text from shifting vertically
+                padding: "0",
+                width: "100%",
+                minWidth: "20vw",
+                flex: "1 1 auto",
+              }),
+              dropdownIndicator: (base) => ({
+                ...base,
+                padding: "0", // Adjust padding around the dropdown arrow
+                height: "40px", // Adjust the height of the dropdown arrow to fit the box
+                width: "40px", // Adjust width of the dropdown arrow if needed
+              }),
+              menu: (base) => ({
+                ...base,
+                maxHeight: "auto", // Dropdown list max height
+              }),
+            }}
+          />
+        </div>
+        <div>
+          <label>Place of Interest:</label>
+          <Select
+            name="place-of-interest"
+            options={selectedDistrictPlacesOfInterest}
+            className="basic-select"
+            placeholder="Type or scroll to select..."
+            onChange={handlePlaceOfInterestChange}
+            value={selectedPlaceOfInterest}
             styles={{
               control: (base) => ({
                 ...base,

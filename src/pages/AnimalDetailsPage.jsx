@@ -108,8 +108,8 @@ export default function AnimalCard({ animals }) {
         <img src={foundAnimal.image} alt={foundAnimal?.name} width="300px" />
         <p>{`Danger level: ${foundAnimal?.dangerLevel}`}</p>
         <p>{`Description: ${foundAnimal?.description}`}</p>
-        {/*  <p>{`Native to: ${foundAnimal?.location.join(", ")}`}</p> */}
-
+        {<p>{`Native to: ${foundAnimal?.country[0].name}`}</p>}{" "}
+        {/* Only displaying the first country of the countries list */}
         <button onClick={handleSightingNavigate} className="sightings-button">
           Click to view locations where the {`${foundAnimal?.name}`} has been
           seen

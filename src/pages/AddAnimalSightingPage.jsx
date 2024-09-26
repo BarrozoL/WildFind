@@ -67,40 +67,18 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
     });
   };
 
-  const getDistricts = async () => {
-    axios.get("http://localhost:5005/api/districts").then((response) => {
-      const districtOptions = response.data.map((district) => {
-        return { value: district._id, label: district.name };
-      });
-      setDistricts(districtOptions);
-    });
-  };
-
-  const getPlacesOfInterest = async () => {
-    axios
-      .get("http://localhost:5005/api/places-of-interest")
-      .then((response) => {
-        const placeOfInterestOptions = response.data.map((placeOfInterest) => {
-          return { value: placeOfInterest._id, label: placeOfInterest.name };
-        });
-        setPlacesOfInterest(placeOfInterestOptions);
-      });
-  };
-
   const handleDateChange = (date) => {
     setDate(date);
   };
+
   const handleFileUpload = (e) => {
     console.log("The file to be uploaded is: ", e.target.files[0]);
-
     const uploadData = new FormData();
     uploadData.append("imageUrl", e.target.files[0]); // Append the file with the key "imageUrl"
-
     sightingService
       .uploadImage(uploadData)
       .then((response) => {
         console.log("response is: ", response);
-
         setImageUrl(response.data.fileUrl);
       })
       .catch((err) => console.log("Error while uploading the file: ", err));
@@ -112,11 +90,12 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
 
   const handleCountryChange = (e) => {
     setSelectedCountry(e);
-    setDistricts(e.districts);
+    setSelectedDistrict(null); // Reset district input when country changes
   };
 
   const handleDistrictChange = (e) => {
     setSelectedDistrict(e);
+    setSelectedPlaceOfInterest(null); // Reset place of interest input when district changes
   };
 
   const handlePlaceOfInterestChange = (e) => {
@@ -146,7 +125,7 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
       .then((response) => {
         setDescription("");
         setImageUrl("");
-        /* navigate("/animals"); */
+        navigate("/animals");
         console.log("created sighting", response.data);
       })
       .catch((error) => console.log(error));
@@ -154,6 +133,7 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
 
   const foundSpecimen = animals.find((animal) => animal._id === specimenId);
 
+  //Getting the districts of the selected country
   const selectedCountryDistricts = selectedCountry?.districts.map(
     (district) => {
       return {
@@ -163,15 +143,10 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
       };
     }
   );
-
-  /*   console.log("selectedCountryDistricts", selectedCountryDistricts); */
-
+  //Getting the places of interest of the selected district
   const selectedDistrictPlacesOfInterest =
     selectedDistrict?.placesOfInterest.map((placeOfInterest) => {
-      return {
-        value: placeOfInterest._id,
-        label: placeOfInterest.name,
-      };
+      return { value: placeOfInterest._id, label: placeOfInterest.name };
     });
 
   return (
@@ -231,7 +206,7 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
             name="district"
             options={selectedCountryDistricts}
             className="basic-select"
-            placeholder="Type or scroll to select..."
+            placeholder="Select a country first..."
             onChange={handleDistrictChange}
             value={selectedDistrict}
             styles={{
@@ -272,9 +247,9 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
           <label>Place of Interest:</label>
           <Select
             name="place-of-interest"
-            options={selectedDistrictPlacesOfInterest}
+            options={selectedDistrictPlacesOfInterest || "asa"}
             className="basic-select"
-            placeholder="Type or scroll to select..."
+            placeholder="Select a district first..."
             onChange={handlePlaceOfInterestChange}
             value={selectedPlaceOfInterest}
             styles={{

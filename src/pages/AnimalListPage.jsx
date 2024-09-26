@@ -106,7 +106,6 @@ export default function AnimalList(/*{ animals }*/) {
             <Link to={`/animals/${animal._id}`} key={animal._id}>
               <div className="animal-cards">
                 <h3>{animal.name}</h3>
-                {console.log(animal.country[0].name)}
                 <div
                   style={{
                     width: "180px",

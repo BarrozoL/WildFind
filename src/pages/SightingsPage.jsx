@@ -1,29 +1,14 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getAnimal } from "../../lib";
-import axios from "axios";
-import { jwtDecode } from "jwt-decode";
 import "../css/SightingsPage.css";
 
 export default function Sightings() {
-  const [sights, setSights] = useState([]);
   const [foundAnimal, setFoundAnimal] = useState();
   const { specimenId } = useParams();
-  //Retrieving the user's authToken token from the localStorage
-  const token = localStorage.getItem("authToken");
-  //Running jwtDecode function to decode the user's authToken
-  const decodedToken = token ? jwtDecode(token) : null;
-  const username = decodedToken ? decodedToken.name : null; // Extract username
-  const userId = decodedToken ? decodedToken._id : null; // Extract username
-
   const navigate = useNavigate();
 
-  const handleNavigate = () => {
-    navigate(`/animals/${specimenId}`);
-  };
-
   useEffect(() => {
-    getSpecimenSightings();
     getAnimal(specimenId).then((data) => setFoundAnimal(data));
     setSpecimenTheme();
   }, [specimenId]);
@@ -34,29 +19,21 @@ export default function Sightings() {
     } else {
       document.body.classList.remove("other-theme");
     }
-
     return () => {
       document.body.classList.remove("other-theme");
     };
   }
 
-  const getSpecimenSightings = async () => {
-    axios
-      .get(`http://localhost:5005/api/specimens/${specimenId}/sightings`)
-      .then((response) => {
-        setSights(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching sightings:", error);
-      });
+  const handleNavigate = () => {
+    navigate(`/animals/${specimenId}`);
   };
 
   return (
     <>
       <div className="spottingWrapper">
         <h2>Sightings:</h2>
-        {sights.map((sighting) => {
-          const formattedDate = new Date(sighting.date).toString();
+        {foundAnimal?.sightings?.map((sighting) => {
+          const formattedDate = new Date(sighting?.date).toString();
           return (
             <div className="sighting-cards" key={sighting._id}>
               <ul className="card-content" style={{ listStyleType: "none" }}>
@@ -70,7 +47,16 @@ export default function Sightings() {
                 )}
 
                 <li>
-                  <b>Sighting Location: </b>
+                  <b>
+                    Spotted in:{" "}
+                    {sighting?.placeOfInterest?.name ? (
+                      <span>{sighting?.placeOfInterest?.name}, </span>
+                    ) : null}{" "}
+                    {sighting?.district?.name ? (
+                      <span>{sighting?.district?.name}, </span>
+                    ) : null}
+                    {sighting.country.name}
+                  </b>
                 </li>
                 <li>{formattedDate}</li>
                 <li>

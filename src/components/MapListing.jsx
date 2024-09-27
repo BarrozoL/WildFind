@@ -4,8 +4,7 @@ export default function MapListing({ location, sightings }) {
       <div className="map-wrap">
         <div className="map-sightings">
           <div>
-            {" "}
-            {location.length > 0 ? (
+            {/*  {location.length > 0 ? (
               <h2 className="location-tag">Sightings in: {location}</h2>
             ) : (
               ""
@@ -19,7 +18,7 @@ export default function MapListing({ location, sightings }) {
                 </h4>
                 <img width="100px" src={sight?.specimenId?.image} />
               </div>
-            ))}
+            ))} */}
           </div>
         </div>
       </div>

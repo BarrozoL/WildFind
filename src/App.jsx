@@ -61,7 +61,6 @@ import IsUnique from "./components/IsUnique";
 // Functions
 import {
   getAllAnimals,
-  addAnimalSighting,
   getAnimalsWithSightings,
   /* getAllWatches,
   deleteWatchItem,
@@ -85,15 +84,6 @@ function App() {
 
   // document.title = "WildFind";
 
-  /*   useEffect(() => {
-    getAllPlants().then((data) => setPlants(data));
-  }, []);
-
-  // Get the existing types of animals
-  useEffect(() => {
-    getTypes().then((data) => setTypes(data));
-  }, []); */
-
   // Get all animals that exist in DB
   useEffect(() => {
     getAllAnimals()
@@ -102,72 +92,6 @@ function App() {
       })
       .catch((error) => console.error("Error fetching animals:", error));
   }, []);
-
-  // Add sighting
-  const newSighting = (sighting) => {
-    addAnimalSighting(sighting).then((newSight) =>
-      setSightings([...sightings, newSight])
-    );
-  };
-
-  //updates animals state, will be passed to AddAnimal (fixes reload problem of animal list after adding animal)
-  /*  const animalState = (newAnimal) => {
-    setAnimals((prevAnimals) => [...prevAnimals, newAnimal]);
-  };
-
-  // Add a new animal
-
-  const newAnimal = (animal) => {
-    addAnimal(animal).then((newAnimal) => setAnimals([...animals, newAnimal]));
-  };
-
-  // Get all watching animals
-
-  useEffect(() => {
-    getAllWatches()
-      .then((data) => {
-        setWatches(data);
-      })
-      .catch((error) => console.error("Error fetching watches:", error));
-  }, []);
-
-  //updates watches state, will be passed to AnimalCard
-  const watchState = (newWatch) => {
-    setWatches((prevWatches) => [...prevWatches, newWatch]);
-  };
-
-  // Delete watching animal
-  const deleteWatch = (id) => {
-    deleteWatchItem(id)
-      .then(() => {
-        setWatches(watches.filter((watch) => watch.id !== id));
-      })
-      .catch((error) => console.error("Error deleting watch:", error));
-  };
-
-  // Edit watch animal
-  const editWatch = (watchItem) => {
-    updateWatch(watchItem)
-      .then((data) => {
-        setWatches(
-          watches.map((watch) => (data.id === watch.id ? data : watch))
-        );
-      })
-      .catch((error) => console.error("Error updating watch:", error));
-  };
-
-  // Get all sightings
-  useEffect(() => {
-    getAnimalSightings().then((data) => setSightings(data));
-  }, []);
-
-
-
-  const newPlantSighting = (sighting) => {
-    addPlantSighting(sighting).then((newSight) =>
-      setSightings([...sightings, newSight])
-    );
-  }; */
 
   return (
     <Router>
@@ -191,12 +115,7 @@ function App() {
         <Route
           exact
           path={`/animals/:specimenId/sightings`}
-          element={
-            <SightingsPage
-              /*  getAnimalsWithSightings={getAnimalsWithSightings} */
-              sightings={sightings}
-            />
-          }
+          element={<SightingsPage sightings={sightings} />}
         />
         <Route
           exact
@@ -205,7 +124,7 @@ function App() {
             <IsPrivate>
               <AddAnimalSightingPage
                 animals={animals}
-                addAnimalSighting={newSighting}
+                /* addAnimalSighting={newSighting} */
               />
             </IsPrivate>
           }
@@ -217,7 +136,7 @@ function App() {
             <IsPrivate>
               <AddPlantSightingPage
                 animals={animals}
-                addAnimalSighting={newSighting}
+                /* addAnimalSighting={newSighting} */
               />
             </IsPrivate>
           }
@@ -237,12 +156,7 @@ function App() {
         <Route
           exact
           path={`/plants/:specimenId/sightings`}
-          element={
-            <SightingsPage
-              /*  getAnimalsWithSightings={getAnimalsWithSightings} */
-              sightings={sightings}
-            />
-          }
+          element={<SightingsPage sightings={sightings} />}
         />
 
         <Route

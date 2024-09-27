@@ -28,7 +28,7 @@ export default function SocialFeedPage() {
 
   const getActions = async () => {
     axios
-      .get("https://wildfindserver.adaptable.app/api/actions")
+      .get("http://localhost:5005/api/actions")
       .then((response) => {
         const foundActions = response.data;
 
@@ -45,7 +45,7 @@ export default function SocialFeedPage() {
 
   const getUserInformation = async () => {
     await axios
-      .get(`https://wildfindserver.adaptable.app/api/users/${userId}`)
+      .get(`http://localhost:5005/api/users/${userId}`)
       .then((response) => {
         setUser(response.data);
       })
@@ -70,7 +70,7 @@ export default function SocialFeedPage() {
 
   const postComment = async (actionId, index) => {
     axios
-      .post("https://wildfindserver.adaptable.app/api/comments", {
+      .post("http://localhost:5005/api/comments", {
         userId,
         actionId,
         text: commentText[index],
@@ -163,7 +163,6 @@ export default function SocialFeedPage() {
                         }}
                       />
                     </div>
-
                     <h3 style={{ marginTop: "3%" }}>
                       <Link to={`/user-profile/${action?.user?._id}`}>
                         <img
@@ -176,7 +175,17 @@ export default function SocialFeedPage() {
                         {action?.user?.username}{" "}
                       </Link>{" "}
                       has spotted {action?.sighting?.specimenId?.name} in{" "}
-                      {action?.sighting?.location}
+                      {action?.sighting?.placeOfInterest?.name ? (
+                        <span>{action?.sighting?.placeOfInterest?.name}, </span>
+                      ) : null}{" "}
+                      {action?.sighting?.district?.name ? (
+                        <span>{action?.sighting?.district?.name}, </span>
+                      ) : null}
+                      {action.sighting?.country.name}
+                      {console.log(
+                        "country",
+                        action?.sighting?.placeOfInterest?.name
+                      )}
                     </h3>
                     <p>
                       <b>Description: </b>

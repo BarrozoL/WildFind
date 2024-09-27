@@ -1,65 +1,41 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getAnimal } from "../../lib";
-import axios from "axios";
-import { jwtDecode } from "jwt-decode";
 import "../css/SightingsPage.css";
 
-export default function Sightings({ sightings, getAnimalsWithSightings }) {
-  const [sights, setSights] = useState([]);
+export default function Sightings() {
   const [foundAnimal, setFoundAnimal] = useState();
   const { specimenId } = useParams();
-  //Retrieving the user's authToken token from the localStorage
-  const token = localStorage.getItem("authToken");
-  //Running jwtDecode function to decode the user's authToken
-  const decodedToken = token ? jwtDecode(token) : null;
-  const username = decodedToken ? decodedToken.name : null; // Extract username
-  const userId = decodedToken ? decodedToken._id : null; // Extract username
-
   const navigate = useNavigate();
-
-  const handleNavigate = () => {
-    navigate(`/animals/${specimenId}`);
-  };
-
-  useEffect(() => {
-    axios
-      .get(
-        `https://wildfindserver.adaptable.app/api/specimens/${specimenId}/sightings`
-      )
-      .then((response) => {
-        setSights(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching sightings:", error);
-      });
-  }, []);
 
   useEffect(() => {
     getAnimal(specimenId).then((data) => setFoundAnimal(data));
+    setSpecimenTheme();
   }, [specimenId]);
 
-  useEffect(() => {
+  function setSpecimenTheme() {
     if (foundAnimal?.typeId === 8) {
       document.body.classList.add("other-theme");
     } else {
       document.body.classList.remove("other-theme");
     }
-
     return () => {
       document.body.classList.remove("other-theme");
     };
-  }, [foundAnimal]);
+  }
+
+  const handleNavigate = () => {
+    navigate(`/animals/${specimenId}`);
+  };
 
   return (
     <>
       <div className="spottingWrapper">
         <h2>Sightings:</h2>
-        {sights.map((sighting) => {
-          const formattedDate = new Date(sighting.date).toString();
+        {foundAnimal?.sightings?.map((sighting) => {
+          const formattedDate = new Date(sighting?.date).toString();
           return (
             <div className="sighting-cards" key={sighting._id}>
-              {console.log(sighting)}
               <ul className="card-content" style={{ listStyleType: "none" }}>
                 {sighting.image && sighting.image.trim() !== "" && (
                   <img
@@ -69,8 +45,18 @@ export default function Sightings({ sightings, getAnimalsWithSightings }) {
                     height="50%"
                   />
                 )}
+
                 <li>
-                  <b>Sighting Location:</b> {sighting.location}
+                  <b>
+                    Spotted in:{" "}
+                    {sighting?.placeOfInterest?.name ? (
+                      <span>{sighting?.placeOfInterest?.name}, </span>
+                    ) : null}{" "}
+                    {sighting?.district?.name ? (
+                      <span>{sighting?.district?.name}, </span>
+                    ) : null}
+                    {sighting.country.name}
+                  </b>
                 </li>
                 <li>{formattedDate}</li>
                 <li>

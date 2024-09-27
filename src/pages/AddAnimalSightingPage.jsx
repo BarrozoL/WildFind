@@ -114,9 +114,9 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
       userId,
       specimenId,
       description,
-      country: selectedCountry.value,
-      district: selectedDistrict.value,
-      placeOfInterest: selectedPlaceOfInterest.value,
+      country: selectedCountry?.value,
+      district: selectedDistrict?.value,
+      placeOfInterest: selectedPlaceOfInterest?.value,
       image: imageUrl,
     };
 

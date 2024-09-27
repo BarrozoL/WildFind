@@ -75,7 +75,7 @@ export default function WatchDetailsPage() {
         </p>
         <p>
           <b>Location: </b>
-          {`${watchItem.location?.join(", ") || "Location unknown"}`}
+          {`${watchItem?.country[0].name || "Location unknown"}`}
         </p>
         {/* <p>
           <b>Note: </b>

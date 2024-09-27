@@ -37,18 +37,6 @@ export default function AnimalList(/*{ animals }*/) {
     }
   };
 
-  // const [movies, setMovies] = useState([]);
-
-  // // Run the effect after the initial render to get a list of movies from the server
-  // useEffect(() => {
-  //   service.getMovies()
-  //     .then((data) => {
-  //       // console.log("data", data);
-  //       setMovies(data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []); //  <-- This effect will run only once, after the initial render
-
   useEffect(() => {
     if (theme) {
       document.body.classList.add(theme);
@@ -118,7 +106,6 @@ export default function AnimalList(/*{ animals }*/) {
             <Link to={`/animals/${animal._id}`} key={animal._id}>
               <div className="animal-cards">
                 <h3>{animal.name}</h3>
-                {console.log(animal.location)}
                 <div
                   style={{
                     width: "180px",

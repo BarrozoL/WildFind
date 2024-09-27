@@ -24,7 +24,7 @@ export default function PrivateMessagePage() {
   //render all of the user's messages and conversations
   const getMessages = async () => {
     axios
-      .get(`https://wildfindserver.adaptable.app/api/users/${currentUserId}`)
+      .get(`http://localhost:5005/api/users/${currentUserId}`)
       .then((response) => {
         setUser(response.data);
       })
@@ -37,7 +37,7 @@ export default function PrivateMessagePage() {
   //it in the sendMessage function, the conversation is updated instantly
   const getUpdatedConversation = async (receiverId) => {
     axios
-      .get(`https://wildfindserver.adaptable.app/api/users/${currentUserId}`)
+      .get(`http://localhost:5005/api/users/${currentUserId}`)
       .then((response) => {
         const updatedUser = response.data;
         const updatedConversation = updatedUser?.conversations?.find(
@@ -66,7 +66,7 @@ export default function PrivateMessagePage() {
       : userId;
     console.log("receiverId", receiverId, "userId", userId);
     axios
-      .post(`https://wildfindserver.adaptable.app/api/messages/${receiverId}`, {
+      .post(`http://localhost:5005/api/messages/${receiverId}`, {
         sender: currentUserId,
         text: messageText,
       })
@@ -120,6 +120,10 @@ export default function PrivateMessagePage() {
       <div className="conversation-sidebar">
         <h2>Private Messages:</h2>
         {user?.conversations?.map((conversation, index) => {
+          const notYou =
+            conversation?.user1Id?._id === currentUserId
+              ? conversation?.user2Id?.username
+              : conversation?.user1Id?.username;
           return (
             //we also map over the index to use it as a key. We we getting a repeated keys error
             <div
@@ -131,11 +135,7 @@ export default function PrivateMessagePage() {
               {(conversation?.user1Id?._id === currentUserId ||
                 conversation?.user2Id?._id === currentUserId) && (
                 <div>
-                  <p>
-                    Conversation between {conversation?.user1Id?.username} and{" "}
-                    {conversation?.user2Id?.username}
-                    {console.log(conversation)}
-                  </p>
+                  <p>Conversation with {notYou} </p>
                 </div>
               )}
             </div>

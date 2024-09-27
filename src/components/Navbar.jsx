@@ -16,15 +16,20 @@ const Navbar = () => {
   const [currentUser, setCurrentUser] = useState();
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
 
-  useEffect(() => {
-    fetchUser();
-  }, [currentUser?.notifications]);
+  useEffect(
+    () => {
+      fetchUser();
+    },
+    [
+      /* currentUser?.notifications */
+    ]
+  );
 
   const clearNotifications = async () => {
     axios;
     try {
       await axios.put(
-        `https://wildfindserver.adaptable.app/api/users/${currentUser._id}/notifications`
+        `http://localhost:5005/api/users/${currentUser._id}/notifications`
       );
       console.log("Notifications cleared successfully");
     } catch (error) {
@@ -34,9 +39,7 @@ const Navbar = () => {
 
   const fetchUser = async () => {
     axios
-      .get(
-        `https://wildfindserver.adaptable.app/api/users/${decodedToken?._id}`
-      )
+      .get(`http://localhost:5005/api/users/${decodedToken?._id}`)
       .then((response) => {
         setCurrentUser(response.data);
       })

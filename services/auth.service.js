@@ -4,7 +4,7 @@
 //   constructor() {
 //     // Create a new instance of axios with a custom configuration
 //     this.api = axios.create({
-//       baseURL: import.meta.env.SERVER_URL || "https://wildfindserver.adaptable.app/",
+//       baseURL: import.meta.env.SERVER_URL || "http://localhost:5005/",
 //       // We set our API's base URL so that all requests use the same base URL
 //     });
 
@@ -24,20 +24,20 @@
 //   login = (requestBody) => {
 //     return this.api.post("/auth/login", requestBody);
 //     // same as
-//     // return axios.post("https://wildfindserver.adaptable.app/auth/login");
+//     // return axios.post("http://localhost:5005/auth/login");
 //   };
 
 //   signup = (requestBody) => {
 //     return this.api.post("/auth/signup", requestBody);
 
 //     // same as
-//     // return axios.post("https://wildfindserver.adaptable.app/auth/signup");
+//     // return axios.post("http://localhost:5005/auth/signup");
 //   };
 
 //   verify = () => {
 //     return this.api.get("/auth/verify");
 //     // same as
-//     // return axios.post("https://wildfindserver.adaptable.app/auth/verify");
+//     // return axios.post("http://localhost:5005/auth/verify");
 //   };
 // }
 
@@ -53,7 +53,7 @@ class AuthService {
     this.api = axios.create({
       baseURL:
         // import.meta.env.SERVER_URL ||
-        "https://wildfindserver.adaptable.app/",
+        "http://localhost:5005/",
     });
 
     this.api.interceptors.request.use((config) => {

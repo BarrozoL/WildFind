@@ -50,14 +50,16 @@ root {
   position: relative;
   flex-grow: 1;
   overflow-y: scroll;
+  display: block;
 }
 
 /* Styling individual messages */
 .message {
-  max-width: 30%;
+  max-width: 20%;
   padding: 10px 15px;
   border-radius: 20px;
   word-wrap: break-word;
+  flex-grow: 1;
 }
 
 .message p {

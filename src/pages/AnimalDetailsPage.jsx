@@ -60,7 +60,7 @@ export default function AnimalCard({ animals }) {
       name: foundAnimal?.name,
       image: foundAnimal?.image,
       description: foundAnimal?.description,
-      location: foundAnimal?.location,
+      country: foundAnimal?.country[0]?._id,
       dangerLevel: foundAnimal?.dangerLevel,
       edible: foundAnimal?.edible,
       note: "",
@@ -76,7 +76,6 @@ export default function AnimalCard({ animals }) {
         setImage(""); */
       })
       .catch((error) => console.log(error));
-    console.log("foundAnimal?.location:", foundAnimal?.location);
     navigate(`/watchlist/${userId}`);
   };
 

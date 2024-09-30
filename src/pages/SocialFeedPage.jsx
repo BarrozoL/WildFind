@@ -306,7 +306,8 @@ export default function SocialFeedPage() {
                     </p>
                     <p>
                       <b>Native to </b>
-                      {action?.addition?.location}
+                      {console.log("country", action?.addition)}
+                      {action?.addition?.country[0]?.name}
                     </p>
                     <p>Entry added at: {action?.addition?.createdAt}</p>
                   </div>

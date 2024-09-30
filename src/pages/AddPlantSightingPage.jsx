@@ -11,47 +11,56 @@ import "../css/AddAnimalSightingPage.css";
 export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
   const [date, setDate] = useState(new Date());
   const [description, setDescription] = useState("");
-
-  const [locations, setLocations] = useState([]);
-  const [selectedLocation, setSelectedLocation] = useState(null);
-
-  // const [image, setImage] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  const { specimenId } = useParams();
+
+  const [countries, setCountries] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState();
+  const [selectedDistrict, setSelectedDistrict] = useState();
+  const [selectedPlaceOfInterest, setSelectedPlaceOfInterest] = useState();
+
   //Retrieving the user's authToken token from the localStorage
   const token = localStorage.getItem("authToken");
-  //Running jwtDecode function to decode the user's authToken
   const decodedToken = token ? jwtDecode(token) : null;
   const userId = decodedToken ? decodedToken._id : null; // Extract userId
   const username = decodedToken ? decodedToken.username : null; // Extract username
-
-  useEffect(() => {
-    getLocations();
-  }, []);
+  const { specimenId } = useParams();
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    getCountries();
+  }, []);
+
+  //getting countries, mapping over them, and creating value and label to populate input options
+  const getCountries = async () => {
+    axios.get("http://localhost:5005/api/countries").then((response) => {
+      const countryOptions = response.data.map((country) => {
+        return {
+          value: country._id,
+          label: country.name,
+          districts: country.districts,
+        };
+      });
+      setCountries(countryOptions);
+    });
+  };
+
+  const handleCountryChange = (e) => {
+    setSelectedCountry(e);
+    setSelectedDistrict(null); // Reset district input when country changes
+  };
+
+  const handleDistrictChange = (e) => {
+    setSelectedDistrict(e);
+    setSelectedPlaceOfInterest(null); // Reset place of interest input when district changes
+  };
+
+  const handlePlaceOfInterestChange = (e) => {
+    setSelectedPlaceOfInterest(e);
+  };
+
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
-  };
-  const handleLocationChange = (selectedOption) => {
-    setSelectedLocation(selectedOption);
-  };
-
-  // const handleImageChange = (e) => {
-  //   setImage(e.target.value);
-  // };
-
-  //get all of the existing locations
-  const getLocations = async () => {
-    axios
-      .get("http://localhost:5005/api/locations")
-      .then((response) => {
-        setLocations(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
 
   const handleDateChange = (date) => {
@@ -76,7 +85,7 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if ((!date || !description, !selectedLocation)) {
+    if ((!date || !description, !selectedCountry)) {
       alert("All fields are mandatory");
       return;
     }
@@ -86,7 +95,9 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
       userId,
       specimenId,
       description,
-      location: selectedLocation.value,
+      country: selectedCountry?.value,
+      district: selectedDistrict?.value,
+      placeOfInterest: selectedPlaceOfInterest?.value,
       image: imageUrl,
     };
 
@@ -102,7 +113,22 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
 
   const foundSpecimen = animals.find((animal) => animal._id === specimenId);
 
-  const locationOptions = [];
+  //Getting the districts of the selected country
+  const selectedCountryDistricts = selectedCountry?.districts.map(
+    (district) => {
+      return {
+        value: district._id,
+        label: district.name,
+        placesOfInterest: district.placesOfInterest,
+      };
+    }
+  );
+
+  //Getting the places of interest of the selected district
+  const selectedDistrictPlacesOfInterest =
+    selectedDistrict?.placesOfInterest.map((placeOfInterest) => {
+      return { value: placeOfInterest._id, label: placeOfInterest.name };
+    });
 
   return (
     <div
@@ -133,13 +159,10 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
         <div className="sighting-row">
           <label>Location:</label>
           <Select
-            name="location"
-            options={locations.map((location) => ({
-              value: location._id,
-              label: location.name,
-            }))}
-            onChange={handleLocationChange}
-            value={selectedLocation}
+            name="country"
+            options={countries}
+            value={selectedCountry}
+            onChange={handleCountryChange}
             className="basic-select"
             placeholder="Type or scroll to select..."
             styles={{
@@ -176,6 +199,93 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
             }}
           />
         </div>
+        <div>
+          <label>District:</label>
+          <Select
+            name="district"
+            options={selectedCountryDistricts}
+            value={selectedDistrict}
+            onChange={handleDistrictChange}
+            className="basic-select"
+            placeholder="Select a country first..."
+            styles={{
+              control: (base) => ({
+                ...base,
+                height: "50px", // Set the desired height of the input box
+                minHeight: "50px",
+                width: "100%",
+                minWidth: "100%",
+              }),
+              valueContainer: (base) => ({
+                ...base,
+                height: "50px", // Ensure the text stays vertically aligned
+                padding: "0 8px", // Adjust padding inside the container if needed
+              }),
+              input: (base) => ({
+                ...base,
+                margin: "0", // Prevent input text from shifting vertically
+                padding: "0",
+                width: "100%",
+                minWidth: "20vw",
+                flex: "1 1 auto",
+              }),
+              dropdownIndicator: (base) => ({
+                ...base,
+                padding: "0", // Adjust padding around the dropdown arrow
+                height: "40px", // Adjust the height of the dropdown arrow to fit the box
+                width: "40px", // Adjust width of the dropdown arrow if needed
+              }),
+              menu: (base) => ({
+                ...base,
+                maxHeight: "auto", // Dropdown list max height
+              }),
+            }}
+          />
+        </div>
+        <div>
+          <label>Place of Interest:</label>
+          <Select
+            name="place-of-interest"
+            options={selectedDistrictPlacesOfInterest || "asa"}
+            className="basic-select"
+            placeholder="Select a district first..."
+            onChange={handlePlaceOfInterestChange}
+            value={selectedPlaceOfInterest}
+            styles={{
+              control: (base) => ({
+                ...base,
+                height: "50px", // Set the desired height of the input box
+                minHeight: "50px",
+                width: "100%",
+                minWidth: "100%",
+              }),
+              valueContainer: (base) => ({
+                ...base,
+                height: "50px", // Ensure the text stays vertically aligned
+                padding: "0 8px", // Adjust padding inside the container if needed
+              }),
+              input: (base) => ({
+                ...base,
+                margin: "0", // Prevent input text from shifting vertically
+                padding: "0",
+                width: "100%",
+                minWidth: "20vw",
+                flex: "1 1 auto",
+              }),
+              dropdownIndicator: (base) => ({
+                ...base,
+                padding: "0", // Adjust padding around the dropdown arrow
+                height: "40px", // Adjust the height of the dropdown arrow to fit the box
+                width: "40px", // Adjust width of the dropdown arrow if needed
+              }),
+              menu: (base) => ({
+                ...base,
+                maxHeight: "auto", // Dropdown list max height
+              }),
+            }}
+          />
+        </div>
+
         <div className="sighting-row">
           <label>Date:</label>
           <DatePicker selected={date} onChange={handleDateChange} />

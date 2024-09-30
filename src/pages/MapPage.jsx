@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "../css/Map.css";
 import Map from "../components/Map";
-import MapListing from "../components/MapListing";
 
 export default function MapPage({}) {
   const [selectedDistrict, setSelectedDistrict] = useState("");
@@ -42,7 +41,6 @@ export default function MapPage({}) {
     <>
       <div className="map-wrapper">
         <Map findLocation={findLocation} />
-        <MapListing /* location={location} sightings={sightings}  */ />
       </div>
 
       <div className="map-wrap">

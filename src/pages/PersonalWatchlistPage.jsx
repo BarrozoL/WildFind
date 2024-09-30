@@ -77,8 +77,8 @@ export default function UserWatchlistPage() {
                     </div>
 
                     {console.log("watchItem:", watchItem)}
-                    <p>Location: {watchItem?.location}</p>
-                    {console.log(watchItem?.locaton)}
+                    <p>Location: {watchItem?.country[0]?.name}</p>
+                    {console.log(watchItem?.country)}
                     <p>Sightings: {watchItem?.sightings?.length}</p>
                   </div>
                 </Link>

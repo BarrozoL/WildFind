@@ -5,21 +5,18 @@ import { jwtDecode } from "jwt-decode";
 import watchService from "../../services/watchlist-service";
 import "../css/AnimalDetailsPage.css";
 
-export default function AnimalCard({ animals }) {
+export default function AnimalCard() {
   const [foundAnimal, setFoundAnimal] = useState();
   const { specimenId } = useParams();
   const token = localStorage.getItem("authToken");
   const decodedToken = token ? jwtDecode(token) : null;
   const userId = decodedToken ? decodedToken._id : null; // Extract userId
-  const username = decodedToken ? decodedToken.username : null; // Extract username
 
   const navigate = useNavigate();
 
   useEffect(() => {
     getAnimal(specimenId).then((data) => setFoundAnimal(data));
-  }, [specimenId]);
 
-  useEffect(() => {
     if (foundAnimal?.typeId === 8) {
       document.body.classList.add("other-theme");
     } else {
@@ -30,7 +27,7 @@ export default function AnimalCard({ animals }) {
     return () => {
       document.body.classList.remove("other-theme");
     };
-  }, [foundAnimal]);
+  }, [specimenId, foundAnimal]);
 
   const handleNavigate = () => {
     navigate("/animals");
@@ -107,7 +104,7 @@ export default function AnimalCard({ animals }) {
         <img src={foundAnimal.image} alt={foundAnimal?.name} width="300px" />
         <p>{`Danger level: ${foundAnimal?.dangerLevel}`}</p>
         <p>{`Description: ${foundAnimal?.description}`}</p>
-        {<p>{`Native to: ${foundAnimal?.country[0].name}`}</p>}{" "}
+        {<p>{`Native to: ${foundAnimal?.country[0].name}`}</p>}
         {/* Only displaying the first country of the countries list */}
         <button onClick={handleSightingNavigate} className="sightings-button">
           Click to view locations where the {`${foundAnimal?.name}`} has been

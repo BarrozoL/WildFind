@@ -18,9 +18,7 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
 
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState();
-  const [districts, setDistricts] = useState([]);
   const [selectedDistrict, setSelectedDistrict] = useState();
-  const [placesOfInterest, setPlacesOfInterest] = useState([]);
   const [selectedPlaceOfInterest, setSelectedPlaceOfInterest] = useState();
 
   //Retrieving the user's authToken token from the localStorage
@@ -35,7 +33,6 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
   useEffect(
     () => {
       getCountries();
-      /*   getDistricts(); */
       getAnimal(specimenId).then((data) => setFoundAnimal(data));
       if (foundAnimal?.typeId === 8) {
         document.body.classList.add("other-theme");
@@ -161,10 +158,10 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
           <Select
             name="country"
             options={countries}
+            value={selectedCountry}
+            onChange={handleCountryChange}
             className="basic-select"
             placeholder="Type or scroll to select..."
-            onChange={handleCountryChange}
-            value={selectedCountry}
             styles={{
               control: (base) => ({
                 ...base,
@@ -201,14 +198,13 @@ export default function AddAnimalSighting({ animals, AddAnimalSighting }) {
         </div>
         <div>
           <label>District:</label>
-
           <Select
             name="district"
             options={selectedCountryDistricts}
+            value={selectedDistrict}
+            onChange={handleDistrictChange}
             className="basic-select"
             placeholder="Select a country first..."
-            onChange={handleDistrictChange}
-            value={selectedDistrict}
             styles={{
               control: (base) => ({
                 ...base,

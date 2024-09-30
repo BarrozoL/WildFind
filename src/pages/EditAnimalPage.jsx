@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "../css/EditAnimalPage.css";
+import Select from "react-select";
+import axios from "axios";
 import { editAnimal, getAnimal } from "../../lib";
 import specimenService from "../../services/specimen-service";
 import defaultBirdImage from "../assets/images/bird.jpeg";
@@ -18,22 +20,25 @@ import defaultPlantImage from "../assets/images/plant.jpeg";
 function EditAnimalPage() {
   const [foundAnimal, setFoundAnimal] = useState();
   const { specimenId } = useParams();
-  console.log("specimenId:", specimenId);
   const navigate = useNavigate();
   const [isAnimal, setIsAnimal] = useState("");
   const [name, setName] = useState("");
   const [selectedAnimalType, setSelectedAnimalType] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [description, setDescription] = useState("");
-  const [location, setLocation] = useState("");
   const [dangerLevel, setDangerLevel] = useState("");
   const [edible, setEdible] = useState("");
+  const [countries, setCountries] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState("");
   let typeId;
+
   useEffect(() => {
+    getCountries();
     if (specimenId) {
       getAnimal(specimenId).then((data) => setFoundAnimal(data));
     }
   }, [specimenId]);
+
   useEffect(() => {
     if (foundAnimal) {
       setIsAnimal(foundAnimal.typeId <= 8 ? "animal" : "plant");
@@ -41,11 +46,33 @@ function EditAnimalPage() {
       setSelectedAnimalType(animalTypeToName(foundAnimal.typeId));
       setImageUrl(foundAnimal.image);
       setDescription(foundAnimal.description);
-      setLocation(foundAnimal.location);
       setDangerLevel(foundAnimal.dangerLevel);
       setEdible(foundAnimal.edible);
+
+      //finding the country option that matches the country of the found animal
+      const countryOption = countries.find((foundCountry) => {
+        return foundCountry.value === foundAnimal.country[0]._id;
+      });
+      if (countryOption) {
+        setSelectedCountry(countryOption);
+      }
     }
-  }, [foundAnimal]);
+  }, [foundAnimal, countries]);
+
+  //getting countries, mapping over them, and creating value and label to populate input options
+  const getCountries = async () => {
+    axios.get("http://localhost:5005/api/countries").then((response) => {
+      const countryOptions = response.data.map((country) => {
+        return {
+          value: country._id,
+          label: country.name,
+          districts: country.districts,
+        };
+      });
+      setCountries(countryOptions);
+    });
+  };
+
   const animalTypeToName = (typeId) => {
     const typeMap = {
       1: "bird",
@@ -87,7 +114,7 @@ function EditAnimalPage() {
   const handleDangerLevelChange = (e) => setDangerLevel(e.target.value);
   const handleEdibleChange = (e) => setEdible(e.target.value);
   const handleDescriptionChange = (e) => setDescription(e.target.value);
-  const handleLocationChange = (e) => setLocation(e.target.value);
+  const handleCountryChange = (e) => setSelectedCountry(e);
   const handleFileUpload = (e) => {
     console.log("The file to be uploaded is: ", e.target.files[0]);
     const uploadData = new FormData();
@@ -123,7 +150,7 @@ function EditAnimalPage() {
       typeId,
       image: imageUrl || defaultImageMap[typeId],
       description,
-      location,
+      country: selectedCountry?.value,
       dangerLevel: isAnimal === "animal" ? dangerLevel : undefined,
       edible: isAnimal === "plant" ? edible : undefined,
     };
@@ -140,16 +167,7 @@ function EditAnimalPage() {
         // Optionally, set an error state to display to the user
       });
   };
-  // useEffect(() => {
-  //   if (foundAnimal?.typeId === 8) {
-  //     document.body.classList.add("other-theme");
-  //   } else {
-  //     document.body.classList.remove("other-theme");
-  //   }
-  //   return () => {
-  //     document.body.classList.remove("other-theme");
-  //   };
-  // }, [foundAnimal]);
+
   return (
     <div className="edit-form">
       <div key={foundAnimal._id}>
@@ -257,14 +275,48 @@ function EditAnimalPage() {
               required
             />
           </div>
-          <div>
-            <label>Native to: </label>
-            <input
-              type="text"
-              name="location"
-              value={location}
-              onChange={handleLocationChange}
-              required
+          <div className="sighting-row">
+            <label>Country:</label>
+
+            <Select
+              name="country"
+              options={countries}
+              value={selectedCountry}
+              onChange={handleCountryChange}
+              className="basic-select"
+              placeholder="Type or scroll to select..."
+              styles={{
+                control: (base) => ({
+                  ...base,
+                  height: "50px", // Set the desired height of the input box
+                  minHeight: "50px",
+                  width: "100%",
+                  minWidth: "100%",
+                }),
+                valueContainer: (base) => ({
+                  ...base,
+                  height: "50px", // Ensure the text stays vertically aligned
+                  padding: "0 8px", // Adjust padding inside the container if needed
+                }),
+                input: (base) => ({
+                  ...base,
+                  margin: "0", // Prevent input text from shifting vertically
+                  padding: "0",
+                  width: "100%",
+                  minWidth: "20vw",
+                  flex: "1 1 auto",
+                }),
+                dropdownIndicator: (base) => ({
+                  ...base,
+                  padding: "0", // Adjust padding around the dropdown arrow
+                  height: "40px", // Adjust the height of the dropdown arrow to fit the box
+                  width: "40px", // Adjust width of the dropdown arrow if needed
+                }),
+                menu: (base) => ({
+                  ...base,
+                  maxHeight: "auto", // Dropdown list max height
+                }),
+              }}
             />
           </div>
           <div className="edit-submit">

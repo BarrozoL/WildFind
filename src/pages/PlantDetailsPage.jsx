@@ -5,22 +5,18 @@ import { jwtDecode } from "jwt-decode";
 import watchService from "../../services/watchlist-service";
 import "../css/PlantDetailsPage.css";
 
-export default function AnimalCard({ animals }) {
+export default function AnimalCard() {
   const [foundPlant, setFoundPlant] = useState();
   const { specimenId } = useParams();
-  console.log("specimenId:", specimenId);
   const token = localStorage.getItem("authToken");
   const decodedToken = token ? jwtDecode(token) : null;
   const userId = decodedToken ? decodedToken._id : null; // Extract userId
-  const username = decodedToken ? decodedToken.username : null; // Extract username
 
   const navigate = useNavigate();
 
   useEffect(() => {
     getAnimal(specimenId).then((data) => setFoundPlant(data));
-  }, [specimenId]);
 
-  useEffect(() => {
     if (foundPlant?.typeId === 8) {
       document.body.classList.add("other-theme");
     } else {
@@ -31,7 +27,7 @@ export default function AnimalCard({ animals }) {
     return () => {
       document.body.classList.remove("other-theme");
     };
-  }, [foundPlant]);
+  }, [specimenId, foundPlant]);
 
   const handleNavigate = () => {
     navigate("/plants");
@@ -61,7 +57,7 @@ export default function AnimalCard({ animals }) {
       name: foundPlant.name,
       image: foundPlant.image,
       description: foundPlant.description,
-      location: foundPlant.location,
+      country: foundAnimal?.country[0]?._id,
       dangerLevel: foundPlant.dangerLevel,
       edible: foundPlant.edible,
       note: "",
@@ -100,13 +96,13 @@ export default function AnimalCard({ animals }) {
   return (
     <>
       <div className="animalDetailWrapper">
-        <div key={foundPlant._id}></div>
-        <h3>{foundPlant.name}</h3>
+        <div key={foundPlant?._id}></div>
+        <h3>{foundPlant?.name}</h3>
         {console.log(foundPlant)}
-        <img src={foundPlant.image} alt={foundPlant.name} width="300px" />
-        <p>{`Edible: ${foundPlant.edible}`}</p>
-        <p>{`Description: ${foundPlant.description}`}</p>
-        <p>{`Native to: ${foundPlant.location.join(", ")}`}</p>
+        <img src={foundPlant?.image} alt={foundPlant.name} width="300px" />
+        <p>{`Edible: ${foundPlant?.edible}`}</p>
+        <p>{`Description: ${foundPlant?.description}`}</p>
+        {<p>{`Native to: ${foundPlant?.country[0]?.name}`}</p>}
         <button onClick={handleSightingNavigate} className="sightings-button">
           Click to view locations where the {`${foundPlant.name}`} has been seen
         </button>

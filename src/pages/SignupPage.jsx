@@ -5,8 +5,6 @@ import authService from "../../services/auth.service";
 import "../css/SignupPage.css";
 import defaultUserImage from "../assets/images/default-user-img1.jpeg";
 
-// const API_URL = "http://localhost:5005";
-
 function SignupPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

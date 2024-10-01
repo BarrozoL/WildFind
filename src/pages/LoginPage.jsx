@@ -4,8 +4,6 @@ import { AuthContext } from "../context/auth.context";
 import authService from "../../services/auth.service";
 import "../css/LoginPage.css";
 
-// const API_URL = "http://localhost:5005";
-
 function LoginPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

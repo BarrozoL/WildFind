@@ -43,7 +43,7 @@ export default function WatchDetailsPage() {
   const handleUpdateNote = async () => {
     try {
       await axios.put(
-        `http://localhost:5005/api/watchlist/${watchItemId}`,
+        `${import.meta.env.VITE_SERVER_URL}/api/watchlist/${watchItemId}`,
         { note: newNote } // Only send the `note` field
       );
       fetchWatchItem(); // Fetch the updated watch item

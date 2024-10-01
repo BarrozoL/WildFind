@@ -55,7 +55,7 @@ export default function AddAnimal() {
 
   //getting countries, mapping over them, and creating value and label to populate input options
   const getCountries = async () => {
-    axios.get("http://localhost:5005/api/countries").then((response) => {
+    axios.get(`${import.meta.env.VITE_SERVER_URL}/api/countries`).then((response) => {
       const countryOptions = response.data.map((country) => {
         return { value: country._id, label: country.name };
       });

@@ -24,7 +24,7 @@ export default function WatchDetailsPage() {
   const fetchWatchItem = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5005/api/watchlist/${watchItemId}`
+        `${import.meta.env.VITE_SERVER_URL}/api/watchlist/${watchItemId}`
       );
       setWatchItem(response.data);
     } catch (error) {

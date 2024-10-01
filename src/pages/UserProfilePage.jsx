@@ -26,7 +26,7 @@ export default function UserProfilePage() {
   //GET all of the user information
   const getUserInformation = async () => {
     await axios
-      .get(`http://localhost:5005/api/users/${userId}`)
+      .get(`${import.meta.env.VITE_SERVER_URL}/api/users/${userId}`)
       .then((response) => {
         setUser(response.data);
       })
@@ -45,9 +45,12 @@ export default function UserProfilePage() {
       }
     }
     try {
-      await axios.post(`http://localhost:5005/api/users/${userId}/following`, {
-        userId: loggedUserId, //userId of the user that is currently logged in, for the request in the backend
-      });
+      await axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/api/users/${userId}/following`,
+        {
+          userId: loggedUserId, //userId of the user that is currently logged in, for the request in the backend
+        }
+      );
       await getUserInformation();
     } catch (error) {
       console.error("Error following user", error);

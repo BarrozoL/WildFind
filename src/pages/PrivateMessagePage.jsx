@@ -24,7 +24,7 @@ export default function PrivateMessagePage() {
   //render all of the user's messages and conversations
   const getMessages = async () => {
     axios
-      .get(`http://localhost:5005/api/users/${currentUserId}`)
+      .get(`${import.meta.env.VITE_SERVER_URL}/api/users/${currentUserId}`)
       .then((response) => {
         setUser(response.data);
       })
@@ -37,7 +37,7 @@ export default function PrivateMessagePage() {
   //it in the sendMessage function, the conversation is updated instantly
   const getUpdatedConversation = async (receiverId) => {
     axios
-      .get(`http://localhost:5005/api/users/${currentUserId}`)
+      .get(`${import.meta.env.VITE_SERVER_URL}/api/users/${currentUserId}`)
       .then((response) => {
         const updatedUser = response.data;
         const updatedConversation = updatedUser?.conversations?.find(
@@ -66,7 +66,7 @@ export default function PrivateMessagePage() {
       : userId;
     console.log("receiverId", receiverId, "userId", userId);
     axios
-      .post(`http://localhost:5005/api/messages/${receiverId}`, {
+      .post(`${import.meta.env.VITE_SERVER_URL}/api/messages/${receiverId}`, {
         sender: currentUserId,
         text: messageText,
       })

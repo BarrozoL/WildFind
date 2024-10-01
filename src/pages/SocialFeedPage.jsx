@@ -28,7 +28,7 @@ export default function SocialFeedPage() {
 
   const getActions = async () => {
     axios
-      .get("http://localhost:5005/api/actions")
+      .get(`${import.meta.env.VITE_SERVER_URL}/api/actions`)
       .then((response) => {
         const foundActions = response.data;
 
@@ -45,7 +45,7 @@ export default function SocialFeedPage() {
 
   const getUserInformation = async () => {
     await axios
-      .get(`http://localhost:5005/api/users/${userId}`)
+      .get(`${import.meta.env.VITE_SERVER_URL}/api/users/${userId}`)
       .then((response) => {
         setUser(response.data);
       })
@@ -70,7 +70,7 @@ export default function SocialFeedPage() {
 
   const postComment = async (actionId, index) => {
     axios
-      .post("http://localhost:5005/api/comments", {
+      .post(`${import.meta.env.VITE_SERVER_URL}/api/comments`, {
         userId,
         actionId,
         text: commentText[index],

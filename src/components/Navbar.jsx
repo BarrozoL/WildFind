@@ -29,7 +29,9 @@ const Navbar = () => {
     axios;
     try {
       await axios.put(
-        `http://localhost:5005/api/users/${currentUser._id}/notifications`
+        `${import.meta.env.VITE_SERVER_URL}/api/users/${
+          currentUser._id
+        }/notifications`
       );
       console.log("Notifications cleared successfully");
     } catch (error) {
@@ -39,7 +41,7 @@ const Navbar = () => {
 
   const fetchUser = async () => {
     axios
-      .get(`http://localhost:5005/api/users/${decodedToken?._id}`)
+      .get(`${import.meta.env.VITE_SERVER_URL}/api/users/${decodedToken?._id}`)
       .then((response) => {
         setCurrentUser(response.data);
       })

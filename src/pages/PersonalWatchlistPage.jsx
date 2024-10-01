@@ -22,7 +22,7 @@ export default function UserWatchlistPage() {
   //GET all of the user information
   const getUserInfo = async () => {
     axios
-      .get(`http://localhost:5005/api/users/${userId}`)
+      .get(`${import.meta.env.VITE_SERVER_URL}/api/users/${userId}`)
       .then((response) => {
         setUser(response.data);
         console.log(user);

@@ -8,15 +8,13 @@ export default function MapPage({}) {
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const [sightings, setSightings] = useState([]);
 
-  const ANIMALS_DB = "http://localhost:5005";
-
   useEffect(() => {
     getMapSightings();
   }, []);
 
   const getMapSightings = async () => {
     axios
-      .get(`${ANIMALS_DB}/api/sightings`)
+      .get(`${import.meta.env.VITE_SERVER_URL}/api/sightings`)
       .then((response) => {
         setSightings(response.data);
       })

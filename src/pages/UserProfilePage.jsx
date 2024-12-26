@@ -46,7 +46,7 @@ export default function UserProfilePage() {
     }
     try {
       await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/api/users/${userId}/following`,
+        `${import.meta.env.VITE_SERVER_URL}/api/users/following/${userId}`,
         {
           userId: loggedUserId, //userId of the user that is currently logged in, for the request in the backend
         }
@@ -56,6 +56,12 @@ export default function UserProfilePage() {
       console.error("Error following user", error);
     }
   };
+
+  /*   const unfollowUser = async () => {
+    try {
+      axios.delete(`${import.meta.env.VITE_SERVER_URL}/api/users/${userId}/following`)
+    }
+  } */
 
   const handleFollowUser = () => {
     followUser();

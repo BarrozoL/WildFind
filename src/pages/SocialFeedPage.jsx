@@ -181,11 +181,7 @@ export default function SocialFeedPage() {
                       {action?.sighting?.district?.name ? (
                         <span>{action?.sighting?.district?.name}, </span>
                       ) : null}
-                      {action.sighting?.country.name}
-                      {console.log(
-                        "country",
-                        action?.sighting?.placeOfInterest?.name
-                      )}
+                      {action.sighting?.country?.name}
                     </h3>
                     <p>
                       <b>Description: </b>
@@ -306,7 +302,6 @@ export default function SocialFeedPage() {
                     </p>
                     <p>
                       <b>Native to </b>
-                      {console.log("country", action?.addition)}
                       {action?.addition?.country[0]?.name}
                     </p>
                     <p>Entry added at: {action?.addition?.createdAt}</p>

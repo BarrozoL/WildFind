@@ -56,15 +56,12 @@ export default function PrivateMessagePage() {
   };
 
   const sendMessage = async () => {
-    /*  if (!selectedConversation) return; */
-
     //setting the receiver of the message either to the id of the clicked conversation or to the userId from the url
     const receiverId = selectedConversation
       ? selectedConversation?.user1Id?._id === currentUserId
         ? selectedConversation?.user2Id?._id
         : selectedConversation?.user1Id?._id
       : userId;
-    console.log("receiverId", receiverId, "userId", userId);
     axios
       .post(`${import.meta.env.VITE_SERVER_URL}/api/messages/${receiverId}`, {
         sender: currentUserId,
@@ -87,7 +84,7 @@ export default function PrivateMessagePage() {
         console.log("Message sent", response?.data);
       })
       .catch((error) => {
-        console.error("Error posting comment:", error);
+        console.error("Error sending message:", error);
       });
   };
 

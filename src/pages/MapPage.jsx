@@ -24,16 +24,20 @@ export default function MapPage({}) {
   };
 
   // Filter over sightings to find match between selected location and sightings
-  const matchingLocationSightings = sightings.filter((sighting) => {
+  const matchingLocationSightings = sightings?.filter((sighting) => {
     return sighting?.district?.name === selectedDistrict;
   });
 
-  console.log("matching location sightings", matchingLocationSightings);
+  //Filter to only render one of each specimen on the map
+  const uniqueSpecimenSighting = matchingLocationSightings?.filter(
+    (sight, index, self) =>
+      index ===
+      self.findIndex((s) => s?.specimenId?._id === sight?.specimenId?._id)
+  );
 
   function findLocation(e) {
     setSelectedDistrict(e.target.id);
   }
-  console.log("selected location", selectedDistrict);
 
   return (
     <>
@@ -44,18 +48,18 @@ export default function MapPage({}) {
       <div className="map-wrap">
         <div className="map-sightings">
           <div>
-            {matchingLocationSightings.length > 0 ? (
+            {matchingLocationSightings?.length > 0 ? (
               <h2 className="location-tag">Sightings in {selectedDistrict}</h2>
             ) : null}
           </div>
           <div className="sighting-card">
-            {matchingLocationSightings?.map((sight) => {
+            {}
+            {uniqueSpecimenSighting?.map((sight) => {
               return (
                 <div key={sight?._id}>
                   <Link to={`/animals/${sight?.specimenId?._id}`}>
                     <h4 style={{ color: "rgb(44, 140, 121)", width: "100px" }}>
                       {sight?.specimenId?.name}
-                      {console.log("sight", sight)}
                     </h4>
                     <img width="100px" src={sight?.specimenId?.image} />
                   </Link>

@@ -37,7 +37,7 @@
 //   verify = () => {
 //     return this.api.get("/auth/verify");
 //     // same as
-//     // return axios.post("http://localhost:5005/auth/verify");
+//     // return axios.post("http://st:5005/auth/verify");
 //   };
 // }
 
@@ -51,9 +51,7 @@ import axios from "axios";
 class AuthService {
   constructor() {
     this.api = axios.create({
-      baseURL:
-      import.meta.env.VITE_SERVER_URL ||
-        "http://localhost:5005",
+      baseURL: import.meta.env.VITE_SERVER_URL || "http://st:5005",
     });
 
     this.api.interceptors.request.use((config) => {
